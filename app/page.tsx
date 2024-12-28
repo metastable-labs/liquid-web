@@ -1,7 +1,5 @@
-export default function Home() {
-  return (
-    <div className="">
-      <h1>Home page</h1>
-    </div>
-  );
-}
+import { Strategies } from "@/views";
+
+const StrategiesPage = () => <Strategies />;
+
+export default StrategiesPage;
