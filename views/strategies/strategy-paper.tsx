@@ -6,6 +6,7 @@ import classNames from "classnames";
 
 import { LWClickAnimation } from "@/components";
 import { EmojiHappyIcon, ArrowRightIcon } from "@/public/icons";
+import { InvestModal } from "@/components/modal/invest-modal";
 
 const MAX_DESCRIPTION_LENGTH = 100;
 
@@ -25,6 +26,7 @@ const StrategyPaper = ({
   close,
 }: IStrategyPaper) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [openInvest, setOpenInvest] = useState(false);
 
   const truncatedDescription =
     description.length > MAX_DESCRIPTION_LENGTH && !isExpanded
@@ -37,8 +39,8 @@ const StrategyPaper = ({
     setIsExpanded((prev) => !prev);
   };
 
-  const invest = () => {
-    console.log("Investing in strategy", id);
+  const handleInvestModal = () => {
+    setOpenInvest(!openInvest);
   };
 
   const handleClick = () => {
@@ -48,8 +50,6 @@ const StrategyPaper = ({
       onClick?.();
     }
   };
-
-  console.log("active", active);
 
   return (
     <div
@@ -102,7 +102,7 @@ const StrategyPaper = ({
             </div>
           ) : (
             <LWClickAnimation
-              onClick={invest}
+              onClick={handleInvestModal}
               className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
               stopPropagation
             >
@@ -141,7 +141,7 @@ const StrategyPaper = ({
 
       {showInvestButton && (
         <LWClickAnimation
-          onClick={invest}
+          onClick={handleInvestModal}
           className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
           stopPropagation
         >
@@ -156,6 +156,13 @@ const StrategyPaper = ({
           <ArrowRightIcon />
         </LWClickAnimation>
       )}
+
+      <InvestModal
+        isOpen={openInvest}
+        onClose={handleInvestModal}
+        balance={3600}
+        tokenSymbol="USDC"
+      />
     </div>
   );
 };

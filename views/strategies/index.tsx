@@ -1,25 +1,25 @@
-'use client';
-import { useCallback, useState } from 'react';
-import classNames from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
+"use client";
+import { useCallback, useState } from "react";
+import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
 
-import ChessPiece from '@/assets/chess-piece';
-import { ArrowLeftIcon, ArrowRightIcon } from '@/public/icons';
-import { LWClickAnimation } from '@/components';
-import { appearAnimation } from '@/utils/helpers';
-import { positions, strategies } from './dummy';
-import StrategyPaper from './strategy-paper';
-import StrategyDetail from './strategy-detail';
-import { Button } from '@/components/ui/button';
-import { InvestModal } from '@/components/modal/invest-modal';
-import { WithdrawModal } from '@/components/modal/withdraw-modal';
-import { ClaimModal } from '@/components/modal/claim-modal';
-import ActionsModal from '@/components/modal/actions-modal';
-import { InfoModal } from '@/components/modal/Info-modal';
+import ChessPiece from "@/assets/chess-piece";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/public/icons";
+import { LWClickAnimation } from "@/components";
+import { appearAnimation } from "@/utils/helpers";
+import { positions, strategies } from "./dummy";
+import StrategyPaper from "./strategy-paper";
+import StrategyDetail from "./strategy-detail";
+import { Button } from "@/components/ui/button";
+import { InvestModal } from "@/components/modal/invest-modal";
+import { WithdrawModal } from "@/components/modal/withdraw-modal";
+import { ClaimModal } from "@/components/modal/claim-modal";
+import ActionsModal from "@/components/modal/actions-modal";
+import { InfoModal } from "@/components/modal/Info-modal";
 
 const Strategies = () => {
   const [selectedStrategy, setSelectedStrategy] = useState<Strategy | null>(
-    null,
+    null
   );
 
   const [openWithdraw, setIsOpenWithdraw] = useState(false);
@@ -34,27 +34,19 @@ const Strategies = () => {
 
   return (
     <div
-      className={classNames('', {
-        'xl:flex xl:gap-12 2xl:gap-36': selectedStrategy,
+      className={classNames("", {
+        "xl:flex xl:gap-12 2xl:gap-36": selectedStrategy,
       })}
     >
       <div className="absolute">
         <Button onClick={() => setIsOpenWithdraw(true)}>
           Open Withdraw Modal
         </Button>
-        <Button onClick={() => setIsOpenInvest(true)}>Open Invest Modal</Button>
         <Button onClick={() => setIsOpenClaim(true)}>Open Claim Modal</Button>
         <Button onClick={() => setIsOpenInfo(true)}>Open Info Modal</Button>
         <Button onClick={() => setIsOpenActions(true)}>
           Open Actions Modal
         </Button>
-
-        <InvestModal
-          isOpen={openInvest}
-          onClose={() => setIsOpenInvest(false)}
-          balance={3600}
-          tokenSymbol="USDC"
-        />
 
         <WithdrawModal
           isOpen={openWithdraw}
@@ -74,9 +66,9 @@ const Strategies = () => {
           isOpen={openActions}
           onClose={() => setIsOpenActions(false)}
           position={positions}
-          onWithdraw={() => console.log('Withdraw clicked')}
-          onClaimYield={() => console.log('Claim yield clicked')}
-          onClaimRewards={() => console.log('Claim rewards clicked')}
+          onWithdraw={() => console.log("Withdraw clicked")}
+          onClaimYield={() => console.log("Claim yield clicked")}
+          onClaimRewards={() => console.log("Claim rewards clicked")}
         />
 
         <InfoModal
@@ -88,8 +80,8 @@ const Strategies = () => {
       </div>
       <div
         className={classNames(
-          'flex flex-col gap-7 pt-[30px] pb-[60px] px-[18px] xl:pr-[0px] xl:max-w-[500px]',
-          { 'hidden xl:flex': selectedStrategy },
+          "flex flex-col gap-7 pt-[30px] pb-[60px] px-[18px] xl:pr-[0px] xl:max-w-[500px]",
+          { "hidden xl:flex": selectedStrategy }
         )}
       >
         <div className="p-4 flex items-center justify-between gap-4 bg-primary-250 border border-primary-200 rounded-xl">
@@ -109,7 +101,7 @@ const Strategies = () => {
           <div
             key={index}
             className={classNames({
-              'pb-7 border-b border-b-primary-500':
+              "pb-7 border-b border-b-primary-500":
                 index !== strategies.length - 1,
             })}
           >
