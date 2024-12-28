@@ -90,15 +90,27 @@ const StrategyPaper = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-1">
-            <span className="text-[12px] leading-[15.84px] text-primary-100">
-              Est. APY
-            </span>
+          {variant === "primary" ? (
+            <div className="flex items-center gap-1">
+              <span className="text-[12px] leading-[15.84px] text-primary-100">
+                Est. APY
+              </span>
 
-            <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium">
-              {estimatedAPY}%
-            </span>
-          </div>
+              <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium">
+                {estimatedAPY}%
+              </span>
+            </div>
+          ) : (
+            <LWClickAnimation
+              onClick={invest}
+              className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
+              stopPropagation
+            >
+              <span className="text-[14px] leading-[18.48px] font-medium text-white text-center">
+                Invest
+              </span>
+            </LWClickAnimation>
+          )}
         </div>
 
         <div className="self-stretch flex flex-col gap-2">
@@ -107,8 +119,7 @@ const StrategyPaper = ({
           </h1>
 
           <motion.p
-            initial={{ height: 40 }}
-            animate={{ height: isExpanded ? "fit-content" : 40 }}
+            animate={{ height: isExpanded ? "fit-content" : 50 }}
             className="text-[15px] leading-[19.8px] text-primary-100"
           >
             {truncatedDescription}
