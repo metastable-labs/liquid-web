@@ -22,14 +22,12 @@ export function HoldButton({
     setIsHolding(true);
     setHoldProgress(0);
 
-    // Start the progress animation
     const startTime = Date.now();
     progressIntervalRef.current = setInterval(() => {
       const progress = ((Date.now() - startTime) / holdDuration) * 100;
       setHoldProgress(Math.min(progress, 100));
     }, 10);
 
-    // Set the completion timeout
     holdTimeoutRef.current = setTimeout(() => {
       if (onHoldComplete) {
         onHoldComplete();
