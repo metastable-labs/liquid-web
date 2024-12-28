@@ -1,4 +1,6 @@
-import { Strategies } from "@/views";
+'use client';
+
+import { Strategies } from '@/views';
 
 const StrategiesPage = () => <Strategies />;
 

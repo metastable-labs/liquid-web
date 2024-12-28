@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 export default {
   content: [
@@ -38,7 +38,9 @@ export default {
       },
     },
     fontFamily: {
-      Aeonik: ["Aeonik"],
+      Aeonik: ['Aeonik'],
+      ClashDisplay: ['ClashDisplay'],
+      QuantaGroteskPro: ['QuantaGroteskPro'],
     },
   },
   plugins: [],

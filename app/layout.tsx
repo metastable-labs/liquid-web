@@ -3,8 +3,8 @@ import "./globals.css";
 import { LWNavigation } from "@/components";
 
 export const metadata: Metadata = {
-  title: "Liquid",
-  description: "Liquid web",
+  title: 'Liquid',
+  description: 'Liquid web',
 };
 
 export default function RootLayout({
