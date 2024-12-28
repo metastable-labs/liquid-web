@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
 export default {
   content: [
@@ -31,6 +31,7 @@ export default {
           800: "#FAEDEF",
           850: "#611515",
           900: "#156146",
+          950: "#0F172A",
         },
       },
       boxShadow: {
@@ -38,9 +39,9 @@ export default {
       },
     },
     fontFamily: {
-      Aeonik: ['Aeonik'],
-      ClashDisplay: ['ClashDisplay'],
-      QuantaGroteskPro: ['QuantaGroteskPro'],
+      Aeonik: ["Aeonik"],
+      ClashDisplay: ["ClashDisplay"],
+      QuantaGroteskPro: ["QuantaGroteskPro"],
     },
   },
   plugins: [],

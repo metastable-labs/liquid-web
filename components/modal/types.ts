@@ -14,8 +14,6 @@ export interface HoldButtonProps
 export interface WithdrawModalProps {
   isOpen: boolean;
   onClose: () => void;
-  balance: number;
-  tokenSymbol?: string;
 }
 
 export interface ActionModalProps {
@@ -24,21 +22,12 @@ export interface ActionModalProps {
   onWithdraw?: () => void;
   onClaimYield?: () => void;
   onClaimRewards?: () => void;
-  position: {
-    name: string;
-    apy: number;
-    totalBalance: number;
-    yieldEarned: number;
-    rewards: number;
-    icons: string[];
-  };
+  position: Position;
 }
 
 export interface ClaimModalProps {
   isOpen: boolean;
   onClose: () => void;
-  balance: number;
-  tokenSymbol?: string;
 }
 
 export interface InvestModalProps {
@@ -51,7 +40,7 @@ export interface InvestModalProps {
 export interface InfoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   description?: string;
 }
 

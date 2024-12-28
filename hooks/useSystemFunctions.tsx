@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from "./useRedux";
+
 /**
  *
  * @description - Groups commonly used system functions and data in a central location for
@@ -9,16 +11,25 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 const useSystemFunctions = () => {
+  const dispatch = useAppDispatch();
   const navigate = useRouter();
   const pathname = usePathname();
 
   // states
+  const appState = useAppSelector((state) => state.app);
+  const positionState = useAppSelector((state) => state.position);
 
   return {
+    // functions
+    dispatch,
+
+    // navigation
     navigate,
     pathname,
 
     // states
+    appState,
+    positionState,
   };
 };
 

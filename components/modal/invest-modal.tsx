@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Keypad } from '../ui/keypad';
-import { HoldButton } from './hold-button';
-import { InvestModalProps } from './types';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { Keypad } from "../ui/keypad";
+import { HoldButton } from "./hold-button";
+import { InvestModalProps } from "./types";
+import { ChevronDown } from "lucide-react";
 // import { formatWithThousandSeparator } from '../util/helpers';
-import ModalWrapper from './modal-wrapper';
-import { useIsMobile } from '../../hooks/useIsMobile';
-import Image from 'next/image';
-import { formatWithThousandSeparator } from '@/utils/helpers';
+import ModalWrapper from "./modal-wrapper";
+import { useIsMobile } from "../../hooks/useIsMobile";
+import Image from "next/image";
+import { formatWithThousandSeparator } from "@/utils/helpers";
 
 const tokenUrl =
-  'https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenAIcon_jgy241.png';
+  "https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenAIcon_jgy241.png";
 
 export function InvestModal({
   isOpen,
   onClose,
   balance = 3600,
-  tokenSymbol = 'USDC',
+  tokenSymbol = "USDC",
 }: InvestModalProps) {
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState("");
 
   const isMobile = useIsMobile();
 
   const handleKeyPress = (key: string) => {
-    if (amount.includes('.') && key === '.') return;
-    if (amount === '0' && key !== '.') {
+    if (amount.includes(".") && key === ".") return;
+    if (amount === "0" && key !== ".") {
       setAmount(key);
     } else {
       setAmount((prev) => prev + key);
@@ -44,8 +44,9 @@ export function InvestModal({
           <div className="border-[#EAEEF4] p-5 rounded-xl border-[1px]">
             <div className="flex justify-between items-center">
               <span className="text-4xl font-medium tabular-nums">
-                {formatWithThousandSeparator(amount) || '0'}
+                {formatWithThousandSeparator(amount) || "0"}
               </span>
+
               <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-full">
                 <Image
                   src={tokenUrl}
@@ -64,7 +65,6 @@ export function InvestModal({
               <span className="font-light text-[#64748B] text-[12px]">
                 Available:
                 <span className="text-[#334155] font-normal text-[13px]">
-                  {' '}
                   ${balance.toLocaleString()} {tokenSymbol}
                 </span>
               </span>

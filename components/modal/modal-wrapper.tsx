@@ -1,10 +1,10 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ModalWrapperProps } from './types';
-import { useIsMobile } from '../../hooks/useIsMobile';
+import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ModalWrapperProps } from "./types";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 function ModalWrapper({
-  title = '',
+  title = "",
   isOpen,
   onClose,
   children,
@@ -22,10 +22,22 @@ function ModalWrapper({
       visible: { opacity: 1, scale: 1 },
     },
     mobile: {
-      hidden: { y: '100%' },
+      hidden: { y: "100%" },
       visible: { y: 0 },
     },
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -43,14 +55,14 @@ function ModalWrapper({
           <motion.div
             className={`bg-white rounded-3xl overflow-hidden ${
               isMobile
-                ? 'fixed bottom-0 left-0 right-0 rounded-b-none'
-                : 'w-[400px] fixed'
+                ? "fixed bottom-0 left-0 right-0 rounded-b-none"
+                : "w-[400px] fixed"
             }`}
             variants={isMobile ? modalVariants.mobile : modalVariants.desktop}
             initial="hidden"
             animate="visible"
             exit="hidden"
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
           >
             <div className="flex flex-col justify-center items-center mt-4 border-[#EAEEF4] border-b-[1px] pb-5">
               {isMobile && (

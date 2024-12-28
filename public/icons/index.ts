@@ -6,6 +6,8 @@ import MoneyTickIcon from "./money-tick-icon";
 import SwapHorizontalIcon from "./swap-horizontal-icon";
 import ArrowRightIcon from "./arrow-right-icon";
 import ArrowLeftIcon from "./arrow-left-icon";
+import MoreIcon from "./more-icon";
+import InfoCircleIcon from "./info-circle-icon";
 
 export {
   CubeIcons,
@@ -16,4 +18,6 @@ export {
   SwapHorizontalIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
+  MoreIcon,
+  InfoCircleIcon,
 };

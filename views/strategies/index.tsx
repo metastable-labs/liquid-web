@@ -1,32 +1,18 @@
 "use client";
 import { useCallback, useState } from "react";
 import classNames from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
 
 import ChessPiece from "@/assets/chess-piece";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
-import { appearAnimation } from "@/utils/helpers";
-import { positions, strategies } from "./dummy";
+import { strategies } from "./dummy";
 import StrategyPaper from "./strategy-paper";
 import StrategyDetail from "./strategy-detail";
-import { Button } from "@/components/ui/button";
-import { InvestModal } from "@/components/modal/invest-modal";
-import { WithdrawModal } from "@/components/modal/withdraw-modal";
-import { ClaimModal } from "@/components/modal/claim-modal";
-import ActionsModal from "@/components/modal/actions-modal";
-import { InfoModal } from "@/components/modal/Info-modal";
 
 const Strategies = () => {
   const [selectedStrategy, setSelectedStrategy] = useState<Strategy | null>(
     null
   );
-
-  const [openWithdraw, setIsOpenWithdraw] = useState(false);
-  const [openInvest, setIsOpenInvest] = useState(false);
-  const [openClaim, setIsOpenClaim] = useState(false);
-  const [openInfo, setIsOpenInfo] = useState(false);
-  const [openActions, setIsOpenActions] = useState(false);
 
   const handleStrategyClick = useCallback((strategy: Strategy) => {
     setSelectedStrategy(strategy);
@@ -38,46 +24,6 @@ const Strategies = () => {
         "xl:flex xl:gap-12 2xl:gap-36": selectedStrategy,
       })}
     >
-      <div className="absolute">
-        <Button onClick={() => setIsOpenWithdraw(true)}>
-          Open Withdraw Modal
-        </Button>
-        <Button onClick={() => setIsOpenClaim(true)}>Open Claim Modal</Button>
-        <Button onClick={() => setIsOpenInfo(true)}>Open Info Modal</Button>
-        <Button onClick={() => setIsOpenActions(true)}>
-          Open Actions Modal
-        </Button>
-
-        <WithdrawModal
-          isOpen={openWithdraw}
-          onClose={() => setIsOpenWithdraw(false)}
-          balance={10000}
-          tokenSymbol="USDC"
-        />
-
-        <ClaimModal
-          isOpen={openClaim}
-          onClose={() => setIsOpenClaim(false)}
-          balance={400}
-          tokenSymbol="USDC"
-        />
-
-        <ActionsModal
-          isOpen={openActions}
-          onClose={() => setIsOpenActions(false)}
-          position={positions}
-          onWithdraw={() => console.log("Withdraw clicked")}
-          onClaimYield={() => console.log("Claim yield clicked")}
-          onClaimRewards={() => console.log("Claim rewards clicked")}
-        />
-
-        <InfoModal
-          isOpen={openInfo}
-          onClose={() => setIsOpenInfo(false)}
-          title="What’s your total balance?"
-          description="Your total balance reflects the amount of money available in a particular position. It includes all deposits."
-        />
-      </div>
       <div
         className={classNames(
           "flex flex-col gap-7 pt-[30px] pb-[60px] px-[18px] xl:pr-[0px] xl:max-w-[500px]",
@@ -137,7 +83,7 @@ const Strategies = () => {
       )}
 
       {selectedStrategy && (
-        <div className="hidden xl:flex gap-4 pt-[66px]">
+        <div className="hidden xl:flex gap-4 pt-[66px] sticky top-0 right-0 h-full overflow-y-auto no-scrollbar pb-10">
           <LWClickAnimation
             onClick={() => setSelectedStrategy(null)}
             className="h-fit w-fit"

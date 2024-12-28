@@ -1,22 +1,20 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Slider } from '../ui/slider';
-import { PercentageButton } from '../ui/percentage-button';
-import { HoldButton } from './hold-button';
-import { ClaimModalProps } from './types';
-import ModalWrapper from './modal-wrapper';
-import Image from 'next/image';
+import { useState } from "react";
+import { Slider } from "../ui/slider";
+import { PercentageButton } from "../ui/percentage-button";
+import { HoldButton } from "./hold-button";
+import { ClaimModalProps } from "./types";
+import ModalWrapper from "./modal-wrapper";
+import Image from "next/image";
 const tokenUrl =
-  'https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenBIcon_wscb3p.png';
+  "https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenBIcon_wscb3p.png";
 
-export function ClaimModal({
-  isOpen,
-  onClose,
-  balance = 10000,
-  tokenSymbol = 'USDC',
-}: ClaimModalProps) {
+export function ClaimModal({ isOpen, onClose }: ClaimModalProps) {
   const [percentage, setPercentage] = useState(100);
+
+  const balance = 10000;
+  const tokenSymbol = "USDC";
 
   const amount = (balance * percentage) / 100;
 
@@ -62,7 +60,7 @@ export function ClaimModal({
               <span className="font-light text-[#64748B]">
                 Claimable:
                 <span className="text-[#334155] font-normal">
-                  {' '}
+                  {" "}
                   ${balance.toLocaleString()}
                 </span>
               </span>
@@ -102,7 +100,7 @@ export function ClaimModal({
               <div className="flex justify-between text-sm text-gray-600 mb-5">
                 <span className="font-light text-[12px]">Fees:</span>
                 <div className="flex items-center gap-1">
-                  <span className="text-[14px]">${'5'.toLocaleString()}</span>
+                  <span className="text-[14px]">${"5".toLocaleString()}</span>
                 </div>
               </div>
             </div>

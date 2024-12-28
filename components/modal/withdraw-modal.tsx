@@ -1,23 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Slider } from '../ui/slider';
-import { PercentageButton } from '../ui/percentage-button';
-import { HoldButton } from './hold-button';
-import { WithdrawModalProps } from './types';
-import ModalWrapper from './modal-wrapper';
-import Image from 'next/image';
+import { useState } from "react";
+import { Slider } from "../ui/slider";
+import { PercentageButton } from "../ui/percentage-button";
+import { HoldButton } from "./hold-button";
+import { WithdrawModalProps } from "./types";
+import ModalWrapper from "./modal-wrapper";
+import Image from "next/image";
 
 const tokenUrl =
-  'https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenBIcon_wscb3p.png';
+  "https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenBIcon_wscb3p.png";
 
-export function WithdrawModal({
-  isOpen,
-  onClose,
-  balance = 10000,
-  tokenSymbol = 'USDC',
-}: WithdrawModalProps) {
+export function WithdrawModal({ isOpen, onClose }: WithdrawModalProps) {
   const [percentage, setPercentage] = useState(100);
+
+  const balance = 10000;
+  const tokenSymbol = "USDC";
 
   const amount = (balance * percentage) / 100;
   const percentageOptions = [10, 25, 50, 75, 100];
@@ -63,7 +61,7 @@ export function WithdrawModal({
               <span className="font-light text-[#64748B]">
                 Balance:
                 <span className="text-[#334155] font-normal">
-                  {' '}
+                  {" "}
                   {balance.toLocaleString()}
                 </span>
               </span>
