@@ -28,7 +28,7 @@ const Strategies = () => {
     >
       <div
         className={classNames(
-          "flex flex-col gap-7 py-[30px] px-[18px] xl:pr-[60px] xl:max-w-[500px]",
+          "flex flex-col gap-7 pt-[30px] pb-[60px] px-[18px] xl:pr-[0px] xl:max-w-[500px]",
           { "hidden xl:flex": selectedStrategy }
         )}
       >

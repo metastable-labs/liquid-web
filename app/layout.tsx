@@ -15,8 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-Aeonik xl:rounded-[32px] xl:m-4 xl:border xl:border-primary-150 pt-6">
-        <div className="flex xl:gap-20 2xl:gap-28 2xl:justify-between">
-          <div className="hidden xl:block">
+        <div className="flex xl:gap-20 2xl:gap-28 2xl:justify-between relative max-h-[94vh] overflow-y-auto">
+          <div className="hidden xl:block sticky top-0">
             <LWNavigation />
           </div>
 
