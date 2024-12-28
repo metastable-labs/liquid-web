@@ -25,6 +25,22 @@ export interface WithdrawModalProps {
   tokenSymbol?: string;
 }
 
+export interface ActionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onWithdraw?: () => void;
+  onClaimYield?: () => void;
+  onClaimRewards?: () => void;
+  position: {
+    name: string;
+    apy: number;
+    totalBalance: number;
+    yieldEarned: number;
+    rewards: number;
+    icons: string[];
+  };
+}
+
 export interface ClaimModalProps {
   isOpen: boolean;
   onClose: () => void;

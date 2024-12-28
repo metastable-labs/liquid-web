@@ -8,6 +8,7 @@ import { ChevronDown } from 'lucide-react';
 import { formatWithThousandSeparator } from '../util/helpers';
 import ModalWrapper from './modal-wrapper';
 import { useIsMobile } from '../hook/useIsMobile';
+import Image from 'next/image';
 
 const tokenUrl =
   'https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenAIcon_jgy241.png';
@@ -45,7 +46,13 @@ export function InvestModal({
                 {formatWithThousandSeparator(amount) || '0'}
               </span>
               <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-full">
-                <img src={tokenUrl} className="h-4 w-4 rounded-full" />
+                <Image
+                  src={tokenUrl}
+                  alt="Token icon"
+                  width={18}
+                  height={18}
+                  className="rounded-full"
+                />
                 <span className="text-[12px]">{tokenSymbol}</span>
                 <ChevronDown size={20} strokeWidth={1} color="#94A3B8" />
               </div>
@@ -76,9 +83,15 @@ export function InvestModal({
               You`&apos;`ll receive:
             </span>
             <div className="flex items-center gap-1">
-              <img src={tokenUrl} className="h-4 w-4 rounded-full" />
+              <Image
+                src={tokenUrl}
+                alt="Token icon"
+                width={18}
+                height={18}
+                className="rounded-full"
+              />
               <span className="text-[14px]">
-                {amount.toLocaleString()} {tokenSymbol}
+                {amount.toLocaleString() || 0} {tokenSymbol}
               </span>
             </div>
           </div>

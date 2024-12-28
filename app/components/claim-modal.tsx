@@ -6,6 +6,7 @@ import { PercentageButton } from './percentage-button';
 import { HoldButton } from './hold-button';
 import { ClaimModalProps } from './types';
 import ModalWrapper from './modal-wrapper';
+import Image from 'next/image';
 const tokenUrl =
   'https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenBIcon_wscb3p.png';
 
@@ -49,7 +50,13 @@ export function ClaimModal({
 
             <div className="flex justify-between text-sm text-gray-600 mb-5">
               <div className="flex items-center gap-1">
-                <img src={tokenUrl} className="h-4 w-4 rounded-full" />
+                <Image
+                  src={tokenUrl}
+                  alt="Token icon"
+                  width={18}
+                  height={18}
+                  className="rounded-full"
+                />
                 <span>{tokenSymbol}</span>
               </div>
               <span className="font-light text-[#64748B]">
@@ -80,7 +87,13 @@ export function ClaimModal({
                   You`&apos;`ll receive:
                 </span>
                 <div className="flex items-center gap-1">
-                  <img src={tokenUrl} className="h-4 w-4 rounded-full" />
+                  <Image
+                    src={tokenUrl}
+                    alt="Token icon"
+                    width={18}
+                    height={18}
+                    className="rounded-full"
+                  />
                   <span className="text-[14px]">
                     {amount.toLocaleString()} {tokenSymbol}
                   </span>

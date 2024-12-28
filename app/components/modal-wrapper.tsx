@@ -46,8 +46,7 @@ function ModalWrapper({
               ${
                 isMobile
                   ? 'bottom-0 left-0 right-0 rounded-b-none'
-                  : 'right-0 left-0 top-0, bottom-0 w-[400px]'
-                //   : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px]'
+                  : 'left-0 right-0top-0 w-[400px]'
               }
             `}
             variants={isMobile ? modalVariants.mobile : modalVariants.desktop}
@@ -56,9 +55,13 @@ function ModalWrapper({
             exit="hidden"
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           >
-            <div className="flex justify-center items-center mt-6">
-              <h2 className="text-sm font-medium text-center">{title}</h2>
+            <div className="flex flex-col justify-center items-center mt-4 border-[#EAEEF4] border-b-[1px] pb-5">
+              {isMobile && (
+                <div className="h-[4px] w-[40px] bg-[#E2E8F0] rounded-full" />
+              )}
+              <h2 className="text-sm font-medium text-center mt-2">{title}</h2>
             </div>
+
             {children}
           </motion.div>
         </div>

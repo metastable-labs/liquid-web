@@ -15,6 +15,7 @@ export default {
     },
     fontFamily: {
       Aeonik: ['Aeonik'],
+      ClashDisplay: ['ClashDisplay'],
       QuantaGroteskPro: ['QuantaGroteskPro'],
     },
   },
