@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Keypad } from "../ui/keypad";
 import { HoldButton } from "./hold-button";
 import { InvestModalProps } from "./types";
@@ -10,19 +10,18 @@ import ModalWrapper from "./modal-wrapper";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import Image from "next/image";
 import { formatWithThousandSeparator } from "@/utils/helpers";
-
-const tokenUrl =
-  "https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenAIcon_jgy241.png";
+import supportedAssets, { SupportedAsset } from "@/constants/supported-assets";
 
 export function InvestModal({
   isOpen,
   onClose,
   balance = 3600,
-  tokenSymbol = "USDC",
 }: InvestModalProps) {
   const [amount, setAmount] = useState("");
+  const [token, setToken] = useState<SupportedAsset>();
 
   const isMobile = useIsMobile();
+  const tokenSymbol = token?.symbol || "USDC";
 
   const handleKeyPress = (key: string) => {
     if (amount.includes(".") && key === ".") return;
@@ -37,6 +36,14 @@ export function InvestModal({
     setAmount((prev) => prev.slice(0, -1));
   };
 
+  useEffect(() => {
+    const token = supportedAssets.find((asset) => asset.symbol === tokenSymbol);
+
+    if (!token) return;
+
+    setToken(token);
+  }, [tokenSymbol]);
+
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose} title="Invest">
       <div className="p-6">
@@ -49,7 +56,7 @@ export function InvestModal({
 
               <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-full">
                 <Image
-                  src={tokenUrl}
+                  src={token?.logo || ""}
                   alt="Token icon"
                   width={18}
                   height={18}
@@ -85,7 +92,7 @@ export function InvestModal({
             </span>
             <div className="flex items-center gap-1">
               <Image
-                src={tokenUrl}
+                src={token?.logo || ""}
                 alt="Token icon"
                 width={18}
                 height={18}

@@ -34,7 +34,6 @@ export interface InvestModalProps {
   isOpen: boolean;
   onClose: () => void;
   balance: number;
-  tokenSymbol?: string;
 }
 
 export interface InfoModalProps {

@@ -161,7 +161,6 @@ const StrategyPaper = ({
         isOpen={openInvest}
         onClose={handleInvestModal}
         balance={3600}
-        tokenSymbol="USDC"
       />
     </div>
   );
