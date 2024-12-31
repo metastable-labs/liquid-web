@@ -8,6 +8,8 @@ import { InfoModal } from "@/components/modal/Info-modal";
 import ActionsModal from "@/components/modal/actions-modal";
 import { WithdrawModal } from "@/components/modal/withdraw-modal";
 import { ClaimModal } from "@/components/modal/claim-modal";
+import PrivyWalletProvider from "@/providers/PrivyProvider";
+import ConnectWalletButton from "@/components/ui/connect-wallet-button";
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -20,6 +22,8 @@ const App = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
+      <ConnectWalletButton />
+
       <div className="flex xl:gap-20 2xl:gap-28 2xl:justify-between relative max-h-[94vh] overflow-y-auto">
         <div className="hidden xl:block sticky top-0">
           <LWNavigation />
@@ -60,9 +64,11 @@ const App = ({ children }: { children: React.ReactNode }) => {
 
 const AppWithProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ReduxProvider>
-      <App>{children}</App>
-    </ReduxProvider>
+    <PrivyWalletProvider>
+      <ReduxProvider>
+        <App>{children}</App>
+      </ReduxProvider>
+    </PrivyWalletProvider>
   );
 };
 

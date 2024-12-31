@@ -79,6 +79,19 @@ const formatNumberWithSuffix = (num: number | string | undefined): string => {
   return numValue.toFixed(2).toString();
 };
 
+const truncateWalletAddress = (
+  text: `0x${string}`,
+  startChars = 5,
+  endChars = 5
+) => {
+  if (text.length <= startChars + endChars) {
+    return text;
+  }
+  return `${text.substring(0, startChars)}...${text.substring(
+    text.length - endChars
+  )}`;
+};
+
 export {
   appearAnimation,
   svgAnimation,
@@ -87,4 +100,5 @@ export {
   formatNumberWithSuffix,
   truncateDecimal,
   formatWithThousandSeparator,
+  truncateWalletAddress,
 };
