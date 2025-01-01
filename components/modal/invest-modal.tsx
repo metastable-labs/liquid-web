@@ -17,8 +17,13 @@ export function InvestModal({
   onClose,
   balance = 3600,
 }: InvestModalProps) {
-  const { amount, formattedValue, floatValue, updateAmount } =
-    useFormattedAmount();
+  const {
+    amount,
+    updateAmount,
+    amountWithThousandSeparator,
+    amountWithoutThousandSeparator,
+  } = useFormattedAmount();
+
   const [token, setToken] = useState<SupportedAsset>();
 
   const isMobile = useIsMobile();
@@ -56,8 +61,10 @@ export function InvestModal({
             <div className="flex justify-between items-center">
               <input
                 type="text"
-                value={formattedValue}
+                placeholder="0.00"
+                value={amountWithThousandSeparator}
                 onChange={(e) => updateAmount(e.target.value)}
+                autoFocus
                 className="text-4xl font-medium tabular-nums w-full bg-transparent border-none outline-none"
               />
 
@@ -109,7 +116,7 @@ export function InvestModal({
                 className="rounded-full"
               />
               <span className="text-[14px]">
-                {floatValue.toLocaleString()} {tokenSymbol}
+                {(amount || 0).toLocaleString()} {tokenSymbol}
               </span>
             </div>
           </div>
@@ -117,7 +124,9 @@ export function InvestModal({
           <HoldButton
             className="w-full"
             onHoldComplete={() => {
-              console.log(`Investing ${floatValue} ${tokenSymbol}`);
+              console.log(
+                `Investing ${amountWithoutThousandSeparator} ${tokenSymbol}`
+              );
               onClose();
             }}
             holdDuration={1000}
