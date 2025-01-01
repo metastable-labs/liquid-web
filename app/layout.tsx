@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-Aeonik xl:rounded-[32px] xl:m-4 xl:border xl:border-primary-150 pt-6">
+      <body className="font-Aeonik xl:rounded-[32px] xl:m-4 xl:border xl:border-primary-150 no-scrollbar">
         <Providers>
           <App>{children}</App>
         </Providers>
