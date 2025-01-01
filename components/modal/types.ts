@@ -44,8 +44,9 @@ export interface InfoModalProps {
 }
 
 export interface ModalWrapperProps {
-  title: string;
+  title?: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  variant?: "default" | "flush-right";
 }

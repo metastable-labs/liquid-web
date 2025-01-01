@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import AppWithProviders from "./app";
+import App from "./app";
+import Providers from "@/providers";
 
 export const metadata: Metadata = {
   title: "Liquid",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-Aeonik xl:rounded-[32px] xl:m-4 xl:border xl:border-primary-150 pt-6">
-        <AppWithProviders>{children}</AppWithProviders>
+        <Providers>
+          <App>{children}</App>
+        </Providers>
       </body>
     </html>
   );

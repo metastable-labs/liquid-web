@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useState } from "react";
 import classNames from "classnames";
+import { motion, AnimatePresence } from "framer-motion";
 
 import ChessPiece from "@/assets/chess-piece";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/public/icons";
@@ -8,15 +9,22 @@ import { LWClickAnimation } from "@/components";
 import { strategies } from "./dummy";
 import StrategyPaper from "./strategy-paper";
 import StrategyDetail from "./strategy-detail";
+import ModalWrapper from "@/components/modal/modal-wrapper";
+
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 const Strategies = () => {
   const [selectedStrategy, setSelectedStrategy] = useState<Strategy | null>(
     null
   );
 
-  const handleStrategyClick = useCallback((strategy: Strategy) => {
+  const handleStrategyClick = (strategy: Strategy | null): void =>
     setSelectedStrategy(strategy);
-  }, []);
+
+  console.log("strategy", selectedStrategy);
 
   return (
     <div
@@ -55,7 +63,7 @@ const Strategies = () => {
               strategy={strategy}
               onClick={() => handleStrategyClick(strategy)}
               active={selectedStrategy?.id === strategy.id}
-              close={() => setSelectedStrategy(null)}
+              close={() => handleStrategyClick(null)}
             />
           </div>
         ))}
@@ -65,7 +73,7 @@ const Strategies = () => {
         <div className="flex flex-col gap-9 xl:hidden px-5">
           <div className="relative flex items-center justify-center">
             <LWClickAnimation
-              onClick={() => setSelectedStrategy(null)}
+              onClick={() => handleStrategyClick(null)}
               className="h-fit w-fit absolute left-0 top-0"
             >
               <ArrowLeftIcon />
@@ -78,24 +86,13 @@ const Strategies = () => {
         </div>
       )}
 
-      {selectedStrategy && (
-        <div className="w-[1px] bg-primary-150 my-[30px] hidden xl:block" />
-      )}
-
-      {selectedStrategy && (
-        <div className="hidden xl:flex gap-4 pt-[66px] sticky top-0 right-0 h-full overflow-y-auto no-scrollbar pb-10">
-          <LWClickAnimation
-            onClick={() => setSelectedStrategy(null)}
-            className="h-fit w-fit"
-          >
-            <ArrowRightIcon />
-          </LWClickAnimation>
-
-          <div className="max-w-[375px]">
-            <StrategyDetail strategy={selectedStrategy} />
-          </div>
-        </div>
-      )}
+      <ModalWrapper
+        isOpen={!!selectedStrategy}
+        onClose={() => handleStrategyClick(null)}
+        variant="flush-right"
+      >
+        <StrategyDetail strategy={selectedStrategy!} />
+      </ModalWrapper>
     </div>
   );
 };

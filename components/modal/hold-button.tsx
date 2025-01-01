@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useState, useRef, useEffect } from 'react';
-import { Button } from '../ui/button';
-import { cn } from '../../utils/class-name';
-import { HoldButtonProps } from './types';
+import * as React from "react";
+import { useState, useRef, useEffect } from "react";
+import { Button } from "../ui/button";
+import { cn } from "../../utils/class-name";
+import { HoldButtonProps } from "./types";
 
 export function HoldButton({
   children,
@@ -66,15 +66,15 @@ export function HoldButton({
         onPointerUp={stopHolding}
         onPointerLeave={stopHolding}
         className={cn(
-          'font-QuantaGroteskPro relative overflow-hidden rounded-full',
-          className,
+          "font-QuantaGroteskPro relative overflow-hidden rounded-full",
+          className
         )}
         {...props}
       >
-        {isHolding ? 'Release to confirm' : children}
+        {isHolding ? "Release to confirm" : children}
         {isHolding && (
           <div
-            className="absolute bottom-0 left-0 h-1 bg-blue-300"
+            className="absolute bottom-0 left-0 h-full bg-blue-300/45"
             style={{ width: `${holdProgress}%` }}
           />
         )}

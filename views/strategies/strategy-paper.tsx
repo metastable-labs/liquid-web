@@ -52,117 +52,119 @@ const StrategyPaper = ({
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className={classNames(
-        "w-full flex flex-col gap-5 self-stretch cursor-pointer"
-      )}
-    >
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5">
-            <Image
-              src={ownerAvatar}
-              alt={`${owner}'s avatar`}
-              width={40}
-              height={40}
-              className="rounded-full"
-              quality={100}
-            />
+    <>
+      <div
+        onClick={handleClick}
+        className={classNames(
+          "w-full flex flex-col gap-5 self-stretch cursor-pointer"
+        )}
+      >
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-1.5">
+              <Image
+                src={ownerAvatar}
+                alt={`${owner}'s avatar`}
+                width={40}
+                height={40}
+                className="rounded-full"
+                quality={100}
+              />
 
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <span className="text-[14px] leading-[16.8px] text-primary-400 font-medium">
-                  @{owner}
-                </span>
-                <span className="text-[12px] leading-[15.84px] text-primary-100 font-normal">
-                  {moment(createdAt).fromNow()}
-                </span>
-              </div>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[14px] leading-[16.8px] text-primary-400 font-medium">
+                    @{owner}
+                  </span>
+                  <span className="text-[12px] leading-[15.84px] text-primary-100 font-normal">
+                    {moment(createdAt).fromNow()}
+                  </span>
+                </div>
 
-              <div className="flex items-center justify-center gap-1">
-                <EmojiHappyIcon />
-                <p className="text-[12px] leading-[15.84px]">
-                  Automated by{" "}
-                  <span className="text-primary-450">@getliquid</span>
-                </p>
+                <div className="flex items-center justify-center gap-1">
+                  <EmojiHappyIcon />
+                  <p className="text-[12px] leading-[15.84px]">
+                    Automated by{" "}
+                    <span className="text-primary-450">@getliquid</span>
+                  </p>
+                </div>
               </div>
             </div>
+
+            {variant === "primary" ? (
+              <div className="flex items-center gap-1">
+                <span className="text-[12px] leading-[15.84px] text-primary-100">
+                  Est. APY
+                </span>
+
+                <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium">
+                  {estimatedAPY}%
+                </span>
+              </div>
+            ) : (
+              <LWClickAnimation
+                onClick={handleInvestModal}
+                className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
+                stopPropagation
+              >
+                <span className="text-[14px] leading-[18.48px] font-medium text-white text-center">
+                  Invest
+                </span>
+              </LWClickAnimation>
+            )}
           </div>
 
-          {variant === "primary" ? (
-            <div className="flex items-center gap-1">
-              <span className="text-[12px] leading-[15.84px] text-primary-100">
-                Est. APY
-              </span>
+          <div className="self-stretch flex flex-col gap-2">
+            <h1 className="text-[15px] leading-[19.8px] text-primary-400 font-medium">
+              {title}
+            </h1>
 
-              <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium">
-                {estimatedAPY}%
-              </span>
-            </div>
-          ) : (
-            <LWClickAnimation
-              onClick={handleInvestModal}
-              className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
-              stopPropagation
+            <motion.p
+              animate={{ height: isExpanded ? "fit-content" : 50 }}
+              className="text-[15px] leading-[19.8px] text-primary-100"
             >
-              <span className="text-[14px] leading-[18.48px] font-medium text-white text-center">
-                Invest
-              </span>
-            </LWClickAnimation>
-          )}
+              {truncatedDescription}
+            </motion.p>
+
+            {description.length > MAX_DESCRIPTION_LENGTH && (
+              <LWClickAnimation
+                className="mt-0.5 w-fit"
+                onClick={handleSeeMoreClick}
+                stopPropagation
+              >
+                <span className="text-[11px] leading-[13.2px] text-primary-450 underline underline-offset-2 cursor-pointer">
+                  {isExpanded ? "See less" : "See more..."}
+                </span>
+              </LWClickAnimation>
+            )}
+          </div>
         </div>
 
-        <div className="self-stretch flex flex-col gap-2">
-          <h1 className="text-[15px] leading-[19.8px] text-primary-400 font-medium">
-            {title}
-          </h1>
-
-          <motion.p
-            animate={{ height: isExpanded ? "fit-content" : 50 }}
-            className="text-[15px] leading-[19.8px] text-primary-100"
+        {showInvestButton && (
+          <LWClickAnimation
+            onClick={handleInvestModal}
+            className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
+            stopPropagation
           >
-            {truncatedDescription}
-          </motion.p>
+            <span className="text-[14px] leading-[18.48px] font-medium text-white text-center">
+              Invest
+            </span>
+          </LWClickAnimation>
+        )}
 
-          {description.length > MAX_DESCRIPTION_LENGTH && (
-            <LWClickAnimation
-              className="mt-0.5 w-fit"
-              onClick={handleSeeMoreClick}
-              stopPropagation
-            >
-              <span className="text-[11px] leading-[13.2px] text-primary-450 underline underline-offset-2 cursor-pointer">
-                {isExpanded ? "See less" : "See more..."}
-              </span>
-            </LWClickAnimation>
-          )}
-        </div>
+        {active && variant === "primary" && (
+          <LWClickAnimation className="w-fit h-[25px]">
+            <ArrowRightIcon />
+          </LWClickAnimation>
+        )}
       </div>
-
-      {showInvestButton && (
-        <LWClickAnimation
-          onClick={handleInvestModal}
-          className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
-          stopPropagation
-        >
-          <span className="text-[14px] leading-[18.48px] font-medium text-white text-center">
-            Invest
-          </span>
-        </LWClickAnimation>
-      )}
-
-      {active && variant === "primary" && (
-        <LWClickAnimation className="w-fit h-[25px]">
-          <ArrowRightIcon />
-        </LWClickAnimation>
-      )}
 
       <InvestModal
         isOpen={openInvest}
         onClose={handleInvestModal}
         balance={3600}
       />
-    </div>
+    </>
   );
 };
 

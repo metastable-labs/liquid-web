@@ -15,7 +15,7 @@ const LWClickAnimation = ({
     onClick?.();
   };
   return (
-    <motion.div
+    <motion.button
       onClick={handleClick}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
@@ -24,7 +24,7 @@ const LWClickAnimation = ({
       })}
     >
       {children}
-    </motion.div>
+    </motion.button>
   );
 };
 
