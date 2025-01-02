@@ -22,13 +22,15 @@ const App = ({ children }: { children: React.ReactNode }) => {
     <>
       <ConnectWalletButton />
 
-      <div className="flex xl:gap-[20%] 2xl:gap-[28%] 2xl:justify-between relative max-h-[94vh] xl:max-h-[87vh] overflow-y-auto no-scrollbar">
+      <div className="flex xl:gap-[20%] 2xl:gap-[28%] 2xl:justify-between relative xl:h-[96vh] overflow-y-auto no-scrollbar pt-10">
         <div className="hidden xl:block sticky top-0">
           <LWNavigation />
         </div>
 
-        <div className="xl:w-[80%] w-full pb-24">{children}</div>
+        <div className="xl:w-[80%] w-full">{children}</div>
       </div>
+
+      <div className="xl:hidden h-28 w-full" />
 
       <div className="xl:hidden fixed left-0 bottom-0 w-full">
         <LWNavigation />

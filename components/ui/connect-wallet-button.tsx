@@ -15,7 +15,7 @@ const ConnectWalletButton = () => {
   };
 
   return (
-    <div className="flex justify-end pr-4 xl:pr-20 py-3">
+    <div className="flex justify-end pr-4 xl:pr-20 py-3 fixed top-0 xl:top-5 right-0 z-50 bg-white w-full xl:w-auto">
       {ready && !authenticated && (
         <LWClickAnimation
           onClick={handleLogin}

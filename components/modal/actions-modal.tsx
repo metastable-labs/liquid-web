@@ -1,4 +1,5 @@
 "use client";
+import classNames from "classnames";
 
 import { MoreIcon, InfoCircleIcon } from "@/public/icons";
 import usePositionActions from "@/store/position/actions";
@@ -8,10 +9,47 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import ModalWrapper from "./modal-wrapper";
 import LWClickAnimation from "../click-animation";
+import { formatNumberWithSuffix } from "@/utils/helpers";
+
+const TokenIcons = ({ icons }: { icons: Array<string> }) => (
+  <div
+    className={classNames("flex items-center justify-center", {
+      "-space-x-1.5": icons.length > 1,
+    })}
+  >
+    {icons.map((icon, index) => (
+      <Image
+        key={index}
+        src={icon}
+        alt="Token icon"
+        width={16}
+        height={16}
+        className="rounded-full"
+      />
+    ))}
+  </div>
+);
 
 function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
   const { setIsClaiming, setIsWithdrawing } = usePositionActions();
   const { setInfo } = useAppActions();
+
+  const assets = position?.assets;
+
+  const iconPairs = (() => {
+    if (assets?.length === 2) {
+      return [[assets[0]?.logo], [assets[1]?.logo]];
+    } else if (assets?.length === 3) {
+      return [[assets[0]?.logo], [assets[1]?.logo, assets[2]?.logo]];
+    } else if (assets?.length === 4) {
+      return [
+        [assets[0]?.logo, assets[1]?.logo],
+        [assets[2]?.logo, assets[3]?.logo],
+      ];
+    } else {
+      return [[], []];
+    }
+  })();
 
   const onWithdraw = () => {
     setIsWithdrawing(true);
@@ -75,51 +113,19 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
             <div className="flex items-center gap-4">
               <div className="space-y-2">
                 <span className="text-[15px] text-[#1E293B] font-medium">
-                  {position?.title}
+                  {"Moonwell - USDC"}
                 </span>
                 <div className="flex gap-1">
-                  <div className="flex items-center justify-center -space-x-1.5">
-                    {position &&
-                      Object?.values?.(position?.iconPairs[0]).map(
-                        (icon, i) => (
-                          <div key={i}>
-                            <Image
-                              src={icon}
-                              alt="Token icon"
-                              width={16}
-                              height={16}
-                              className="rounded-full"
-                            />
-                          </div>
-                        )
-                      )}
-                  </div>
-
-                  <div className="min-w-fit min-h-fit ">
-                    <MoreIcon />
-                  </div>
-
-                  <div className="flex items-center justify-center -space-x-1.5">
-                    {position &&
-                      Object.values(position?.iconPairs[1]).map((icon, i) => (
-                        <div key={i}>
-                          <Image
-                            src={icon}
-                            alt="Token icon"
-                            width={16}
-                            height={16}
-                            className="rounded-full"
-                          />
-                        </div>
-                      ))}
-                  </div>
+                  <TokenIcons icons={iconPairs[0]} />
+                  <MoreIcon />
+                  <TokenIcons icons={iconPairs[1]} />
                 </div>
               </div>
             </div>
             <div className="text-[12px] text-[#64748B] font-light">
               Est. APY{" "}
               <span className="text-[#4691FE] text-[13px] font-medium">
-                {position?.estimatedAPY}%
+                {position?.apy}%
               </span>
             </div>
           </div>
@@ -130,7 +136,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
                 key={index}
                 className="flex items-center justify-between border-[#EAEEF4] border-[1px] px-4 py-3 rounded-xl"
               >
-                <LWClickAnimation onClick={infoClick}>
+                <LWClickAnimation onClick={infoClick} className="flex flex-col">
                   <div className="flex items-center gap-1">
                     <span className="text-sm text-[#64748B] text-[12px] font-light">
                       {title}
@@ -140,8 +146,8 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
                     </div>
                   </div>
 
-                  <div className="text-lg font-medium text-[13px] font-ClashDisplay">
-                    ${value}
+                  <div className="text-lg font-medium text-[13px] font-ClashDisplay xl">
+                    ${(Number(value) / 1e9).toLocaleString()}
                   </div>
                 </LWClickAnimation>
 

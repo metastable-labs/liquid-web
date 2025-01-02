@@ -1,8 +1,11 @@
 import Image from "next/image";
+import classNames from "classnames";
+
 import { InfoCircleIcon, MoreIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
 import useAppActions from "@/store/app/actions";
 import usePositionActions from "@/store/position/actions";
+import { formatNumberWithSuffix } from "@/utils/helpers";
 
 const Info = ({ title, value, onClick }: PositionInfo) => (
   <LWClickAnimation
@@ -17,13 +20,17 @@ const Info = ({ title, value, onClick }: PositionInfo) => (
       <InfoCircleIcon />
     </div>
     <span className="text-[13px] leading-[15.6px] text-primary-950">
-      ${value.toLocaleString()}
+      ${formatNumberWithSuffix(value)}
     </span>
   </LWClickAnimation>
 );
 
-const TokenIcons = ({ icons }: { icons: string[] }) => (
-  <div className="flex items-center justify-center -space-x-1.5">
+const TokenIcons = ({ icons }: { icons: Array<string> }) => (
+  <div
+    className={classNames("flex items-center justify-center", {
+      "-space-x-1.5": icons.length > 1,
+    })}
+  >
     {icons.map((icon, index) => (
       <Image
         key={index}
@@ -37,26 +44,29 @@ const TokenIcons = ({ icons }: { icons: string[] }) => (
   </div>
 );
 
-const PositionCard = ({
-  estimatedAPY,
-  iconPairs,
-  rewards,
-  title,
-  totalBalance,
-  yieldEarned,
-}: Position) => {
+const PositionCard = (props: Position) => {
   const { setInfo } = useAppActions();
   const { setActivePosition } = usePositionActions();
 
+  const { apy, assets, rewards, totalBalance, yieldEarned } = props;
+
+  const iconPairs = (() => {
+    if (assets.length === 2) {
+      return [[assets[0].logo], [assets[1].logo]];
+    } else if (assets.length === 3) {
+      return [[assets[0].logo], [assets[1].logo, assets[2].logo]];
+    } else if (assets.length === 4) {
+      return [
+        [assets[0].logo, assets[1].logo],
+        [assets[2].logo, assets[3].logo],
+      ];
+    } else {
+      throw new Error("Assets array must contain 2 to 4 items.");
+    }
+  })();
+
   const handleAction = () => {
-    setActivePosition({
-      title,
-      estimatedAPY,
-      iconPairs,
-      rewards,
-      totalBalance,
-      yieldEarned,
-    });
+    setActivePosition(props);
   };
 
   const renderInfoSection = (
@@ -85,20 +95,20 @@ const PositionCard = ({
       <div className="self-stretch flex items-center justify-between">
         <div className="flex flex-col gap-2 justify-center">
           <h1 className="text-[15px] leading-[19.8px] text-primary-400 font-medium">
-            {title}
+            Moonwell - USDC
           </h1>
           <div className="flex items-center gap-1">
-            <TokenIcons icons={Object.values(iconPairs[0])} />
+            <TokenIcons icons={iconPairs[0]} />
             <MoreIcon />
-            <TokenIcons icons={Object.values(iconPairs[1])} />
+            <TokenIcons icons={iconPairs[1]} />
           </div>
         </div>
         <div className="flex items-center gap-1">
           <span className="text-[12px] leading-[15.84px] text-primary-100">
             Est. APY
           </span>
-          <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium">
-            {estimatedAPY}%
+          <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium font-ClashDisplay">
+            {apy}%
           </span>
         </div>
       </div>
@@ -106,7 +116,7 @@ const PositionCard = ({
       <div className="flex items-center justify-between">
         {renderInfoSection(
           "Total Balance",
-          totalBalance,
+          Number(totalBalance) / 1e9,
           "What’s your total balance?",
           "Your total balance reflects the amount of money available in a particular position. It includes all deposits."
         )}
@@ -115,7 +125,7 @@ const PositionCard = ({
 
         {renderInfoSection(
           "Yield Earned",
-          yieldEarned,
+          Number(yieldEarned) / 1e9,
           "What is Yield?",
           "Yield refers to the income earned on an investment over time, typically expressed as a percentage."
         )}
@@ -124,7 +134,7 @@ const PositionCard = ({
 
         {renderInfoSection(
           "Rewards",
-          rewards,
+          Number(rewards) / 1e9,
           "How are my rewards calculated?",
           "Rewards are calculated based on your contributions and performance metrics within the specified position."
         )}

@@ -5,12 +5,12 @@ import Image from "next/image";
 
 import supportedAssets from "@/constants/supported-assets";
 import useFormattedAmount from "@/hooks/useFormattedAmount";
+import useScreenDetect from "@/hooks/useScreenDetect";
 import { Keypad } from "../ui/keypad";
 import { HoldButton } from "./hold-button";
 import { InvestModalProps } from "./types";
 import { ChevronDown } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
-import { useIsMobile } from "../../hooks/useIsMobile";
 
 export function InvestModal({
   isOpen,
@@ -25,8 +25,8 @@ export function InvestModal({
   } = useFormattedAmount();
 
   const [token, setToken] = useState<SupportedAsset>();
+  const { isDesktop } = useScreenDetect();
 
-  const isMobile = useIsMobile();
   const tokenSymbol = token?.symbol || "USDC";
 
   const handleKeyPress = (key: string) => {
@@ -66,6 +66,7 @@ export function InvestModal({
                 onChange={(e) => updateAmount(e.target.value)}
                 autoFocus
                 className="text-4xl font-medium tabular-nums w-full bg-transparent border-none outline-none"
+                disabled={!isDesktop}
               />
 
               <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-full">
@@ -97,7 +98,7 @@ export function InvestModal({
             </div>
           </div>
 
-          {isMobile && (
+          {!isDesktop && (
             <Keypad
               onKeyPress={handleKeyPress}
               onBackspace={handleBackspace}

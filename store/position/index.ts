@@ -5,12 +5,22 @@ export interface PositionState {
   activePosition: Position | null;
   isWithdrawing: boolean;
   isClaiming: boolean;
+  strategies?: Array<Strategy>;
+  strategiesMeta?: Meta;
+  loadingStrategies?: boolean;
+  positions?: Array<Position>;
+  positionsMeta?: Meta;
+  loadingPositions?: boolean;
 }
 
 const initialState: PositionState = {
   activePosition: null,
   isWithdrawing: false,
   isClaiming: false,
+  strategies: undefined,
+  loadingStrategies: true,
+  positions: undefined,
+  loadingPositions: true,
 };
 
 export const positionReducer = createSlice({
@@ -28,10 +38,85 @@ export const positionReducer = createSlice({
     setIsClaiming(state, action: PayloadAction<boolean>) {
       state.isClaiming = action.payload;
     },
+
+    setLoadingStrategies(state, action: PayloadAction<boolean>) {
+      state.loadingStrategies = action.payload;
+    },
+
+    setExtraStrategies: (
+      state,
+      action: PayloadAction<Array<Strategy> | undefined>
+    ) => {
+      if (action.payload) {
+        state.strategies = [...state.strategies!, ...action.payload];
+      } else {
+        state.strategies = undefined;
+      }
+    },
+
+    setStrategies: (
+      state,
+      action: PayloadAction<Array<Strategy> | undefined>
+    ) => {
+      if (action.payload) {
+        state.strategies = [...action.payload];
+      } else {
+        state.strategies = undefined;
+      }
+    },
+
+    setStrategiesMeta: (state, action: PayloadAction<Meta | undefined>) => {
+      if (action.payload) {
+        state.strategiesMeta = { ...action.payload };
+      } else {
+        state.strategiesMeta = undefined;
+      }
+    },
+
+    setLoadingPosition(state, action: PayloadAction<boolean>) {
+      state.loadingPositions = action.payload;
+    },
+
+    setExtraPosition: (
+      state,
+      action: PayloadAction<Array<Position> | undefined>
+    ) => {
+      if (action.payload) {
+        state.positions = { ...state.positions!, ...action.payload };
+      } else {
+        state.positions = undefined;
+      }
+    },
+
+    setPositions: (
+      state,
+      action: PayloadAction<Array<Position> | undefined>
+    ) => {
+      state.positions = action.payload;
+    },
+
+    setPositionsMeta: (state, action: PayloadAction<Meta | undefined>) => {
+      if (action.payload) {
+        state.positionsMeta = { ...action.payload };
+      } else {
+        state.positionsMeta = undefined;
+      }
+    },
   },
 });
 
-export const { setActivePosition, setIsClaiming, setIsWithdrawing } =
-  positionReducer.actions;
+export const {
+  setActivePosition,
+  setExtraPosition,
+  setExtraStrategies,
+  setIsClaiming,
+  setIsWithdrawing,
+  setLoadingPosition,
+  setLoadingStrategies,
+  setPositions,
+  setStrategies,
+  setStrategiesMeta,
+  setPositionsMeta,
+} = positionReducer.actions;
 
 export default positionReducer.reducer;

@@ -12,15 +12,7 @@ const MAX_DESCRIPTION_LENGTH = 100;
 
 const StrategyPaper = ({
   onClick,
-  strategy: {
-    createdAt,
-    description,
-    estimatedAPY,
-    id,
-    owner,
-    ownerAvatar,
-    title,
-  },
+  strategy: { apy, createdAt, curator, description, owner, name },
   active,
   variant = "primary",
   close,
@@ -63,8 +55,10 @@ const StrategyPaper = ({
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-1.5">
               <Image
-                src={ownerAvatar}
-                alt={`${owner}'s avatar`}
+                src={
+                  "https://res.cloudinary.com/djzeufu4j/image/upload/v1735331176/Avatar_udfxuk.png"
+                }
+                alt={`${curator}'s avatar`}
                 width={40}
                 height={40}
                 className="rounded-full"
@@ -73,8 +67,8 @@ const StrategyPaper = ({
 
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[14px] leading-[16.8px] text-primary-400 font-medium">
-                    @{owner}
+                  <span className="text-[14px] leading-[16.8px] text-primary-400 font-medium font-ClashDisplay">
+                    {curator.handle}
                   </span>
                   <span className="text-[12px] leading-[15.84px] text-primary-100 font-normal">
                     {moment(createdAt).fromNow()}
@@ -85,7 +79,7 @@ const StrategyPaper = ({
                   <EmojiHappyIcon />
                   <p className="text-[12px] leading-[15.84px]">
                     Automated by{" "}
-                    <span className="text-primary-450">@getliquid</span>
+                    <span className="text-primary-450">{owner.handle}</span>
                   </p>
                 </div>
               </div>
@@ -97,8 +91,8 @@ const StrategyPaper = ({
                   Est. APY
                 </span>
 
-                <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium">
-                  {estimatedAPY}%
+                <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium font-ClashDisplay">
+                  {Number(apy)}%
                 </span>
               </div>
             ) : (
@@ -116,11 +110,23 @@ const StrategyPaper = ({
 
           <div className="self-stretch flex flex-col gap-2">
             <h1 className="text-[15px] leading-[19.8px] text-primary-400 font-medium">
-              {title}
+              {name}
             </h1>
 
+            {variant === "secondary" && (
+              <div className="flex items-center gap-1">
+                <span className="text-[12px] leading-[15.84px] text-primary-100">
+                  Est. APY
+                </span>
+
+                <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium font-ClashDisplay">
+                  {Number(apy)}%
+                </span>
+              </div>
+            )}
+
             <motion.p
-              animate={{ height: isExpanded ? "fit-content" : 50 }}
+              animate={{ height: isExpanded ? "fit-content" : 35 }}
               className="text-[15px] leading-[19.8px] text-primary-100"
             >
               {truncatedDescription}

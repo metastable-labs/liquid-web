@@ -1,7 +1,8 @@
-type Strategy = {
+type Strategy_ = {
   id: string;
   owner: string;
-  ownerAvatar: string;
+  curator: string;
+  curatorAvatar: string;
   title: string;
   description: string;
   estimatedAPY: number;

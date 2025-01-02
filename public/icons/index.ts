@@ -9,6 +9,7 @@ import ArrowLeftIcon from "./arrow-left-icon";
 import MoreIcon from "./more-icon";
 import InfoCircleIcon from "./info-circle-icon";
 import CloseIcon from "./close-icon";
+import PositionIcon from "./position-icon";
 
 export {
   CubeIcons,
@@ -22,4 +23,5 @@ export {
   MoreIcon,
   InfoCircleIcon,
   CloseIcon,
+  PositionIcon,
 };
