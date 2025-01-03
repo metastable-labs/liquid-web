@@ -16,6 +16,7 @@ import {
   setStrategies,
   setPositionsMeta,
   setStrategiesMeta,
+  setLoadingInvesting,
 } from ".";
 import { CallbackProps } from "..";
 import api from "./api";
@@ -35,10 +36,13 @@ const usePositionActions = () => {
     dispatch(setIsWithdrawing_(isWithdrawing));
   };
 
-  const investInStrategy = async (amount: number) => {
+  const investInStrategy = async (
+    amount: number,
+    strategyId: `0x${string}`
+  ) => {
     try {
-      const amountToInvest = BigInt(amount * 10 ** 18);
-      const strategyId = "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e";
+      setLoadingInvesting(true);
+      const amountToInvest = BigInt(amount * 10 ** 6);
       const strategyModule = "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e";
 
       const { request } = await simulateContract(wagmiConfig, {
@@ -48,8 +52,12 @@ const usePositionActions = () => {
         args: [strategyId, strategyModule, [amountToInvest]],
       });
       const hash = await writeContract(wagmiConfig, request);
+
+      console.log("Investment hash", hash);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoadingInvesting(false);
     }
   };
 

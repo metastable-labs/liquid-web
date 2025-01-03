@@ -165,11 +165,7 @@ const StrategyPaper = ({
         )}
       </div>
 
-      <InvestModal
-        isOpen={openInvest}
-        onClose={handleInvestModal}
-        balance={3600}
-      />
+      <InvestModal isOpen={openInvest} onClose={handleInvestModal} />
     </>
   );
 };

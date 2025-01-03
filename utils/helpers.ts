@@ -92,6 +92,16 @@ const truncateWalletAddress = (
   )}`;
 };
 
+const formatBalance = (balance: string, decimals = 2): string => {
+  const valuesBeforeDecimal = balance.split(".")[0];
+  const valuesAfterDecimal = balance.split(".")[1];
+  const truncatedDecimals = valuesAfterDecimal
+    ? valuesAfterDecimal?.slice(0, decimals)
+    : "";
+
+  return `${valuesBeforeDecimal}.${truncatedDecimals}`;
+};
+
 export {
   appearAnimation,
   svgAnimation,
@@ -101,4 +111,5 @@ export {
   truncateDecimal,
   formatWithThousandSeparator,
   truncateWalletAddress,
+  formatBalance,
 };

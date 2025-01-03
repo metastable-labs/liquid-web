@@ -11,6 +11,7 @@ export interface PositionState {
   positions?: Array<Position>;
   positionsMeta?: Meta;
   loadingPositions?: boolean;
+  loadingInvesting: boolean;
 }
 
 const initialState: PositionState = {
@@ -21,6 +22,7 @@ const initialState: PositionState = {
   loadingStrategies: true,
   positions: undefined,
   loadingPositions: true,
+  loadingInvesting: false,
 };
 
 export const positionReducer = createSlice({
@@ -41,6 +43,10 @@ export const positionReducer = createSlice({
 
     setLoadingStrategies(state, action: PayloadAction<boolean>) {
       state.loadingStrategies = action.payload;
+    },
+
+    setLoadingInvesting(state, action: PayloadAction<boolean>) {
+      state.loadingInvesting = action.payload;
     },
 
     setExtraStrategies: (
@@ -117,6 +123,7 @@ export const {
   setStrategies,
   setStrategiesMeta,
   setPositionsMeta,
+  setLoadingInvesting,
 } = positionReducer.actions;
 
 export default positionReducer.reducer;

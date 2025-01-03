@@ -71,7 +71,7 @@ export function HoldButton({
         )}
         {...props}
       >
-        {isHolding ? "Release to confirm" : children}
+        {children}
         {isHolding && (
           <div
             className="absolute bottom-0 left-0 h-full bg-blue-300/45"

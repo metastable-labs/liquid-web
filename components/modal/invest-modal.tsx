@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useBalance } from "wagmi";
 
 import supportedAssets from "@/constants/supported-assets";
 import useFormattedAmount from "@/hooks/useFormattedAmount";
@@ -11,23 +12,42 @@ import { HoldButton } from "./hold-button";
 import { InvestModalProps } from "./types";
 import { ChevronDown } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
+import { usePrivy } from "@privy-io/react-auth";
+import LWClickAnimation from "../click-animation";
+import { useAccount } from "wagmi";
+import { USDCContractAddress } from "@/constants/addresses";
+import { formatBalance } from "@/utils/helpers";
+import usePositionActions from "@/store/position/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+import classNames from "classnames";
 
-export function InvestModal({
-  isOpen,
-  onClose,
-  balance = 3600,
-}: InvestModalProps) {
+export function InvestModal({ isOpen, onClose }: InvestModalProps) {
   const {
     amount,
     updateAmount,
     amountWithThousandSeparator,
     amountWithoutThousandSeparator,
   } = useFormattedAmount();
+  const { address } = useAccount();
+  const { ready, authenticated, login } = usePrivy();
+  const { isLoading, data } = useBalance({
+    address,
+    token: USDCContractAddress,
+  });
+  const { investInStrategy } = usePositionActions();
+  const { positionState } = useSystemFunctions();
 
   const [token, setToken] = useState<SupportedAsset>();
   const { isDesktop } = useScreenDetect();
 
+  const { loadingInvesting } = positionState;
   const tokenSymbol = token?.symbol || "USDC";
+  const formattedUsdcBalance = (Number(data?.value || 0) / 10 ** 6).toString();
+  const balance = formatBalance(formattedUsdcBalance);
+  const amountIsGreaterThanBalance =
+    Number(amountWithoutThousandSeparator) > Number(balance);
+  const disableButton =
+    amountIsGreaterThanBalance || loadingInvesting || !amount || amount === "0";
 
   const handleKeyPress = (key: string) => {
     if (amount.includes(".") && key === ".") return;
@@ -40,6 +60,16 @@ export function InvestModal({
 
   const handleBackspace = () => {
     updateAmount(amount.slice(0, -1));
+  };
+
+  const handleLogin = () => {
+    login({ loginMethods: ["wallet"] });
+  };
+
+  const handleSubmit = () => {
+    console.log(`Investing ${amountWithoutThousandSeparator} ${tokenSymbol}`);
+
+    onClose();
   };
 
   useEffect(() => {
@@ -57,7 +87,15 @@ export function InvestModal({
     <ModalWrapper isOpen={isOpen} onClose={onClose} title="Invest">
       <div className="p-6">
         <div className="space-y-6">
-          <div className="border-[#EAEEF4] p-5 rounded-xl border-[1px]">
+          <div
+            className={classNames(
+              "p-5 rounded-xl border-[1px] transition-all duration-500",
+              {
+                "border-[#EAEEF4]": !amountIsGreaterThanBalance,
+                "border-primary-1350": amountIsGreaterThanBalance,
+              }
+            )}
+          >
             <div className="flex justify-between items-center">
               <input
                 type="text"
@@ -65,7 +103,12 @@ export function InvestModal({
                 value={amountWithThousandSeparator}
                 onChange={(e) => updateAmount(e.target.value)}
                 autoFocus
-                className="text-4xl font-medium tabular-nums w-full bg-transparent border-none outline-none"
+                className={classNames(
+                  "text-4xl font-medium tabular-nums w-full bg-transparent border-none outline-none",
+                  {
+                    "text-primary-1350": amountIsGreaterThanBalance,
+                  }
+                )}
                 disabled={!isDesktop}
               />
 
@@ -82,20 +125,22 @@ export function InvestModal({
               </div>
             </div>
 
-            <div className="flex justify-between items-center">
-              <span
-                className="text-[#375DFB] text-[12px] cursor-pointer"
-                onClick={handleMaxClick}
-              >
-                Max
-              </span>
-              <span className="font-light text-[#64748B] text-[12px]">
-                Available:
-                <span className="text-[#334155] font-normal text-[13px]">
-                  ${balance.toLocaleString()} {tokenSymbol}
+            {ready && authenticated && !isLoading && (
+              <div className="flex justify-between items-center">
+                <span
+                  className="text-[#375DFB] text-[12px] cursor-pointer"
+                  onClick={handleMaxClick}
+                >
+                  Max
                 </span>
-              </span>
-            </div>
+                <span className="font-light text-[#64748B] text-[12px]">
+                  Available:
+                  <span className="text-[#334155] font-normal text-[13px]">
+                    {"  "}${balance.toLocaleString()} {tokenSymbol}
+                  </span>
+                </span>
+              </div>
+            )}
           </div>
 
           {!isDesktop && (
@@ -106,34 +151,24 @@ export function InvestModal({
             />
           )}
 
-          <div className="flex justify-between text-sm text-gray-600 mb-5">
-            <span className="font-light text-[12px]">You&apos;ll receive:</span>
-            <div className="flex items-center gap-1">
-              <Image
-                src={token?.logo || ""}
-                alt="Token icon"
-                width={18}
-                height={18}
-                className="rounded-full"
-              />
-              <span className="text-[14px]">
-                {(amount || 0).toLocaleString()} {tokenSymbol}
-              </span>
-            </div>
-          </div>
-
-          <HoldButton
-            className="w-full"
-            onHoldComplete={() => {
-              console.log(
-                `Investing ${amountWithoutThousandSeparator} ${tokenSymbol}`
-              );
-              onClose();
-            }}
-            holdDuration={1000}
-          >
-            Hold to confirm
-          </HoldButton>
+          {ready && authenticated ? (
+            <HoldButton
+              className="w-full transition-all duration-500"
+              onHoldComplete={handleSubmit}
+              holdDuration={1000}
+              disabled={disableButton}
+            >
+              Hold to confirm
+            </HoldButton>
+          ) : (
+            <LWClickAnimation
+              onClick={handleLogin}
+              className="w-full h-10 flex items-center justify-center bg-primary-350 rounded-full text-[14px] leading-[18.48px] font-medium text-white text-cente"
+              stopPropagation
+            >
+              <span className="r">Connect wallet to continue</span>
+            </LWClickAnimation>
+          )}
         </div>
       </div>
     </ModalWrapper>

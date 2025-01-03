@@ -33,7 +33,6 @@ export interface ClaimModalProps {
 export interface InvestModalProps {
   isOpen: boolean;
   onClose: () => void;
-  balance: number;
 }
 
 export interface InfoModalProps {
