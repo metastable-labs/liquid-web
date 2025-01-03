@@ -9,6 +9,7 @@ export interface HoldButtonProps
   onHoldComplete?: () => void;
   holdDuration?: number;
   className?: string;
+  loading?: boolean;
 }
 
 export interface WithdrawModalProps {
@@ -33,6 +34,7 @@ export interface ClaimModalProps {
 export interface InvestModalProps {
   isOpen: boolean;
   onClose: () => void;
+  strategyId: string;
 }
 
 export interface InfoModalProps {

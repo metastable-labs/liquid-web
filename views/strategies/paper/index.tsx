@@ -12,7 +12,7 @@ const MAX_DESCRIPTION_LENGTH = 100;
 
 const StrategyPaper = ({
   onClick,
-  strategy: { apy, createdAt, curator, description, owner, name },
+  strategy: { apy, createdAt, curator, description, owner, name, id },
   active,
   variant = "primary",
   close,
@@ -165,7 +165,11 @@ const StrategyPaper = ({
         )}
       </div>
 
-      <InvestModal isOpen={openInvest} onClose={handleInvestModal} />
+      <InvestModal
+        isOpen={openInvest}
+        onClose={handleInvestModal}
+        strategyId={id}
+      />
     </>
   );
 };

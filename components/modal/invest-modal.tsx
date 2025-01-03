@@ -3,25 +3,25 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useBalance } from "wagmi";
+import classNames from "classnames";
+import { useAccount } from "wagmi";
+import { usePrivy } from "@privy-io/react-auth";
 
 import supportedAssets from "@/constants/supported-assets";
 import useFormattedAmount from "@/hooks/useFormattedAmount";
 import useScreenDetect from "@/hooks/useScreenDetect";
+import { USDCContractAddress } from "@/constants/addresses";
+import { formatBalance } from "@/utils/helpers";
+import usePositionActions from "@/store/position/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { Keypad } from "../ui/keypad";
 import { HoldButton } from "./hold-button";
 import { InvestModalProps } from "./types";
 import { ChevronDown } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
-import { usePrivy } from "@privy-io/react-auth";
 import LWClickAnimation from "../click-animation";
-import { useAccount } from "wagmi";
-import { USDCContractAddress } from "@/constants/addresses";
-import { formatBalance } from "@/utils/helpers";
-import usePositionActions from "@/store/position/actions";
-import useSystemFunctions from "@/hooks/useSystemFunctions";
-import classNames from "classnames";
 
-export function InvestModal({ isOpen, onClose }: InvestModalProps) {
+export function InvestModal({ isOpen, onClose, strategyId }: InvestModalProps) {
   const {
     amount,
     updateAmount,
@@ -34,7 +34,7 @@ export function InvestModal({ isOpen, onClose }: InvestModalProps) {
     address,
     token: USDCContractAddress,
   });
-  const { investInStrategy } = usePositionActions();
+  const { joinStrategy } = usePositionActions();
   const { positionState } = useSystemFunctions();
 
   const [token, setToken] = useState<SupportedAsset>();
@@ -66,8 +66,13 @@ export function InvestModal({ isOpen, onClose }: InvestModalProps) {
     login({ loginMethods: ["wallet"] });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(`Investing ${amountWithoutThousandSeparator} ${tokenSymbol}`);
+
+    await joinStrategy(
+      Number(amountWithoutThousandSeparator),
+      strategyId as `0x${string}`
+    );
 
     onClose();
   };
@@ -157,6 +162,7 @@ export function InvestModal({ isOpen, onClose }: InvestModalProps) {
               onHoldComplete={handleSubmit}
               holdDuration={1000}
               disabled={disableButton}
+              loading={loadingInvesting}
             >
               Hold to confirm
             </HoldButton>

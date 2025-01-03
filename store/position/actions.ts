@@ -2,7 +2,10 @@ import { simulateContract, writeContract } from "@wagmi/core";
 
 import { wagmiConfig } from "@/providers/PrivyProvider";
 import { LiquidABI } from "@/constants/abis";
-import { liquidContractAddress } from "@/constants/addresses";
+import {
+  engineContractAddress,
+  liquidContractAddress,
+} from "@/constants/addresses";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import {
   setActivePosition as setActivePosition_,
@@ -36,10 +39,7 @@ const usePositionActions = () => {
     dispatch(setIsWithdrawing_(isWithdrawing));
   };
 
-  const investInStrategy = async (
-    amount: number,
-    strategyId: `0x${string}`
-  ) => {
+  const joinStrategy = async (amount: number, strategyId: `0x${string}`) => {
     try {
       setLoadingInvesting(true);
       const amountToInvest = BigInt(amount * 10 ** 6);
@@ -47,13 +47,34 @@ const usePositionActions = () => {
 
       const { request } = await simulateContract(wagmiConfig, {
         abi: LiquidABI.abi,
-        address: liquidContractAddress,
+        address: engineContractAddress,
         functionName: "join",
         args: [strategyId, strategyModule, [amountToInvest]],
       });
       const hash = await writeContract(wagmiConfig, request);
 
       console.log("Investment hash", hash);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingInvesting(false);
+    }
+  };
+
+  const exitStrategy = async (strategyId: `0x${string}`) => {
+    try {
+      setLoadingInvesting(true);
+      const strategyModule = "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e";
+
+      const { request } = await simulateContract(wagmiConfig, {
+        abi: LiquidABI.abi,
+        address: engineContractAddress,
+        functionName: "exit",
+        args: [strategyId, strategyModule],
+      });
+      const hash = await writeContract(wagmiConfig, request);
+
+      console.log("exit hash", hash);
     } catch (error) {
       console.error(error);
     } finally {
@@ -123,10 +144,11 @@ const usePositionActions = () => {
     setActivePosition,
     setIsClaiming,
     setIsWithdrawing,
-    investInStrategy,
+    joinStrategy,
     withdrawStrategy,
     getStrategies,
     getPositions,
+    exitStrategy,
   };
 };
 
