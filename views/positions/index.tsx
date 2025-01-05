@@ -59,7 +59,7 @@ const Positions = () => {
       className={classNames(
         "xl:pb-16 pt-8 xl:pt-0 px-3.5 self-stretch flex flex-col gap-6 xl:max-w-[500px]",
         {
-          "justify-center items-center h-full": showEmptyState,
+          "justify-center items-center h-[80vh]": showEmptyState,
         }
       )}
     >
