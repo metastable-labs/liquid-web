@@ -12,7 +12,7 @@
     "imageUrl": "https://beta.useliquid.xyz/icon.png",
     "buttonTitle": "Check this out",
     "splashImageUrl": "https://beta.useliquid.xyz/images/logo.png",
-    "splashBackgroundColor": "#eeccff",
+    "splashBackgroundColor": "#f7f7f7",
     "webhookUrl": "https://beta.useliquid.xyz/api/webhook"
   }
 }

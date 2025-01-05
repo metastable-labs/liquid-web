@@ -24,7 +24,6 @@ export const privyConfig: PrivyClientConfig = {
     showWalletLoginFirst: true,
     walletList: [
       "metamask",
-      "coinbase_wallet",
       "rainbow",
       "wallet_connect",
       "detected_ethereum_wallets",
