@@ -3,10 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface AppState {
   info: Info | null;
+  farcasterContext: UserContext | undefined;
 }
 
 const initialState: AppState = {
   info: null,
+  farcasterContext: undefined,
 };
 
 export const appReducer = createSlice({
@@ -16,9 +18,13 @@ export const appReducer = createSlice({
     setInfo(state, action: PayloadAction<Info | null>) {
       state.info = action.payload;
     },
+
+    setFarcasterContext(state, action: PayloadAction<UserContext>) {
+      state.farcasterContext = { ...action.payload };
+    },
   },
 });
 
-export const { setInfo } = appReducer.actions;
+export const { setInfo, setFarcasterContext } = appReducer.actions;
 
 export default appReducer.reducer;

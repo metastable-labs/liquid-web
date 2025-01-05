@@ -10,6 +10,7 @@ export const wagmiConfig = createConfig({
   transports: {
     [base.id]: http(),
   },
+  // connectors: [frameConnector()]  // If we want to connect to user's farcaster wallet
 });
 
 export const privyConfig: PrivyClientConfig = {
