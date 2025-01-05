@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 
@@ -6,11 +8,32 @@ import {
   ChartIcon,
   MoneyTickIcon,
   SwapHorizontalIcon,
+  AlertFillIcon,
+  CloseAltIcon,
 } from "@/public/icons";
-import { formatNumberWithSuffix } from "@/utils/helpers";
 import StrategyPaper from "./paper";
+import { LWClickAnimation } from "@/components";
+
+const Disclaimer = ({ close }: { close: () => void }) => (
+  <div className="px-3.5 pt-3.5 pb-4 flex gap-3 bg-primary-1400 rounded-xl">
+    <AlertFillIcon />
+
+    <div className="self-stretch flex flex-col justify-center gap-1 text-[14px] leading-[18.48px]">
+      <h1 className="text-primary-1450 font-medium">Disclaimer</h1>
+      <p className="text-primary-1500">
+        Use cautiously and with small amounts for only testing purposes as the
+        Liquid protocol contracts are still undergoing audits
+      </p>
+    </div>
+
+    <LWClickAnimation onClick={close} className="w-fit h-fit">
+      <CloseAltIcon />
+    </LWClickAnimation>
+  </div>
+);
 
 const StrategyDetail = ({ strategy }: IStrategyDetails) => {
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
   const {
     agentCuratorFee,
     numberOfDeposits,
@@ -35,8 +58,6 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
       ])
     ).values()
   );
-
-  console.log("assets", assets);
 
   const maps = [
     { title: "Assets involved", data: assets },
@@ -95,6 +116,8 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
       ))}
 
       <div className="w-full h-[1px] rounded-full bg-primary-500" />
+
+      {showDisclaimer && <Disclaimer close={() => setShowDisclaimer(false)} />}
 
       <div className="flex flex-col gap-6">
         <h2 className="text-[16px] leading-[19.2px] text-primary-400 font-medium">

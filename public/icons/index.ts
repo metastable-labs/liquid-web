@@ -10,6 +10,9 @@ import MoreIcon from "./more-icon";
 import InfoCircleIcon from "./info-circle-icon";
 import CloseIcon from "./close-icon";
 import PositionIcon from "./position-icon";
+import DisconnectIcon from "./disconnect-icon";
+import AlertFillIcon from "./alert-fill-icon";
+import CloseAltIcon from "./close-alt-icon";
 
 export {
   CubeIcons,
@@ -24,4 +27,7 @@ export {
   InfoCircleIcon,
   CloseIcon,
   PositionIcon,
+  DisconnectIcon,
+  AlertFillIcon,
+  CloseAltIcon,
 };
