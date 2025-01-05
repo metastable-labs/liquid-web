@@ -1,9 +1,11 @@
 "use client";
-import { LWClickAnimation } from "@/components";
 import { useAccount } from "wagmi";
 import { usePrivy } from "@privy-io/react-auth";
+
+import { LWClickAnimation } from "@/components";
 import { truncateWalletAddress } from "@/utils/helpers";
 import useSwitchNetworkConnect from "@/hooks/useSwitchNetwork";
+import { DisconnectIcon } from "@/public/icons";
 
 const ConnectWalletButton = () => {
   const {} = useSwitchNetworkConnect();
@@ -27,14 +29,17 @@ const ConnectWalletButton = () => {
       )}
 
       {ready && authenticated && address && (
-        <LWClickAnimation
-          onClick={logout}
-          className="bg-gray-100 text-gray-900 hover:bg-gray-100/80 h-10 px-5 flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full text-sm font-medium"
-        >
-          <div className="w-[10px] h-[10px] rounded-full bg-primary-1000" />
+        <div className="flex items-center gap-[9px]">
+          <div className="bg-gray-100 text-gray-900 hover:bg-gray-100/80 h-10 px-5 flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full text-sm font-medium">
+            <div className="w-[10px] h-[10px] rounded-full bg-primary-1000" />
 
-          <div>{truncateWalletAddress(address)}</div>
-        </LWClickAnimation>
+            <div>{truncateWalletAddress(address)}</div>
+          </div>
+
+          <LWClickAnimation onClick={logout} className="min-w-fit min-h-fit">
+            <DisconnectIcon />
+          </LWClickAnimation>
+        </div>
       )}
     </div>
   );
