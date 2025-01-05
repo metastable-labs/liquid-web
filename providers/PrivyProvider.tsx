@@ -30,6 +30,9 @@ export const privyConfig: PrivyClientConfig = {
       "safe",
       "uniswap",
     ],
+    logo: "https://res.cloudinary.com/djzeufu4j/image/upload/v1734991182/liquid_logo_ico.ico",
+    landingHeader: "Connect wallet to Liquid",
+    walletChainType: "ethereum-only",
   },
 };
 
