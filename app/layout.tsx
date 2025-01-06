@@ -67,7 +67,7 @@ export default function RootLayout({
                 "type": "launch_frame",
                 "name": "Liquid",
                 "url": "https://beta.useliquid.xyz",
-                "splashImageUrl": "https://beta.useliquid.xyz/liquid-splash.png",
+                "splashImageUrl": "https://beta.useliquid.xyz/liquid-logo.png",
                 "splashBackgroundColor": "#f7f7f7"
               }
             }

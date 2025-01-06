@@ -11,7 +11,7 @@
     "homeUrl": "https://beta.useliquid.xyz/",
     "imageUrl": "https://beta.useliquid.xyz/liquid_preview.jpg",
     "buttonTitle": "Check this out",
-    "splashImageUrl": "https://beta.useliquid.xyz/liquid-splash.png",
+    "splashImageUrl": "https://beta.useliquid.xyz/liquid-logo.png",
     "splashBackgroundColor": "#f7f7f7",
     "webhookUrl": "https://beta.useliquid.xyz/api/webhook"
   }
