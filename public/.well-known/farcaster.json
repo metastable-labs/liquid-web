@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjE5NjMzOSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDgzQjk3QzRBM0QyREFEMkY1MTZmNjE1OUZDRkRhYjViNzNlMjI0YzcifQ",
+    "payload": "eyJkb21haW4iOiJiZXRhLnVzZWxpcXVpZC54eXoifQ",
+    "signature": "MHg0M2VmZTViNWNjMTEyYzU0NzExM2NiNzZhMzgyMmZlMGRlMTYwZTFmODYzZTVjNDUwOGM5YTlmOGY2ZGUyN2QwNWE4YzJmZDM3ODgwZTBlYjI1NWFhMGY0NTI2OGFlMzc1NzZmODViOTAxZDE4YzEwMzViYmI5Mzc4ZjllYjU0MjFi"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Liquid",
+    "iconUrl": "https://beta.useliquid.xyz/liquid-logo.png",
+    "homeUrl": "https://beta.useliquid.xyz/",
+    "imageUrl": "https://beta.useliquid.xyz/liquid_preview.jpg",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://beta.useliquid.xyz/liquid-logo.png",
+    "splashBackgroundColor": "#f7f7f7",
+    "webhookUrl": "https://beta.useliquid.xyz/api/webhook"
+  }
+}

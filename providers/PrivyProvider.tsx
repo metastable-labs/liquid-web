@@ -10,6 +10,7 @@ export const wagmiConfig = createConfig({
   transports: {
     [base.id]: http(),
   },
+  // connectors: [frameConnector()]  // If we want to connect to user's farcaster wallet
 });
 
 export const privyConfig: PrivyClientConfig = {
@@ -23,13 +24,15 @@ export const privyConfig: PrivyClientConfig = {
     showWalletLoginFirst: true,
     walletList: [
       "metamask",
-      "coinbase_wallet",
       "rainbow",
       "wallet_connect",
       "detected_ethereum_wallets",
       "safe",
       "uniswap",
     ],
+    logo: "https://res.cloudinary.com/djzeufu4j/image/upload/v1734991182/liquid_logo_ico.ico",
+    landingHeader: "Connect wallet to Liquid",
+    walletChainType: "ethereum-only",
   },
 };
 

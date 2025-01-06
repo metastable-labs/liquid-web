@@ -38,7 +38,7 @@ const getUpdatedNavItems = (
 };
 
 const LWNavigation = () => {
-  const { pathname } = useSystemFunctions();
+  const { pathname, appState } = useSystemFunctions();
   const [userImage, setUserImage] = useState(
     "https://res.cloudinary.com/djzeufu4j/image/upload/v1735331176/Avatar_udfxuk.png"
   );
@@ -63,13 +63,11 @@ const LWNavigation = () => {
 
   const updatedNavItems = getUpdatedNavItems(extendedNavigationItems, pathname);
 
-  useEffect(
-    () =>
-      setUserImage(
-        "https://res.cloudinary.com/djzeufu4j/image/upload/v1735331176/Avatar_udfxuk.png"
-      ),
-    []
-  );
+  useEffect(() => {
+    if (appState.farcasterContext && appState.farcasterContext.pfpUrl) {
+      setUserImage(appState.farcasterContext.pfpUrl);
+    }
+  }, [appState.farcasterContext]);
 
   return (
     <nav className="border-t border-t-primary-150 rounded-t-[22px] xl:rounded-t-none xl:border-t-0 shadow-nav xl:shadow-none bg-white px-10 pb-5 pt-5 flex items-center justify-center xl:items-start xl:justify-start gap-32 xl:flex-col xl:gap-9 w-full xl:w-fit">
