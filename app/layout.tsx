@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   applicationName: "Liquid",
   openGraph: {
     title: "Liquid",
-    description: "Liquid web",
+    description: "Your Personal DeFi Feed powered by AI",
     url: "https://beta.useliquid.xyz",
     type: "website",
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "https://beta.useliquid.xyz",
     title: "Liquid",
-    description: "Liquid web",
+    description: "Your Personal DeFi Feed powered by AI",
     images: [
       {
         url: "https://res.cloudinary.com/djzeufu4j/image/upload/v1736164264/liquid_preview_knkf6b.jpg",
