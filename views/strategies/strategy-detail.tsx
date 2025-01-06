@@ -89,7 +89,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
   ];
 
   return (
-    <div className="flex flex-col gap-7 pb-6">
+    <div className="flex flex-col gap-7 pb-6 w-full">
       <StrategyPaper strategy={strategy} variant="secondary" />
 
       {maps.map(({ title, data }, index) => (

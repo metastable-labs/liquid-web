@@ -49,7 +49,7 @@ function ModalWrapper({
         <div
           className={classNames("fixed inset-0 z-50", {
             "justify-center items-center flex": variant === "default",
-            "justify-end p-4 xl:p-10 flex": variant === "flush-right",
+            "justify-end pt-4 md:p-10 flex": variant === "flush-right",
           })}
         >
           <motion.div
@@ -94,7 +94,7 @@ function ModalWrapper({
               animate="visible"
               exit="hidden"
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="flex gap-3 relative"
+              className="flex gap-3 relative w-full md:w-auto"
             >
               <LWClickAnimation
                 onClick={onClose}
@@ -103,8 +103,14 @@ function ModalWrapper({
                 <CloseIcon />
               </LWClickAnimation>
 
-              <div className="flex py-[66px] sticky h-full overflow-auto no-scrollbar bg-white px-6 rounded-[32px]">
-                <div className="max-w-[375px]">{children}</div>
+              <div
+                className="flex py-[66px] sticky h-full overflow-auto no-scrollbar bg-white px-6 w-full md:rounded-[32px]"
+                style={{
+                  borderTopLeftRadius: "32px",
+                  borderTopRightRadius: "32px",
+                }}
+              >
+                <div className="md:max-w-[375px]">{children}</div>
               </div>
             </motion.div>
           )}
