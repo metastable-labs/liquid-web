@@ -16,7 +16,9 @@ import { LWClickAnimation } from "@/components";
 
 const Disclaimer = ({ close }: { close: () => void }) => (
   <div className="px-3.5 pt-3.5 pb-4 flex gap-3 bg-primary-1400 rounded-xl">
-    <AlertFillIcon />
+    <div className="w-fit h-fit">
+      <AlertFillIcon />
+    </div>
 
     <div className="self-stretch flex flex-col justify-center gap-1 text-[14px] leading-[18.48px]">
       <h1 className="text-primary-1450 font-medium">Disclaimer</h1>
@@ -60,8 +62,8 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
   );
 
   const maps = [
-    { title: "Assets involved", data: assets },
-    { title: "Protocols", data: protocols },
+    { title: `Asset${assets.length > 1 ? "s" : ""} involved`, data: assets },
+    { title: `Protocol${protocols.length > 1 ? "s" : ""}`, data: protocols },
   ];
 
   const information = [
@@ -132,7 +134,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
                 "p-4 flex flex-col gap-4 border rounded-xl",
                 {
                   "border-primary-550 bg-primary-600": !theme,
-                  "border-primary-650 bg-primary-700": theme === "Stable",
+                  "border-primary-650 bg-primary-700": theme === "Low",
                   "border-primary-1050 bg-primary-1100": theme === "Moderate",
                   "border-primary-1200 bg-primary-1250": theme === "High",
                 }
@@ -143,7 +145,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
                   "w-fit h-fit p-1.5 flex items-center justify-center rounded-[9px]",
                   {
                     "bg-primary-400": !theme,
-                    "bg-primary-900": theme === "Stable",
+                    "bg-primary-900": theme === "Low",
                     "bg-primary-1150": theme === "Moderate",
                     "bg-primary-1300": theme === "High",
                   }
@@ -156,7 +158,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
                 <h3
                   className={classNames("text-[14px] leading-[18.48px]", {
                     "text-primary-400": !theme,
-                    "text-primary-900": theme === "Stable",
+                    "text-primary-900": theme === "Low",
                     "text-primary-1150": theme === "Moderate",
                     "text-primary-1300": theme === "High",
                   })}
@@ -169,7 +171,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
                     "text-[28px] leading-[31.36px] font-bold capitalize font-QuantaGroteskPro",
                     {
                       "text-primary-400": !theme,
-                      "text-primary-900": theme === "Stable",
+                      "text-primary-900": theme === "Low",
                       "text-primary-1150": theme === "Moderate",
                       "text-primary-1300": theme === "High",
                     }
