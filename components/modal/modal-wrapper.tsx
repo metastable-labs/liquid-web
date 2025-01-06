@@ -72,7 +72,7 @@ function ModalWrapper({
               initial="hidden"
               animate="visible"
               exit="hidden"
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              transition={{ type: "tween" }}
             >
               <div className="flex flex-col justify-center items-center mt-4 border-[#EAEEF4] border-b-[1px] pb-5">
                 {isMobile && (
@@ -93,7 +93,7 @@ function ModalWrapper({
               initial="hidden"
               animate="visible"
               exit="hidden"
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              transition={{ type: "tween" }}
               className="flex gap-3 relative w-full md:w-auto"
             >
               <LWClickAnimation

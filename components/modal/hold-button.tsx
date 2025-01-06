@@ -25,6 +25,9 @@ export function HoldButton({
 
     const startTime = Date.now();
     progressIntervalRef.current = setInterval(() => {
+      if ("vibrate" in navigator) {
+        navigator.vibrate(holdDuration);
+      }
       const progress = ((Date.now() - startTime) / holdDuration) * 100;
       setHoldProgress(Math.min(progress, 100));
     }, 10);

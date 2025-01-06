@@ -21,7 +21,7 @@ import { ChevronDown } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
 import LWClickAnimation from "../click-animation";
 
-export function InvestModal({ isOpen, onClose, strategyId }: InvestModalProps) {
+export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
   const {
     amount,
     updateAmount,
@@ -40,7 +40,7 @@ export function InvestModal({ isOpen, onClose, strategyId }: InvestModalProps) {
   const [token, setToken] = useState<SupportedAsset>();
   const { isDesktop } = useScreenDetect();
 
-  const { loadingInvesting } = positionState;
+  const { loadingInvesting, closeInvestModal } = positionState;
   const tokenSymbol = token?.symbol || "USDC";
   const formattedUsdcBalance = (Number(data?.value || 0) / 10 ** 6).toString();
   const balance = formatBalance(formattedUsdcBalance);
@@ -67,14 +67,7 @@ export function InvestModal({ isOpen, onClose, strategyId }: InvestModalProps) {
   };
 
   const handleSubmit = async () => {
-    console.log(`Investing ${amountWithoutThousandSeparator} ${tokenSymbol}`);
-
-    await joinStrategy(
-      Number(amountWithoutThousandSeparator),
-      strategyId as `0x${string}`
-    );
-
-    onClose();
+    joinStrategy(Number(amountWithoutThousandSeparator), onChainId);
   };
 
   useEffect(() => {
@@ -87,6 +80,16 @@ export function InvestModal({ isOpen, onClose, strategyId }: InvestModalProps) {
   const handleMaxClick = () => {
     updateAmount(balance.toString());
   };
+
+  useEffect(
+    function closeModal() {
+      if (closeInvestModal) {
+        onClose();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [closeInvestModal]
+  );
 
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose} title="Invest">

@@ -90,4 +90,5 @@ type Strategy = {
   steps: Array<Step>;
   totalValueLocked: string;
   tvl: string;
+  onChainId: `0x${string}`;
 };

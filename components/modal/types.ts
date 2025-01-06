@@ -34,7 +34,7 @@ export interface ClaimModalProps {
 export interface InvestModalProps {
   isOpen: boolean;
   onClose: () => void;
-  strategyId: string;
+  onChainId: `0x${string}`;
 }
 
 export interface InfoModalProps {

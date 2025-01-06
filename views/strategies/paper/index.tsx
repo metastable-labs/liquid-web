@@ -12,7 +12,7 @@ const MAX_DESCRIPTION_LENGTH = 100;
 
 const StrategyPaper = ({
   onClick,
-  strategy: { apy, createdAt, curator, description, owner, name, id },
+  strategy: { apy, createdAt, curator, description, owner, name, onChainId },
   active,
   variant = "primary",
   close,
@@ -168,7 +168,7 @@ const StrategyPaper = ({
       <InvestModal
         isOpen={openInvest}
         onClose={handleInvestModal}
-        strategyId={id}
+        onChainId={onChainId}
       />
     </>
   );

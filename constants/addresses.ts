@@ -6,3 +6,6 @@ export const USDCContractAddress =
 
 export const engineContractAddress =
   "0x94A4D03f2823BC0A183e49636A1896B2754C5c3B" as `0x${string}`;
+
+export const strategyContractAddress =
+  "0x99d6D2dEf07Fb0082688272B547841045E431a9d" as `0x${string}`;
