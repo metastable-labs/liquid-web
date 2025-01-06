@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
-    siteName: "defiwrapped.xyz",
+    siteName: "beta.useliquid.xyz",
   },
   twitter: {
     card: "summary_large_image",
