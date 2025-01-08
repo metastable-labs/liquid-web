@@ -9,8 +9,6 @@ import PositionCard from "./card";
 import PositionCardSkeleton from "./card/skeleton";
 import PositionsEmpty from "./empty";
 
-const ADDRESS = "0x7890abcdef7890abcdef7890abcdef7890abcd";
-
 const Positions = () => {
   const { getPositions } = usePositionActions();
   const {
@@ -40,17 +38,15 @@ const Positions = () => {
   useEffect(() => {
     if (!shouldFetchMore) return;
 
-    const query = `walletAddress=${address || ADDRESS}&page=${
-      positionsMeta?.next
-    }&limit=10`;
+    const query = `walletAddress=${address}&page=${positionsMeta?.next}&limit=10`;
 
     getPositions(query, { onSuccess: () => setShouldFetchMore(false) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldFetchMore]);
 
   useEffect(() => {
-    if (!positions)
-      getPositions(`walletAddress=${address || ADDRESS}&page=1&limit=10`);
+    if (!positions && address)
+      getPositions(`walletAddress=${address}&page=1&limit=10`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 

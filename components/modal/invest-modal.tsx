@@ -38,12 +38,12 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
   const { positionState } = useSystemFunctions();
 
   const [token, setToken] = useState<SupportedAsset>();
+  const [balance, setBalance] = useState("0");
   const { isDesktop } = useScreenDetect();
 
   const { loadingInvesting, closeInvestModal } = positionState;
   const tokenSymbol = token?.symbol || "USDC";
-  const formattedUsdcBalance = (Number(data?.value || 0) / 10 ** 6).toString();
-  const balance = formatBalance(formattedUsdcBalance);
+
   const amountIsGreaterThanBalance =
     Number(amountWithoutThousandSeparator) > Number(balance);
   const disableButton =
@@ -69,6 +69,17 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
   const handleSubmit = async () => {
     joinStrategy(Number(amountWithoutThousandSeparator), onChainId);
   };
+
+  useEffect(() => {
+    if (data) {
+      const formattedUsdcBalance = (
+        Number(data?.value || 0) /
+        10 ** 6
+      ).toString();
+      const resp = formatBalance(formattedUsdcBalance);
+      setBalance(resp);
+    }
+  }, [data, loadingInvesting]);
 
   useEffect(() => {
     const token = supportedAssets.find((asset) => asset.symbol === tokenSymbol);

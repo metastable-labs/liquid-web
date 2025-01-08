@@ -6,7 +6,7 @@ import {
 } from "@wagmi/core";
 
 import { wagmiConfig } from "@/providers/PrivyProvider";
-import { LiquidABI } from "@/constants/abis";
+import { EngineAbi, LiquidABI } from "@/constants/abis";
 import {
   engineContractAddress,
   liquidContractAddress,
@@ -173,9 +173,10 @@ const usePositionActions = () => {
   const _joinStrategy = async () => {
     try {
       const { amountToInvest, onChainId } = joinData;
+      console.log("amountToInvest", amountToInvest, typeof amountToInvest);
       const { request } = await simulateContract(wagmiConfig, {
         address: engineContractAddress,
-        abi: LiquidABI.abi,
+        abi: EngineAbi.abi,
         functionName: "join",
         args: [onChainId, strategyContractAddress, [amountToInvest]],
       });
@@ -183,11 +184,11 @@ const usePositionActions = () => {
       const hash = await writeContract(wagmiConfig, request);
 
       dispatch(setCloseInvestModal(true));
-      dispatch(setCloseInvestModal(false));
       showToast("Investment successful!", "success");
 
       getStrategies(`page=1&limit=10`);
       getPositions(`walletAddress=${address}&page=1&limit=10`);
+      dispatch(setCloseInvestModal(false));
 
       console.log("join hash", hash);
     } catch (error) {
