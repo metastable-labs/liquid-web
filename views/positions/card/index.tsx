@@ -51,8 +51,10 @@ const PositionCard = (props: Position) => {
   const { apy, assets, rewards, totalBalance, yieldEarned } = props;
 
   const iconPairs = (() => {
-    if (assets.length === 2) {
-      return [[assets[0].logo], [assets[1].logo]];
+    if (!assets) return [[], []];
+
+    if (assets.length < 3) {
+      return [[assets[0].logo], assets.length === 2 ? [assets[1].logo] : []];
     } else if (assets.length === 3) {
       return [[assets[0].logo], [assets[1].logo, assets[2].logo]];
     } else if (assets.length === 4) {
@@ -99,7 +101,7 @@ const PositionCard = (props: Position) => {
           </h1>
           <div className="flex items-center gap-1">
             <TokenIcons icons={iconPairs[0]} />
-            <MoreIcon />
+            {iconPairs[1].length > 0 && <MoreIcon />}
             <TokenIcons icons={iconPairs[1]} />
           </div>
         </div>
@@ -116,7 +118,7 @@ const PositionCard = (props: Position) => {
       <div className="flex items-center justify-between">
         {renderInfoSection(
           "Total Balance",
-          Number(totalBalance) / 1e9,
+          Number(totalBalance),
           "What’s your total balance?",
           "Your total balance reflects the amount of money available in a particular position. It includes all deposits."
         )}
@@ -125,7 +127,7 @@ const PositionCard = (props: Position) => {
 
         {renderInfoSection(
           "Yield Earned",
-          Number(yieldEarned) / 1e9,
+          Number(yieldEarned),
           "What is Yield?",
           "Yield refers to the income earned on an investment over time, typically expressed as a percentage."
         )}
@@ -134,7 +136,7 @@ const PositionCard = (props: Position) => {
 
         {renderInfoSection(
           "Rewards",
-          Number(rewards) / 1e9,
+          Number(rewards),
           "How are my rewards calculated?",
           "Rewards are calculated based on your contributions and performance metrics within the specified position."
         )}

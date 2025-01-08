@@ -37,17 +37,19 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
   const assets = position?.assets;
 
   const iconPairs = (() => {
-    if (assets?.length === 2) {
-      return [[assets[0]?.logo], [assets[1]?.logo]];
-    } else if (assets?.length === 3) {
-      return [[assets[0]?.logo], [assets[1]?.logo, assets[2]?.logo]];
-    } else if (assets?.length === 4) {
+    if (!assets) return [[], []];
+
+    if (assets.length < 3) {
+      return [[assets[0].logo], assets.length === 2 ? [assets[1].logo] : []];
+    } else if (assets.length === 3) {
+      return [[assets[0].logo], [assets[1].logo, assets[2].logo]];
+    } else if (assets.length === 4) {
       return [
-        [assets[0]?.logo, assets[1]?.logo],
-        [assets[2]?.logo, assets[3]?.logo],
+        [assets[0].logo, assets[1].logo],
+        [assets[2].logo, assets[3].logo],
       ];
     } else {
-      return [[], []];
+      throw new Error("Assets array must contain 2 to 4 items.");
     }
   })();
 
@@ -69,7 +71,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
   const actions = [
     {
       title: "Total Balance",
-      value: position?.totalBalance.toLocaleString(),
+      value: position?.totalBalance,
       onClick: onWithdraw,
       buttonTitle: "Withdraw",
       infoClick: () =>
@@ -81,7 +83,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
     },
     {
       title: "Yield Earned",
-      value: position?.yieldEarned.toLocaleString(),
+      value: position?.yieldEarned,
       onClick: onClaimYield,
       buttonTitle: "Claim",
       infoClick: () =>
@@ -93,7 +95,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
     },
     {
       title: "Rewards",
-      value: position?.rewards.toLocaleString(),
+      value: position?.rewards,
       onClick: onClaimRewards,
       buttonTitle: "Claim",
       infoClick: () =>
@@ -117,7 +119,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
                 </span>
                 <div className="flex gap-1">
                   <TokenIcons icons={iconPairs[0]} />
-                  <MoreIcon />
+                  {iconPairs[1].length > 0 && <MoreIcon />}
                   <TokenIcons icons={iconPairs[1]} />
                 </div>
               </div>
@@ -147,7 +149,11 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
                   </div>
 
                   <div className="text-lg font-medium text-[13px] font-ClashDisplay xl">
-                    ${(Number(value) / 1e9).toLocaleString()}
+                    $
+                    {Number(value).toLocaleString(undefined, {
+                      maximumFractionDigits: 5,
+                      minimumFractionDigits: 2,
+                    })}
                   </div>
                 </LWClickAnimation>
 
