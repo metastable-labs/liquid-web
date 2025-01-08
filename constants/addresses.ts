@@ -9,3 +9,9 @@ export const engineContractAddress =
 
 export const strategyContractAddress =
   "0x99d6D2dEf07Fb0082688272B547841045E431a9d" as `0x${string}`;
+
+export const moonwellConnector =
+  "0x21A76ca87A68E2220AF1DD1aa7b0115bFe553398" as `0x${string}`;
+
+export const morphoConnector =
+  "0xAb59C0A7F69fC3891C62E44e7a82460DFB71FCEf" as `0x${string}`;

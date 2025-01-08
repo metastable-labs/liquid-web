@@ -12,9 +12,8 @@ import {
   CloseAltIcon,
 } from "@/public/icons";
 import StrategyPaper from "./paper";
-import { LWClickAnimation } from "@/components";
 
-const Disclaimer = ({ close }: { close: () => void }) => (
+const Disclaimer = () => (
   <div className="px-3.5 pt-3.5 pb-4 flex gap-3 bg-primary-1400 rounded-xl">
     <div className="w-fit h-fit">
       <AlertFillIcon />
@@ -28,14 +27,13 @@ const Disclaimer = ({ close }: { close: () => void }) => (
       </p>
     </div>
 
-    <LWClickAnimation onClick={close} className="w-fit h-fit">
+    <div className="w-fit h-fit">
       <CloseAltIcon />
-    </LWClickAnimation>
+    </div>
   </div>
 );
 
 const StrategyDetail = ({ strategy }: IStrategyDetails) => {
-  const [showDisclaimer, setShowDisclaimer] = useState(true);
   const {
     agentCuratorFee,
     numberOfDeposits,
@@ -119,7 +117,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
 
       <div className="w-full h-[1px] rounded-full bg-primary-500" />
 
-      {showDisclaimer && <Disclaimer close={() => setShowDisclaimer(false)} />}
+      <Disclaimer />
 
       <div className="flex flex-col gap-6">
         <h2 className="text-[16px] leading-[19.2px] text-primary-400 font-medium">
