@@ -7,7 +7,6 @@ import classNames from "classnames";
 import { useAccount } from "wagmi";
 import { usePrivy } from "@privy-io/react-auth";
 
-import supportedAssets from "@/constants/supported-assets";
 import useFormattedAmount from "@/hooks/useFormattedAmount";
 import useScreenDetect from "@/hooks/useScreenDetect";
 import { USDCContractAddress } from "@/constants/addresses";
@@ -21,7 +20,12 @@ import { ChevronDown } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
 import LWClickAnimation from "../click-animation";
 
-export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
+export function InvestModal({
+  isOpen,
+  onClose,
+  onChainId,
+  assets,
+}: InvestModalProps) {
   const {
     amount,
     updateAmount,
@@ -32,17 +36,16 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
   const { ready, authenticated, login } = usePrivy();
   const { isLoading, data } = useBalance({
     address,
-    token: USDCContractAddress,
+    token: assets[0]?.address || USDCContractAddress,
   });
   const { joinStrategy } = usePositionActions();
   const { positionState } = useSystemFunctions();
 
-  const [token, setToken] = useState<SupportedAsset>();
+  const [token, setToken] = useState<Asset>();
   const [balance, setBalance] = useState("0");
   const { isDesktop } = useScreenDetect();
 
   const { loadingInvesting, closeInvestModal } = positionState;
-  const tokenSymbol = token?.symbol || "USDC";
 
   const amountIsGreaterThanBalance =
     Number(amountWithoutThousandSeparator) > Number(balance);
@@ -86,11 +89,10 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
   }, [data, loadingInvesting]);
 
   useEffect(() => {
-    const token = supportedAssets.find((asset) => asset.symbol === tokenSymbol);
-    if (token) {
-      setToken(token);
+    if (assets) {
+      setToken(assets[0]);
     }
-  }, [tokenSymbol]);
+  }, [assets]);
 
   useEffect(
     function closeModal() {
@@ -140,7 +142,7 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
                   height={18}
                   className="rounded-full"
                 />
-                <span className="text-[12px]">{tokenSymbol}</span>
+                <span className="text-[12px]">{token?.symbol}</span>
                 <ChevronDown size={20} strokeWidth={1} color="#94A3B8" />
               </div>
             </div>
@@ -156,7 +158,7 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
                 <span className="font-light text-[#64748B] text-[12px]">
                   Available:
                   <span className="text-[#334155] font-normal text-[13px]">
-                    {"  "}${balance.toLocaleString()} {tokenSymbol}
+                    {"  "}${balance.toLocaleString()} {token?.symbol}
                   </span>
                 </span>
               </div>
@@ -194,13 +196,4 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
       </div>
     </ModalWrapper>
   );
-}
-
-export interface SupportedAsset {
-  address: string;
-  decimals: number;
-  symbol: string;
-  name: string;
-  logo: string;
-  balance: number;
 }

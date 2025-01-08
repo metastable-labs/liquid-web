@@ -12,13 +12,24 @@ const MAX_DESCRIPTION_LENGTH = 100;
 
 const StrategyPaper = ({
   onClick,
-  strategy: { apy, createdAt, curator, description, owner, name, onChainId },
+  strategy: {
+    apy,
+    createdAt,
+    curator,
+    description,
+    owner,
+    name,
+    onChainId,
+    steps,
+  },
   active,
   variant = "primary",
   close,
 }: IStrategyPaper) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [openInvest, setOpenInvest] = useState(false);
+
+  const { assets } = steps[0];
 
   const truncatedDescription =
     description.length > MAX_DESCRIPTION_LENGTH && !isExpanded
@@ -169,6 +180,7 @@ const StrategyPaper = ({
         isOpen={openInvest}
         onClose={() => setOpenInvest(false)}
         onChainId={onChainId}
+        assets={assets}
       />
     </>
   );

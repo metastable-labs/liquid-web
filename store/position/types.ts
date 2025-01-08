@@ -2,6 +2,7 @@ type Asset = {
   logo: string;
   name: string;
   symbol: string;
+  address: `0x${string}`;
 };
 
 type Entity = {
