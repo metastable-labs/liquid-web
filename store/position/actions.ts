@@ -34,6 +34,7 @@ import api from "./api";
 import { erc20Abi, keccak256, pad, stringToBytes } from "viem";
 import { useAccount, useWaitForTransactionReceipt } from "wagmi";
 import { useEffect, useState } from "react";
+import useAppActions from "../app/actions";
 
 const usePositionActions = () => {
   const [joinData, setJoinData] = useState({
@@ -51,6 +52,7 @@ const usePositionActions = () => {
   });
   const { dispatch } = useSystemFunctions();
   const { address } = useAccount();
+  const { showToast } = useAppActions();
 
   const setActivePosition = (position: Position | null) => {
     dispatch(setActivePosition_(position));
@@ -182,11 +184,14 @@ const usePositionActions = () => {
 
       dispatch(setCloseInvestModal(true));
       dispatch(setCloseInvestModal(false));
+      showToast("Investment successful!", "success");
+
       getStrategies(`page=1&limit=10`);
       getPositions(`walletAddress=${address}&page=1&limit=10`);
 
       console.log("join hash", hash);
     } catch (error) {
+      showToast("Something went wrong!", "error");
       console.error(error);
     } finally {
       dispatch(setLoadingInvesting(false));

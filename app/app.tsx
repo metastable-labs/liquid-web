@@ -1,5 +1,5 @@
 "use client";
-import { LWNavigation } from "@/components";
+import { LWNavigation, LWToastNotification } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 import usePositionActions from "@/store/position/actions";
@@ -58,6 +58,8 @@ const App = ({ children }: { children: React.ReactNode }) => {
         title={info?.title}
         description={info?.description}
       />
+
+      <LWToastNotification />
     </>
   );
 };

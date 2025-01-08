@@ -13,6 +13,7 @@ import PositionIcon from "./position-icon";
 import DisconnectIcon from "./disconnect-icon";
 import AlertFillIcon from "./alert-fill-icon";
 import CloseAltIcon from "./close-alt-icon";
+import ToastIcon from "./toast-icon";
 
 export {
   CubeIcons,
@@ -30,4 +31,5 @@ export {
   DisconnectIcon,
   AlertFillIcon,
   CloseAltIcon,
+  ToastIcon,
 };

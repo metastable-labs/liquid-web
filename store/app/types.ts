@@ -13,3 +13,11 @@ type UserContext = {
   pfpUrl?: string;
   username?: string;
 };
+
+type Toast = "success" | "error" | "info" | "warning";
+
+type ToastState = {
+  message: string;
+  type: Toast;
+  show: boolean;
+};

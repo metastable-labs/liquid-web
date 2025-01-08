@@ -43,6 +43,9 @@ export default {
           1400: "#FEF3EB",
           1450: "#0A0D14",
           1500: "#525866",
+          1550: "#FDEDF0",
+          1600: "#F0F4FF",
+          1650: "#FFF8E5",
         },
       },
       boxShadow: {
