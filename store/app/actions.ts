@@ -1,5 +1,6 @@
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { setInfo as setInfo_, setToast } from ".";
+import api from "./api";
 
 const useAppActions = () => {
   const { dispatch } = useSystemFunctions();
@@ -21,10 +22,19 @@ const useAppActions = () => {
     dispatch(setToast({ message: "", type: "success", show: false }));
   };
 
+  const registerUser = async (walletAddress: string) => {
+    try {
+      await api.onboard(walletAddress);
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
   return {
     setInfo,
     showToast,
     hideToast,
+    registerUser,
   };
 };
 

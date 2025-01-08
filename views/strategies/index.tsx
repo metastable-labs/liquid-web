@@ -20,7 +20,6 @@ const Strategies = () => {
     null
   );
 
-  const showEmptyState = !Boolean(strategies?.length) && !loadingStrategies;
   const showShouldFetchMore = shouldFetchMore || loadingStrategies;
 
   const handleStrategyClick = (strategy: Strategy | null): void =>

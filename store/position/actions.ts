@@ -173,7 +173,7 @@ const usePositionActions = () => {
   const _joinStrategy = async () => {
     try {
       const { amountToInvest, onChainId } = joinData;
-      console.log("amountToInvest", amountToInvest, typeof amountToInvest);
+
       const { request } = await simulateContract(wagmiConfig, {
         address: engineContractAddress,
         abi: EngineAbi.abi,
@@ -181,16 +181,14 @@ const usePositionActions = () => {
         args: [onChainId, strategyContractAddress, [amountToInvest]],
       });
 
-      const hash = await writeContract(wagmiConfig, request);
+      await writeContract(wagmiConfig, request);
 
       dispatch(setCloseInvestModal(true));
       showToast("Investment successful!", "success");
 
-      getStrategies(`page=1&limit=10`);
-      getPositions(`walletAddress=${address}&page=1&limit=10`);
+      await getStrategies(`page=1&limit=10`);
+      await getPositions(`walletAddress=${address}&page=1&limit=10`);
       dispatch(setCloseInvestModal(false));
-
-      console.log("join hash", hash);
     } catch (error) {
       showToast("Something went wrong!", "error");
       console.error(error);

@@ -6,8 +6,11 @@ import { LWClickAnimation } from "@/components";
 import { truncateWalletAddress } from "@/utils/helpers";
 import useSwitchNetworkConnect from "@/hooks/useSwitchNetwork";
 import { DisconnectIcon } from "@/public/icons";
+import { useEffect } from "react";
+import useAppActions from "@/store/app/actions";
 
 const ConnectWalletButton = () => {
+  const { registerUser } = useAppActions();
   const {} = useSwitchNetworkConnect();
   const { address } = useAccount();
   const { ready, authenticated, login, logout } = usePrivy();
@@ -15,6 +18,13 @@ const ConnectWalletButton = () => {
   const handleLogin = () => {
     login({ loginMethods: ["wallet"] });
   };
+
+  useEffect(() => {
+    if (ready && authenticated && address) {
+      registerUser(address);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, authenticated, address]);
 
   return (
     <div className="flex justify-end pr-4 xl:pr-20 py-3 fixed top-0 xl:top-5 right-0 z-50 bg-white w-full xl:w-auto">

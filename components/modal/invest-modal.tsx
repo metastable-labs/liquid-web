@@ -70,6 +70,10 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
     joinStrategy(Number(amountWithoutThousandSeparator), onChainId);
   };
 
+  const handleMaxClick = () => {
+    updateAmount(balance.toString());
+  };
+
   useEffect(() => {
     if (data) {
       const formattedUsdcBalance = (
@@ -88,14 +92,11 @@ export function InvestModal({ isOpen, onClose, onChainId }: InvestModalProps) {
     }
   }, [tokenSymbol]);
 
-  const handleMaxClick = () => {
-    updateAmount(balance.toString());
-  };
-
   useEffect(
     function closeModal() {
       if (closeInvestModal) {
         onClose();
+        updateAmount("");
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

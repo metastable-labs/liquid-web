@@ -167,7 +167,7 @@ const StrategyPaper = ({
 
       <InvestModal
         isOpen={openInvest}
-        onClose={handleInvestModal}
+        onClose={() => setOpenInvest(false)}
         onChainId={onChainId}
       />
     </>
