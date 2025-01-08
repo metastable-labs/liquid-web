@@ -26,10 +26,6 @@ const Disclaimer = () => (
         Liquid protocol contracts are still undergoing audits
       </p>
     </div>
-
-    <div className="w-fit h-fit">
-      <CloseAltIcon />
-    </div>
   </div>
 );
 
