@@ -48,7 +48,8 @@ const PositionCard = (props: Position) => {
   const { setInfo } = useAppActions();
   const { setActivePosition } = usePositionActions();
 
-  const { apy, assets, rewards, totalBalance, yieldEarned } = props;
+  const { strategy, assets, rewards, totalBalance, yieldEarned } = props;
+  const { apy, name } = strategy;
 
   const iconPairs = (() => {
     if (!assets) return [[], []];
@@ -97,7 +98,7 @@ const PositionCard = (props: Position) => {
       <div className="self-stretch flex items-center justify-between">
         <div className="flex flex-col gap-2 justify-center">
           <h1 className="text-[15px] leading-[19.8px] text-primary-400 font-medium">
-            Moonwell - USDC
+            {name}
           </h1>
           <div className="flex items-center gap-1">
             <TokenIcons icons={iconPairs[0]} />
@@ -110,7 +111,7 @@ const PositionCard = (props: Position) => {
             Est. APY
           </span>
           <span className="text-[14px] leading-[16.8px] text-primary-350 font-medium font-ClashDisplay">
-            {apy}%
+            {apy || "0.00"}%
           </span>
         </div>
       </div>

@@ -17,7 +17,6 @@ type Meta = {
 };
 
 type Position = {
-  apy: string;
   assets: Array<Asset>;
   closedAt: string | null;
   closeTransactionHash: string | null;
@@ -33,6 +32,11 @@ type Position = {
   updatedAt: string;
   userId: string;
   yieldEarned: string;
+  strategy: {
+    id: string;
+    name: string;
+    apy: string;
+  };
 };
 
 type Positions = {

@@ -20,10 +20,6 @@ export interface WithdrawModalProps {
 export interface ActionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onWithdraw?: () => void;
-  onClaimYield?: () => void;
-  onClaimRewards?: () => void;
-  position: Position;
 }
 
 export interface ClaimModalProps {

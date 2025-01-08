@@ -39,10 +39,6 @@ const App = ({ children }: { children: React.ReactNode }) => {
       <ActionsModal
         isOpen={!!activePosition}
         onClose={() => setActivePosition(null)}
-        position={activePosition!}
-        onWithdraw={() => console.log("Withdraw clicked")}
-        onClaimYield={() => console.log("Claim yield clicked")}
-        onClaimRewards={() => console.log("Claim rewards clicked")}
       />
 
       <WithdrawModal

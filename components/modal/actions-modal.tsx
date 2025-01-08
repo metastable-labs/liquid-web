@@ -1,15 +1,15 @@
 "use client";
 import classNames from "classnames";
+import Image from "next/image";
 
 import { MoreIcon, InfoCircleIcon } from "@/public/icons";
 import usePositionActions from "@/store/position/actions";
 import useAppActions from "@/store/app/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { ActionModalProps } from "./types";
-import Image from "next/image";
 import { Button } from "../ui/button";
 import ModalWrapper from "./modal-wrapper";
 import LWClickAnimation from "../click-animation";
-import { formatNumberWithSuffix } from "@/utils/helpers";
 
 const TokenIcons = ({ icons }: { icons: Array<string> }) => (
   <div
@@ -30,7 +30,10 @@ const TokenIcons = ({ icons }: { icons: Array<string> }) => (
   </div>
 );
 
-function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
+function ActionsModal({ isOpen, onClose }: ActionModalProps) {
+  const {
+    positionState: { activePosition: position },
+  } = useSystemFunctions();
   const { setIsClaiming, setIsWithdrawing } = usePositionActions();
   const { setInfo } = useAppActions();
 
@@ -115,7 +118,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
             <div className="flex items-center gap-4">
               <div className="space-y-2">
                 <span className="text-[15px] text-[#1E293B] font-medium">
-                  {"Moonwell - USDC"}
+                  {position?.strategy.name}
                 </span>
                 <div className="flex gap-1">
                   <TokenIcons icons={iconPairs[0]} />
@@ -127,7 +130,7 @@ function ActionsModal({ isOpen, onClose, position }: ActionModalProps) {
             <div className="text-[12px] text-[#64748B] font-light">
               Est. APY{" "}
               <span className="text-[#4691FE] text-[13px] font-medium">
-                {position?.apy}%
+                {position?.strategy?.apy || "0.00"}%
               </span>
             </div>
           </div>
