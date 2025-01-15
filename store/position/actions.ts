@@ -1,7 +1,7 @@
 import { simulateContract, writeContract } from "@wagmi/core";
 
 import { wagmiConfig } from "@/providers/PrivyProvider";
-import { EngineAbi, LiquidABI } from "@/constants/abis";
+import { EngineAbi } from "@/constants/abis";
 import {
   engineContractAddress,
   strategyContractAddress,
