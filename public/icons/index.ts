@@ -14,6 +14,8 @@ import DisconnectIcon from "./disconnect-icon";
 import AlertFillIcon from "./alert-fill-icon";
 import CloseAltIcon from "./close-alt-icon";
 import ToastIcon from "./toast-icon";
+import ChevronDownIcon from "./chevron-down-icon";
+import TreeIcon from "./tree-icon";
 
 export {
   CubeIcons,
@@ -32,4 +34,6 @@ export {
   AlertFillIcon,
   CloseAltIcon,
   ToastIcon,
+  ChevronDownIcon,
+  TreeIcon,
 };

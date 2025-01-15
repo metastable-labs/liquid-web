@@ -68,7 +68,7 @@ export function WithdrawModal({ isOpen, onClose }: WithdrawModalProps) {
               </div>
               <span className="font-light text-[#64748B]">
                 Balance:
-                <span className="text-[#334155] font-normal">
+                <span className="text-primary-1700 font-normal">
                   {" "}
                   {balance.toLocaleString(undefined, {
                     maximumFractionDigits: 5,

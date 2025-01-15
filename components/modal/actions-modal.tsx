@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import classNames from "classnames";
 import Image from "next/image";
 
@@ -6,6 +7,7 @@ import { MoreIcon, InfoCircleIcon } from "@/public/icons";
 import usePositionActions from "@/store/position/actions";
 import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import ExitPostionModal from "./exit-position-modal";
 import { ActionModalProps } from "./types";
 import { Button } from "../ui/button";
 import ModalWrapper from "./modal-wrapper";
@@ -36,6 +38,7 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
   } = useSystemFunctions();
   const { setIsClaiming, setIsWithdrawing } = usePositionActions();
   const { setInfo } = useAppActions();
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
 
   const assets = position?.assets;
 
@@ -111,9 +114,9 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
   ];
 
   return (
-    <ModalWrapper isOpen={isOpen} onClose={onClose} title="Action">
-      <div className="p-6">
-        <div className="space-y-3">
+    <>
+      <ModalWrapper isOpen={isOpen} onClose={onClose} title="Action">
+        <div className="gap-3 p-6 w-full flex flex-col items-stretch">
           <div className="flex items-center justify-between border-[#EAEEF4] border-[1px] px-4 py-3 rounded-xl">
             <div className="flex items-center gap-4">
               <div className="space-y-2">
@@ -170,9 +173,25 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
               </div>
             )
           )}
+
+          <div className="w-full px-6 py-3">
+            <LWClickAnimation
+              onClick={() => setIsExitModalOpen(true)}
+              className="flex items-center justify-center py-[18px] px-8 w-full rounded-[30px] bg-primary-500"
+            >
+              <span className="text-[16px] leading-[16px] text-primary-1700 font-QuantaGroteskPro font-semibold">
+                Exit Position
+              </span>
+            </LWClickAnimation>
+          </div>
         </div>
-      </div>
-    </ModalWrapper>
+      </ModalWrapper>
+
+      <ExitPostionModal
+        isOpen={isExitModalOpen}
+        onClose={() => setIsExitModalOpen(false)}
+      />
+    </>
   );
 }
 

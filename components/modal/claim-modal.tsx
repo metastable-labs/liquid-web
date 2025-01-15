@@ -59,7 +59,7 @@ export function ClaimModal({ isOpen, onClose }: ClaimModalProps) {
               </div>
               <span className="font-light text-[#64748B]">
                 Claimable:
-                <span className="text-[#334155] font-normal">
+                <span className="text-primary-1700 font-normal">
                   {" "}
                   ${balance.toLocaleString()}
                 </span>
