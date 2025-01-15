@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import classNames from "classnames";
+import { usePrivy } from "@privy-io/react-auth";
 
 import usePositionActions from "@/store/position/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import { setLoadingPosition } from "@/store/position";
 import PositionCard from "./card";
 import PositionCardSkeleton from "./card/skeleton";
 import PositionsEmpty from "./empty";
@@ -13,12 +15,21 @@ const Positions = () => {
   const { getPositions } = usePositionActions();
   const {
     positionState: { loadingPositions, positions, positionsMeta },
+    dispatch,
   } = useSystemFunctions();
   const { address } = useAccount();
+  const { ready } = usePrivy();
   const [shouldFetchMore, setShouldFetchMore] = useState(false);
 
-  const showEmptyState = !Boolean(positions?.length) && !loadingPositions;
+  const showEmptyState =
+    (!Boolean(positions?.length) && !loadingPositions) || (!address && ready);
   const showShouldFetchMore = shouldFetchMore || loadingPositions;
+
+  const initialPositionFetch = () => {
+    if (positions) return;
+    if (ready && !address) dispatch(setLoadingPosition(false));
+    if (address) getPositions(`walletAddress=${address}&page=1&limit=10`);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,8 +56,7 @@ const Positions = () => {
   }, [shouldFetchMore]);
 
   useEffect(() => {
-    if (!positions && address)
-      getPositions(`walletAddress=${address}&page=1&limit=10`);
+    initialPositionFetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 
