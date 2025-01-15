@@ -22,6 +22,11 @@ export interface ActionModalProps {
   onClose: () => void;
 }
 
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 export interface ClaimModalProps {
   isOpen: boolean;
   onClose: () => void;

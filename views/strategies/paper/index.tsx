@@ -28,6 +28,7 @@ const StrategyPaper = ({
 }: IStrategyPaper) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [openInvest, setOpenInvest] = useState(false);
+  const [showInvest, setShowInvest] = useState(false);
 
   const { assets } = steps[0];
 
@@ -44,6 +45,20 @@ const StrategyPaper = ({
 
   const handleInvestModal = () => {
     setOpenInvest(!openInvest);
+  };
+
+  const handleInvestClick = () => {
+    if (!showInvest) {
+      setShowInvest(true);
+      setTimeout(() => {
+        setOpenInvest(true);
+      }, 100);
+    } else {
+      setOpenInvest(false);
+      setTimeout(() => {
+        setShowInvest(false);
+      }, 500);
+    }
   };
 
   const handleClick = () => {
@@ -159,7 +174,7 @@ const StrategyPaper = ({
 
         {showInvestButton && (
           <LWClickAnimation
-            onClick={handleInvestModal}
+            onClick={handleInvestClick}
             className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
             stopPropagation
           >
@@ -176,10 +191,10 @@ const StrategyPaper = ({
         )}
       </div>
 
-      {openInvest && (
+      {showInvest && (
         <InvestModal
           isOpen={openInvest}
-          onClose={() => setOpenInvest(false)}
+          onClose={handleInvestClick}
           onChainId={onChainId}
           assets={assets}
         />
