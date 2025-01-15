@@ -19,6 +19,7 @@ import { InvestModalProps } from "./types";
 import { ChevronDown } from "lucide-react";
 import ModalWrapper from "./modal-wrapper";
 import LWClickAnimation from "../click-animation";
+import supportedAssets from "@/constants/supported-assets";
 
 export function InvestModal({
   isOpen,
@@ -32,11 +33,16 @@ export function InvestModal({
     amountWithThousandSeparator,
     amountWithoutThousandSeparator,
   } = useFormattedAmount();
+
+  const selectedAddress = supportedAssets.find(
+    (asset) => asset.symbol === assets[0]?.symbol
+  )?.address;
+
   const { address } = useAccount();
   const { ready, authenticated, login } = usePrivy();
   const { isLoading, data } = useBalance({
     address,
-    token: assets[0]?.address || USDCContractAddress,
+    token: assets[0]?.address || selectedAddress,
   });
   const { joinStrategy } = usePositionActions();
   const { positionState } = useSystemFunctions();
@@ -135,20 +141,22 @@ export function InvestModal({
               />
 
               <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-full">
-                <Image
-                  src={token?.logo || ""}
-                  alt="Token icon"
-                  width={18}
-                  height={18}
-                  className="rounded-full"
-                />
+                {token?.logo && (
+                  <Image
+                    src={token.logo}
+                    alt="Token icon"
+                    width={18}
+                    height={18}
+                    className="rounded-full"
+                  />
+                )}
                 <span className="text-[12px]">{token?.symbol}</span>
                 <ChevronDown size={20} strokeWidth={1} color="#94A3B8" />
               </div>
             </div>
 
             {ready && authenticated && !isLoading && (
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center transition-all duration-500">
                 <span
                   className="text-[#375DFB] text-[12px] cursor-pointer"
                   onClick={handleMaxClick}

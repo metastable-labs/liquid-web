@@ -1,15 +1,9 @@
-import {
-  simulateContract,
-  writeContract,
-  multicall,
-  getTransactionConfirmations,
-} from "@wagmi/core";
+import { simulateContract, writeContract } from "@wagmi/core";
 
 import { wagmiConfig } from "@/providers/PrivyProvider";
 import { EngineAbi, LiquidABI } from "@/constants/abis";
 import {
   engineContractAddress,
-  liquidContractAddress,
   strategyContractAddress,
   USDCContractAddress,
 } from "@/constants/addresses";
@@ -31,7 +25,7 @@ import {
 } from ".";
 import { CallbackProps } from "..";
 import api from "./api";
-import { erc20Abi, keccak256, pad, stringToBytes } from "viem";
+import { erc20Abi } from "viem";
 import { useAccount, useWaitForTransactionReceipt } from "wagmi";
 import { useEffect, useState } from "react";
 import useAppActions from "../app/actions";
@@ -97,7 +91,7 @@ const usePositionActions = () => {
       setLoadingInvesting(true);
 
       const { request } = await simulateContract(wagmiConfig, {
-        abi: LiquidABI.abi,
+        abi: EngineAbi.abi,
         address: engineContractAddress,
         functionName: "exit",
         args: [onChainId, strategyContractAddress],
@@ -109,24 +103,6 @@ const usePositionActions = () => {
       console.error(error);
     } finally {
       setLoadingInvesting(false);
-    }
-  };
-
-  const withdrawStrategy = async (amount: number) => {
-    try {
-      const assets = BigInt(0);
-      const receiverAddress = "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e";
-      const ownerAddress = "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e";
-
-      const { request } = await simulateContract(wagmiConfig, {
-        abi: LiquidABI.abi,
-        address: liquidContractAddress,
-        functionName: "withdraw",
-        args: [assets, receiverAddress, ownerAddress],
-      });
-      const hash = await writeContract(wagmiConfig, request);
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -209,7 +185,6 @@ const usePositionActions = () => {
     setIsClaiming,
     setIsWithdrawing,
     joinStrategy,
-    withdrawStrategy,
     getStrategies,
     getPositions,
     exitStrategy,

@@ -145,7 +145,7 @@ const StrategyPaper = ({
 
             {description.length > MAX_DESCRIPTION_LENGTH && (
               <LWClickAnimation
-                className="mt-0.5 w-fit"
+                className="mt-3 w-fit"
                 onClick={handleSeeMoreClick}
                 stopPropagation
               >
@@ -176,12 +176,14 @@ const StrategyPaper = ({
         )}
       </div>
 
-      <InvestModal
-        isOpen={openInvest}
-        onClose={() => setOpenInvest(false)}
-        onChainId={onChainId}
-        assets={assets}
-      />
+      {openInvest && (
+        <InvestModal
+          isOpen={openInvest}
+          onClose={() => setOpenInvest(false)}
+          onChainId={onChainId}
+          assets={assets}
+        />
+      )}
     </>
   );
 };

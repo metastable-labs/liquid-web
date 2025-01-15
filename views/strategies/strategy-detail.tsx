@@ -49,15 +49,15 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
   const protocols = Array.from(
     new Map(
       steps.map((step) => [
-        step.protocol.name,
-        { icon: step.protocol.logo, name: step.protocol.name },
+        step?.protocol?.name,
+        { icon: step?.protocol?.logo, name: step?.protocol?.name },
       ])
     ).values()
   );
 
   const maps = [
     { title: `Asset${assets.length > 1 ? "s" : ""} involved`, data: assets },
-    { title: `Protocol${protocols.length > 1 ? "s" : ""}`, data: protocols },
+    { title: `Protocol${protocols?.length > 1 ? "s" : ""}`, data: protocols },
   ];
 
   const information = [
