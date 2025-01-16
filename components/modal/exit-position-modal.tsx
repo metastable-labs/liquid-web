@@ -1,16 +1,25 @@
 "use client";
 import classNames from "classnames";
 
-import { TreeIcon } from "@/public/icons";
 import LWClickAnimation from "../click-animation";
 import ModalWrapper from "./modal-wrapper";
 import { ModalProps } from "./types";
+import { TreeIcon } from "@/public/icons";
+import usePositionActions from "@/store/position/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
-  const exitPosition = () => {};
+  const { positionState } = useSystemFunctions();
+  const { exitStrategy } = usePositionActions();
+
+  const exit = () => {
+    if (!positionState.activePosition?.strategyId) return;
+
+    exitStrategy(positionState.activePosition.strategyId as `0x${string}`);
+  };
 
   const actions = [
-    { title: "Yes, Exit position", variant: "primary", onClick: exitPosition },
+    { title: "Yes, Exit position", variant: "primary", onClick: exit },
     { title: "Cancel", variant: "secondary", onClick: onClose },
   ];
   return (
