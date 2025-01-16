@@ -13,9 +13,11 @@ const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
   const { exitStrategy } = usePositionActions();
 
   const exit = () => {
-    if (!positionState.activePosition?.strategyId) return;
+    if (!positionState.activePosition?.strategy.onChainId) return;
 
-    exitStrategy(positionState.activePosition.strategyId as `0x${string}`);
+    exitStrategy(positionState.activePosition?.strategy.onChainId, {
+      onSuccess: onClose,
+    });
   };
 
   const actions = [

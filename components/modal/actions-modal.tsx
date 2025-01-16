@@ -163,13 +163,13 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
                   </div>
                 </LWClickAnimation>
 
-                <Button
+                {/* <Button
                   onClick={onClick}
                   variant="secondary"
                   className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl h-[28px] text-[11px] w-[73px]"
                 >
                   {buttonTitle}
-                </Button>
+                </Button> */}
               </div>
             )
           )}

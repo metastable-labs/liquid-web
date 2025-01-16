@@ -12,6 +12,7 @@ export interface PositionState {
   positionsMeta?: Meta;
   loadingPositions?: boolean;
   loadingInvesting: boolean;
+  loadingExit: boolean;
   closeInvestModal: boolean;
 }
 
@@ -25,6 +26,7 @@ const initialState: PositionState = {
   loadingPositions: true,
   loadingInvesting: false,
   closeInvestModal: false,
+  loadingExit: false,
 };
 
 export const positionReducer = createSlice({
@@ -49,6 +51,10 @@ export const positionReducer = createSlice({
 
     setLoadingInvesting(state, action: PayloadAction<boolean>) {
       state.loadingInvesting = action.payload;
+    },
+
+    setLoadingExit(state, action: PayloadAction<boolean>) {
+      state.loadingExit = action.payload;
     },
 
     setCloseInvestModal(state, action: PayloadAction<boolean>) {
@@ -131,6 +137,7 @@ export const {
   setPositionsMeta,
   setLoadingInvesting,
   setCloseInvestModal,
+  setLoadingExit,
 } = positionReducer.actions;
 
 export default positionReducer.reducer;

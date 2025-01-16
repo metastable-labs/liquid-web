@@ -22,6 +22,7 @@ import {
   setStrategiesMeta,
   setLoadingInvesting,
   setCloseInvestModal,
+  setLoadingExit,
 } from ".";
 import { CallbackProps } from "..";
 import api from "./api";
@@ -86,9 +87,12 @@ const usePositionActions = () => {
     }
   };
 
-  const exitStrategy = async (onChainId: `0x${string}`) => {
+  const exitStrategy = async (
+    onChainId: `0x${string}`,
+    callback?: CallbackProps
+  ) => {
     try {
-      setLoadingInvesting(true);
+      dispatch(setLoadingExit(true));
 
       const { request } = await simulateContract(wagmiConfig, {
         abi: EngineAbi.abi,
@@ -97,12 +101,22 @@ const usePositionActions = () => {
         args: [onChainId, strategyContractAddress],
       });
       const hash = await writeContract(wagmiConfig, request);
+      showToast("Successfully exited strategy!", "success");
+
+      callback?.onSuccess?.();
+
+      setTimeout(() => {
+        getStrategies(`page=1&limit=10`);
+        getPositions(`walletAddress=${address}&page=1&limit=10`);
+      }, 2000);
 
       console.log("exit hash", hash);
     } catch (error) {
       console.error(error);
+      showToast("Something went wrong! try again later.", "error");
+      callback?.onError?.(error);
     } finally {
-      setLoadingInvesting(false);
+      dispatch(setLoadingExit(false));
     }
   };
 
@@ -162,9 +176,12 @@ const usePositionActions = () => {
       dispatch(setCloseInvestModal(true));
       showToast("Investment successful!", "success");
 
-      await getStrategies(`page=1&limit=10`);
-      await getPositions(`walletAddress=${address}&page=1&limit=10`);
       dispatch(setCloseInvestModal(false));
+
+      setTimeout(() => {
+        getStrategies(`page=1&limit=10`);
+        getPositions(`walletAddress=${address}&page=1&limit=10`);
+      }, 2500);
     } catch (error) {
       showToast("Something went wrong!", "error");
       console.error(error);

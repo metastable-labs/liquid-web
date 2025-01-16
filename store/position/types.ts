@@ -36,6 +36,7 @@ type Position = {
     id: string;
     name: string;
     apy: string;
+    onChainId: `0x${string}`;
   };
 };
 
