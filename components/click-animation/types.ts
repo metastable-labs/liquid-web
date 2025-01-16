@@ -4,4 +4,5 @@ interface ILWClickAnimation {
   className?: string;
   stopPropagation?: boolean;
   disabled?: boolean;
+  loading?: boolean;
 }

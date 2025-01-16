@@ -45,6 +45,7 @@ const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
             <LWClickAnimation
               key={index}
               onClick={onClick}
+              loading={positionState.loadingExit}
               className={classNames(
                 "flex items-center justify-center py-[18px] px-8 w-full rounded-[30px]",
                 {
