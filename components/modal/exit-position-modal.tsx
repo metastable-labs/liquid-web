@@ -3,12 +3,16 @@ import classNames from "classnames";
 
 import LWClickAnimation from "../click-animation";
 import ModalWrapper from "./modal-wrapper";
-import { ModalProps } from "./types";
+import { ExitPostionModalProps } from "./types";
 import { TreeIcon } from "@/public/icons";
 import usePositionActions from "@/store/position/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 
-const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
+const ExitPostionModal = ({
+  isOpen,
+  onClose,
+  onParentClose,
+}: ExitPostionModalProps) => {
   const { positionState } = useSystemFunctions();
   const { exitStrategy } = usePositionActions();
 
@@ -16,7 +20,10 @@ const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
     if (!positionState.activePosition?.strategy.onChainId) return;
 
     exitStrategy(positionState.activePosition?.strategy.onChainId, {
-      onSuccess: onClose,
+      onSuccess: () => {
+        onClose();
+        onParentClose();
+      },
     });
   };
 

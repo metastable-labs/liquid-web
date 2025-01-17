@@ -20,7 +20,7 @@ const Info = ({ title, value, onClick }: PositionInfo) => (
       <InfoCircleIcon />
     </div>
     <span className="text-[13px] leading-[15.6px] text-primary-950">
-      ${formatNumberWithSuffix(value)}
+      ${formatNumberWithSuffix(value, 4)}
     </span>
   </LWClickAnimation>
 );

@@ -201,6 +201,7 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
       <ExitPostionModal
         isOpen={isExitModalOpen}
         onClose={() => setIsExitModalOpen(false)}
+        onParentClose={onClose}
       />
     </>
   );

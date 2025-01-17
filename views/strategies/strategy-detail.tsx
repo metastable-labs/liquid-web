@@ -9,9 +9,9 @@ import {
   MoneyTickIcon,
   SwapHorizontalIcon,
   AlertFillIcon,
-  CloseAltIcon,
 } from "@/public/icons";
 import StrategyPaper from "./paper";
+import { formatNumberWithSuffix } from "@/utils/helpers";
 
 const Disclaimer = () => (
   <div className="px-3.5 pt-3.5 pb-4 flex gap-3 bg-primary-1400 rounded-xl">
@@ -64,7 +64,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
     {
       icon: <MoneyTickIcon />,
       title: "Total value locked",
-      value: `$${totalValueLocked}`,
+      value: `$${formatNumberWithSuffix(totalValueLocked)}`,
     },
     {
       icon: <ChartIcon />,

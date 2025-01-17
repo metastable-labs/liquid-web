@@ -51,7 +51,10 @@ const generateConsistentColor = (text: string): string => {
   return color;
 };
 
-const formatNumberWithSuffix = (num: number | string | undefined): string => {
+const formatNumberWithSuffix = (
+  num: number | string | undefined,
+  decimals = 2
+): string => {
   if (!num) return "0";
 
   const numValue = typeof num === "string" ? Number(num) : num;
@@ -76,7 +79,9 @@ const formatNumberWithSuffix = (num: number | string | undefined): string => {
   if (numValue >= 1e3) {
     return formatWithPrecision(numValue / 1e3) + "k";
   }
-  return numValue.toFixed(2).toString();
+  return numValue.toLocaleString(undefined, {
+    maximumFractionDigits: decimals,
+  });
 };
 
 const truncateWalletAddress = (
