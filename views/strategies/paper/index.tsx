@@ -122,7 +122,7 @@ const StrategyPaper = ({
               </div>
             ) : (
               <LWClickAnimation
-                onClick={handleInvestModal}
+                onClick={handleInvestClick}
                 className="w-[72px] h-[25px] flex items-center justify-center bg-primary-350 rounded-[10px]"
                 stopPropagation
               >
