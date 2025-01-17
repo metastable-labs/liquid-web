@@ -21,7 +21,12 @@ const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
   };
 
   const actions = [
-    { title: "Yes, Exit position", variant: "primary", onClick: exit },
+    {
+      title: "Yes, Exit position",
+      variant: "primary",
+      onClick: exit,
+      loading: positionState.loadingExit,
+    },
     { title: "Cancel", variant: "secondary", onClick: onClose },
   ];
   return (
@@ -41,11 +46,11 @@ const ExitPostionModal = ({ isOpen, onClose }: ModalProps) => {
         </p>
 
         <div className="flex flex-col items-center justify-center py-3 px-6 gap-2 w-full">
-          {actions.map(({ title, variant, onClick }, index) => (
+          {actions.map(({ onClick, title, variant, loading }, index) => (
             <LWClickAnimation
               key={index}
               onClick={onClick}
-              loading={positionState.loadingExit}
+              loading={loading}
               className={classNames(
                 "flex items-center justify-center py-[18px] px-8 w-full rounded-[30px]",
                 {
