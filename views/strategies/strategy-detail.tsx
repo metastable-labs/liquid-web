@@ -64,7 +64,7 @@ const StrategyDetail = ({ strategy }: IStrategyDetails) => {
     {
       icon: <MoneyTickIcon />,
       title: "Total value locked",
-      value: `$${formatNumberWithSuffix(totalValueLocked)}`,
+      value: `$${formatNumberWithSuffix(totalValueLocked, 4)}`,
     },
     {
       icon: <ChartIcon />,
