@@ -100,13 +100,13 @@ export function InvestModal({
 
   useEffect(
     function closeModal() {
-      if (closeInvestModal) {
+      if (closeInvestModal && isOpen) {
         onClose();
         updateAmount("");
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [closeInvestModal]
+    [closeInvestModal, isOpen]
   );
 
   return (

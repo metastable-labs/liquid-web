@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "imagedelivery.net",
       },
+      {
+        protocol: "https",
+        hostname: "liquid-user-assets.s3.eu-west-2.amazonaws.com",
+      },
     ],
   },
 };

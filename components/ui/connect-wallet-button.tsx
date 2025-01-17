@@ -15,7 +15,8 @@ const ConnectWalletButton = () => {
   const { address } = useAccount();
   const { ready, authenticated, login, logout } = usePrivy();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    await logout();
     login({ loginMethods: ["wallet"] });
   };
 
@@ -28,7 +29,7 @@ const ConnectWalletButton = () => {
 
   return (
     <div className="flex justify-end pr-4 xl:pr-20 py-3 fixed top-0 xl:top-5 right-0 z-50 bg-white w-full xl:w-auto">
-      {ready && !authenticated && (
+      {ready && (!authenticated || !address) && (
         <LWClickAnimation
           onClick={handleLogin}
           className="bg-gray-100 text-gray-900 hover:bg-gray-100/80 h-10 px-10 inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium"

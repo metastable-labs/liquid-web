@@ -8,6 +8,7 @@ type Asset = {
 type Entity = {
   handle: string;
   id: string;
+  profilePicture: string;
 };
 
 type Meta = {

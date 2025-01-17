@@ -81,9 +81,7 @@ const StrategyPaper = ({
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-1.5">
               <Image
-                src={
-                  "https://res.cloudinary.com/djzeufu4j/image/upload/v1735331176/Avatar_udfxuk.png"
-                }
+                src={owner.profilePicture}
                 alt={`${curator}'s avatar`}
                 width={40}
                 height={40}
