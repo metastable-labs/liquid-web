@@ -16,6 +16,7 @@ import CloseAltIcon from "./close-alt-icon";
 import ToastIcon from "./toast-icon";
 import ChevronDownIcon from "./chevron-down-icon";
 import TreeIcon from "./tree-icon";
+import InfoCircleFillIcon from "./info-circle-fill-icon";
 
 export {
   CubeIcons,
@@ -36,4 +37,5 @@ export {
   ToastIcon,
   ChevronDownIcon,
   TreeIcon,
+  InfoCircleFillIcon,
 };

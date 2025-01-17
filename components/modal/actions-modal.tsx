@@ -3,7 +3,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import Image from "next/image";
 
-import { MoreIcon, InfoCircleIcon } from "@/public/icons";
+import { MoreIcon, InfoCircleIcon, InfoCircleFillIcon } from "@/public/icons";
 import usePositionActions from "@/store/position/actions";
 import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
@@ -98,6 +98,7 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
           description:
             "Yield refers to the income earned on an investment over time, typically expressed as a percentage.",
         }),
+      disabled: true,
     },
     {
       title: "Rewards",
@@ -110,6 +111,7 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
           description:
             "Rewards are calculated based on your contributions and performance metrics within the specified position.",
         }),
+      disabled: true,
     },
   ];
 
@@ -138,41 +140,50 @@ function ActionsModal({ isOpen, onClose }: ActionModalProps) {
             </div>
           </div>
 
-          {actions.map(
-            ({ buttonTitle, infoClick, onClick, title, value }, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between border-[#EAEEF4] border-[1px] px-4 py-3 rounded-xl"
-              >
-                <LWClickAnimation onClick={infoClick} className="flex flex-col">
-                  <div className="flex items-center gap-1">
-                    <span className="text-sm text-[#64748B] text-[12px] font-light">
-                      {title}
-                    </span>
-                    <div className="min-w-fit">
-                      <InfoCircleIcon />
-                    </div>
+          {actions.map(({ infoClick, title, value, disabled }, index) => (
+            <div
+              key={index}
+              className={classNames(
+                "flex items-center justify-between border-[#EAEEF4] border-[1px] px-4 py-3 rounded-xl",
+                { "opacity-30 pointer-events-none": disabled }
+              )}
+            >
+              <LWClickAnimation onClick={infoClick} className="flex flex-col">
+                <div className="flex items-center gap-1">
+                  <span className="text-sm text-[#64748B] text-[12px] font-light">
+                    {title}
+                  </span>
+                  <div className="min-w-fit">
+                    <InfoCircleIcon />
                   </div>
+                </div>
 
-                  <div className="text-lg font-medium text-[13px] font-ClashDisplay xl">
-                    $
-                    {Number(value).toLocaleString(undefined, {
-                      maximumFractionDigits: 5,
-                      minimumFractionDigits: 2,
-                    })}
-                  </div>
-                </LWClickAnimation>
+                <div className="text-lg font-medium text-[13px] font-ClashDisplay xl">
+                  $
+                  {Number(value).toLocaleString(undefined, {
+                    maximumFractionDigits: 5,
+                    minimumFractionDigits: 2,
+                  })}
+                </div>
+              </LWClickAnimation>
 
-                {/* <Button
+              {/* <Button
                   onClick={onClick}
                   variant="secondary"
                   className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl h-[28px] text-[11px] w-[73px]"
                 >
                   {buttonTitle}
                 </Button> */}
-              </div>
-            )
-          )}
+            </div>
+          ))}
+
+          <div className="flex gap-3 px-3.5 pt-3.5 pb-4 bg-primary-1750 rounded-xl">
+            <InfoCircleFillIcon />
+
+            <p className="text-[14px] leading-[18.48px] text-primary-1500">
+              Yields and Rewards calculation are coming soon.
+            </p>
+          </div>
 
           <div className="w-full px-6 py-3">
             <LWClickAnimation

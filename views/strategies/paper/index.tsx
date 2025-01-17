@@ -26,7 +26,7 @@ const StrategyPaper = ({
   variant = "primary",
   close,
 }: IStrategyPaper) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(variant === "secondary");
   const [openInvest, setOpenInvest] = useState(false);
   const [showInvest, setShowInvest] = useState(false);
 
@@ -40,6 +40,7 @@ const StrategyPaper = ({
   const showInvestButton = variant === "primary" && !active;
 
   const handleSeeMoreClick = () => {
+    if (variant === "primary") return onClick?.();
     setIsExpanded((prev) => !prev);
   };
 
