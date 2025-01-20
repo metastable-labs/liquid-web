@@ -82,12 +82,21 @@ export function InvestModal({
   };
 
   useEffect(() => {
-    if (data) {
+    if (data?.symbol === "USDC") {
       const formattedUsdcBalance = (
         Number(data?.value || 0) /
         10 ** 6
       ).toString();
-      const resp = formatBalance(formattedUsdcBalance);
+      const resp = formatBalance(formattedUsdcBalance, 4);
+      setBalance(resp);
+    }
+
+    if (data?.symbol === "WETH") {
+      const formattedWethBalance = (
+        Number(data?.value || 0) /
+        10 ** 18
+      ).toString();
+      const resp = formatBalance(formattedWethBalance, 4);
       setBalance(resp);
     }
   }, [data, loadingInvesting]);
