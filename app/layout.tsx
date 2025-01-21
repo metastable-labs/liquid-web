@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import App from "./app";
 import Providers from "@/providers";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Liquid",
@@ -75,6 +76,21 @@ export default function RootLayout({
         />
       </head>
       <body className="font-Aeonik xl:rounded-[32px] xl:m-4 xl:border xl:border-primary-150 no-scrollbar">
+        {/** Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-1SHGD261ZW"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-1SHGD261ZW');
+        `}
+        </Script>
+
         <Providers>
           <App>{children}</App>
         </Providers>
