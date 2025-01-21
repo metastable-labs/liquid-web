@@ -3,6 +3,7 @@ type Asset = {
   name: string;
   symbol: string;
   address: `0x${string}`;
+  decimals: number;
 };
 
 type Entity = {

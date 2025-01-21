@@ -82,7 +82,8 @@ export function InvestModal({
     joinStrategy(
       Number(amountWithoutThousandSeparator),
       onChainId,
-      token?.address
+      token?.address,
+      token?.decimals
     );
   };
 

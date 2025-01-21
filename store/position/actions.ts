@@ -60,11 +60,12 @@ const usePositionActions = () => {
   const joinStrategy = async (
     amount: number,
     onChainId: `0x${string}`,
-    tokenAddress: `0x${string}`
+    tokenAddress: `0x${string}`,
+    tokenDecimal: number
   ) => {
     try {
       dispatch(setLoadingInvesting(true));
-      const amountToInvest = BigInt(amount * 10 ** 6);
+      const amountToInvest = BigInt(amount * 10 ** tokenDecimal);
 
       _approveAndJoin(amountToInvest, onChainId, tokenAddress);
     } catch (error) {
