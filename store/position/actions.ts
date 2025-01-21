@@ -2,11 +2,7 @@ import { readContract, simulateContract, writeContract } from "@wagmi/core";
 
 import { wagmiConfig } from "@/providers/PrivyProvider";
 import { EngineAbi } from "@/constants/abis";
-import {
-  engineContractAddress,
-  strategyContractAddress,
-  USDCContractAddress,
-} from "@/constants/addresses";
+import { ADDRESSES } from "@/constants/addresses";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import {
   setActivePosition as setActivePosition_,
@@ -61,23 +57,16 @@ const usePositionActions = () => {
     dispatch(setIsWithdrawing_(isWithdrawing));
   };
 
-  const joinStrategy = async (amount: number, onChainId: `0x${string}`) => {
+  const joinStrategy = async (
+    amount: number,
+    onChainId: `0x${string}`,
+    tokenAddress: `0x${string}`
+  ) => {
     try {
       dispatch(setLoadingInvesting(true));
       const amountToInvest = BigInt(amount * 10 ** 6);
 
-      _approveUSDC(amountToInvest, onChainId);
-
-      // const { request } = await simulateContract(wagmiConfig, {
-      //   address: USDCContractAddress,
-      //   abi: erc20Abi,
-      //   functionName: "approve",
-      //   args: [engineContractAddress as `0x${string}`, amountToInvest],
-      // });
-
-      // const hash = await writeContract(wagmiConfig, request);
-
-      // setJoinData({ onChainId, amountToInvest, transactionHash: hash });
+      _approveAndJoin(amountToInvest, onChainId, tokenAddress);
     } catch (error) {
       console.error("error", error);
       dispatch(setLoadingInvesting(false));
@@ -98,9 +87,9 @@ const usePositionActions = () => {
 
       const { request } = await simulateContract(wagmiConfig, {
         abi: EngineAbi.abi,
-        address: engineContractAddress,
+        address: ADDRESSES["engineContract"],
         functionName: "exit",
-        args: [onChainId, strategyContractAddress],
+        args: [onChainId, ADDRESSES["strategyContract"]],
       });
       const hash = await writeContract(wagmiConfig, request);
       showToast("Successfully exited strategy!", "success");
@@ -170,12 +159,12 @@ const usePositionActions = () => {
       const { amountToInvest: amount, onChainId: id } = joinData;
 
       const { request } = await simulateContract(wagmiConfig, {
-        address: engineContractAddress,
+        address: ADDRESSES["engineContract"],
         abi: EngineAbi.abi,
         functionName: "join",
         args: [
           onChainId || id,
-          strategyContractAddress,
+          ADDRESSES["strategyContract"],
           [amountToInvest || amount],
         ],
       });
@@ -201,27 +190,28 @@ const usePositionActions = () => {
     }
   };
 
-  const _approveUSDC = async (
+  const _approveAndJoin = async (
     amountToInvest: bigint,
-    onChainId: `0x${string}`
+    onChainId: `0x${string}`,
+    tokenAddress: `0x${string}`
   ) => {
     const unlimitedApproval = BigInt(
       "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     );
 
     const currentAllowance = await readContract(wagmiConfig, {
-      address: USDCContractAddress,
+      address: tokenAddress,
       abi: erc20Abi,
       functionName: "allowance",
-      args: [address as `0x${string}`, engineContractAddress],
+      args: [address as `0x${string}`, ADDRESSES["engineContract"]],
     });
 
     if (currentAllowance < amountToInvest) {
       const { request } = await simulateContract(wagmiConfig, {
-        address: USDCContractAddress,
+        address: tokenAddress,
         abi: erc20Abi,
         functionName: "approve",
-        args: [engineContractAddress, unlimitedApproval],
+        args: [ADDRESSES["engineContract"], unlimitedApproval],
       });
 
       const hash = await writeContract(wagmiConfig, request);

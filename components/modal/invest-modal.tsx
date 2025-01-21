@@ -18,6 +18,7 @@ import { HoldButton } from "./hold-button";
 import { InvestModalProps } from "./types";
 import ModalWrapper from "./modal-wrapper";
 import LWClickAnimation from "../click-animation";
+import useAppActions from "@/store/app/actions";
 
 export function InvestModal({
   isOpen,
@@ -31,6 +32,7 @@ export function InvestModal({
     amountWithThousandSeparator,
     amountWithoutThousandSeparator,
   } = useFormattedAmount();
+  const { showToast } = useAppActions();
   const { address } = useAccount();
   const { ready, authenticated, login } = usePrivy();
   const { joinStrategy } = usePositionActions();
@@ -74,7 +76,14 @@ export function InvestModal({
   };
 
   const handleSubmit = async () => {
-    joinStrategy(Number(amountWithoutThousandSeparator), onChainId);
+    if (!token) {
+      return showToast("An asset must be selected!", "info");
+    }
+    joinStrategy(
+      Number(amountWithoutThousandSeparator),
+      onChainId,
+      token?.address
+    );
   };
 
   const handleMaxClick = () => {
@@ -82,21 +91,12 @@ export function InvestModal({
   };
 
   useEffect(() => {
-    if (data?.symbol === "USDC") {
+    if (data) {
       const formattedUsdcBalance = (
         Number(data?.value || 0) /
-        10 ** 6
+        10 ** data.decimals
       ).toString();
       const resp = formatBalance(formattedUsdcBalance, 4);
-      setBalance(resp);
-    }
-
-    if (data?.symbol === "WETH") {
-      const formattedWethBalance = (
-        Number(data?.value || 0) /
-        10 ** 18
-      ).toString();
-      const resp = formatBalance(formattedWethBalance, 4);
       setBalance(resp);
     }
   }, [data, loadingInvesting]);
