@@ -18,17 +18,20 @@ const Positions = () => {
     dispatch,
   } = useSystemFunctions();
   const { address } = useAccount();
-  const { ready } = usePrivy();
+  const { ready, authenticated } = usePrivy();
   const [shouldFetchMore, setShouldFetchMore] = useState(false);
 
   const showEmptyState =
-    (!Boolean(positions?.length) && !loadingPositions) || (!address && ready);
+    (!Boolean(positions?.length) && !loadingPositions) ||
+    ((!address || !authenticated) && ready);
+
   const showShouldFetchMore = shouldFetchMore || loadingPositions;
 
   const initialPositionFetch = () => {
     if (positions) return;
     if (ready && !address) dispatch(setLoadingPosition(false));
-    if (address) getPositions(`walletAddress=${address}&page=1&limit=10`);
+    if (address && authenticated)
+      getPositions(`walletAddress=${address}&page=1&limit=10`);
   };
 
   useEffect(() => {
@@ -58,7 +61,7 @@ const Positions = () => {
   useEffect(() => {
     initialPositionFetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address]);
+  }, [address, authenticated]);
 
   return (
     <div
