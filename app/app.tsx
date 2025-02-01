@@ -1,5 +1,5 @@
 "use client";
-import { LWNavigation, LWToastNotification } from "@/components";
+import { LWToastNotification, LWToolBar } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 import usePositionActions from "@/store/position/actions";
@@ -7,7 +7,6 @@ import { InfoModal } from "@/components/modal/Info-modal";
 import ActionsModal from "@/components/modal/actions-modal";
 import { WithdrawModal } from "@/components/modal/withdraw-modal";
 import { ClaimModal } from "@/components/modal/claim-modal";
-import ConnectWalletButton from "@/components/ui/connect-wallet-button";
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -20,20 +19,12 @@ const App = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <ConnectWalletButton />
-
-      <div className="flex xl:gap-[20%] 2xl:gap-[28%] 2xl:justify-between relative xl:h-[96vh] overflow-y-auto no-scrollbar pt-10">
-        <div className="hidden xl:block sticky top-0">
-          <LWNavigation />
+      <div className="relative flex flex-col h-[100dvh] xl:h-[96vh] overflow-y-auto no-scrollbar pt-0 xl:pt-5">
+        <LWToolBar />
+        {/* <div className="w-full min-h-20" /> */}
+        <div className="w-full flex items-center justify-center">
+          {children}
         </div>
-
-        <div className="xl:w-[80%] w-full">{children}</div>
-      </div>
-
-      <div className="xl:hidden h-28 w-full" />
-
-      <div className="xl:hidden fixed left-0 bottom-0 w-full">
-        <LWNavigation />
       </div>
 
       <ActionsModal

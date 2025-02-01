@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@farcaster/frame-sdk": "^0.0.25",
+    "@hookform/resolvers": "^3.10.0",
     "@privy-io/react-auth": "^1.98.4",
     "@privy-io/wagmi": "^0.2.13",
     "@radix-ui/react-slider": "^1.2.2",
@@ -26,10 +27,12 @@
     "next": "15.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
     "tailwind-merge": "^2.6.0",
     "viem": "2.x",
-    "wagmi": "^2.14.6"
+    "wagmi": "^2.14.6",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

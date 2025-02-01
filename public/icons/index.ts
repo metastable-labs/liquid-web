@@ -17,6 +17,13 @@ import ToastIcon from "./toast-icon";
 import ChevronDownIcon from "./chevron-down-icon";
 import TreeIcon from "./tree-icon";
 import InfoCircleFillIcon from "./info-circle-fill-icon";
+import WalletAddIcon from "./wallet-add-icon";
+import CheckIcon from "./check-icon";
+import ChevronRightIcon from "./chevron-right-icon";
+import Phoenix from "./memecoin";
+import Orandis from "./orandis";
+import Solaris from "./solaris";
+import Liquid from "./liquid";
 
 export {
   CubeIcons,
@@ -38,4 +45,11 @@ export {
   ChevronDownIcon,
   TreeIcon,
   InfoCircleFillIcon,
+  WalletAddIcon,
+  CheckIcon,
+  ChevronRightIcon,
+  Phoenix,
+  Orandis,
+  Liquid,
+  Solaris,
 };
