@@ -1,4 +1,4 @@
-import LWButton from "@/components/button";
+import { LWButton } from "@/components";
 import { AgentFunction, StepProps } from "../types";
 import FunctionCard from "./functionCard";
 
@@ -10,7 +10,7 @@ const Step1 = ({ agentFunction, setAgentFunction, setStep }: StepProps) => {
     "liquid-protocol",
   ];
   return (
-    <div className="mt-5 xl:mt-[85px] flex flex-col gap-10 lg:gap-[100px] w-full">
+    <div className="flex flex-col gap-10 lg:gap-[100px] w-full">
       <div className="flex flex-col gap-5 md:gap-7 lg:gap-9">
         <h1 className="text-primary-400 font-QuantaGroteskPro text-[clamp(25px,5vw,28px)] leading-[clamp(28px,5vw,31.36px)] font-bold">
           Select Agent Function
@@ -28,7 +28,6 @@ const Step1 = ({ agentFunction, setAgentFunction, setStep }: StepProps) => {
         </div>
       </div>
 
-      {/* Next */}
       <div className="flex items-center justify-end w-full fixed bottom-0 left-0 bg-white p-4 md:static">
         <LWButton
           title="Next"

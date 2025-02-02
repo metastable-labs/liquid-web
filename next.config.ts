@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const ContentSecurityPolicy = `
   default-src 'self';
   
-  img-src 'self' 
+ img-src 'self' blob:
     https://assets.smold.app 
     https://res.cloudinary.com
     https://i.imgur.com 

@@ -17,6 +17,12 @@ type AgentBuildForm = {
   agentDeveloperID: string;
 };
 
+interface AgentAvatarProps {
+  agentFunction: AgentFunction;
+  file: File | null;
+  setFile: Dispatch<SetStateAction<File | null>>;
+}
+
 interface StepProps {
   setStep?: Dispatch<SetStateAction<number>>;
   agentFunction?: AgentFunction;
@@ -31,6 +37,8 @@ interface StepProps {
   setCreateTokenPage?: Dispatch<SetStateAction<boolean>>;
   setValue?: UseFormSetValue<AgentBuildForm>;
   setDisableHeader?: Dispatch<SetStateAction<boolean>>;
+  setProtocol?: Dispatch<SetStateAction<string | undefined>>;
+  protocol?: string;
 }
 
 interface FunctionCardProps {
@@ -39,4 +47,10 @@ interface FunctionCardProps {
   active?: boolean;
 }
 
-export type { AgentBuildForm, StepProps, AgentFunction, FunctionCardProps };
+export type {
+  AgentBuildForm,
+  StepProps,
+  AgentFunction,
+  FunctionCardProps,
+  AgentAvatarProps,
+};

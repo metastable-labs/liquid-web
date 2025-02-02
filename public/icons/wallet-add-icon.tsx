@@ -17,40 +17,40 @@ const WalletAddIcon = ({
     <path
       d="M7.50004 15.8333C7.50004 16.4583 7.32504 17.05 7.01671 17.55C6.44171 18.5167 5.38337 19.1667 4.16671 19.1667C2.95004 19.1667 1.89171 18.5167 1.31671 17.55C1.00837 17.05 0.833374 16.4583 0.833374 15.8333C0.833374 13.9917 2.32504 12.5 4.16671 12.5C6.00837 12.5 7.50004 13.9917 7.50004 15.8333Z"
       stroke={fill}
-      stroke-width="1.5"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M5.40985 15.8162H2.92651"
       stroke={fill}
-      stroke-width="1.5"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M4.16675 14.5996V17.0913"
       stroke={fill}
-      stroke-width="1.5"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M18.3333 9.99992V14.1666C18.3333 16.6666 16.6666 18.3333 14.1666 18.3333H6.35829C6.61663 18.1166 6.84163 17.8499 7.01663 17.5499C7.32496 17.0499 7.49996 16.4583 7.49996 15.8333C7.49996 13.9916 6.00829 12.4999 4.16663 12.4999C3.16663 12.4999 2.27496 12.9416 1.66663 13.6332V9.99992C1.66663 7.73325 3.03329 6.14992 5.15829 5.88325C5.37496 5.84992 5.59996 5.83325 5.83329 5.83325H14.1666C14.3833 5.83325 14.5916 5.84158 14.7916 5.87491C16.9416 6.12491 18.3333 7.71659 18.3333 9.99992Z"
       stroke={fill}
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M18.3333 10.4167H15.8333C14.9166 10.4167 14.1666 11.1667 14.1666 12.0834C14.1666 13.0001 14.9166 13.7501 15.8333 13.7501H18.3333"
       stroke={fill}
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

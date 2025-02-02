@@ -24,6 +24,8 @@ import Phoenix from "./memecoin";
 import Orandis from "./orandis";
 import Solaris from "./solaris";
 import Liquid from "./liquid";
+import EditIcon from "./edit-icon";
+import ArrowCircleDownIcon from "./arrow-circle-down-icon";
 
 export {
   CubeIcons,
@@ -52,4 +54,6 @@ export {
   Orandis,
   Liquid,
   Solaris,
+  EditIcon,
+  ArrowCircleDownIcon,
 };
