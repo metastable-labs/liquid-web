@@ -26,6 +26,10 @@ import Solaris from "./solaris";
 import Liquid from "./liquid";
 import EditIcon from "./edit-icon";
 import ArrowCircleDownIcon from "./arrow-circle-down-icon";
+import ShareIcon from "./share-icon";
+import HeartIcon from "./heart-icon";
+import RepostIcon from "./repost-icon";
+import ReplyIcon from "./reply-icon";
 
 export {
   CubeIcons,
@@ -56,4 +60,8 @@ export {
   Solaris,
   EditIcon,
   ArrowCircleDownIcon,
+  ShareIcon,
+  HeartIcon,
+  RepostIcon,
+  ReplyIcon,
 };

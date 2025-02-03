@@ -1,0 +1,3 @@
+interface ILWPost {
+  post: Post;
+}

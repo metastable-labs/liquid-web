@@ -6,6 +6,8 @@ import LWContainer from "./container";
 import LWInput from "./input";
 import LWSelect from "./select";
 import LWButton from "./button";
+import LWUserPaper from "./user-paper";
+import LWPost from "./post";
 
 export {
   LWNavigation,
@@ -16,4 +18,6 @@ export {
   LWInput,
   LWSelect,
   LWButton,
+  LWUserPaper,
+  LWPost,
 };

@@ -1,4 +1,4 @@
-type ButtonVariants = "primary" | "secondary" | "tertiary";
+type ButtonVariants = "primary" | "primaryAlt" | "secondary" | "tertiary";
 
 interface ILWButton {
   variant?: ButtonVariants;

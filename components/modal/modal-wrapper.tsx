@@ -12,6 +12,7 @@ function ModalWrapper({
   onClose,
   children,
   variant = "default",
+  enlargeTitle = false,
 }: ModalWrapperProps) {
   const isMobile = useIsMobile();
 
@@ -74,11 +75,24 @@ function ModalWrapper({
               exit="hidden"
               transition={{ type: "tween" }}
             >
-              <div className="flex flex-col justify-center items-center mt-4 border-[#EAEEF4] border-b-[1px] pb-5">
+              <div
+                className={classNames(
+                  "flex flex-col justify-center items-center mt-4 pb-5",
+                  {
+                    "border-[#EAEEF4] border-b-[1px]": !enlargeTitle,
+                  }
+                )}
+              >
                 {isMobile && (
                   <div className="h-[4px] w-[40px] bg-[#E2E8F0] rounded-full" />
                 )}
-                <h2 className="text-sm font-medium text-center mt-2">
+                <h2
+                  className={classNames({
+                    "text-sm font-medium text-center mt-2": !enlargeTitle,
+                    "text-[24px] leading-[26.88px] font-medium text-center mt-3":
+                      enlargeTitle,
+                  })}
+                >
                   {title}
                 </h2>
               </div>

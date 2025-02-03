@@ -61,6 +61,7 @@ export default {
           2300: "#C2D6FF",
           2350: "#162664",
           2400: "#94A3B8",
+          2450: "#CBD5E1",
         },
       },
       boxShadow: {
