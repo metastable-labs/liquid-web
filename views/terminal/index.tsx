@@ -8,11 +8,13 @@ import InfoCard from "./info-card";
 import { agent } from "./dummy";
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import GrantPermission from "./grant-permission";
+import { formatNumberWithSuffix } from "@/utils/helpers";
+import classNames from "classnames";
 
 const Terminal = () => {
   const [openGrantPermission, setOpenGrantPermission] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const { creator, description, goals, icon, name, symbol } = agent;
+  const { creator, description, goal, icon, name, symbol } = agent;
 
   const permissionsInfo = [
     <p key={0}>
@@ -67,11 +69,9 @@ const Terminal = () => {
     { children: <LWUserPaper user={creator} />, title: "Creator" },
     {
       children: (
-        <>
-          {goals.map((goal, index) => (
-            <LWPost key={index} post={goal} />
-          ))}
-        </>
+        <p className="text-[16px] leading-[19.84px] text-primary-100 flex items-center justify-center h-full">
+          {agent.goal}
+        </p>
       ),
       title: "Agent’s Goal",
     },
@@ -81,11 +81,22 @@ const Terminal = () => {
     console.log("Share");
   };
 
+  const rates = [
+    { title: "Win rate", value: "98%" },
+    { title: "Users", value: formatNumberWithSuffix(4_400) },
+    { title: "Last 7D PnL", value: `+${96.4}%`, variant: "positive" },
+    {
+      title: "Total PnL",
+      value: `+$${(456_000).toLocaleString()}`,
+      variant: "positive",
+    },
+  ];
+
   return (
     <>
-      <div className="w-full px-5 mt-10 flex flex-col gap-14">
+      <div className="w-full px-5 mt-10 flex flex-col gap-14 pb-10">
         <div className="flex flex-col gap-6">
-          <div className="self-stretch p-4 border border-primary-150 bg-white rounded-3xl">
+          <div className="self-stretch p-4 border border-primary-150 bg-white rounded-3xl flex flex-col items-stretch gap-10 md:flex-row md:items-center md:justify-between ">
             <div className="flex items-center gap-2">
               <Image
                 src={icon}
@@ -113,6 +124,33 @@ const Terminal = () => {
                   </span>
                 </div>
               </div>
+            </div>
+
+            <div className="flex flex-wrap gap-6">
+              {rates.map((rate, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                  <h4 className="text-[clamp(12px,5vw,15px)] leading-[clamp(16px,5vw,19.8px)] text-primary-100">
+                    {rate.title}
+                  </h4>
+
+                  <span
+                    className={classNames(
+                      "text-[clamp(14px,5vw,16px)] leading-[clamp(17px,5vw,19.2px)] font-medium",
+                      {
+                        "text-primary-2600": !rate.title.includes("PnL"),
+                        "text-primary-2700":
+                          rate.title.includes("PnL") &&
+                          rate.variant === "positive",
+                        "text-primary-1350":
+                          rate.title.includes("PnL") &&
+                          rate.variant === "negative",
+                      }
+                    )}
+                  >
+                    {rate.value}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 

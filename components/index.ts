@@ -8,6 +8,7 @@ import LWSelect from "./select";
 import LWButton from "./button";
 import LWUserPaper from "./user-paper";
 import LWPost from "./post";
+import LWTradeInterface from "./trade-interface";
 
 export {
   LWNavigation,
@@ -20,4 +21,5 @@ export {
   LWButton,
   LWUserPaper,
   LWPost,
+  LWTradeInterface,
 };

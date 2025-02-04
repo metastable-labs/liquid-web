@@ -8,6 +8,7 @@ const LWClickAnimation = ({
   stopPropagation,
   disabled,
   loading,
+  type = "button",
 }: ILWClickAnimation) => {
   const handleClick = (e: React.MouseEvent) => {
     if (stopPropagation) {
@@ -20,9 +21,11 @@ const LWClickAnimation = ({
       onClick={handleClick}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
-      className={classNames(`cursor-pointer ${className}`, {
+      className={classNames(`${className}`, {
         "pointer-events-none opacity-70": disabled,
       })}
+      disabled={disabled}
+      type={type}
     >
       {loading ? <Loading /> : children}
     </motion.button>

@@ -11,17 +11,6 @@ type User = {
   updatedAt: string;
 };
 
-type Post = {
-  id: string;
-  user: User;
-  content: string;
-  likes: number;
-  comments: number;
-  reposts: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
 type Agent = {
   name: string;
   symbol: string;
@@ -31,7 +20,7 @@ type Agent = {
   createdAt: string;
   updatedAt: string;
   creator: User;
-  goals: Array<Post>;
+  goal: string;
 };
 
 type InfoCardProps = {

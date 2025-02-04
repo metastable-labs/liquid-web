@@ -1,11 +1,23 @@
 import Image from "next/image";
+import classNames from "classnames";
 
-import LWClickAnimation from "../click-animation";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { WalletAddIcon } from "@/public/icons";
+import LWClickAnimation from "../click-animation";
 
 const LWToolBar = () => {
+  const { pathname } = useSystemFunctions();
+  const isTradeRoute = pathname.split("/")[2] === "trade";
   return (
-    <div className="w-full sticky top-0 flex items-center justify-between gap-5 px-5 bg-white py-5 xl:bg-transparent z-10">
+    <div
+      className={classNames(
+        "w-full sticky top-0 flex items-center justify-between gap-5 px-5 py-5 xl:bg-transparent z-10",
+        {
+          "bg-primary-2650": isTradeRoute,
+          "bg-white": !isTradeRoute,
+        }
+      )}
+    >
       <Image
         src="/images/logo.png"
         alt="Liquid Logo"

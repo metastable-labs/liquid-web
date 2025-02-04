@@ -30,6 +30,12 @@ import ShareIcon from "./share-icon";
 import HeartIcon from "./heart-icon";
 import RepostIcon from "./repost-icon";
 import ReplyIcon from "./reply-icon";
+import ArrowUpIcon from "./arrow-up-icon";
+import UserIcon from "./user-icon";
+import ETHIcon from "./eth-icon";
+import InfoIcon from "./info-icon";
+import ExportIcon from "./export-icon";
+import CopyIcon from "./copy-icon";
 
 export {
   CubeIcons,
@@ -64,4 +70,10 @@ export {
   HeartIcon,
   RepostIcon,
   ReplyIcon,
+  ArrowUpIcon,
+  UserIcon,
+  ETHIcon,
+  InfoIcon,
+  ExportIcon,
+  CopyIcon,
 };
