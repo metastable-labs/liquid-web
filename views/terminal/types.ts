@@ -27,3 +27,15 @@ type InfoCardProps = {
   title: string;
   children: React.ReactNode;
 };
+
+type Transaction = {
+  type: "buy" | "sell";
+  date: string;
+  amount: number;
+  token: string;
+};
+
+type AgentLog = {
+  date: string;
+  transactions: Array<Transaction>;
+};

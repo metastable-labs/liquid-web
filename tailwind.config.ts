@@ -72,6 +72,7 @@ export default {
       boxShadow: {
         nav: "0px 0px 20px -6px rgba(15, 23, 42, 0.12)",
         functionCard: "0px 6px 10px -6px rgba(2, 6, 23, 0.06)",
+        agentLog: "0px 4px 14px 0px rgba(0, 0, 0, 0.12)",
       },
     },
     fontFamily: {

@@ -118,7 +118,7 @@ function ModalWrapper({
               </LWClickAnimation>
 
               <div
-                className="flex py-[66px] sticky h-full overflow-auto no-scrollbar bg-white px-6 w-full md:rounded-[32px]"
+                className="flex py-9 sticky h-full overflow-auto no-scrollbar bg-white px-6 w-full md:rounded-[32px]"
                 style={{
                   borderTopLeftRadius: "32px",
                   borderTopRightRadius: "32px",

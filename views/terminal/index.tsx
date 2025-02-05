@@ -10,6 +10,7 @@ import ModalWrapper from "@/components/modal/modal-wrapper";
 import GrantPermission from "./grant-permission";
 import { formatNumberWithSuffix } from "@/utils/helpers";
 import classNames from "classnames";
+import AgentLog from "./agent-log";
 
 const Terminal = () => {
   const [openGrantPermission, setOpenGrantPermission] = useState(false);
@@ -204,6 +205,8 @@ const Terminal = () => {
       >
         <GrantPermission onClick={handlePermission} />
       </ModalWrapper>
+
+      <AgentLog />
     </>
   );
 };

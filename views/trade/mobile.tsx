@@ -44,8 +44,8 @@ const icons = [
   <CheckIcon key="check" width={20} height={20} fill="green" />,
 ];
 
-type MobileTabs = "info" | "buy/sell";
-const mobileTabs: MobileTabs[] = ["info", "buy/sell"];
+type MobileTabs = "info" | "chart" | "buy/sell";
+const mobileTabs: MobileTabs[] = ["info", "chart", "buy/sell"];
 
 const MobileView = ({ data, period, periods, setPeriod }: IView) => {
   const [mobileTab, setMobileTab] = useState<MobileTabs>("info");
@@ -116,13 +116,44 @@ const MobileView = ({ data, period, periods, setPeriod }: IView) => {
     <div key="info" className="w-full">
       <TokenInfo />
     </div>,
+    <div key="chart" className="w-full">
+      <h1>Coingecko Chart</h1>
+    </div>,
     <div key="buy/sell" className="w-full">
       <LWTradeInterface token={token} />
     </div>,
   ];
 
   return (
-    <div className="pb-10">
+    <div className="pb-10 flex flex-col gap-10">
+      <div className="w-full flex flex-col gap-[17.6px]">
+        <div className="flex items-center gap-1">
+          <Image
+            src={token.token_logo_url}
+            alt={`${token.token_name} icon`}
+            width={40}
+            height={40}
+            quality={100}
+            className="w-10 h-10 rounded-full object-cover"
+          />
+
+          <h1 className="text-[clamp(29px,5vw,32px)] leading-[clamp(32px,5vw,31.35.84px)] tracking-[-1px] text-primary-400 font-bold font-QuantaGroteskPro">
+            {token.token_name}
+          </h1>
+        </div>
+
+        <div className="flex items-center gap-5">
+          {extras.map((extra, index) => (
+            <div
+              key={index}
+              className="p-2 h-[34px] flex items-center justify-center border border-primary-2300 rounded-xl bg-primary-1750 w-fit overflow-hidden"
+            >
+              {extra}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.div
           key={mobileTab}
