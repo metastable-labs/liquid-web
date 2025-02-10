@@ -1,13 +1,34 @@
 import Image from "next/image";
 import classNames from "classnames";
+import { useAccount } from "wagmi";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { WalletAddIcon } from "@/public/icons";
+import useAppActions from "@/store/app/actions";
+import useSwitchNetworkConnect from "@/hooks/useSwitchNetwork";
+import { usePrivy, useSolanaWallets, useWallets } from "@privy-io/react-auth";
 import LWClickAnimation from "../click-animation";
+import { truncateWalletAddress } from "@/utils/helpers";
 
 const LWToolBar = () => {
   const { pathname } = useSystemFunctions();
+  const { registerUser } = useAppActions();
+  const {} = useSwitchNetworkConnect();
+  const { ready, authenticated, login, logout } = usePrivy();
+  const { wallets: solanaWallets } = useSolanaWallets();
+  const { wallets: evmWallets } = useWallets();
+
+  const solanaAddress = solanaWallets?.[0]?.address;
+  const evmAddress = evmWallets?.[0]?.address;
+  const address = evmAddress || solanaAddress || "";
+
   const isTradeRoute = pathname.split("/")[2] === "trade";
+
+  const handleLogin = async () => {
+    await logout();
+    login({ loginMethods: ["wallet"] });
+  };
+
   return (
     <div
       className={classNames(
@@ -27,13 +48,29 @@ const LWToolBar = () => {
         className="object-cover"
       />
 
-      <LWClickAnimation className="p-1.5 flex items-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600">
-        <WalletAddIcon />
+      {ready && (!authenticated || !address) && (
+        <LWClickAnimation
+          onClick={handleLogin}
+          className="p-1.5 flex items-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600"
+        >
+          <WalletAddIcon />
 
-        <span className="text-[14px] leading-[18.48px] font-medium text-primary-1450">
-          Connect wallet
-        </span>
-      </LWClickAnimation>
+          <span className="text-[14px] leading-[18.48px] font-medium text-primary-1450">
+            Connect wallet
+          </span>
+        </LWClickAnimation>
+      )}
+
+      {ready && authenticated && address && (
+        <LWClickAnimation
+          onClick={logout}
+          className="p-1.5 flex items-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600"
+        >
+          <span className="text-[14px] leading-[18.48px] font-medium text-primary-1450">
+            {truncateWalletAddress(address)}
+          </span>
+        </LWClickAnimation>
+      )}
     </div>
   );
 };

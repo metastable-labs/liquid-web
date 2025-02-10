@@ -85,7 +85,7 @@ const formatNumberWithSuffix = (
 };
 
 const truncateWalletAddress = (
-  text: `0x${string}`,
+  text: `0x${string}` | string,
   startChars = 5,
   endChars = 5
 ) => {

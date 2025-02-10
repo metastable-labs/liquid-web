@@ -1,9 +1,15 @@
+import { PropsWithChildren } from "react";
+import { http } from "wagmi";
+import { base } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createConfig, WagmiProvider } from "@privy-io/wagmi";
-import { base } from "viem/chains";
-import { http } from "wagmi";
 import { PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth";
-import { PropsWithChildren } from "react";
+import { toSolanaWalletConnectors } from "@privy-io/react-auth/solana";
+
+const solanaConnectors = toSolanaWalletConnectors({
+  // By default, shouldAutoConnect is enabled
+  shouldAutoConnect: true,
+});
 
 export const wagmiConfig = createConfig({
   chains: [base],
@@ -14,25 +20,25 @@ export const wagmiConfig = createConfig({
 });
 
 export const privyConfig: PrivyClientConfig = {
-  embeddedWallets: {
-    createOnLogin: "users-without-wallets",
-    requireUserPasswordOnCreate: true,
-    showWalletUIs: true,
-  },
   loginMethods: ["wallet"],
   appearance: {
     showWalletLoginFirst: true,
     walletList: [
       "metamask",
       "rainbow",
-      "wallet_connect",
-      "detected_ethereum_wallets",
-      "safe",
       "uniswap",
+      "detected_solana_wallets",
+      "detected_ethereum_wallets",
+      "wallet_connect",
     ],
     logo: "https://res.cloudinary.com/djzeufu4j/image/upload/v1734991182/liquid_logo_ico.ico",
     landingHeader: "Connect wallet to Liquid",
-    walletChainType: "ethereum-only",
+    walletChainType: "ethereum-and-solana",
+  },
+  externalWallets: {
+    solana: {
+      connectors: solanaConnectors,
+    },
   },
 };
 

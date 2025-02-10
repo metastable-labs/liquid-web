@@ -13,9 +13,9 @@ const ContentSecurityPolicy = `
   
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com;
   
-  child-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org;
+  child-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.geckoterminal.com;
   
-  frame-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com;
+  frame-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.geckoterminal.com;
   
   connect-src 'self' 
     https://auth.privy.io 

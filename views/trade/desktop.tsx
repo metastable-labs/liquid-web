@@ -134,7 +134,16 @@ const DesktopView = ({ data, period, periods, setPeriod }: IView) => {
           ))}
         </div>
 
-        {/* Chart goes here */}
+        <iframe
+          height="100%"
+          width="100%"
+          id="geckoterminal-embed"
+          title="GeckoTerminal Embed"
+          src="https://www.geckoterminal.com/solana/pools/22WrmyTj8x2TRVQen3fxxi2r4Rn6JDHWoMTpsSmn8RUd?embed=1&info=0&swaps=0&grayscale=0&light_chart=1"
+          frameBorder="0"
+          allow="clipboard-write"
+          allowFullScreen
+        ></iframe>
         <div></div>
       </div>
 
