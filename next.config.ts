@@ -27,7 +27,10 @@ const ContentSecurityPolicy = `
     https://www.google-analytics.com 
     https://pulse.walletconnect.org 
     https://explorer-api.walletconnect.com 
-    https://*.walletconnect.com;
+    https://*.walletconnect.com
+    https://region1.google-analytics.com
+    https://www.geckoterminal.com
+    https://www.googletagmanager.com/gtag/js;
   
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
   

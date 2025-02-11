@@ -12,15 +12,14 @@ type User = {
 };
 
 type Agent = {
-  name: string;
-  symbol: string;
-  icon: string;
   id: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-  creator: User;
+  name: string;
   goal: string;
+  creator: string;
+  winRate: number;
+  users: number;
+  last7dPnl: string;
+  totalPnl: string;
 };
 
 type InfoCardProps = {

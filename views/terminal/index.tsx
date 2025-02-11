@@ -1,21 +1,36 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { LWClickAnimation, LWButton, LWUserPaper, LWPost } from "@/components";
 import { ShareIcon } from "@/public/icons";
 import InfoCard from "./info-card";
-import { agent } from "./dummy";
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import GrantPermission from "./grant-permission";
 import { formatNumberWithSuffix } from "@/utils/helpers";
 import classNames from "classnames";
 import AgentLog from "./agent-log";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
-const Terminal = () => {
+const Terminal = ({ agent }: { agent: Agent }) => {
+  const { navigate } = useSystemFunctions();
   const [openGrantPermission, setOpenGrantPermission] = useState(false);
   const [permissionGranted, setPermissionGranted] = useState(false);
-  const { creator, description, goal, icon, name, symbol } = agent;
+  const { creator, goal, id, name, winRate, users, last7dPnl, totalPnl } =
+    agent;
+
+  const mockCreator = {
+    avatar: "/images/avatar2.png",
+    createdAt: "2024-07-01T00:00:00.000Z",
+    followers: 3000,
+    following: 167,
+    id: "1",
+    name: creator,
+    twitterURL: "https://twitter.com/tommyeth",
+    updatedAt: "2024-07-01T00:00:00.000Z",
+    username: creator,
+    warpcastURL: "https://example.com/tommyeth",
+  };
 
   const permissionsInfo = [
     <p key={0}>
@@ -55,8 +70,8 @@ const Terminal = () => {
 
   const actions: Array<ILWButton> = [
     {
-      title: `Trade $${symbol}`,
-      onClick: () => console.log("Trade"),
+      title: `Trade $${name}`,
+      onClick: () => navigate.push(`/${id}/trade`),
       variant: "secondary",
     },
     {
@@ -67,7 +82,7 @@ const Terminal = () => {
   ];
 
   const infoCards: Array<InfoCardProps> = [
-    { children: <LWUserPaper user={creator} />, title: "Creator" },
+    { children: <LWUserPaper user={mockCreator} />, title: "Creator" },
     {
       children: (
         <p className="text-[16px] leading-[19.84px] text-primary-100 flex items-center justify-center h-full">
@@ -83,12 +98,12 @@ const Terminal = () => {
   };
 
   const rates = [
-    { title: "Win rate", value: "98%" },
-    { title: "Users", value: formatNumberWithSuffix(4_400) },
-    { title: "Last 7D PnL", value: `+${96.4}%`, variant: "positive" },
+    { title: "Win rate", value: winRate },
+    { title: "Users", value: formatNumberWithSuffix(users) },
+    { title: "Last 7D PnL", value: `+${last7dPnl}`, variant: "positive" },
     {
       title: "Total PnL",
-      value: `+$${(456_000).toLocaleString()}`,
+      value: `+$${totalPnl.toLocaleString()}`,
       variant: "positive",
     },
   ];
@@ -100,7 +115,7 @@ const Terminal = () => {
           <div className="self-stretch p-4 border border-primary-150 bg-white rounded-3xl flex flex-col items-stretch gap-10 md:flex-row md:items-center md:justify-between ">
             <div className="flex items-center gap-2">
               <Image
-                src={icon}
+                src={"/images/liquid.png"}
                 alt={`${name} icon`}
                 width={100}
                 height={100}
@@ -121,7 +136,7 @@ const Terminal = () => {
 
                 <div className="px-2 py-1 flex items-center justify-center border border-primary-2300 rounded-xl bg-primary-1750 w-fit">
                   <span className="text-[14px] leading-[18.48px] text-primary-2350 font-medium">
-                    ${symbol}
+                    ${name}
                   </span>
                 </div>
               </div>
@@ -157,7 +172,9 @@ const Terminal = () => {
 
           <div className="self-stretch p-6 border border-primary-150 bg-white rounded-3xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <p className="max-w-[504px] text-[clamp(15px,5vw,18px)] leading-[clamp(18px,5vw,23.76px)] text-primary-100 font-medium">
-              {description}
+              Welcome to Agent {name}’s terminal. Here, you can grant {name}{" "}
+              access to your wallet to achieve its goal or you can buy and sell
+              Agent’s token.
             </p>
 
             <div className="flex flex-col-reverse md:flex-row md:items-center gap-6">
