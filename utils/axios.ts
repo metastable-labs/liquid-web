@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://dev.useliquid.xyz/core/v1/",
+  baseURL: "https://dev.useliquid.xyz/aqua/api/v1/",
 });
 
 axiosInstance.interceptors.response.use(

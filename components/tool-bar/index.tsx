@@ -1,33 +1,42 @@
 import Image from "next/image";
 import classNames from "classnames";
-import { useAccount } from "wagmi";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { WalletAddIcon } from "@/public/icons";
-import useAppActions from "@/store/app/actions";
-import useSwitchNetworkConnect from "@/hooks/useSwitchNetwork";
-import { usePrivy, useSolanaWallets, useWallets } from "@privy-io/react-auth";
+import { usePrivy } from "@privy-io/react-auth";
 import LWClickAnimation from "../click-animation";
 import { truncateWalletAddress } from "@/utils/helpers";
+import { useEffect } from "react";
+import { setTokenHeader } from "@/utils/axios";
+import useAgentActions from "@/store/agent/actions";
 
 const LWToolBar = () => {
   const { pathname } = useSystemFunctions();
-  const { registerUser } = useAppActions();
-  const {} = useSwitchNetworkConnect();
-  const { ready, authenticated, login, logout } = usePrivy();
-  const { wallets: solanaWallets } = useSolanaWallets();
-  const { wallets: evmWallets } = useWallets();
+  const { ready, authenticated, login, logout, user } = usePrivy();
+  const { connectUser } = useAgentActions();
 
-  const solanaAddress = solanaWallets?.[0]?.address;
-  const evmAddress = evmWallets?.[0]?.address;
-  const address = evmAddress || solanaAddress || "";
-
+  const address = user?.wallet?.address || "";
+  const linkedTwitter = user?.linkedAccounts?.find(
+    (account) => account.type === "twitter_oauth"
+  );
+  const linkedFarcaster = user?.linkedAccounts?.find(
+    (account) => account.type === "farcaster"
+  );
+  const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
   const isTradeRoute = pathname.split("/")[2] === "trade";
 
-  const handleLogin = async () => {
-    await logout();
-    login({ loginMethods: ["wallet"] });
+  const authUser = async () => {
+    if (!user) return;
+
+    await setTokenHeader(user.id);
+
+    connectUser();
   };
+
+  useEffect(() => {
+    authUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   return (
     <div
@@ -50,13 +59,13 @@ const LWToolBar = () => {
 
       {ready && (!authenticated || !address) && (
         <LWClickAnimation
-          onClick={handleLogin}
+          onClick={login}
           className="p-1.5 flex items-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600"
         >
           <WalletAddIcon />
 
           <span className="text-[14px] leading-[18.48px] font-medium text-primary-1450">
-            Connect wallet
+            Login
           </span>
         </LWClickAnimation>
       )}
@@ -64,8 +73,19 @@ const LWToolBar = () => {
       {ready && authenticated && address && (
         <LWClickAnimation
           onClick={logout}
-          className="p-1.5 flex items-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600"
+          className="p-1.5 flex items-center justify-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600"
         >
+          {avatar && (
+            <Image
+              src={avatar}
+              alt={`${avatar} avatar`}
+              width={30}
+              height={30}
+              quality={100}
+              className="w-7 h-7 rounded-full object-cover"
+            />
+          )}
+
           <span className="text-[14px] leading-[18.48px] font-medium text-primary-1450">
             {truncateWalletAddress(address)}
           </span>

@@ -1,5 +1,5 @@
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { setInfo as setInfo_, setToast } from ".";
+import { setInfo as setInfo_, setOpenGrantPermission, setToast } from ".";
 import api from "./api";
 
 const useAppActions = () => {
@@ -30,11 +30,16 @@ const useAppActions = () => {
     }
   };
 
+  const showGrantPermission = (show: boolean) => {
+    dispatch(setOpenGrantPermission(show));
+  };
+
   return {
     setInfo,
     showToast,
     hideToast,
     registerUser,
+    showGrantPermission,
   };
 };
 

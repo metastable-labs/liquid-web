@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import appReducer from "./app";
 import positionReducer from "./position";
+import agentReducer from "./agent";
 
 export interface CallbackProps {
   onSuccess?: Function;
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     app: appReducer,
     position: positionReducer,
+    agent: agentReducer,
   },
 });
 

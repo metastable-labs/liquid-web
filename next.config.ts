@@ -65,6 +65,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "liquid-user-assets.s3.eu-west-2.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "pbs.twimg.com",
+      },
     ],
   },
   headers: async () => {

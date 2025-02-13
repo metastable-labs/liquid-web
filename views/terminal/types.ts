@@ -15,11 +15,29 @@ type Agent = {
   id: string;
   name: string;
   goal: string;
-  creator: string;
+  type: string;
+  token: {
+    agentId: string;
+    name: string;
+    symbol: string;
+    locked: string;
+    marketCap: string;
+    status: string;
+  };
+  creator: Creator;
   winRate: number;
   users: number;
   last7dPnl: string;
   totalPnl: string;
+};
+
+type Creator = {
+  username: string;
+  fid: number;
+  followers: number;
+  following: number;
+  pfp: string;
+  profile: { bio: any[] };
 };
 
 type InfoCardProps = {
