@@ -12,7 +12,8 @@ import useAgentActions from "@/store/agent/actions";
 
 const LWToolBar = () => {
   const { pathname } = useSystemFunctions();
-  const { ready, authenticated, login, logout, user } = usePrivy();
+  const { ready, authenticated, login, logout, user, getAccessToken } =
+    usePrivy();
   const { connectUser } = useAgentActions();
 
   const address = user?.wallet?.address || "";
@@ -28,9 +29,15 @@ const LWToolBar = () => {
   const authUser = async () => {
     if (!user) return;
 
-    await setTokenHeader(user.id);
+    const accessToken = await getAccessToken();
 
-    connectUser();
+    if (!accessToken) return;
+
+    await setTokenHeader(accessToken);
+
+    setTimeout(() => {
+      connectUser();
+    }, 1500);
   };
 
   useEffect(() => {
