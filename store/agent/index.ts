@@ -5,12 +5,16 @@ export interface AgentState {
   delegating: boolean;
   loadingDelegationDetails: boolean;
   delegationDetails?: AgentDelegationDetails;
+  agent?: Agent;
+  loadingAgent: boolean;
 }
 
 const initialState: AgentState = {
   delegating: false,
-  loadingDelegationDetails: false,
+  loadingDelegationDetails: true,
   delegationDetails: undefined,
+  agent: undefined,
+  loadingAgent: true,
 };
 
 export const agentReducer = createSlice({
@@ -19,6 +23,10 @@ export const agentReducer = createSlice({
   reducers: {
     setDelegating(state, action: PayloadAction<boolean>) {
       state.delegating = action.payload;
+    },
+
+    setLoadingAgent(state, action: PayloadAction<boolean>) {
+      state.loadingAgent = action.payload;
     },
 
     setLoadingDelegationDetails(state, action: PayloadAction<boolean>) {
@@ -35,6 +43,14 @@ export const agentReducer = createSlice({
         state.delegationDetails = undefined;
       }
     },
+
+    setAgent(state, action: PayloadAction<Agent | undefined>) {
+      if (action.payload) {
+        state.agent = { ...action.payload };
+      } else {
+        state.agent = undefined;
+      }
+    },
   },
 });
 
@@ -42,6 +58,8 @@ export const {
   setDelegating,
   setDelegationDetails,
   setLoadingDelegationDetails,
+  setAgent,
+  setLoadingAgent,
 } = agentReducer.actions;
 
 export default agentReducer.reducer;

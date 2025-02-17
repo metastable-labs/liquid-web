@@ -4,21 +4,28 @@ import classNames from "classnames";
 import { LWClickAnimation } from "@/components";
 import { ShareIcon } from "@/public/icons";
 import { formatNumberWithSuffix } from "@/utils/helpers";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
-const AgentHeader = ({ agent }: { agent: Agent }) => {
-  const { name, winRate, users, last7dPnl, totalPnl, token } = agent;
+const AgentHeader = () => {
+  const { agentState } = useSystemFunctions();
+  const agent = agentState.agent;
+  const name = agent?.name || "";
 
   const handleShare = () => {
     console.log("Share");
   };
 
   const rates = [
-    { title: "Win rate", value: winRate },
-    { title: "Users", value: formatNumberWithSuffix(users) },
-    { title: "Last 7D PnL", value: `+${last7dPnl}`, variant: "positive" },
+    { title: "Win rate", value: agent?.winRate || "0%" },
+    { title: "Users", value: formatNumberWithSuffix(agent?.users || 0) },
+    {
+      title: "Last 7D PnL",
+      value: `+${agent?.last7dPnl || ""}`,
+      variant: "positive",
+    },
     {
       title: "Total PnL",
-      value: `+$${totalPnl.toLocaleString()}`,
+      value: `+$${agent?.totalPnl?.toLocaleString() || "0"}`,
       variant: "positive",
     },
   ];
@@ -48,7 +55,7 @@ const AgentHeader = ({ agent }: { agent: Agent }) => {
 
           <div className="px-2 py-1 flex items-center justify-center border border-primary-2300 rounded-xl bg-primary-1750 w-fit">
             <span className="text-[14px] leading-[18.48px] text-primary-2350 font-medium">
-              ${token.symbol}
+              ${agent?.token.symbol || ""}
             </span>
           </div>
         </div>

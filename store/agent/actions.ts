@@ -2,13 +2,28 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import api from "./api";
 
 import {
+  setAgent,
   setDelegating,
   setDelegationDetails,
+  setLoadingAgent,
   setLoadingDelegationDetails,
 } from ".";
 
 const useAgentActions = () => {
   const { dispatch } = useSystemFunctions();
+
+  const fetchAgent = async (agentId: string) => {
+    try {
+      dispatch(setLoadingAgent(true));
+      const response = await api.fetchAgent(agentId);
+
+      dispatch(setAgent(response));
+    } catch (error: any) {
+      dispatch(setAgent(undefined));
+    } finally {
+      dispatch(setLoadingAgent(false));
+    }
+  };
 
   const fetchDelegationDetails = async (agentId: string) => {
     try {
@@ -44,6 +59,7 @@ const useAgentActions = () => {
     fetchDelegationDetails,
     delegateOrUndelegate,
     connectUser,
+    fetchAgent,
   };
 };
 

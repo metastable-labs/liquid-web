@@ -1,18 +1,24 @@
 import { LWUserPaper } from "@/components";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import InfoCard from "./info-card";
 
-const AgentInfos = ({ creator, goal }: { creator: Creator; goal: string }) => {
+const AgentInfos = () => {
+  const { agentState } = useSystemFunctions();
+  const creator = agentState.agent?.creator;
+  const goal = agentState.agent?.goal || "";
+  const username = creator?.username || "";
+
   const mockCreator = {
-    avatar: creator.pfp,
+    avatar: creator?.pfp || "",
     createdAt: "2024-07-01T00:00:00.000Z",
-    followers: creator.followers,
-    following: creator.following,
-    id: creator.fid.toString(),
-    name: creator.username,
-    twitterURL: `https://twitter.com/${creator.username}`,
+    followers: creator?.followers || 0,
+    following: creator?.following || 0,
+    id: creator?.fid?.toString() || "",
+    name: username,
+    twitterURL: `https://twitter.com/${username}`,
     updatedAt: "2024-07-01T00:00:00.000Z",
-    username: creator.username,
-    warpcastURL: `https://warpcast.com/${creator.username}`,
+    username: username,
+    warpcastURL: `https://warpcast.com/${username}`,
   };
 
   const infoCards: Array<InfoCardProps> = [

@@ -1,38 +1,19 @@
+"use client";
+import { useEffect } from "react";
+import useAgentActions from "@/store/agent/actions";
 import { Terminal } from "@/views";
 
-const fetchData = async (agentId: string): Promise<Agent> => {
-  const res = await fetch(
-    `https://dev.useliquid.xyz/aqua/api/v1/agents/${agentId}`,
-    {
-      priority: "high",
-    }
-  );
-
-  if (!res.ok) {
-    let errorMessage = "Failed to fetch agent data";
-    try {
-      const errorData = await res.json();
-      errorMessage = errorData.message || errorMessage;
-    } catch (jsonError) {
-      errorMessage = await res.text();
-    }
-
-    throw new Error(`Error fetching agent: ${errorMessage}`);
-  }
-
-  const response: { data: Agent } = await res.json();
-
-  return response.data;
-};
-
-export default async function TerminalPage({
+export default function TerminalPage({
   params,
 }: {
-  params: Promise<{ agentId: string }>;
+  params: { agentId: string };
 }) {
-  const agentId = (await params).agentId;
+  const { fetchAgent } = useAgentActions();
 
-  const agent = await fetchData(agentId);
+  useEffect(() => {
+    fetchAgent(params.agentId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return <Terminal agent={agent} />;
+  return <Terminal />;
 }

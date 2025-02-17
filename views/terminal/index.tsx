@@ -1,7 +1,7 @@
-"use client";
 import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 
+import Loading from "@/components/ui/loading";
 import { LWButton } from "@/components";
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
@@ -13,19 +13,20 @@ import WhyGrantPermission from "./why-grant-permission";
 import AgentInfos from "./infos";
 import AgentHeader from "./agent-header";
 
-const Terminal = ({ agent }: { agent: Agent }) => {
+const Terminal = () => {
   const { fetchDelegationDetails } = useAgentActions();
-  const { navigate, appState } = useSystemFunctions();
+  const { navigate, appState, agentState, dispatch } = useSystemFunctions();
   const { showGrantPermission } = useAppActions();
   const { ready, user } = usePrivy();
-  const { creator, goal, id, name, token } = agent;
+  const agent = agentState.agent;
 
-  const permissionGranted = user?.wallet?.delegated;
+  const permissionGranted =
+    user?.wallet?.delegated && agentState.delegationDetails?.isActive;
 
   const actions: Array<ILWButton> = [
     {
-      title: `Trade $${token.symbol}`,
-      onClick: () => navigate.push(`/${id}/trade`),
+      title: `Trade $${agent?.token.symbol}`,
+      onClick: () => navigate.push(`/${agent?.id}/trade`),
       variant: "secondary",
     },
     {
@@ -35,24 +36,31 @@ const Terminal = ({ agent }: { agent: Agent }) => {
     },
   ];
 
-  useEffect(() => {
-    if (!id) return;
+  useEffect(
+    function getDelegationInfo() {
+      if (!agent?.id || !ready) return;
 
-    fetchDelegationDetails(id);
+      fetchDelegationDetails(agent?.id);
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    [agent, ready]
+  );
+
+  if (agentState.loadingAgent || agentState.loadingDelegationDetails) {
+    return <Loading />;
+  }
 
   return (
     <>
       <div className="w-full px-5 mt-10 flex flex-col gap-14 pb-10">
         <div className="flex flex-col gap-6">
-          <AgentHeader agent={agent} />
+          <AgentHeader />
 
           <div className="self-stretch p-6 border border-primary-150 bg-white rounded-3xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <p className="max-w-[504px] text-[clamp(15px,5vw,18px)] leading-[clamp(18px,5vw,23.76px)] text-primary-100 font-medium">
-              Welcome to Agent {name}’s terminal. Here, you can grant {name}{" "}
-              access to your wallet to achieve its goal or you can buy and sell
-              Agent’s token.
+              Welcome to Agent {agent?.name}’s terminal. Here, you can grant{" "}
+              {agent?.name} access to your wallet to achieve its goal or you can
+              buy and sell Agent’s token.
             </p>
 
             <div className="flex flex-col-reverse md:flex-row md:items-center gap-6">
@@ -69,7 +77,7 @@ const Terminal = ({ agent }: { agent: Agent }) => {
             </div>
           </div>
 
-          <AgentInfos creator={creator} goal={goal} />
+          <AgentInfos />
         </div>
 
         <WhyGrantPermission />

@@ -1,13 +1,18 @@
 import { usePrivy, useDelegatedActions } from "@privy-io/react-auth";
 import { LWButton } from "@/components";
 import useAppActions from "@/store/app/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+import useAgentActions from "@/store/agent/actions";
 
 function DelegateActionButton() {
   const { user, login } = usePrivy();
+  const { delegateOrUndelegate } = useAgentActions();
   const { delegateWallet, revokeWallets } = useDelegatedActions();
   const { showGrantPermission } = useAppActions();
+  const { agentState } = useSystemFunctions();
 
-  const isAlreadyDelegated = !!user?.linkedAccounts.find(
+  const isAlreadyDelegatedToThisAgent = agentState.delegationDetails?.isActive;
+  const isAlreadyDelegatedWallet = !!user?.linkedAccounts.find(
     (account) =>
       account.type === "wallet" &&
       account.delegated &&
@@ -19,24 +24,34 @@ function DelegateActionButton() {
 
     const chainType = user.wallet?.chainType;
     const address = user.wallet?.address;
+    const agentId = agentState.agent?.id || "";
 
     showGrantPermission(false);
+
     if (chainType === "solana") {
       delegateWallet({
         address: address!,
         chainType: "solana",
+      }).then(() => {
+        delegateOrUndelegate(agentId, true);
       });
     } else {
       delegateWallet({
         address: address!,
         chainType: "ethereum",
+      }).then(() => {
+        delegateOrUndelegate(agentId, true);
       });
     }
   };
 
   const onRevoke = () => {
+    const agentId = agentState.agent?.id || "";
+
     showGrantPermission(false);
-    revokeWallets();
+    revokeWallets().then(() => {
+      delegateOrUndelegate(agentId, false);
+    });
   };
 
   const onClick = () => {
@@ -44,11 +59,18 @@ function DelegateActionButton() {
       return login();
     }
 
-    if (isAlreadyDelegated) {
-      return onRevoke();
+    if (!isAlreadyDelegatedWallet) {
+      return onDelegate();
     }
 
-    onDelegate();
+    if (isAlreadyDelegatedWallet && !isAlreadyDelegatedToThisAgent) {
+      const agentId = agentState.agent?.id || "";
+      return delegateOrUndelegate(agentId, true);
+    }
+
+    if (isAlreadyDelegatedWallet && isAlreadyDelegatedToThisAgent) {
+      return onRevoke();
+    }
   };
 
   const btnText = user == null ? "Connect Wallet" : "Continue";
