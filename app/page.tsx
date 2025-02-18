@@ -1,6 +1,6 @@
 "use client";
-import { AgentBuild } from "@/views";
+import { Create } from "@/views";
 
-const AgentBuildPage = () => <AgentBuild />;
+const CreatePage = () => <Create />;
 
-export default AgentBuildPage;
+export default CreatePage;

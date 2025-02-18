@@ -36,6 +36,16 @@ import ETHIcon from "./eth-icon";
 import InfoIcon from "./info-icon";
 import ExportIcon from "./export-icon";
 import CopyIcon from "./copy-icon";
+import AgentIconActive from "./agent-icon-active";
+import AgentIconInactive from "./agent-icon-inactive";
+import CreateIconActive from "./create-icon-active";
+import CreateIconInactive from "./create-icon-inactive";
+import PermissionsIconActive from "./permissions-icon-active";
+import PermissionsIconInactive from "./permissions-icon-inactive";
+import WalletIconActive from "./wallet-icon-active";
+import WalletIconInactive from "./wallet-icon-inactive";
+import MenuIcon from "./menu-icon";
+import RotatedAddIcon from "./rotated-add-icon";
 
 export {
   CubeIcons,
@@ -76,4 +86,14 @@ export {
   InfoIcon,
   ExportIcon,
   CopyIcon,
+  AgentIconActive,
+  AgentIconInactive,
+  CreateIconActive,
+  CreateIconInactive,
+  PermissionsIconActive,
+  PermissionsIconInactive,
+  WalletIconActive,
+  WalletIconInactive,
+  MenuIcon,
+  RotatedAddIcon,
 };

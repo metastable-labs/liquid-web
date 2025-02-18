@@ -77,6 +77,138 @@ const AgentBuild = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="relative w-full mt-5 xl:mt-[85px]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {steps[step]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </form>
     </LWContainer>
   );

@@ -75,7 +75,7 @@ export default function RootLayout({
           }'
         />
       </head>
-      <body className="font-Aeonik xl:rounded-[32px] xl:m-4 xl:border xl:border-primary-150 no-scrollbar">
+      <body className="font-Aeonik lg:rounded-[32px] lg:m-4 lg:border lg:border-primary-150 no-scrollbar">
         {/** Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1SHGD261ZW"
