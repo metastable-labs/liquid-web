@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+
 import useAgentActions from "@/store/agent/actions";
 import { Terminal } from "@/views";
 
