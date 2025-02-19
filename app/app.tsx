@@ -61,7 +61,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
         >
           {showNavigation && <LWNavigation />}
 
-          {children}
+          <div className="flex-1">{children}</div>
         </div>
       </div>
 

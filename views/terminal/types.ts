@@ -27,8 +27,9 @@ type Agent = {
   creator: Creator;
   winRate: number;
   users: number;
-  last7dPnl: string;
-  totalPnl: string;
+  last7dPnl: number;
+  totalPnl: number;
+  active?: boolean;
 };
 
 type Creator = {
