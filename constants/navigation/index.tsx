@@ -42,14 +42,6 @@ const navigationItems: Array<ILWNavigationItem> = [
     route: "/agents",
     title: "My agents",
   },
-  {
-    icons: {
-      active: <AgentIconActive />,
-      inactive: <AgentIconInactive />,
-    },
-    route: "/explore",
-    title: "Explore",
-  },
 ];
 
 export { navigationItems };
