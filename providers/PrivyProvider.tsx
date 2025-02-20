@@ -15,7 +15,12 @@ export const wagmiConfig = createConfig({
 export const privyConfig: PrivyClientConfig = {
   loginMethods: ["farcaster", "twitter"],
   embeddedWallets: {
-    createOnLogin: "all-users",
+    ethereum: {
+      createOnLogin: "all-users",
+    },
+    solana: {
+      createOnLogin: "all-users",
+    },
   },
   fundingMethodConfig: {
     moonpay: {

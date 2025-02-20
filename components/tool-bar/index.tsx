@@ -55,7 +55,7 @@ const LWToolBar = () => {
     authUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
-
+  console.log(user);
   return (
     <div
       className={classNames(

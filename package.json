@@ -11,7 +11,7 @@
   "dependencies": {
     "@farcaster/frame-sdk": "^0.0.25",
     "@hookform/resolvers": "^3.10.0",
-    "@privy-io/react-auth": "^1.98.4",
+    "@privy-io/react-auth": "^2.4.5",
     "@privy-io/wagmi": "^0.2.13",
     "@radix-ui/react-slider": "^1.2.2",
     "@reduxjs/toolkit": "^2.5.0",

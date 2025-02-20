@@ -13,13 +13,21 @@ const Wallet = () => {
   const { fundWallet } = useFunding();
   const balance = "0.00";
 
-  const address = user?.wallet?.address || "";
+  const solanaWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "solana" &&
+      account.walletClientType === "privy"
+  );
+  const address = solanaWallet?.address || "";
+
+  console.log(address);
 
   const actions = [
     {
       title: "Add money",
       icon: <CoinIcon />,
-      action: () => fundWallet(address, "evm"),
+      action: () => fundWallet(address, "solana"),
     },
     {
       title: "Withdraw",

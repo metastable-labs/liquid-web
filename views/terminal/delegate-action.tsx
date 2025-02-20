@@ -19,30 +19,37 @@ function DelegateActionButton() {
       account.walletClientType === "privy"
   );
 
-  const onDelegate = () => {
+  const onDelegate = async () => {
     if (!user) return;
 
-    const chainType = user.wallet?.chainType;
-    const address = user.wallet?.address;
+    const solanaWallet: any = user?.linkedAccounts.find(
+      (account) =>
+        account.type === "wallet" &&
+        account.chainType === "solana" &&
+        account.walletClientType === "privy"
+    );
+
+    const evmWallet: any = user?.linkedAccounts.find(
+      (account) =>
+        account.type === "wallet" &&
+        account.chainType === "ethereum" &&
+        account.walletClientType === "privy"
+    );
+
     const agentId = agentState.agent?.id || "";
 
     showGrantPermission(false);
 
-    if (chainType === "solana") {
-      delegateWallet({
-        address: address!,
-        chainType: "solana",
-      }).then(() => {
-        delegateOrUndelegate(agentId, true);
-      });
-    } else {
-      delegateWallet({
-        address: address!,
-        chainType: "ethereum",
-      }).then(() => {
-        delegateOrUndelegate(agentId, true);
-      });
-    }
+    await delegateWallet({
+      address: solanaWallet?.address,
+      chainType: "solana",
+    });
+    await delegateWallet({
+      address: evmWallet?.address,
+      chainType: "ethereum",
+    }).then(() => {
+      delegateOrUndelegate(agentId, true);
+    });
   };
 
   const onRevoke = () => {
