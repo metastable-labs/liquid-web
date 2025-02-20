@@ -13,9 +13,15 @@ export const wagmiConfig = createConfig({
 });
 
 export const privyConfig: PrivyClientConfig = {
-  loginMethods: ["farcaster", "twitter", "email"],
+  loginMethods: ["farcaster", "twitter"],
   embeddedWallets: {
     createOnLogin: "all-users",
+  },
+  fundingMethodConfig: {
+    moonpay: {
+      paymentMethod: "credit_debit_card", // Purchase with credit or debit card
+      uiConfig: { accentColor: "#4691FE", theme: "light" }, // Styling preferences for MoonPay's UIs
+    },
   },
 };
 

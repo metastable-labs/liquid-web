@@ -6,7 +6,6 @@ import { AnimatePresence } from "framer-motion";
 import { usePrivy } from "@privy-io/react-auth";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { truncateWalletAddress } from "@/utils/helpers";
 import { setTokenHeader } from "@/utils/axios";
 import useAgentActions from "@/store/agent/actions";
 import useTruncateText from "@/hooks/useTruncateText";
@@ -18,8 +17,7 @@ import Dropdown from "./dropdown";
 const LWToolBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { pathname } = useSystemFunctions();
-  const { ready, authenticated, login, logout, user, getAccessToken } =
-    usePrivy();
+  const { ready, authenticated, login, user, getAccessToken } = usePrivy();
   const { connectUser } = useAgentActions();
   const { truncate } = useTruncateText();
 
@@ -109,7 +107,7 @@ const LWToolBar = () => {
               >
                 <Image
                   src={avatar}
-                  alt={`${avatar} avatar`}
+                  alt={`${username} avatar`}
                   width={40}
                   height={40}
                   quality={100}

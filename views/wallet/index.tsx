@@ -4,44 +4,22 @@ import Image from "next/image";
 import { CoinIcon, ArrowUpAltIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
 import AssetPaper from "./asset-paper";
-
-const EHTSOL = () => {
-  const images = ["/images/base.png", "/images/sol.png"];
-
-  return (
-    <div className="flex items-center -space-x-2">
-      {images.map((image, index) => (
-        <div
-          key={index}
-          className="w-[25px] h-[25px] rounded-full border border-primary-2750 relative"
-        >
-          <Image
-            src={image}
-            alt="ETH/SOL"
-            width={25}
-            height={25}
-            quality={100}
-            className={classNames(
-              "w-[25px] h-[25px] object-cover rounded-full relative",
-              {
-                "z-20": index === 0,
-              }
-            )}
-          />
-        </div>
-      ))}
-    </div>
-  );
-};
+import ETHSOL from "./eth-sol";
+import useFunding from "@/hooks/useFunding";
+import { usePrivy } from "@privy-io/react-auth";
 
 const Wallet = () => {
+  const { user } = usePrivy();
+  const { fundWallet } = useFunding();
   const balance = "0.00";
+
+  const address = user?.wallet?.address || "";
 
   const actions = [
     {
       title: "Add money",
       icon: <CoinIcon />,
-      action: () => console.log("add money"),
+      action: () => fundWallet(address, "evm"),
     },
     {
       title: "Withdraw",
@@ -101,7 +79,7 @@ const Wallet = () => {
             </p>
           </div>
 
-          <EHTSOL />
+          <ETHSOL />
         </div>
 
         <div className="flex flex-col gap-[29px]">

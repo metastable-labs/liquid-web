@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
+import { usePrivy } from "@privy-io/react-auth";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { MenuIcon, RotatedAddIcon } from "@/public/icons";
@@ -10,6 +11,7 @@ import { navigationItems } from "@/constants/navigation";
 import LWClickAnimation from "../click-animation";
 import LWBackdrop from "../backdrop";
 import Dropdown from "./dropdown";
+import useTruncateText from "@/hooks/useTruncateText";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -22,11 +24,26 @@ const modalVariants = {
 };
 
 const Menu = () => {
+  const { pathname } = useSystemFunctions();
+  const { user } = usePrivy();
+  const { truncate } = useTruncateText();
+
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const { pathname } = useSystemFunctions();
-  const userName = "meisterjustice";
-  const userImage = "/images/avatar2.png";
+
+  const address = user?.wallet?.address || "";
+  const linkedTwitter = user?.linkedAccounts?.find(
+    (account) => account.type === "twitter_oauth"
+  );
+  const linkedFarcaster = user?.linkedAccounts?.find(
+    (account) => account.type === "farcaster"
+  );
+  const userName =
+    linkedFarcaster?.username ||
+    linkedTwitter?.username ||
+    truncate(address, 4, 5);
+
+  const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
   const onClose = () => setIsOpen(false);
   const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
@@ -87,7 +104,7 @@ const Menu = () => {
                     className="pb-[19px] px-5 flex items-center gap-2.5 border-b-[0.5px] border-b-primary-550"
                   >
                     <Image
-                      src={userImage}
+                      src={avatar}
                       alt={`${userName} avatar`}
                       width={44}
                       height={44}

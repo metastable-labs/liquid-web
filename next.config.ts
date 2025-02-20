@@ -9,7 +9,10 @@ const ContentSecurityPolicy = `
     https://i.imgur.com 
     https://imagedelivery.net
     https://liquid-user-assets.s3.eu-west-2.amazonaws.com
-    https://explorer-api.walletconnect.com;
+    https://explorer-api.walletconnect.com
+    https://apple.com/apple-pay
+    https://google.com/pay
+    https://auth.privy.io/api/v1/analytics_events;
   
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com;
   
@@ -30,7 +33,10 @@ const ContentSecurityPolicy = `
     https://*.walletconnect.com
     https://region1.google-analytics.com
     https://www.geckoterminal.com
-    https://www.googletagmanager.com/gtag/js;
+    https://www.googletagmanager.com/gtag/js
+    https://apple.com/apple-pay
+    https://google.com/pay
+    https://auth.privy.io/api/v1/analytics_events;
   
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
   
