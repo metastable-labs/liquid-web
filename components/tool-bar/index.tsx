@@ -1,22 +1,27 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import classNames from "classnames";
+import { AnimatePresence } from "framer-motion";
 import { usePrivy } from "@privy-io/react-auth";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { WalletAddIcon } from "@/public/icons";
 import { truncateWalletAddress } from "@/utils/helpers";
 import { setTokenHeader } from "@/utils/axios";
 import useAgentActions from "@/store/agent/actions";
+import useTruncateText from "@/hooks/useTruncateText";
 import LWClickAnimation from "../click-animation";
 import Menu from "./menu";
+import LWBackdrop from "../backdrop";
+import Dropdown from "./dropdown";
 
 const LWToolBar = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
   const { pathname } = useSystemFunctions();
   const { ready, authenticated, login, logout, user, getAccessToken } =
     usePrivy();
   const { connectUser } = useAgentActions();
+  const { truncate } = useTruncateText();
 
   const address = user?.wallet?.address || "";
   const linkedTwitter = user?.linkedAccounts?.find(
@@ -25,6 +30,10 @@ const LWToolBar = () => {
   const linkedFarcaster = user?.linkedAccounts?.find(
     (account) => account.type === "farcaster"
   );
+  const username =
+    linkedFarcaster?.username ||
+    linkedTwitter?.username ||
+    truncate(address, 4, 5);
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
   const isTradeRoute = pathname.split("/")[2] === "trade";
 
@@ -41,6 +50,8 @@ const LWToolBar = () => {
       connectUser();
     }, 1500);
   };
+
+  const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
 
   useEffect(() => {
     authUser();
@@ -91,25 +102,30 @@ const LWToolBar = () => {
 
         {ready && authenticated && address && (
           <>
-            <LWClickAnimation
-              onClick={logout}
-              className="p-1.5 lg:flex items-center justify-center gap-2 rounded-[10px] border border-primary-500 bg-primary-600 hidden"
-            >
-              {avatar && (
+            <div className="relative hidden lg:block">
+              <LWClickAnimation
+                onClick={toggleShowDropDown}
+                className="w-fit z-10"
+              >
                 <Image
                   src={avatar}
                   alt={`${avatar} avatar`}
-                  width={30}
-                  height={30}
+                  width={40}
+                  height={40}
                   quality={100}
-                  className="w-7 h-7 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
-              )}
+              </LWClickAnimation>
 
-              <span className="text-[14px] leading-[18.48px] font-medium text-primary-1450">
-                {truncateWalletAddress(address)}
-              </span>
-            </LWClickAnimation>
+              <AnimatePresence>
+                {showDropdown && (
+                  <>
+                    <LWBackdrop onClick={toggleShowDropDown} />
+                    <Dropdown />
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
 
             <Menu />
           </>

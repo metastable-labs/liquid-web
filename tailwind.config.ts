@@ -67,12 +67,14 @@ export default {
           2600: "#1A2001",
           2650: "#EEF4FF",
           2700: "#1A8860",
+          2750: "#C6DDFF",
         },
       },
       boxShadow: {
         nav: "0px 0px 20px -6px rgba(15, 23, 42, 0.12)",
         functionCard: "0px 6px 10px -6px rgba(2, 6, 23, 0.06)",
         agentLog: "0px 4px 14px 0px rgba(0, 0, 0, 0.12)",
+        profileDropdown: "0px -1px 10px 0px rgba(0, 0, 0, 0.10)",
       },
     },
     fontFamily: {

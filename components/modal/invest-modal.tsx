@@ -38,7 +38,7 @@ export function InvestModal({
   const { joinStrategy } = usePositionActions();
   const { positionState } = useSystemFunctions();
   const { isDesktop } = useScreenDetect();
-  const [token, setToken] = useState<Asset>();
+  const [token, setToken] = useState<Asset_>();
   const [balance, setBalance] = useState("0");
   const [showAssetSelection, setShowAssetSelection] = useState(false);
 

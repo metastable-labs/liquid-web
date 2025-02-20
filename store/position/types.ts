@@ -1,4 +1,4 @@
-type Asset = {
+type Asset_ = {
   logo: string;
   name: string;
   symbol: string;
@@ -19,7 +19,7 @@ type Meta = {
 };
 
 type Position = {
-  assets: Array<Asset>;
+  assets: Array<Asset_>;
   closedAt: string | null;
   closeTransactionHash: string | null;
   createdAt: string;
@@ -63,7 +63,7 @@ type Step = {
   actionType: "SUPPLY" | "BORROW" | "REPAY" | "WITHDRAW";
   amountRatio: number;
   assetOut: string;
-  assets: Array<Asset>;
+  assets: Array<Asset_>;
   assetsIn: string[];
   data: string;
   id: string;

@@ -47,6 +47,10 @@ import WalletIconInactive from "./wallet-icon-inactive";
 import MenuIcon from "./menu-icon";
 import RotatedAddIcon from "./rotated-add-icon";
 import ExternalLinkIcon from "./external-link-icon";
+import EmptyWalletIcon from "./empty-wallet-icon";
+import LogoutIcon from "./logout-icon";
+import CoinIcon from "./coin-icon";
+import ArrowUpAltIcon from "./arrow-up-alt-icon";
 
 export {
   CubeIcons,
@@ -98,4 +102,8 @@ export {
   MenuIcon,
   RotatedAddIcon,
   ExternalLinkIcon,
+  EmptyWalletIcon,
+  LogoutIcon,
+  ArrowUpAltIcon,
+  CoinIcon,
 };

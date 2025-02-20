@@ -8,6 +8,8 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { MenuIcon, RotatedAddIcon } from "@/public/icons";
 import { navigationItems } from "@/constants/navigation";
 import LWClickAnimation from "../click-animation";
+import LWBackdrop from "../backdrop";
+import Dropdown from "./dropdown";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -21,11 +23,13 @@ const modalVariants = {
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const { pathname } = useSystemFunctions();
   const userName = "meisterjustice";
   const userImage = "/images/avatar2.png";
 
   const onClose = () => setIsOpen(false);
+  const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
 
   useEffect(() => onClose(), [pathname]);
 
@@ -77,29 +81,43 @@ const Menu = () => {
               </div>
 
               <div className="flex flex-col items-stretch gap-5">
-                <div className="pb-[19px] px-5 flex items-center gap-2.5 border-b-[0.5px] border-b-primary-550">
-                  <Image
-                    src={userImage}
-                    alt={`${userName} avatar`}
-                    width={44}
-                    height={44}
-                    quality={100}
-                    className="w-11 h-11 object-cover rounded-full"
-                  />
-
-                  <div className="flex items-center justify-center gap-1">
-                    <span className="text-[13px] leading-[16.2px] text-primary-350">
-                      @{userName}
-                    </span>
+                <div className="relative">
+                  <LWClickAnimation
+                    onClick={toggleShowDropDown}
+                    className="pb-[19px] px-5 flex items-center gap-2.5 border-b-[0.5px] border-b-primary-550"
+                  >
                     <Image
-                      src="/images/farcaster.png"
-                      alt="farcaster logo"
-                      width={16}
-                      height={16}
+                      src={userImage}
+                      alt={`${userName} avatar`}
+                      width={44}
+                      height={44}
                       quality={100}
-                      className="w-4 h-4 object-cover rounded-full"
+                      className="w-11 h-11 object-cover rounded-full"
                     />
-                  </div>
+
+                    <div className="flex items-center justify-center gap-1">
+                      <span className="text-[13px] leading-[16.2px] text-primary-350">
+                        @{userName}
+                      </span>
+                      <Image
+                        src="/images/farcaster.png"
+                        alt="farcaster logo"
+                        width={16}
+                        height={16}
+                        quality={100}
+                        className="w-4 h-4 object-cover rounded-full"
+                      />
+                    </div>
+                  </LWClickAnimation>
+
+                  <AnimatePresence>
+                    {showDropdown && (
+                      <>
+                        <LWBackdrop onClick={toggleShowDropDown} />
+                        <Dropdown />
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 <div className="flex flex-col px-5 gap-6">

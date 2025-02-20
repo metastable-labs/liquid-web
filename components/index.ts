@@ -10,6 +10,7 @@ import LWUserPaper from "./user-paper";
 import LWPost from "./post";
 import LWTradeInterface from "./trade-interface";
 import LWAgentCard from "./agent-card";
+import LWBackdrop from "./backdrop";
 
 export {
   LWNavigation,
@@ -24,4 +25,5 @@ export {
   LWPost,
   LWTradeInterface,
   LWAgentCard,
+  LWBackdrop,
 };
