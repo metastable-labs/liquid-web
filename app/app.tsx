@@ -5,25 +5,12 @@ import { usePrivy } from "@privy-io/react-auth";
 
 import { LWNavigation, LWToastNotification, LWToolBar } from "@/components";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import useAppActions from "@/store/app/actions";
-import usePositionActions from "@/store/position/actions";
-import { InfoModal } from "@/components/modal/Info-modal";
-import ActionsModal from "@/components/modal/actions-modal";
-import { WithdrawModal } from "@/components/modal/withdraw-modal";
-import { ClaimModal } from "@/components/modal/claim-modal";
 
 const mainPages = ["/", "/wallet", "/permissions", "/agents"];
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const { ready, authenticated, user } = usePrivy();
-  const {
-    pathname,
-    appState: { info },
-    positionState: { activePosition, isClaiming, isWithdrawing },
-  } = useSystemFunctions();
-  const { setInfo } = useAppActions();
-  const { setActivePosition, setIsClaiming, setIsWithdrawing } =
-    usePositionActions();
+  const { pathname } = useSystemFunctions();
 
   const address = user?.wallet?.address || "";
   const supportsNavigation = useMemo(() => {
@@ -64,25 +51,6 @@ const App = ({ children }: { children: React.ReactNode }) => {
           <div className="flex-1">{children}</div>
         </div>
       </div>
-
-      <ActionsModal
-        isOpen={!!activePosition}
-        onClose={() => setActivePosition(null)}
-      />
-
-      <WithdrawModal
-        isOpen={isWithdrawing}
-        onClose={() => setIsWithdrawing(false)}
-      />
-
-      <ClaimModal isOpen={isClaiming} onClose={() => setIsClaiming(false)} />
-
-      <InfoModal
-        isOpen={!!info}
-        onClose={() => setInfo(null)}
-        title={info?.title}
-        description={info?.description}
-      />
 
       <LWToastNotification />
     </>

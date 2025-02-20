@@ -17,7 +17,6 @@ const useSystemFunctions = () => {
 
   // states
   const appState = useAppSelector((state) => state.app);
-  const positionState = useAppSelector((state) => state.position);
   const agentState = useAppSelector((state) => state.agent);
 
   return {
@@ -30,7 +29,6 @@ const useSystemFunctions = () => {
 
     // states
     appState,
-    positionState,
     agentState,
   };
 };

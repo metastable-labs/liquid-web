@@ -8,11 +8,15 @@ const useFunding = () => {
   const { fundWallet: fundSolanaWallet } = useSolanaFundWallet();
 
   const fundWallet = (address: string, network: "evm" | "solana") => {
-    if (network === "evm") {
-      return fundEVMWallet(address);
+    if (network === "solana") {
+      return fundSolanaWallet(address, {
+        cluster: {
+          name: "mainnet-beta",
+        },
+      });
     }
 
-    return fundSolanaWallet(address);
+    return fundEVMWallet(address);
   };
 
   return {

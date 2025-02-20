@@ -19,9 +19,13 @@ const Wallet = () => {
       account.chainType === "solana" &&
       account.walletClientType === "privy"
   );
+  const evmWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "ethereum" &&
+      account.walletClientType === "privy"
+  );
   const address = solanaWallet?.address || "";
-
-  console.log(address);
 
   const actions = [
     {
