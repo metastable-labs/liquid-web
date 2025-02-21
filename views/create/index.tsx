@@ -21,7 +21,7 @@ const Create = () => {
         </p>
       </div>
 
-      <div className="flex flex-col items-stretch gap-6 self-center">
+      <div className="flex flex-col items-stretch gap-6 lg:self-center self-stretch">
         <h1 className="text-[15px] leading-[19.8px] font-medium text-primary-1700">
           Explore Agents from the community
         </h1>

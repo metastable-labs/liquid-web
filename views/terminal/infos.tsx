@@ -25,7 +25,7 @@ const AgentInfos = () => {
     { children: <LWUserPaper user={mockCreator} />, title: "Creator" },
     {
       children: (
-        <p className="text-[16px] leading-[19.84px] text-primary-100 flex items-center justify-center h-full">
+        <p className="text-[16px] leading-[19.84px] text-primary-100 content-center h-full">
           {goal}
         </p>
       ),

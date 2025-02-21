@@ -1,5 +1,5 @@
 const WalletIconInactive = ({
-  fill = "64748B",
+  fill = "#64748B",
   width = 25,
   height = 24,
 }: IconProps) => (

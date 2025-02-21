@@ -13,7 +13,8 @@ export default function TerminalPage() {
     if (params.agentId) {
       fetchAgent(params.agentId);
     }
-  }, [params.agentId, fetchAgent]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.agentId]);
 
   return <Terminal />;
 }

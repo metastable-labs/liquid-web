@@ -20,7 +20,7 @@ const ETHSOL = () => {
             className={classNames(
               "w-[25px] h-[25px] object-cover rounded-full relative",
               {
-                "z-20": index === 0,
+                "z-0": index === 0,
               }
             )}
           />
