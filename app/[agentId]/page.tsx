@@ -10,7 +10,7 @@ export default function TerminalPage() {
   const params = useParams() as { agentId: string };
 
   useEffect(() => {
-    if (params.agentId) {
+    if (params?.agentId) {
       fetchAgent(params.agentId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
