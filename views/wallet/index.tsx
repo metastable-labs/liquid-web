@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { usePrivy } from "@privy-io/react-auth";
 
 import { CoinIcon, ArrowUpAltIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
 import AssetPaper from "./asset-paper";
 import ETHSOL from "./eth-sol";
 import useFunding from "@/hooks/useFunding";
-import { usePrivy } from "@privy-io/react-auth";
 
 const Wallet = () => {
   const { user } = usePrivy();
@@ -68,8 +68,15 @@ const Wallet = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-[76px] px-5">
-      <div className="w-full p-6 rounded-[32px] border border-primary-150 bg-white flex flex-col gap-[70px]">
+    <div
+      className={classNames(
+        "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-[76px] pb-10 lg:pb-0",
+        {
+          "lg:px-5": !user,
+        }
+      )}
+    >
+      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">
         <div className="flex items-center gap-6 self-stretch px-4 py-3 border border-primary-550 bg-primary-600 rounded-[26px]">
           <Image
             src="/images/person.png"
@@ -160,7 +167,7 @@ const Wallet = () => {
         </div>
       </div>
 
-      <div className="w-full p-6 rounded-[32px] border border-primary-150 bg-white flex flex-col gap-[70px]">
+      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">
         <h1 className="text-[19.7px] leading-[26px] text-primary-400 font-medium">
           Activity
         </h1>
