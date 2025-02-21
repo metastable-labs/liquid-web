@@ -1,16 +1,24 @@
+import { useState } from "react";
 import classNames from "classnames";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePrivy } from "@privy-io/react-auth";
 
+import useFunding from "@/hooks/useFunding";
 import { CoinIcon, ArrowUpAltIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
+import { appearAnimation } from "@/utils/helpers";
+import Add from "./add";
+import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
 import ETHSOL from "./eth-sol";
-import useFunding from "@/hooks/useFunding";
 
 const Wallet = () => {
   const { user } = usePrivy();
   const { fundWallet } = useFunding();
+  const [walletInteraction, setWalletInteraction] =
+    useState<WalletInteration>("main");
+
   const balance = "0.00";
 
   const solanaWallet: any = user?.linkedAccounts.find(
@@ -31,12 +39,12 @@ const Wallet = () => {
     {
       title: "Add money",
       icon: <CoinIcon />,
-      action: () => fundWallet(address, "solana"),
+      action: () => setWalletInteraction("add"),
     },
     {
       title: "Withdraw",
       icon: <ArrowUpAltIcon />,
-      action: () => console.log("withdraw"),
+      action: () => setWalletInteraction("withdraw"),
     },
   ];
 
@@ -66,6 +74,77 @@ const Wallet = () => {
       balanceUSDValue: 40_540.89,
     },
   ];
+
+  const walletInteractions = {
+    main: (
+      <div className="flex flex-col gap-[29px]">
+        <div className="flex flex-col gap-2.5">
+          <h5 className="text-[13px] leading-[16.12px] text-primary-100">
+            Total Holdings
+          </h5>
+
+          <span className="text-[36px] leading-[40.32px] text-primary-950 font-QuantaGroteskPro font-bold">
+            ${balance}
+          </span>
+        </div>
+
+        <div className="self-stretch flex flex-col gap-8">
+          <div className="self-stretch flex items-center gap-4">
+            {actions.map(({ action, icon, title }, index) => (
+              <LWClickAnimation
+                onClick={action}
+                key={index}
+                className={classNames(
+                  "flex-1 px-[21.6px] py-[6.75px] flex items-center justify-center gap-[6.75px] rounded-[21.6px]",
+                  {
+                    "bg-primary-350": index === 0,
+                    "border border-primary-550 bg-primary-600": index === 1,
+                  }
+                )}
+              >
+                <span
+                  className={classNames(
+                    "text-[16.2px] leading-[21.6px] font-medium text-center",
+                    {
+                      "text-white": index === 0,
+                      "text-primary-1700": index === 1,
+                    }
+                  )}
+                >
+                  {title}
+                </span>
+                {icon}
+              </LWClickAnimation>
+            ))}
+          </div>
+
+          <div className="flex flex-col self-stretch items-stretch gpa-[29px]">
+            <h1 className="text-[24px] leading-[26.88px] tracking-[-0.6px] text-primary-50 font-medium">
+              Assets
+            </h1>
+
+            <div className="flex flex-col self-stretch items-stretch gap-6">
+              {assets.map((asset, index) => (
+                <AssetPaper key={index} asset={asset} />
+              ))}
+
+              <LWClickAnimation
+                onClick={() => console.log("Clicked")}
+                className="flex items-center gap-1 w-fit"
+              >
+                <span className="text-[13px] leading-[16.12px] text-primary-400">
+                  See all
+                </span>
+                <ArrowRightIcon fill="#0C0507" width={14} height={14} />
+              </LWClickAnimation>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    add: <Add onClose={() => setWalletInteraction("main")} />,
+    withdraw: <Withdraw onClose={() => setWalletInteraction("main")} />,
+  };
 
   return (
     <div
@@ -101,70 +180,15 @@ const Wallet = () => {
           <ETHSOL />
         </div>
 
-        <div className="flex flex-col gap-[29px]">
-          <div className="flex flex-col gap-2.5">
-            <h5 className="text-[13px] leading-[16.12px] text-primary-100">
-              Total Holdings
-            </h5>
-
-            <span className="text-[36px] leading-[40.32px] text-primary-950 font-QuantaGroteskPro font-bold">
-              ${balance}
-            </span>
-          </div>
-
-          <div className="self-stretch flex flex-col gap-8">
-            <div className="self-stretch flex items-center gap-4">
-              {actions.map(({ action, icon, title }, index) => (
-                <LWClickAnimation
-                  onClick={action}
-                  key={index}
-                  className={classNames(
-                    "flex-1 px-[21.6px] py-[6.75px] flex items-center justify-center gap-[6.75px] rounded-[21.6px]",
-                    {
-                      "bg-primary-350": index === 0,
-                      "border border-primary-550 bg-primary-600": index === 1,
-                    }
-                  )}
-                >
-                  <span
-                    className={classNames(
-                      "text-[16.2px] leading-[21.6px] font-medium text-center",
-                      {
-                        "text-white": index === 0,
-                        "text-primary-1700": index === 1,
-                      }
-                    )}
-                  >
-                    {title}
-                  </span>
-                  {icon}
-                </LWClickAnimation>
-              ))}
-            </div>
-
-            <div className="flex flex-col self-stretch items-stretch gpa-[29px]">
-              <h1 className="text-[24px] leading-[26.88px] tracking-[-0.6px] text-primary-50 font-medium">
-                Assets
-              </h1>
-
-              <div className="flex flex-col self-stretch items-stretch gap-6">
-                {assets.map((asset, index) => (
-                  <AssetPaper key={index} asset={asset} />
-                ))}
-
-                <LWClickAnimation
-                  onClick={() => console.log("Clicked")}
-                  className="flex items-center gap-1 w-fit"
-                >
-                  <span className="text-[13px] leading-[16.12px] text-primary-400">
-                    See all
-                  </span>
-                  <ArrowRightIcon fill="#0C0507" width={14} height={14} />
-                </LWClickAnimation>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={walletInteraction}
+            {...appearAnimation}
+            transition={{ duration: 0.2 }}
+          >
+            {walletInteractions[walletInteraction]}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">

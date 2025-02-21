@@ -6,3 +6,9 @@ type Asset = {
   balance: number;
   balanceUSDValue: number;
 };
+
+type WalletInteration = "main" | "add" | "withdraw";
+
+interface InteractionProps {
+  onClose: () => void;
+}
