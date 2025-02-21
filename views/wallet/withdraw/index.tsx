@@ -10,7 +10,7 @@ import Step2 from "./step2";
 import Step3 from "./step3";
 
 const Withdraw = ({ onClose }: InteractionProps) => {
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(0);
   const [address, setAddress] = useState<string>(
     "0x1234567890qwertyuio098765432wedrftgyhj"
   );
