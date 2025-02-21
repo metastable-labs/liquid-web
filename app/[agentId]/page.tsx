@@ -7,12 +7,12 @@ import { Terminal } from "@/views";
 export default function TerminalPage({
   params,
 }: {
-  params: { agentId: string };
+  params: { agentId: any }
 }) {
   const { fetchAgent } = useAgentActions();
 
   useEffect(() => {
-    fetchAgent(params.agentId);
+    fetchAgent(params?.agentId as string);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,3 +1,4 @@
+"use client";
 import AgentBuild from "./agent-build";
 import Terminal from "./terminal";
 import Trade from "./trade";

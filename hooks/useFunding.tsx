@@ -12,7 +12,8 @@ const useFunding = () => {
       return fundSolanaWallet(address, {
         cluster: {
           name: "mainnet-beta",
-        },
+        }, 
+       
       });
     }
 
