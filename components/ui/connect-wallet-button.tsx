@@ -4,14 +4,12 @@ import { usePrivy } from "@privy-io/react-auth";
 
 import { LWClickAnimation } from "@/components";
 import { truncateWalletAddress } from "@/utils/helpers";
-import useSwitchNetworkConnect from "@/hooks/useSwitchNetwork";
 import { DisconnectIcon } from "@/public/icons";
 import { useEffect } from "react";
 import useAppActions from "@/store/app/actions";
 
 const ConnectWalletButton = () => {
   const { registerUser } = useAppActions();
-  const {} = useSwitchNetworkConnect();
   const { address } = useAccount();
   const { ready, authenticated, login, logout } = usePrivy();
 

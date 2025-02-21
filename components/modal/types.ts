@@ -36,7 +36,7 @@ export interface InvestModalProps {
   isOpen: boolean;
   onClose: () => void;
   onChainId: `0x${string}`;
-  assets: Asset_[];
+  assets: Asset[];
 }
 
 export interface InfoModalProps {

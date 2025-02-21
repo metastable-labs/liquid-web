@@ -1,3 +1,0 @@
-interface ILWPost {
-  post: Post;
-}
