@@ -38,7 +38,7 @@ const Trade = () => {
   }, [period]);
 
   return (
-    <div className={classNames("overflow-scroll", { "lg:px-5 pb-10": !user })}>
+    <div className={classNames("overflow-scroll pb-10", { "lg:px-5": !user })}>
       <button
         onClick={() => navigate.back()}
         className="hidden w-fit lg:flex items-center gap-1 mb-[60px]"
