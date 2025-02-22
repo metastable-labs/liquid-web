@@ -5,10 +5,10 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePrivy } from "@privy-io/react-auth";
 
-import useFunding from "@/hooks/useFunding";
 import { CoinIcon, ArrowUpAltIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
 import { appearAnimation } from "@/utils/helpers";
+import useAppActions from "@/store/app/actions";
 import Add from "./add";
 import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
@@ -16,7 +16,7 @@ import ETHSOL from "./eth-sol";
 
 const Wallet = () => {
   const { user } = usePrivy();
-  const { fundWallet } = useFunding();
+  const { shwoSelectNetworkModal } = useAppActions();
   const [walletInteraction, setWalletInteraction] =
     useState<WalletInteration>("main");
 
@@ -40,7 +40,7 @@ const Wallet = () => {
     {
       title: "Add money",
       icon: <CoinIcon />,
-      action: () => setWalletInteraction("add"),
+      action: () => shwoSelectNetworkModal(true),
     },
     {
       title: "Withdraw",
@@ -153,6 +153,7 @@ const Wallet = () => {
         "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-[76px] pb-10 lg:pb-0",
         {
           "lg:px-5": !user,
+          "max-w-[1076px]": user,
         }
       )}
     >
@@ -173,7 +174,7 @@ const Wallet = () => {
                 Wallet
               </h3>
 
-              <p className="text-[12px] leading-[15.84px] text-primary-100">
+              <p className="text-[12px] leading-[15.84px] text-primary-100 max-w-[278px]">
                 Liquid uses <span className="font-bold">privy delegated</span>{" "}
                 wallets to allow agents take actions on your behalf
               </p>

@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAccount } from "wagmi";
 import { NumericFormat, OnValueChange } from "react-number-format";
 import { getBalance } from "@wagmi/core";
 import { formatEther } from "viem";
@@ -23,7 +22,6 @@ function truncateToDecimals(num: number) {
 
 const LWTradeInterface = ({ standAlone = true, token }: ILBTradeInterface) => {
   const { ready, authenticated } = usePrivy();
-  const { address } = useAccount();
 
   const [tab, setTab] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState<number>();
@@ -182,7 +180,7 @@ const LWTradeInterface = ({ standAlone = true, token }: ILBTradeInterface) => {
           <div className="p-4 self-stretch flex items-center justify-between rounded-xl border border-primary-150">
             <NumericFormat
               value={amount}
-              className="bg-transparent outline-none text-primary-950 text-[24px] leading-[26.88px] tracking-[-0.6px] max-w-[50%] font-medium"
+              className="bg-transparent outline-none text-primary-950 text-[24px] leading-[26.88px] tracking-[-0.6px] w-[50%] font-medium"
               placeholder="Amount"
               thousandSeparator=","
               allowNegative={false}
@@ -216,7 +214,7 @@ const LWTradeInterface = ({ standAlone = true, token }: ILBTradeInterface) => {
             {balancePartitions.map(({ text, onClick }, index) => (
               <LWClickAnimation
                 key={index}
-                className="px-[11px] py-1.5 bg-primary-600 border border-primary-550 rounded-[10px] flex-1 flex items-center justify-center"
+                className="px-4 lg:px-[11px] py-1.5 bg-primary-600 border border-primary-550 rounded-[10px] flex-1 flex items-center justify-center"
                 onClick={onClick}
               >
                 <span className="text-primary-1700 font-medium text-[13px] leading-[16.12px]">

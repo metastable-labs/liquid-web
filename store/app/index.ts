@@ -6,6 +6,7 @@ export interface AppState {
   farcasterContext: UserContext | undefined;
   toast: ToastState;
   openGrantPermission: boolean;
+  openSelectNetworkModal: boolean;
 }
 
 const initialState: AppState = {
@@ -17,6 +18,7 @@ const initialState: AppState = {
     show: false,
   },
   openGrantPermission: false,
+  openSelectNetworkModal: false,
 };
 
 export const appReducer = createSlice({
@@ -38,6 +40,10 @@ export const appReducer = createSlice({
     setOpenGrantPermission: (state, action: PayloadAction<boolean>) => {
       state.openGrantPermission = action.payload;
     },
+
+    setOpenSelectNetworkModal: (state, action: PayloadAction<boolean>) => {
+      state.openSelectNetworkModal = action.payload;
+    },
   },
 });
 
@@ -46,6 +52,7 @@ export const {
   setFarcasterContext,
   setToast,
   setOpenGrantPermission,
+  setOpenSelectNetworkModal,
 } = appReducer.actions;
 
 export default appReducer.reducer;

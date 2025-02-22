@@ -16,7 +16,7 @@ const LWButton = ({
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.95 }}
       className={classNames(
-        `flex justify-center items-center rounded-[30px] ${className}`,
+        `flex justify-center items-center rounded-[21.6px] ${className}`,
         {
           "px-20 py-3.5": variant === "primary",
           "px-14 h-[52px]": variant === "primaryAlt" || variant === "secondary",

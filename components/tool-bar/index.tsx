@@ -58,17 +58,10 @@ const LWToolBar = () => {
   console.log(user);
   return (
     <div
-      className={classNames(
-        "w-full sticky top-0 flex items-center justify-between gap-5 px-5 py-5 xl:bg-transparent z-10 rounded-full min-h-[77px]",
-        {
-          "bg-primary-2650": isTradeRoute,
-          "bg-white": !isTradeRoute,
-        }
-      )}
+      className="w-full sticky top-0 flex items-center justify-between gap-5 px-5 py-5 xl:bg-transparent z-10 rounded-full min-h-[85.5px]"
       style={{
-        background: isTradeRoute
-          ? "white"
-          : "linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.5) 70%, transparent 100%)",
+        background:
+          "linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.5) 70%, transparent 100%)",
       }}
     >
       <Image

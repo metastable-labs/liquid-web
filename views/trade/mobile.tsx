@@ -116,9 +116,22 @@ const MobileView = ({ data, period, periods, setPeriod }: IView) => {
     <div key="info" className="w-full">
       <TokenInfo />
     </div>,
+
     <div key="chart" className="w-full">
-      <h1>Coingecko Chart</h1>
+      <iframe
+        height="100%"
+        width="100%"
+        id="geckoterminal-embed"
+        title="GeckoTerminal Embed"
+        src="https://www.geckoterminal.com/solana/pools/22WrmyTj8x2TRVQen3fxxi2r4Rn6JDHWoMTpsSmn8RUd?embed=1&info=0&swaps=0&grayscale=0&light_chart=1"
+        frameBorder="0"
+        allow="clipboard-write"
+        allowFullScreen
+        style={{ minHeight: "380px" }}
+      ></iframe>
+      <div></div>
     </div>,
+
     <div key="buy/sell" className="w-full">
       <LWTradeInterface token={token} />
     </div>,
@@ -142,7 +155,7 @@ const MobileView = ({ data, period, periods, setPeriod }: IView) => {
           </h1>
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex flex-wrap items-center gap-5">
           {extras.map((extra, index) => (
             <div
               key={index}
@@ -167,13 +180,13 @@ const MobileView = ({ data, period, periods, setPeriod }: IView) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="fixed bottom-0 left-0 w-screen h-fit flex items-center justify-around px-[34px] py-4 bg-[#FFFEF7]">
+      <div className="fixed z-50 bottom-0 left-0 w-screen h-fit flex items-center justify-around px-[34px] py-4 bg-[#EEF4FF]/20">
         {mobileTabs.map((tab, index) => (
           <div
             onClick={() => setMobileTab(tab)}
             key={index}
             className={classNames(
-              "py-2.5 px-3.5 flex items-center justify-center text-sm capitalize transition-colors relative",
+              "py-2.5 px-3.5 flex items-center justify-center text-sm capitalize transition-colors relative cursor-pointer",
               {
                 "text-primary-2200": tab === mobileTab,
                 "text-[#475467]": tab !== mobileTab,

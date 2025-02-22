@@ -10,6 +10,7 @@ import LWUserPaper from "./user-paper";
 import LWTradeInterface from "./trade-interface";
 import LWAgentCard from "./agent-card";
 import LWBackdrop from "./backdrop";
+import LWSelectNetworkModal from "./modal/select-network-modal";
 
 export {
   LWNavigation,
@@ -24,4 +25,5 @@ export {
   LWTradeInterface,
   LWAgentCard,
   LWBackdrop,
+  LWSelectNetworkModal,
 };

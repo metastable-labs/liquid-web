@@ -1,18 +1,5 @@
-"use client";
-import { useEffect } from "react";
-
 import { Trade } from "@/views";
 
-const TradePage = () => {
-  useEffect(() => {
-    document.body.style.backgroundColor = "#EEF4FF";
-
-    return () => {
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-
-  return <Trade />;
-};
+const TradePage = () => <Trade />;
 
 export default TradePage;

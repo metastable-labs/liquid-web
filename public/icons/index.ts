@@ -51,6 +51,7 @@ import EmptyWalletIcon from "./empty-wallet-icon";
 import LogoutIcon from "./logout-icon";
 import CoinIcon from "./coin-icon";
 import ArrowUpAltIcon from "./arrow-up-alt-icon";
+import ExternalDriveIcon from "./external-drive-icon";
 
 export {
   CubeIcons,
@@ -106,4 +107,5 @@ export {
   LogoutIcon,
   ArrowUpAltIcon,
   CoinIcon,
+  ExternalDriveIcon,
 };

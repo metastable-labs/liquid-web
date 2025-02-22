@@ -75,20 +75,14 @@ function ModalWrapper({
               exit="hidden"
               transition={{ type: "tween" }}
             >
-              <div
-                className={classNames(
-                  "flex flex-col justify-center items-center mt-4 pb-5",
-                  {
-                    "border-[#EAEEF4] border-b-[1px]": !enlargeTitle,
-                  }
-                )}
-              >
+              <div className="flex flex-col justify-center items-center mt-4 pb-5">
                 {isMobile && (
                   <div className="h-[4px] w-[40px] bg-[#E2E8F0] rounded-full" />
                 )}
                 <h2
                   className={classNames({
-                    "text-sm font-medium text-center mt-2": !enlargeTitle,
+                    "text-[16px] leading-[19.84px] text-primary-950 font-medium text-center mt-2":
+                      !enlargeTitle,
                     "text-[24px] leading-[26.88px] font-medium text-center mt-3":
                       enlargeTitle,
                   })}

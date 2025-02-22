@@ -7,7 +7,7 @@ import LWClickAnimation from "../click-animation";
 
 const AgentStat = ({ title, value }: AgentStat) => (
   <div className="flex flex-col gap-2">
-    <span className="text-[12px] leading-[15.84px] lg:text-[15px] lg:leading-[19.8px] text-primary-100">
+    <span className="text-[12px] leading-[15.84px] lg:text-[15px] lg:leading-[19.8px] text-primary-100 whitespace-nowrap">
       {title}
     </span>
 
@@ -22,18 +22,7 @@ const AgentStat = ({ title, value }: AgentStat) => (
 );
 
 const LWAgentCard = ({
-  agent: {
-    creator,
-    goal,
-    id,
-    last7dPnl,
-    name,
-    token,
-    totalPnl,
-    type,
-    users,
-    winRate,
-  },
+  agent: { creator, id, last7dPnl, name, users, winRate },
   actions,
   actionIdentifier,
   variant = "primary",

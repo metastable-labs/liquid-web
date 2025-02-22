@@ -13,7 +13,7 @@ const LWUserPaper = ({ user }: ILWUserPaper) => (
 
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
-        <h1 className="text-[clamp(24px,5vw,28px)] leading-[clamp(27px,5vw,31.36px)] text-primary-2350 font-bold font-QuantaGroteskPro">
+        <h1 className="text-[clamp(22px,5vw,28px)] leading-[clamp(27px,5vw,31.36px)] text-primary-2350 font-bold font-QuantaGroteskPro">
           {user.name}
         </h1>
 
@@ -22,30 +22,34 @@ const LWUserPaper = ({ user }: ILWUserPaper) => (
         </span>
       </div>
 
-      <div className="flex items-center gap-2">
-        <span className="text-[13px] leading-[16.12px] text-primary-1700">
-          {user.followers} followers
-        </span>
-
-        <div className="w-[1px] h-4 bg-primary-2450" />
-
-        <span className="text-[13px] leading-[16.12px] text-primary-1700">
-          {user.following} following
-        </span>
-
-        <a href={user.warpcastURL} target="_blank" rel="noreferrer">
-          <span className="text-[clamp(14px,5vw,16px)] leading-[clamp(17px,5vw,19.84px)] text-primary-450 underline underline-offset-2">
-            Warpcast
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-[13px] leading-[16.12px] whitespace-nowrap text-primary-1700">
+            {user.followers} followers
           </span>
-        </a>
 
-        <div className="w-[1px] h-4 bg-primary-2450" />
+          <div className="w-[1px] h-4 bg-primary-2450" />
 
-        <a href={user.twitterURL} target="_blank" rel="noreferrer">
-          <span className="text-[clamp(14px,5vw,16px)] leading-[clamp(17px,5vw,19.84px)] text-primary-450 underline underline-offset-2">
-            X
+          <span className="text-[13px] leading-[16.12px] whitespace-nowrap text-primary-1700">
+            {user.following} following
           </span>
-        </a>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <a href={user.warpcastURL} target="_blank" rel="noreferrer">
+            <span className="text-[16px] leading-[19.84px] text-primary-450 underline underline-offset-2">
+              Warpcast
+            </span>
+          </a>
+
+          <div className="w-[1px] h-4 bg-primary-2450" />
+
+          <a href={user.twitterURL} target="_blank" rel="noreferrer">
+            <span className="text-[16px] leading-[19.84px] text-primary-450 underline underline-offset-2">
+              X
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

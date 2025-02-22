@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { LWAgentCard } from "@/components";
 import { dummyAgents } from "./dummy";
@@ -28,7 +29,9 @@ const Create = () => {
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2 lg:grid-cols-3 max-w-[1077px]">
           {dummyAgents.map((agent, index) => (
-            <LWAgentCard key={index} agent={agent} variant="secondary" />
+            <Link href={`/${agent?.id}/trade`} key={index}>
+              <LWAgentCard agent={agent} variant="secondary" />
+            </Link>
           ))}
         </div>
       </div>
