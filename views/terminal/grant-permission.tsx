@@ -2,7 +2,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import DelegateActionButton from "./delegate-action";
 
 const permissionInfo = [
-  "It's advisable to fund your wallet with USDC or SOL to set the max spend for unrestricted agent trades.",
+  "It's advisable to fund your wallet with ETH or SOL to set the max spend for unrestricted agent trades.",
   "Agents can use a % of the delegated balance per trade, based on their goals.",
 ];
 
