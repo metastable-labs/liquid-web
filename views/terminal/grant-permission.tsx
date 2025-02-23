@@ -13,7 +13,22 @@ const revokeInfo = [
 
 const GrantPermission = () => {
   const { user } = usePrivy();
-  const permissionGranted = user?.wallet?.delegated;
+
+  const solanaWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "solana" &&
+      account.walletClientType === "privy"
+  );
+
+  const evmWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "ethereum" &&
+      account.walletClientType === "privy"
+  );
+
+  const permissionGranted = evmWallet?.delegated && solanaWallet?.delegated;
 
   const info = permissionGranted ? revokeInfo : permissionInfo;
 

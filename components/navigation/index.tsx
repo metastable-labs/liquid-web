@@ -22,8 +22,8 @@ const LWNavigation = () => {
     pathSegments[1] === "trade";
 
   return (
-    <nav className="sticky h-fit top-[118px] lg:block min-w-[113.5px] hidden">
-      <div className="px-6 pt-6 pb-9 lg:flex flex-col gap-9 border border-primary-150 rounded-[32px] bg-white">
+    <nav className="sticky h-fit top-[118px] xl:block min-w-[113.5px] hidden">
+      <div className="px-6 pt-6 pb-9 xl:flex flex-col gap-9 border border-primary-150 rounded-[32px] bg-white">
         {navigationItems.map(({ route, title, icons }) => {
           const isActive = pathname === route;
 

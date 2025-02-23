@@ -7,50 +7,11 @@ import useAgentActions from "@/store/agent/actions";
 function DelegateActionButton() {
   const { user, login } = usePrivy();
   const { delegateOrUndelegate } = useAgentActions();
-  const { delegateWallet, revokeWallets } = useDelegatedActions();
-  const { showGrantPermission } = useAppActions();
+  const { revokeWallets } = useDelegatedActions();
+  const { showGrantPermission, showSelectNetworkModal } = useAppActions();
   const { agentState } = useSystemFunctions();
 
   const isAlreadyDelegatedToThisAgent = agentState.delegationDetails?.isActive;
-  const isAlreadyDelegatedWallet = !!user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.delegated &&
-      account.walletClientType === "privy"
-  );
-
-  const onDelegate = async () => {
-    if (!user) return;
-
-    const solanaWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "solana" &&
-        account.walletClientType === "privy"
-    );
-
-    const evmWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "ethereum" &&
-        account.walletClientType === "privy"
-    );
-
-    const agentId = agentState.agent?.id || "";
-
-    showGrantPermission(false);
-
-    await delegateWallet({
-      address: solanaWallet?.address,
-      chainType: "solana",
-    });
-    await delegateWallet({
-      address: evmWallet?.address,
-      chainType: "ethereum",
-    }).then(() => {
-      delegateOrUndelegate(agentId, true);
-    });
-  };
 
   const onRevoke = () => {
     const agentId = agentState.agent?.id || "";
@@ -66,18 +27,30 @@ function DelegateActionButton() {
       return login();
     }
 
-    if (!isAlreadyDelegatedWallet) {
-      return onDelegate();
-    }
+    const solanaWallet: any = user?.linkedAccounts.find(
+      (account) =>
+        account.type === "wallet" &&
+        account.chainType === "solana" &&
+        account.walletClientType === "privy"
+    );
 
-    if (isAlreadyDelegatedWallet && !isAlreadyDelegatedToThisAgent) {
-      const agentId = agentState.agent?.id || "";
-      return delegateOrUndelegate(agentId, true);
-    }
+    const evmWallet: any = user?.linkedAccounts.find(
+      (account) =>
+        account.type === "wallet" &&
+        account.chainType === "ethereum" &&
+        account.walletClientType === "privy"
+    );
 
-    if (isAlreadyDelegatedWallet && isAlreadyDelegatedToThisAgent) {
+    if (
+      solanaWallet?.delegated &&
+      evmWallet?.delegated &&
+      isAlreadyDelegatedToThisAgent
+    ) {
       return onRevoke();
     }
+
+    showGrantPermission(false);
+    return showSelectNetworkModal(true);
   };
 
   const btnText = user == null ? "Connect Wallet" : "Continue";

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
+import classNames from "classnames";
 
 import Loading from "@/components/ui/loading";
 import ModalWrapper from "@/components/modal/modal-wrapper";
@@ -12,7 +13,6 @@ import GrantPermission from "./grant-permission";
 import WhyGrantPermission from "./why-grant-permission";
 import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
-import classNames from "classnames";
 
 const Terminal = () => {
   const { fetchDelegationDetails } = useAgentActions();
@@ -21,8 +21,28 @@ const Terminal = () => {
   const { ready, user } = usePrivy();
   const agent = agentState.agent;
 
+  const solanaWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "solana" &&
+      account.walletClientType === "privy"
+  );
+
+  const evmWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "ethereum" &&
+      account.walletClientType === "privy"
+  );
+
   const permissionGranted =
-    user?.wallet?.delegated && agentState.delegationDetails?.isActive;
+    evmWallet?.delegated &&
+    solanaWallet?.delegated &&
+    agentState.delegationDetails?.isActive;
+
+  const loading =
+    agentState.loadingAgent ||
+    (!agentState.delegationDetails && agentState.loadingDelegationDetails);
 
   useEffect(
     function getDelegationInfo() {
@@ -34,10 +54,6 @@ const Terminal = () => {
     [agent, ready]
   );
 
-  if (agentState.loadingAgent || agentState.loadingDelegationDetails) {
-    return <Loading />;
-  }
-
   return (
     <>
       <div
@@ -46,17 +62,23 @@ const Terminal = () => {
           "px-5": !user,
         })}
       >
-        <div
-          className={classNames(
-            "flex flex-col lg:flex-row items-stretch gap-[30px]"
-          )}
-        >
-          <AgentOverview />
+        {loading && (
+          <div className="flex flex-col xl:flex-row items-stretch">
+            <Loading />
+          </div>
+        )}
 
-          <AgentInfos />
-        </div>
+        {!loading && (
+          <>
+            <div className="flex flex-col xl:flex-row items-stretch gap-[30px]">
+              <AgentOverview />
 
-        <WhyGrantPermission />
+              <AgentInfos />
+            </div>
+
+            <WhyGrantPermission />
+          </>
+        )}
       </div>
 
       <ModalWrapper

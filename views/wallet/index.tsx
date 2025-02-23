@@ -16,31 +16,17 @@ import ETHSOL from "./eth-sol";
 
 const Wallet = () => {
   const { user } = usePrivy();
-  const { shwoSelectNetworkModal } = useAppActions();
+  const { showSelectNetworkModal } = useAppActions();
   const [walletInteraction, setWalletInteraction] =
     useState<WalletInteration>("main");
 
   const balance = "0.00";
 
-  const solanaWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "solana" &&
-      account.walletClientType === "privy"
-  );
-  const evmWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "ethereum" &&
-      account.walletClientType === "privy"
-  );
-  const address = solanaWallet?.address || "";
-
   const actions = [
     {
       title: "Add money",
       icon: <CoinIcon />,
-      action: () => shwoSelectNetworkModal(true),
+      action: () => showSelectNetworkModal(true),
     },
     {
       title: "Withdraw",

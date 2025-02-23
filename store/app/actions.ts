@@ -39,7 +39,7 @@ const useAppActions = () => {
     dispatch(setOpenGrantPermission(show));
   };
 
-  const shwoSelectNetworkModal = (show: boolean) =>
+  const showSelectNetworkModal = (show: boolean) =>
     dispatch(setOpenSelectNetworkModal(show));
 
   return {
@@ -48,7 +48,7 @@ const useAppActions = () => {
     hideToast,
     registerUser,
     showGrantPermission,
-    shwoSelectNetworkModal,
+    showSelectNetworkModal,
   };
 };
 

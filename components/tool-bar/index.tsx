@@ -1,11 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import classNames from "classnames";
 import { AnimatePresence } from "framer-motion";
 import { usePrivy } from "@privy-io/react-auth";
 
-import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { setTokenHeader } from "@/utils/axios";
 import useAgentActions from "@/store/agent/actions";
 import useTruncateText from "@/hooks/useTruncateText";
@@ -16,7 +14,6 @@ import Dropdown from "./dropdown";
 
 const LWToolBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const { pathname } = useSystemFunctions();
   const { ready, authenticated, login, user, getAccessToken } = usePrivy();
   const { connectUser } = useAgentActions();
   const { truncate } = useTruncateText();
@@ -33,7 +30,6 @@ const LWToolBar = () => {
     linkedTwitter?.username ||
     truncate(address, 4, 5);
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
-  const isTradeRoute = pathname.split("/")[2] === "trade";
 
   const authUser = async () => {
     if (!user) return;
@@ -55,7 +51,7 @@ const LWToolBar = () => {
     authUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
-  console.log(user);
+
   return (
     <div
       className="w-full sticky top-0 flex items-center justify-between gap-5 px-5 py-5 xl:bg-transparent z-10 rounded-full min-h-[85.5px]"

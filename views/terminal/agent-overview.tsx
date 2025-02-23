@@ -10,20 +10,36 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 
 const AgentOverview = () => {
-  const { navigate, agentState } = useSystemFunctions();
+  const { navigate, agentState, dispatch } = useSystemFunctions();
   const { ready, user } = usePrivy();
-  const { shwoSelectNetworkModal } = useAppActions();
+  const { showGrantPermission } = useAppActions();
 
   const agent = agentState.agent;
   const name = agent?.name || "";
 
+  const solanaWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "solana" &&
+      account.walletClientType === "privy"
+  );
+
+  const evmWallet: any = user?.linkedAccounts.find(
+    (account) =>
+      account.type === "wallet" &&
+      account.chainType === "ethereum" &&
+      account.walletClientType === "privy"
+  );
+
   const permissionGranted =
-    user?.wallet?.delegated && agentState.delegationDetails?.isActive;
+    evmWallet?.delegated &&
+    solanaWallet?.delegated &&
+    agentState.delegationDetails?.isActive;
 
   const actions: Array<ILWButton> = [
     {
       title: `${permissionGranted ? "Revoke" : "Grant Permission"}`,
-      onClick: () => shwoSelectNetworkModal(true),
+      onClick: () => showGrantPermission(true),
       variant: "primaryAlt",
     },
     {

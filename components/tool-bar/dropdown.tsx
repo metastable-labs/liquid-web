@@ -6,6 +6,7 @@ import useTruncateText from "@/hooks/useTruncateText";
 import useCopy from "@/hooks/useCopy";
 import { EmptyWalletIcon, LogoutIcon } from "@/public/icons";
 import LWClickAnimation from "../click-animation";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const isAddress = (value: string): boolean => /^0x[a-fA-F0-9]{40}$/.test(value);
 
@@ -13,6 +14,7 @@ const Dropdown = () => {
   const { user, logout } = usePrivy();
   const { truncate } = useTruncateText();
   const { handleCopy } = useCopy();
+  const { navigate } = useSystemFunctions();
 
   const address = user?.wallet?.address || "";
   const linkedTwitter = user?.linkedAccounts?.find(
@@ -36,7 +38,11 @@ const Dropdown = () => {
     {
       icon: <LogoutIcon />,
       title: "Log out",
-      action: logout,
+      action: () => {
+        logout().then(() => {
+          navigate.replace("/");
+        });
+      },
     },
   ];
 

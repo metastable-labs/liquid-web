@@ -66,14 +66,14 @@ const Menu = () => {
     <>
       <LWClickAnimation
         onClick={() => setIsOpen(true)}
-        className="w-fit h-fit lg:hidden"
+        className="w-fit h-fit xl:hidden"
       >
         <MenuIcon />
       </LWClickAnimation>
 
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 justify-end flex lg:hidden">
+          <div className="fixed inset-0 z-50 justify-end flex xl:hidden">
             <motion.div
               className="fixed inset-0 bg-black/50"
               variants={overlayVariants}

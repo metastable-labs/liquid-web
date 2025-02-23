@@ -115,13 +115,11 @@ const LWAgentCard = ({
           </div>
         </div>
 
-        <a
-          href="#"
-          target="_blank"
+        <div
           className={classNames({ "lg:hidden w-fit": variant === "primary" })}
         >
           <ExternalLinkIcon />
-        </a>
+        </div>
       </div>
 
       <div
@@ -171,9 +169,9 @@ const LWAgentCard = ({
             </span>
           </LWClickAnimation>
 
-          <a href="#" target="_blank" className="hidden lg:block">
+          <div className="hidden lg:block">
             <ExternalLinkIcon />
-          </a>
+          </div>
         </div>
       )}
     </div>
