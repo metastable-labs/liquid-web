@@ -6,16 +6,16 @@ const permissionsInfo = [
   </p>,
   <p key={1}>
     Just click <span className="font-bold">{"Grant Permissions"}</span> on the
-    agent&apos;s page and
+    agent&apos;s page and{" "}
     <span className="font-bold">grant trading permissions</span> via a secure
-    delegation (e.g, Privy).
+    delegation powered by Privy.
   </p>,
   <p key={2}>
     If the agent succeeds,{" "}
     <span className="font-bold">
       your wallet sees the profits from those trades.
     </span>{" "}
-    You can
+    You can{" "}
     <span className="font-bold">revoke this permission</span> anytime.
   </p>,
 ];
