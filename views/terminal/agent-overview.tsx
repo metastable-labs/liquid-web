@@ -43,7 +43,7 @@ const AgentOverview = () => {
       variant: "primaryAlt",
     },
     {
-      title: `Trade $${agent?.token.symbol}`,
+      title: `Trade (coming soon)`, // `Trade $${agent?.token.symbol}`
       onClick: () => navigate.push(`/${agent?.id}/trade`),
       variant: "secondary",
     },
@@ -172,13 +172,23 @@ const AgentOverview = () => {
       <div className="flex flex-col md:flex-row md:items-center gap-6">
         {ready &&
           actions.map((action, index) => (
-            <LWButton
+            <div
               key={index}
-              title={action.title}
-              onClick={action.onClick}
-              variant={action.variant}
-              className="w-full"
-            />
+              className={classNames("w-full", {
+                relative: action.variant === "secondary",
+              })}
+            >
+              <LWButton
+                title={action.title}
+                onClick={action.onClick}
+                variant={action.variant}
+                className="w-full"
+              />
+
+              {action.variant === "secondary" && (
+                <div className="rounded-[21.6px] bg-[rgba(217, 217, 217, 0.01)] backdrop-blur-[1px] absolute w-full h-full top-0 left-0" />
+              )}
+            </div>
           ))}
       </div>
     </div>
