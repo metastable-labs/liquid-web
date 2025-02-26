@@ -18,7 +18,12 @@ const Withdraw = ({ onClose }: InteractionProps) => {
     useFormattedAmount();
 
   const steps = [
-    <Step1 key={1} setStep={setStep} setAddress={setAddress} />,
+    <Step1
+      key={1}
+      address={address}
+      setStep={setStep}
+      setAddress={setAddress}
+    />,
     <Step2
       key={2}
       address={address}
