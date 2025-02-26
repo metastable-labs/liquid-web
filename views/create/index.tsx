@@ -7,8 +7,6 @@ import UiLoading from "@/components/ui/loading";
 const Create = () => {
   const { ready } = usePrivy();
 
-  console.log(ready);
-
   if (!ready) {
     return <UiLoading />;
   }

@@ -182,7 +182,7 @@ const Wallet = () => {
         </AnimatePresence>
       </div>
 
-      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">
+      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white hidden xl:flex flex-col gap-[70px]">
         <h1 className="text-[19.7px] leading-[26px] text-primary-400 font-medium">
           Activity
         </h1>
