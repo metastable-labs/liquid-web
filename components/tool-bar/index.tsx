@@ -73,7 +73,11 @@ const LWToolBar = () => {
       />
 
       <div className="flex items-center gap-5">
-        <a href="#" target="_blank" className="hidden lg:block">
+        <a
+          href="https://metastablelabs.notion.site/How-Does-it-Work-18b716767cb480b2bf19e34d82b95576?pvs=4"
+          target="_blank"
+          className="hidden lg:block"
+        >
           <span className="text-[14px] leading-[18.48px] text-primary-50 font-medium">
             How it works?
           </span>

@@ -1,30 +1,48 @@
 import { useState } from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import { ChevronDownIcon } from "@/public/icons";
 import { agentLog } from "./dummy";
 
-const Log = ({ date, transactions }: AgentLog) => {
-  const formattedDate = moment(date).format("DD/MM/YY");
-  return (
-    <div className="flex flex-col items-stretch gap-4 text-[15px] leading-[19.8px]">
-      <span className="text-primary-400 font-medium">{formattedDate}</span>
+const Log = ({ date, message, type, initiator, loading }: Log) => {
+  const formattedDate = moment(date).format("h:mm a");
 
-      <div className="self-stretch flex flex-col items-stretch gap-6">
-        {transactions.map((transaction, index) => (
-          <div key={index} className="flex items-center justify-between gap-5">
-            <p className="text-primary-1700">
-              {`Agent ${transaction.type === "buy" ? "bought" : "sold"} $${
-                transaction.amount
-              } worth of ${transaction.token}`}
-            </p>
-            <span className="text-primary-100">
-              {moment(transaction.date).format("h:mm a")}
+  return (
+    <div className="self-stretch flex items-center justify-between gap-10 text-[15px] leading-[19.8px]">
+      <div className="flex items-center gap-1">
+        <span className="text-primary-600">{">>>"}</span>
+
+        {loading ? (
+          <span className="text-primary-600">. . .</span>
+        ) : (
+          <p>
+            <span
+              className={classNames("capitalize", {
+                "text-primary-2800": type === "info",
+                "text-primary-2000": type === "warning",
+                "text-primary-2500": type === "error",
+                "text-primary-1000": type === "success",
+              })}
+            >
+              {initiator && `[${initiator}] ~`}
+            </span>{" "}
+            <span
+              className={classNames("capitalize", {
+                "text-primary-600": type === "info",
+                "text-primary-2000": type === "warning",
+                "text-primary-2500": type === "error",
+                "text-primary-1000": type === "success",
+              })}
+            >
+              {message}
             </span>
-          </div>
-        ))}
+          </p>
+        )}
       </div>
+
+      <span className="text-primary-100">{formattedDate}</span>
     </div>
   );
 };
@@ -52,13 +70,13 @@ const AgentLog = () => {
       >
         <div className="flex flex-col items-stretch gap-6 pb-10">
           <h1
-            className="text-[28px] leading-[31.36px] text-primary-2350 font-bold font-QuantaGroteskPro sticky -top-9 pt-5"
+            className="text-[20px] leading-[23.2px] text-primary-2850 font-QuantaGroteskPro sticky -top-9 pt-5"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.5) 70%, transparent 100%)",
+                "linear-gradient(to bottom, rgba(15, 23, 42, 1) 0%, rgba(15, 23, 42, 0.8) 50%, rgba(15, 23, 42, 0.5) 80%, transparent 100%)",
             }}
           >
-            Agent&apos;s Log
+            WELCOME TO LIQUID
           </h1>
 
           {agentLog.map((log, index) => (
