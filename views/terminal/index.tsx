@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import classNames from "classnames";
 
@@ -7,52 +6,44 @@ import Loading from "@/components/ui/loading";
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
-import useAgentActions from "@/store/agent/actions";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import AgentLog from "./agent-log";
 import GrantPermission from "./grant-permission";
 import WhyGrantPermission from "./why-grant-permission";
 import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
+import { useEffect, useState } from "react";
 
 const Terminal = () => {
-  const { fetchDelegationDetails } = useAgentActions();
   const { appState, agentState } = useSystemFunctions();
   const { showGrantPermission } = useAppActions();
-  const { ready, user } = usePrivy();
-  const agent = agentState.agent;
+  const { user, ready } = usePrivy();
+  const { solanaWallet, evmWallet } = useLinkedAccounts();
+  const { delegationDetails } = agentState;
 
-  const solanaWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "solana" &&
-      account.walletClientType === "privy"
-  );
-
-  const evmWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "ethereum" &&
-      account.walletClientType === "privy"
-  );
-
-  const permissionGranted =
-    evmWallet?.delegated &&
-    solanaWallet?.delegated &&
-    agentState.delegationDetails?.isActive;
+  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
   const loading =
     agentState.loadingAgent ||
     (!agentState.delegationDetails && agentState.loadingDelegationDetails);
 
-  useEffect(
-    function getDelegationInfo() {
-      if (!agent?.id || !ready) return;
+  useEffect(() => {
+    const permissionGranted =
+      user && ready
+        ? evmWallet?.delegated &&
+          (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
+          (delegationDetails ? delegationDetails?.isActive : false)
+        : false;
 
-      fetchDelegationDetails(agent?.id);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [agent, ready]
-  );
+    setIsPermissionGranted(permissionGranted);
+  }, [
+    user,
+    ready,
+    delegationDetails,
+    evmWallet,
+    solanaWallet,
+    appState.isSolanaSupported,
+  ]);
 
   return (
     <>
@@ -82,7 +73,7 @@ const Terminal = () => {
       </div>
 
       <ModalWrapper
-        title={permissionGranted ? "Revoke Permission" : "Grant Permission"}
+        title={isPermissionGranted ? "Revoke Permission" : "Grant Permission"}
         isOpen={appState.openGrantPermission}
         onClose={() => showGrantPermission(false)}
         enlargeTitle

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import { usePrivy } from "@privy-io/react-auth";
@@ -11,24 +11,22 @@ import useAppActions from "@/store/app/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 const AgentOverview = () => {
-  const { navigate, agentState } = useSystemFunctions();
+  const { navigate, agentState, appState } = useSystemFunctions();
   const { ready, user } = usePrivy();
   const { showGrantPermission } = useAppActions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
 
+  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+
+  const { delegationDetails } = agentState;
   const agent = agentState.agent;
   const name = agent?.name || "";
 
-  const permissionGranted =
-    evmWallet?.delegated &&
-    solanaWallet?.delegated &&
-    agentState.delegationDetails?.isActive;
-
   const actions: Array<ILWButton> = [
     {
-      title: `${permissionGranted ? "Revoke" : "Grant Permission"}`,
+      title: `${isPermissionGranted ? "Revoke" : "Grant Permission"}`,
       onClick: () => showGrantPermission(true),
-      variant: "primaryAlt",
+      variant: isPermissionGranted ? "danger" : "primaryAlt",
     },
     {
       title: `Trade (coming soon)`, // `Trade $${agent?.token.symbol}`
@@ -51,6 +49,24 @@ const AgentOverview = () => {
       variant: "positive",
     },
   ];
+
+  useEffect(() => {
+    const permissionGranted =
+      user && ready
+        ? evmWallet?.delegated &&
+          (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
+          (delegationDetails ? delegationDetails?.isActive : false)
+        : false;
+
+    setIsPermissionGranted(permissionGranted);
+  }, [
+    user,
+    ready,
+    delegationDetails,
+    evmWallet,
+    solanaWallet,
+    appState.isSolanaSupported,
+  ]);
 
   const extras = [
     <span
