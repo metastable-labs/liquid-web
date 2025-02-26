@@ -3,13 +3,15 @@ import { LWButton } from "@/components";
 import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAgentActions from "@/store/agent/actions";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 function DelegateActionButton() {
   const { user, login } = usePrivy();
   const { delegateOrUndelegate } = useAgentActions();
   const { revokeWallets } = useDelegatedActions();
   const { showGrantPermission, showSelectNetworkModal } = useAppActions();
-  const { agentState } = useSystemFunctions();
+  const { agentState, appState } = useSystemFunctions();
+  const { solanaWallet, evmWallet } = useLinkedAccounts();
 
   const isAlreadyDelegatedToThisAgent = agentState.delegationDetails?.isActive;
 
@@ -27,22 +29,8 @@ function DelegateActionButton() {
       return login();
     }
 
-    const solanaWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "solana" &&
-        account.walletClientType === "privy"
-    );
-
-    const evmWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "ethereum" &&
-        account.walletClientType === "privy"
-    );
-
     if (
-      solanaWallet?.delegated &&
+      (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
       evmWallet?.delegated &&
       isAlreadyDelegatedToThisAgent
     ) {

@@ -19,8 +19,12 @@ const LWButton = ({
         `flex justify-center items-center rounded-[21.6px] ${className}`,
         {
           "px-20 py-3.5": variant === "primary",
-          "px-14 h-[52px]": variant === "primaryAlt" || variant === "secondary",
+          "px-14 h-[52px]":
+            variant === "primaryAlt" ||
+            variant === "secondary" ||
+            variant === "danger",
           "bg-primary-350": variant === "primary" || variant === "primaryAlt",
+          "bg-primary-1350": variant === "danger",
           "border border-primary-550 bg-primary-600": variant === "secondary",
           "w-full": fullWidth,
           "opacity-60 pointer-events-none": disabled || loading,
@@ -33,9 +37,14 @@ const LWButton = ({
       <span
         className={classNames("lg:whitespace-nowrap", {
           "text-[16px] leading-[16px] font-semibold": variant === "primary",
-          "text-white": variant === "primary" || variant === "primaryAlt",
+          "text-white":
+            variant === "primary" ||
+            variant === "primaryAlt" ||
+            variant === "danger",
           "text-[18px] leading-[18px] font-semibold font-QuantaGroteskPro":
-            variant === "secondary" || variant === "primaryAlt",
+            variant === "secondary" ||
+            variant === "primaryAlt" ||
+            variant === "danger",
           "text-primary-1800": variant === "secondary",
         })}
       >

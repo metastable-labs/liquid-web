@@ -8,10 +8,11 @@ import { usePrivy } from "@privy-io/react-auth";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { MenuIcon, RotatedAddIcon } from "@/public/icons";
 import { navigationItems } from "@/constants/navigation";
+import useTruncateText from "@/hooks/useTruncateText";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import LWClickAnimation from "../click-animation";
 import LWBackdrop from "../backdrop";
 import Dropdown from "./dropdown";
-import useTruncateText from "@/hooks/useTruncateText";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -27,17 +28,12 @@ const Menu = () => {
   const { pathname } = useSystemFunctions();
   const { user } = usePrivy();
   const { truncate } = useTruncateText();
+  const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
 
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const address = user?.wallet?.address || "";
-  const linkedTwitter = user?.linkedAccounts?.find(
-    (account) => account.type === "twitter_oauth"
-  );
-  const linkedFarcaster = user?.linkedAccounts?.find(
-    (account) => account.type === "farcaster"
-  );
   const userName =
     linkedFarcaster?.username ||
     linkedTwitter?.username ||

@@ -1,8 +1,12 @@
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import classNames from "classnames";
 import Image from "next/image";
 
 const ETHSOL = () => {
-  const images = ["/images/base.png", "/images/sol.png"];
+  const { appState } = useSystemFunctions();
+  const images = appState.isSolanaSupported
+    ? ["/images/base.png", "/images/sol.png"]
+    : ["/images/base.png"];
 
   return (
     <div className="flex items-center -space-x-2">

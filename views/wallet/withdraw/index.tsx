@@ -1,39 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { LWClickAnimation } from "@/components";
 import { ArrowLeftIcon } from "@/public/icons";
 import useFormattedAmount from "@/hooks/useFormattedAmount";
 import { appearAnimation } from "@/utils/helpers";
+import useAddressValidator from "@/hooks/useAddressValidator";
 import Step1 from "./step1";
 import Step2 from "./step2";
-import Step3 from "./step3";
 
 const Withdraw = ({ onClose }: InteractionProps) => {
   const [step, setStep] = useState<number>(0);
-  const [address, setAddress] = useState<string>();
-  const { amount, updateAmount, amountWithThousandSeparator } =
-    useFormattedAmount();
+  const [address, setAddress] = useState<string>("");
+  const { updateAmount, amountWithThousandSeparator } = useFormattedAmount();
+  const { isEthValid, isSolValid } = useAddressValidator(address);
 
   const steps = [
-    <Step1
-      key={1}
-      address={address}
-      setStep={setStep}
-      setAddress={setAddress}
-    />,
+    <Step1 key={1} setAddress={setAddress} />,
     <Step2
       key={2}
       address={address}
       amount={amountWithThousandSeparator}
       setAmount={updateAmount}
       setStep={setStep}
-    />,
-    <Step3
-      key={3}
       onClose={onClose}
-      address={address}
-      amount={amountWithThousandSeparator}
     />,
   ];
 
@@ -41,6 +31,16 @@ const Withdraw = ({ onClose }: InteractionProps) => {
     if (step === 0) return onClose();
     setStep(step - 1);
   };
+
+  useEffect(() => {
+    if (!isEthValid && !isSolValid) return;
+
+    if (step === 0) {
+      setStep(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEthValid, isSolValid]);
+
   return (
     <div className="-mt-14 flex flex-col items-stretch gap-6 h-full">
       <LWClickAnimation

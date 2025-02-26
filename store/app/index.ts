@@ -7,6 +7,7 @@ export interface AppState {
   toast: ToastState;
   openGrantPermission: boolean;
   openSelectNetworkModal: boolean;
+  isSolanaSupported: boolean;
 }
 
 const initialState: AppState = {
@@ -19,6 +20,7 @@ const initialState: AppState = {
   },
   openGrantPermission: false,
   openSelectNetworkModal: false,
+  isSolanaSupported: false,
 };
 
 export const appReducer = createSlice({

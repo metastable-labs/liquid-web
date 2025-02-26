@@ -25,21 +25,6 @@ const Step1 = ({ setStep, setAddress, address }: WithdrawStepProps) => {
             <WalletIconInactive fill="#94A3B8" width={24} height={24} />
           </div>
         </div>
-
-        <div className="px-3.5 py-2 rounded-3xl border border-primary-2100 bg-primary-1750 h-14 self-stretch flex items-center justify-between gap-5">
-          <span className="text-[16px] leading-[19.84px] text-primary-2350">
-            This is an EVM wallet
-          </span>
-
-          <Image
-            src="/images/base.png"
-            alt="base icon"
-            width={20}
-            height={20}
-            quality={100}
-            className="w-5 h-5 rounded-full border border-primary-2750"
-          />
-        </div>
       </div>
 
       <div className="flex flex-col items-center">

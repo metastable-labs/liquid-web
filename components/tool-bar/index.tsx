@@ -11,27 +11,26 @@ import LWClickAnimation from "../click-animation";
 import Menu from "./menu";
 import LWBackdrop from "../backdrop";
 import Dropdown from "./dropdown";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const LWToolBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { ready, authenticated, login, user, getAccessToken } = usePrivy();
-  const { connectUser } = useAgentActions();
+  const { connectUser, fetchDelegationDetails } = useAgentActions();
   const { truncate } = useTruncateText();
+  const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
+  const { agentState } = useSystemFunctions();
 
   const address = user?.wallet?.address || "";
-  const linkedTwitter = user?.linkedAccounts?.find(
-    (account) => account.type === "twitter_oauth"
-  );
-  const linkedFarcaster = user?.linkedAccounts?.find(
-    (account) => account.type === "farcaster"
-  );
   const username =
     linkedFarcaster?.username ||
     linkedTwitter?.username ||
     truncate(address, 4, 5);
+
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
-  const authUser = async () => {
+  const connect = async () => {
     if (!user) return;
 
     const accessToken = await getAccessToken();
@@ -42,15 +41,19 @@ const LWToolBar = () => {
 
     setTimeout(() => {
       connectUser();
+
+      if (!agentState.agent?.id) return;
+
+      fetchDelegationDetails(agentState.agent?.id);
     }, 1500);
   };
 
   const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
 
   useEffect(() => {
-    authUser();
+    connect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id]);
+  }, [user?.id, agentState.agent]);
 
   return (
     <div
