@@ -106,19 +106,21 @@ function ModalWrapper({
             >
               <LWClickAnimation
                 onClick={onClose}
-                className="p-2.5 bg-white rounded-full md:sticky h-fit absolute z-20 right-0 md:left-0 md:block"
+                className="p-2.5 bg-primary-950 rounded-full md:sticky h-fit absolute z-20 right-0 md:left-0 md:block"
               >
-                <CloseIcon />
+                <CloseIcon fill="white" />
               </LWClickAnimation>
 
               <div
-                className="flex py-9 sticky h-full overflow-auto no-scrollbar bg-white px-6 w-full md:rounded-[32px]"
+                className="flex py-9 sticky h-full overflow-auto no-scrollbar bg-primary-950 px-6 w-full md:rounded-[32px]"
                 style={{
                   borderTopLeftRadius: "32px",
                   borderTopRightRadius: "32px",
                 }}
               >
-                <div className="md:max-w-[375px]">{children}</div>
+                <div className="max-w-[375px]  md:min-w-[525px] md:max-w-2xl">
+                  {children}
+                </div>
               </div>
             </motion.div>
           )}

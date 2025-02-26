@@ -68,6 +68,8 @@ export default {
           2650: "#EEF4FF",
           2700: "#1A8860",
           2750: "#C6DDFF",
+          2800: "#ACF",
+          2850: "#D9D9D9",
         },
       },
       boxShadow: {

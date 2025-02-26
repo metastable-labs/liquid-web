@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "Liquid",
   description: "Liquid web",
   keywords: [
+    "ai",
+    "ai agents",    
     "liquid",
     "pools",
     "crypto agent",
@@ -21,27 +23,27 @@ export const metadata: Metadata = {
   ],
   applicationName: "Liquid",
   openGraph: {
-    title: "Liquid",
-    description: "The First Collaborative Finance Curation Platform",
-    url: "https://beta.useliquid.xyz",
+    title: "Launch an onchain AI agent in seconds",
+    description: "Liquid makes crypto simple. an AI agent that takes onchain actions for you.",
+    url: "https://app.useliquid.xyz",
     type: "website",
     images: [
       {
-        url: "https://res.cloudinary.com/djzeufu4j/image/upload/v1736164264/liquid_preview_knkf6b.jpg",
+        url: "https://res.cloudinary.com/njokuscript/image/upload/v1740572700/Section_preview_2_u2yliq.png",
         width: 1200,
         height: 630,
       },
     ],
-    siteName: "beta.useliquid.xyz",
+    siteName: "app.useliquid.xyz",
   },
   twitter: {
     card: "summary_large_image",
-    site: "https://beta.useliquid.xyz",
-    title: "Liquid",
-    description: "The First Collaborative Finance Curation Platform",
+    site: "https://app.useliquid.xyz",
+    title: "Launch an onchain AI agent in seconds",
+    description: "Liquid makes crypto simple. an AI agent that takes onchain actions for you.",
     images: [
       {
-        url: "https://res.cloudinary.com/djzeufu4j/image/upload/v1736164264/liquid_preview_knkf6b.jpg",
+        url: "https://res.cloudinary.com/njokuscript/image/upload/v1740572700/Section_preview_2_u2yliq.png",
         width: 1200,
         height: 630,
       },
@@ -61,14 +63,14 @@ export default function RootLayout({
           name="fc:frame"
           content='{
             "version": "next",
-            "imageUrl": "https://beta.useliquid.xyz/liquid_preview.jpg",
+            "imageUrl": "https://app.useliquid.xyz/liquid_preview.jpg",
             "button":{
               "title": "Check this out",
               "action": {
                 "type": "launch_frame",
                 "name": "Liquid",
-                "url": "https://beta.useliquid.xyz",
-                "splashImageUrl": "https://beta.useliquid.xyz/liquid-logo.png",
+                "url": "https://app.useliquid.xyz",
+                "splashImageUrl": "https://app.useliquid.xyz/liquid-logo.png",
                 "splashBackgroundColor": "#f7f7f7"
               }
             }

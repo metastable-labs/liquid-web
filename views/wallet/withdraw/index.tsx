@@ -11,14 +11,17 @@ import Step3 from "./step3";
 
 const Withdraw = ({ onClose }: InteractionProps) => {
   const [step, setStep] = useState<number>(0);
-  const [address, setAddress] = useState<string>(
-    "0x1234567890qwertyuio098765432wedrftgyhj"
-  );
+  const [address, setAddress] = useState<string>();
   const { amount, updateAmount, amountWithThousandSeparator } =
     useFormattedAmount();
 
   const steps = [
-    <Step1 key={1} setStep={setStep} setAddress={setAddress} />,
+    <Step1
+      key={1}
+      address={address}
+      setStep={setStep}
+      setAddress={setAddress}
+    />,
     <Step2
       key={2}
       address={address}
