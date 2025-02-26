@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { isAddress } from "viem";
 import { PublicKey } from "@solana/web3.js";
+import useSystemFunctions from "./useSystemFunctions";
 
-function useAddressValidator(address: string) {
+function useAddressValidator(address: string, delay: number = 1000) {
+  const { appState } = useSystemFunctions();
   const [isEthValid, setIsEthValid] = useState(false);
   const [isSolValid, setIsSolValid] = useState(false);
 
@@ -18,8 +20,10 @@ function useAddressValidator(address: string) {
 
     // Check Solana address validity
     try {
-      new PublicKey(address);
-      setIsSolValid(true);
+      if (appState.isSolanaSupported) {
+        new PublicKey(address);
+        setIsSolValid(true);
+      }
     } catch (error) {
       setIsSolValid(false);
     }
@@ -28,13 +32,13 @@ function useAddressValidator(address: string) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       check();
-    }, 1000);
+    }, delay);
 
     return () => {
       clearTimeout(timeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address]);
+  }, [address, appState.isSolanaSupported]);
 
   return { isEthValid, isSolValid };
 }

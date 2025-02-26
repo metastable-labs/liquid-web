@@ -5,18 +5,14 @@ import { LWClickAnimation } from "@/components";
 import { ArrowLeftIcon } from "@/public/icons";
 import useFormattedAmount from "@/hooks/useFormattedAmount";
 import { appearAnimation } from "@/utils/helpers";
+import useAddressValidator from "@/hooks/useAddressValidator";
 import Step1 from "./step1";
 import Step2 from "./step2";
-import Step3 from "./step3";
-import useAddressValidator from "@/hooks/useAddressValidator";
 
 const Withdraw = ({ onClose }: InteractionProps) => {
   const [step, setStep] = useState<number>(0);
-  const [address, setAddress] = useState<string>(
-    "0x1234567890qwertyuio098765432wedrftgyhj"
-  );
-  const { amount, updateAmount, amountWithThousandSeparator } =
-    useFormattedAmount();
+  const [address, setAddress] = useState<string>("");
+  const { updateAmount, amountWithThousandSeparator } = useFormattedAmount();
   const { isEthValid, isSolValid } = useAddressValidator(address);
 
   const steps = [
@@ -27,12 +23,7 @@ const Withdraw = ({ onClose }: InteractionProps) => {
       amount={amountWithThousandSeparator}
       setAmount={updateAmount}
       setStep={setStep}
-    />,
-    <Step3
-      key={3}
       onClose={onClose}
-      address={address}
-      amount={amountWithThousandSeparator}
     />,
   ];
 

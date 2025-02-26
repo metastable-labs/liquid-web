@@ -6,19 +6,35 @@ import classNames from "classnames";
 import { LWClickAnimation } from "@/components";
 import useTruncateText from "@/hooks/useTruncateText";
 import useAddressValidator from "@/hooks/useAddressValidator";
+import useTransaction from "@/hooks/useTransaction";
 
-const Step2 = ({ address, amount, setStep, setAmount }: WithdrawStepProps) => {
+const Step2 = ({
+  address,
+  amount,
+  setStep,
+  setAmount,
+  onClose,
+}: WithdrawStepProps) => {
   const { truncatedText } = useTruncateText(address, 8, 8);
   const [inputWidth, setInputWidth] = useState(50);
   const spanRef = useRef<HTMLSpanElement>(null);
-  const { isEthValid } = useAddressValidator(address || "");
+  const { isEthValid, isSolValid } = useAddressValidator(address || "", 1);
+  const { sendTransaction } = useTransaction(onClose);
 
   const balance = 2000;
   const amountValue = amount?.replace(/,/g, "");
   const disableNext = !amount || Number(amountValue) > balance;
 
   const handleNext = () => {
-    setStep?.(2);
+    if ((!isEthValid && !isSolValid) || !address) return;
+
+    const amountValue = amount?.replace(/,/g, "");
+
+    sendTransaction(
+      address,
+      Number(amountValue),
+      isEthValid ? "evm" : "solana"
+    );
   };
 
   useEffect(() => {
