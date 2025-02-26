@@ -25,7 +25,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
           className={classNames(
             "w-full flex relative lg:border-t-0 lg:rounded-t-none lg:bg-transparent lg:overflow-visible mt-7 p-6 lg:p-0 border-t border-primary-150 rounded-t-[32px] bg-white overflow-y-scroll",
             {
-              "items-center justify-center": !showNavigation,
+              "lg:items-center lg:justify-center": !showNavigation,
               "lg:gap-[100px] lg:px-5 lg:pt-0": showNavigation,
             }
           )}

@@ -10,7 +10,7 @@ const Log = ({ date, message, type, initiator, loading }: Log) => {
   const formattedDate = moment(date).format("h:mm a");
 
   return (
-    <div className="self-stretch flex items-center justify-between gap-10 text-[15px] leading-[19.8px]">
+    <div className="self-stretch flex items-center justify-between gap-8 text-[15px] leading-[19.8px]">
       <div className="flex items-center gap-1">
         <span className="text-primary-600">{">>>"}</span>
 
@@ -42,7 +42,9 @@ const Log = ({ date, message, type, initiator, loading }: Log) => {
         )}
       </div>
 
-      <span className="text-primary-100">{formattedDate}</span>
+      <span className="text-primary-100 whitespace-nowrap">
+        {formattedDate}
+      </span>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const Step2 = ({
   const { truncatedText } = useTruncateText(address, 8, 8);
   const [inputWidth, setInputWidth] = useState(50);
   const spanRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { isEthValid, isSolValid } = useAddressValidator(address || "", 1);
   const { sendTransaction } = useTransaction(onClose);
 
@@ -39,12 +40,19 @@ const Step2 = ({
 
   useEffect(() => {
     if (spanRef.current) {
-      setInputWidth(spanRef.current.offsetWidth + 10); // +10px for padding
+      setInputWidth(spanRef.current.offsetWidth + 10);
     }
   }, [amount]);
 
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, []);
+
   return (
-    <div className="self-stretch flex flex-col gap-24">
+    <div ref={containerRef} className="self-stretch flex flex-col gap-24">
       <div className="flex flex-col gap-3">
         <div className="self-stretch px-4 py-2.5 flex items-center justify-center gap-2 border-b border-b-primary-550 shadow-withdrawAddressInput h-[60px]">
           <p className="w-full text-[16px] leading-[19.84px] text-primary-950 font-medium">
