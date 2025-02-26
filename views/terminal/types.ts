@@ -57,3 +57,11 @@ type AgentLog = {
   date: string;
   transactions: Array<Transaction>;
 };
+
+type Log = {
+  date: string;
+  message: string;
+  type: "info" | "warning" | "error" | "success";
+  initiator?: "user" | "aqua" | "error";
+  loading?: boolean;
+};
