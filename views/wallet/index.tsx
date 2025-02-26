@@ -39,7 +39,7 @@ const Wallet = () => {
     {
       title: "USD Coin",
       icon: "/images/usdc.png",
-      network: "sol",
+      network: "base",
       symbol: "USDC",
       balance: 4506,
       balanceUSDValue: 4508,
@@ -106,7 +106,7 @@ const Wallet = () => {
           </div>
 
           <div className="flex flex-col self-stretch items-stretch gpa-[29px]">
-            <h1 className="text-[24px] leading-[26.88px] tracking-[-0.6px] text-primary-50 font-medium">
+            <h1 className="mb-5 text-[24px] leading-[26.88px] tracking-[-0.6px] text-primary-50 font-medium">
               Assets
             </h1>
 

@@ -8,28 +8,16 @@ import { ShareIcon } from "@/public/icons";
 import { formatNumberWithSuffix } from "@/utils/helpers";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 const AgentOverview = () => {
-  const { navigate, agentState, dispatch } = useSystemFunctions();
+  const { navigate, agentState } = useSystemFunctions();
   const { ready, user } = usePrivy();
   const { showGrantPermission } = useAppActions();
+  const { solanaWallet, evmWallet } = useLinkedAccounts();
 
   const agent = agentState.agent;
   const name = agent?.name || "";
-
-  const solanaWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "solana" &&
-      account.walletClientType === "privy"
-  );
-
-  const evmWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "ethereum" &&
-      account.walletClientType === "privy"
-  );
 
   const permissionGranted =
     evmWallet?.delegated &&

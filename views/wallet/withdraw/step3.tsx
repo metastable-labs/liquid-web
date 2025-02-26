@@ -1,10 +1,12 @@
 import { LWClickAnimation } from "@/components";
+import useAddressValidator from "@/hooks/useAddressValidator";
 import useTruncateText from "@/hooks/useTruncateText";
 import classNames from "classnames";
 import { title } from "process";
 
 const Step3 = ({ address, amount, onClose }: WithdrawStepProps) => {
   const { truncatedText } = useTruncateText(address, 8, 8);
+  const { isEthValid } = useAddressValidator(address || "");
 
   const info = [
     {
@@ -13,7 +15,7 @@ const Step3 = ({ address, amount, onClose }: WithdrawStepProps) => {
     },
     {
       title: "Network",
-      value: "Base",
+      value: isEthValid ? "Base" : "Solana",
     },
     {
       title: "Network Fee",

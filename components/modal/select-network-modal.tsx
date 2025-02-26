@@ -7,15 +7,19 @@ import LWClickAnimation from "../click-animation";
 import { useDelegatedActions, usePrivy } from "@privy-io/react-auth";
 import useAgentActions from "@/store/agent/actions";
 import useFunding from "@/hooks/useFunding";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 const LWSelectNetworkModal = () => {
   const { appState, pathname } = useSystemFunctions();
-  const { showSelectNetworkModal, showGrantPermission } = useAppActions();
+  const { showSelectNetworkModal } = useAppActions();
   const { user } = usePrivy();
   const { delegateOrUndelegate } = useAgentActions();
   const { delegateWallet } = useDelegatedActions();
   const { agentState } = useSystemFunctions();
   const { fundWallet } = useFunding();
+  const { evmWallet, solanaWallet } = useLinkedAccounts();
+
+  const { isSolanaSupported } = appState;
 
   const isAlreadyDelegatedToThisAgent = agentState.delegationDetails?.isActive;
 
@@ -26,13 +30,6 @@ const LWSelectNetworkModal = () => {
 
   const onDelegateSolanaWallet = async () => {
     if (!user) return;
-
-    const solanaWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "solana" &&
-        account.walletClientType === "privy"
-    );
 
     if (solanaWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
       const agentId = agentState.agent?.id || "";
@@ -53,13 +50,6 @@ const LWSelectNetworkModal = () => {
   const onDelegateEvmWallet = async () => {
     if (!user) return;
 
-    const evmWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "ethereum" &&
-        account.walletClientType === "privy"
-    );
-
     if (evmWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
       const agentId = agentState.agent?.id || "";
       return delegateOrUndelegate(agentId, true);
@@ -77,13 +67,6 @@ const LWSelectNetworkModal = () => {
   };
 
   const onFundSolanaWallet = () => {
-    const solanaWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "solana" &&
-        account.walletClientType === "privy"
-    );
-
     if (!solanaWallet) return;
 
     fundWallet(solanaWallet.address, "solana");
@@ -91,13 +74,6 @@ const LWSelectNetworkModal = () => {
   };
 
   const onFundEvmWallet = () => {
-    const evmWallet: any = user?.linkedAccounts.find(
-      (account) =>
-        account.type === "wallet" &&
-        account.chainType === "ethereum" &&
-        account.walletClientType === "privy"
-    );
-
     if (!evmWallet) return;
 
     fundWallet(evmWallet.address, "evm");
@@ -120,18 +96,26 @@ const LWSelectNetworkModal = () => {
     return onFundSolanaWallet();
   };
 
-  const networks = [
-    {
-      title: "Base",
-      icon: "/images/base.png",
-      action: baseAction,
-    },
-    {
-      title: "Solana",
-      icon: "/images/sol.png",
-      action: solanaAction,
-    },
-  ];
+  const networks = isSolanaSupported
+    ? [
+        {
+          title: "Base",
+          icon: "/images/base.png",
+          action: baseAction,
+        },
+        {
+          title: "Solana",
+          icon: "/images/sol.png",
+          action: solanaAction,
+        },
+      ]
+    : [
+        {
+          title: "Base",
+          icon: "/images/base.png",
+          action: baseAction,
+        },
+      ];
 
   return (
     <ModalWrapper

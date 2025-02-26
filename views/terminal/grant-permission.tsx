@@ -1,5 +1,6 @@
-import { usePrivy } from "@privy-io/react-auth";
 import DelegateActionButton from "./delegate-action";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const permissionInfo = [
   "It's advisable to fund your wallet with ETH or SOL to set the max spend for unrestricted agent trades.",
@@ -12,23 +13,12 @@ const revokeInfo = [
 ];
 
 const GrantPermission = () => {
-  const { user } = usePrivy();
+  const { appState } = useSystemFunctions();
+  const { solanaWallet, evmWallet } = useLinkedAccounts();
 
-  const solanaWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "solana" &&
-      account.walletClientType === "privy"
-  );
-
-  const evmWallet: any = user?.linkedAccounts.find(
-    (account) =>
-      account.type === "wallet" &&
-      account.chainType === "ethereum" &&
-      account.walletClientType === "privy"
-  );
-
-  const permissionGranted = evmWallet?.delegated && solanaWallet?.delegated;
+  const permissionGranted =
+    evmWallet?.delegated &&
+    (appState.isSolanaSupported ? solanaWallet?.delegated : true);
 
   const info = permissionGranted ? revokeInfo : permissionInfo;
 

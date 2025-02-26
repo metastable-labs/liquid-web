@@ -15,8 +15,18 @@ const Create = () => {
         />
 
         <p className="text-[18px] leading-[22.32px] text-primary-1700 text-center max-w-xl">
-          Creation of Agent coming soon. For now, go to farcaster and tag
-          @getliquid, with your prompt and an Agent will be created for you.
+          Creation of Agent coming soon. For now, go to farcaster and tag{" "}
+          <span>
+            <a
+              href="https://warpcast.com/liquidapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400"
+            >
+              @liquidapp
+            </a>
+          </span>
+          , with your prompt and an Agent will be created for you.
         </p>
       </div>
 

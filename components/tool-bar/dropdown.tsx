@@ -7,6 +7,7 @@ import useCopy from "@/hooks/useCopy";
 import { EmptyWalletIcon, LogoutIcon } from "@/public/icons";
 import LWClickAnimation from "../click-animation";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 const isAddress = (value: string): boolean => /^0x[a-fA-F0-9]{40}$/.test(value);
 
@@ -15,18 +16,15 @@ const Dropdown = () => {
   const { truncate } = useTruncateText();
   const { handleCopy } = useCopy();
   const { navigate } = useSystemFunctions();
+  const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
 
   const address = user?.wallet?.address || "";
-  const linkedTwitter = user?.linkedAccounts?.find(
-    (account) => account.type === "twitter_oauth"
-  );
-  const linkedFarcaster = user?.linkedAccounts?.find(
-    (account) => account.type === "farcaster"
-  );
+
   const username =
     linkedFarcaster?.username ||
     linkedTwitter?.username ||
     truncate(address, 4, 5);
+
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
   const actions = [

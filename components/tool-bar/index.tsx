@@ -11,24 +11,21 @@ import LWClickAnimation from "../click-animation";
 import Menu from "./menu";
 import LWBackdrop from "../backdrop";
 import Dropdown from "./dropdown";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 const LWToolBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { ready, authenticated, login, user, getAccessToken } = usePrivy();
   const { connectUser } = useAgentActions();
   const { truncate } = useTruncateText();
+  const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
 
   const address = user?.wallet?.address || "";
-  const linkedTwitter = user?.linkedAccounts?.find(
-    (account) => account.type === "twitter_oauth"
-  );
-  const linkedFarcaster = user?.linkedAccounts?.find(
-    (account) => account.type === "farcaster"
-  );
   const username =
     linkedFarcaster?.username ||
     linkedTwitter?.username ||
     truncate(address, 4, 5);
+
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
   const authUser = async () => {
