@@ -1,4 +1,20 @@
-import Strategies from "./strategies";
-import Positions from "./positions";
+"use client";
+import AgentBuild from "./agent-build";
+import Terminal from "./terminal";
+import Trade from "./trade";
+import Create from "./create";
+import Wallet from "./wallet";
+import Permissions from "./permissions";
+import Agents from "./agents";
+import Explore from "./explore";
 
-export { Strategies, Positions };
+export {
+  AgentBuild,
+  Terminal,
+  Trade,
+  Create,
+  Agents,
+  Explore,
+  Permissions,
+  Wallet,
+};

@@ -17,6 +17,41 @@ import ToastIcon from "./toast-icon";
 import ChevronDownIcon from "./chevron-down-icon";
 import TreeIcon from "./tree-icon";
 import InfoCircleFillIcon from "./info-circle-fill-icon";
+import WalletAddIcon from "./wallet-add-icon";
+import CheckIcon from "./check-icon";
+import ChevronRightIcon from "./chevron-right-icon";
+import Phoenix from "./memecoin";
+import Orandis from "./orandis";
+import Solaris from "./solaris";
+import Liquid from "./liquid";
+import EditIcon from "./edit-icon";
+import ArrowCircleDownIcon from "./arrow-circle-down-icon";
+import ShareIcon from "./share-icon";
+import HeartIcon from "./heart-icon";
+import RepostIcon from "./repost-icon";
+import ReplyIcon from "./reply-icon";
+import ArrowUpIcon from "./arrow-up-icon";
+import UserIcon from "./user-icon";
+import ETHIcon from "./eth-icon";
+import InfoIcon from "./info-icon";
+import ExportIcon from "./export-icon";
+import CopyIcon from "./copy-icon";
+import AgentIconActive from "./agent-icon-active";
+import AgentIconInactive from "./agent-icon-inactive";
+import CreateIconActive from "./create-icon-active";
+import CreateIconInactive from "./create-icon-inactive";
+import PermissionsIconActive from "./permissions-icon-active";
+import PermissionsIconInactive from "./permissions-icon-inactive";
+import WalletIconActive from "./wallet-icon-active";
+import WalletIconInactive from "./wallet-icon-inactive";
+import MenuIcon from "./menu-icon";
+import RotatedAddIcon from "./rotated-add-icon";
+import ExternalLinkIcon from "./external-link-icon";
+import EmptyWalletIcon from "./empty-wallet-icon";
+import LogoutIcon from "./logout-icon";
+import CoinIcon from "./coin-icon";
+import ArrowUpAltIcon from "./arrow-up-alt-icon";
+import ExternalDriveIcon from "./external-drive-icon";
 
 export {
   CubeIcons,
@@ -38,4 +73,39 @@ export {
   ChevronDownIcon,
   TreeIcon,
   InfoCircleFillIcon,
+  WalletAddIcon,
+  CheckIcon,
+  ChevronRightIcon,
+  Phoenix,
+  Orandis,
+  Liquid,
+  Solaris,
+  EditIcon,
+  ArrowCircleDownIcon,
+  ShareIcon,
+  HeartIcon,
+  RepostIcon,
+  ReplyIcon,
+  ArrowUpIcon,
+  UserIcon,
+  ETHIcon,
+  InfoIcon,
+  ExportIcon,
+  CopyIcon,
+  AgentIconActive,
+  AgentIconInactive,
+  CreateIconActive,
+  CreateIconInactive,
+  PermissionsIconActive,
+  PermissionsIconInactive,
+  WalletIconActive,
+  WalletIconInactive,
+  MenuIcon,
+  RotatedAddIcon,
+  ExternalLinkIcon,
+  EmptyWalletIcon,
+  LogoutIcon,
+  ArrowUpAltIcon,
+  CoinIcon,
+  ExternalDriveIcon,
 };

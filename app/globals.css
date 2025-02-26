@@ -103,3 +103,26 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.scrollbar-container {
+  scrollbar-width: thin;
+  scrollbar-color: #4691fe transparent;
+}
+
+.scrollbar-container::-webkit-scrollbar {
+  width: 2px;
+}
+
+.scrollbar-container::-webkit-scrollbar-track {
+  background: transparent;
+  margin-right: 2px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb {
+  background: #4691fe;
+  border-radius: 6px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb:hover {
+  background: #3578e5;
+}

@@ -1,5 +1,10 @@
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { setInfo as setInfo_, setToast } from ".";
+import {
+  setInfo as setInfo_,
+  setOpenGrantPermission,
+  setToast,
+  setOpenSelectNetworkModal,
+} from ".";
 import api from "./api";
 
 const useAppActions = () => {
@@ -30,11 +35,20 @@ const useAppActions = () => {
     }
   };
 
+  const showGrantPermission = (show: boolean) => {
+    dispatch(setOpenGrantPermission(show));
+  };
+
+  const showSelectNetworkModal = (show: boolean) =>
+    dispatch(setOpenSelectNetworkModal(show));
+
   return {
     setInfo,
     showToast,
     hideToast,
     registerUser,
+    showGrantPermission,
+    showSelectNetworkModal,
   };
 };
 

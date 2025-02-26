@@ -5,4 +5,5 @@ interface ILWClickAnimation {
   stopPropagation?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  type?: "button" | "submit" | "reset";
 }

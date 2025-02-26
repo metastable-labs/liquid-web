@@ -1,61 +1,44 @@
 "use client";
-import { LWNavigation, LWToastNotification } from "@/components";
-import useSystemFunctions from "@/hooks/useSystemFunctions";
-import useAppActions from "@/store/app/actions";
-import usePositionActions from "@/store/position/actions";
-import { InfoModal } from "@/components/modal/Info-modal";
-import ActionsModal from "@/components/modal/actions-modal";
-import { WithdrawModal } from "@/components/modal/withdraw-modal";
-import { ClaimModal } from "@/components/modal/claim-modal";
-import ConnectWalletButton from "@/components/ui/connect-wallet-button";
+import classNames from "classnames";
+import { usePrivy } from "@privy-io/react-auth";
+
+import {
+  LWNavigation,
+  LWToastNotification,
+  LWToolBar,
+  LWSelectNetworkModal,
+} from "@/components";
 
 const App = ({ children }: { children: React.ReactNode }) => {
-  const {
-    appState: { info },
-    positionState: { activePosition, isClaiming, isWithdrawing },
-  } = useSystemFunctions();
-  const { setInfo } = useAppActions();
-  const { setActivePosition, setIsClaiming, setIsWithdrawing } =
-    usePositionActions();
+  const { ready, authenticated, user } = usePrivy();
+
+  const address = user?.wallet?.address || "";
+
+  const showNavigation = ready && authenticated && address;
 
   return (
     <>
-      <ConnectWalletButton />
+      <div className="relative flex flex-col h-[100dvh] md:h-[96vh] overflow-y-auto no-scrollbar pt-0">
+        <LWToolBar />
 
-      <div className="flex xl:gap-[20%] 2xl:gap-[28%] 2xl:justify-between relative xl:h-[96vh] overflow-y-auto no-scrollbar pt-10">
-        <div className="hidden xl:block sticky top-0">
-          <LWNavigation />
+        <div
+          className={classNames(
+            "w-full flex relative lg:border-t-0 lg:rounded-t-none lg:bg-transparent lg:overflow-visible mt-7 p-6 lg:p-0 border-t border-primary-150 rounded-t-[32px] bg-white overflow-y-scroll",
+            {
+              "items-center justify-center": !showNavigation,
+              "lg:gap-[100px] lg:px-5 lg:pt-0": showNavigation,
+            }
+          )}
+        >
+          {showNavigation && <LWNavigation />}
+
+          <div className="flex-1">{children}</div>
         </div>
-
-        <div className="xl:w-[80%] w-full">{children}</div>
       </div>
-
-      <div className="xl:hidden h-28 w-full" />
-
-      <div className="xl:hidden fixed left-0 bottom-0 w-full">
-        <LWNavigation />
-      </div>
-
-      <ActionsModal
-        isOpen={!!activePosition}
-        onClose={() => setActivePosition(null)}
-      />
-
-      <WithdrawModal
-        isOpen={isWithdrawing}
-        onClose={() => setIsWithdrawing(false)}
-      />
-
-      <ClaimModal isOpen={isClaiming} onClose={() => setIsClaiming(false)} />
-
-      <InfoModal
-        isOpen={!!info}
-        onClose={() => setInfo(null)}
-        title={info?.title}
-        description={info?.description}
-      />
 
       <LWToastNotification />
+
+      <LWSelectNetworkModal />
     </>
   );
 };
