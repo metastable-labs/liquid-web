@@ -2,14 +2,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { WalletIconInactive } from "@/public/icons";
 import { LWButton } from "@/components";
+import { step } from "viem/chains";
 
-const Step1 = ({ setStep, setAddress, address }: WithdrawStepProps) => {
+const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
   const handleNext = () => {
     setStep?.(1);
   };
 
   return (
-    <div className="flex flex-col items-stretch justify-between h-full">
+    <div className="flex flex-col items-stretch justify-between h-80 lg:h-full gap-">
       <div className="self-stretch flex flex-col items-stretch gap-2">
         <div className="self-stretch px-4 py-2.5 flex items-center justify-center gap-2 rounded-[26px] border border-primary-550 shadow-withdrawAddressInput h-[60px]">
           <input
@@ -19,6 +20,7 @@ const Step1 = ({ setStep, setAddress, address }: WithdrawStepProps) => {
             className="w-full text-[16px] leading-[19.84px] text-primary-2400 bg-transparent outline-none"
             onChange={(e) => setAddress?.(e.target.value)}
             value={address}
+            disabled={step! > 0}
           />
 
           <div className="min-w-fit">
