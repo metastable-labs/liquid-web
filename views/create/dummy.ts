@@ -9,7 +9,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 86.7,
     name: "Favour",
     token: {
@@ -36,7 +36,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -20.43,
     name: "Justice",
     token: {
@@ -63,7 +63,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 90.5,
     name: "Meister",
     token: {
@@ -90,7 +90,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
     name: "Njoku",
     token: {
@@ -117,7 +117,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 86.7,
     name: "Favour",
     token: {
@@ -144,7 +144,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -20.43,
     name: "Justice",
     token: {
@@ -171,7 +171,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 90.5,
     name: "Meister",
     token: {
@@ -198,7 +198,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
     name: "Njoku",
     token: {
@@ -225,7 +225,7 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
     name: "Njoku",
     token: {
