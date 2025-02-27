@@ -70,6 +70,10 @@ export default {
           2750: "#C6DDFF",
           2800: "#ACF",
           2850: "#D9D9D9",
+          2900: "#FFDAC2",
+          2950: "#5A36BF",
+          3000: "#B47818",
+          3050: "#C2540A",
         },
       },
       boxShadow: {
@@ -78,6 +82,8 @@ export default {
         agentLog: "0px 4px 14px 0px rgba(0, 0, 0, 0.12)",
         profileDropdown: "0px -1px 10px 0px rgba(0, 0, 0, 0.10)",
         withdrawAddressInput: "0px 2px 6px -2px rgba(15, 23, 42, 0.04)",
+        secondaryShadow: "0px 3.561px 12.463px 0px rgba(0, 0, 0, 0.12)",
+        inputShadow: "0px 5.335px 8.892px -5.335px rgba(2, 6, 23, 0.06)",
       },
     },
     fontFamily: {

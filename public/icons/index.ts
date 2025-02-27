@@ -52,6 +52,11 @@ import LogoutIcon from "./logout-icon";
 import CoinIcon from "./coin-icon";
 import ArrowUpAltIcon from "./arrow-up-alt-icon";
 import ExternalDriveIcon from "./external-drive-icon";
+import AttachmentIcon from "./attachment-icon";
+import SendIcon from "./send-icon";
+import MemecoinIcon from "./memecoin-icon";
+import DollarSquareIcon from "./dollar-square-icon";
+import BookSavedIcon from "./book-saved-icon";
 
 export {
   CubeIcons,
@@ -108,4 +113,9 @@ export {
   ArrowUpAltIcon,
   CoinIcon,
   ExternalDriveIcon,
+  AttachmentIcon,
+  SendIcon,
+  BookSavedIcon,
+  DollarSquareIcon,
+  MemecoinIcon,
 };

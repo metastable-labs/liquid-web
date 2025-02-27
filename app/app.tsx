@@ -7,6 +7,7 @@ import {
   LWToastNotification,
   LWToolBar,
   LWSelectNetworkModal,
+  LWIntro,
 } from "@/components";
 
 const App = ({ children }: { children: React.ReactNode }) => {
@@ -39,6 +40,8 @@ const App = ({ children }: { children: React.ReactNode }) => {
       <LWToastNotification />
 
       <LWSelectNetworkModal />
+
+      <LWIntro />
     </>
   );
 };
