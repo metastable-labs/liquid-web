@@ -8,6 +8,7 @@ import {
   LWToolBar,
   LWSelectNetworkModal,
 } from "@/components";
+import UiLoading from "@/components/ui/loading";
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const { ready, authenticated, user } = usePrivy();
@@ -15,6 +16,10 @@ const App = ({ children }: { children: React.ReactNode }) => {
   const address = user?.wallet?.address || "";
 
   const showNavigation = ready && authenticated && address;
+
+  if (!ready) {
+    return <UiLoading />;
+  }
 
   return (
     <>

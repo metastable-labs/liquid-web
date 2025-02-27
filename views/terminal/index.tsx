@@ -54,8 +54,8 @@ const Terminal = () => {
         })}
       >
         {loading && (
-          <div className="flex flex-col xl:flex-row items-stretch">
-            <Loading />
+          <div className="flex flex-col xl:flex-row items-stretch justify-center">
+            <div className="w-10 h-10 border-2 border-primary-100 rounded-full animate-spin" />
           </div>
         )}
 

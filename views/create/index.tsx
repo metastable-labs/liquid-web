@@ -1,16 +1,8 @@
 import Image from "next/image";
 
 import ExploreAgents from "./explore-agents";
-import { usePrivy } from "@privy-io/react-auth";
-import UiLoading from "@/components/ui/loading";
 
 const Create = () => {
-  const { ready } = usePrivy();
-
-  if (!ready) {
-    return <UiLoading />;
-  }
-
   return (
     <div className="flex flex-col gap-16">
       <div className="flex flex-col items-center -space-y-3">
