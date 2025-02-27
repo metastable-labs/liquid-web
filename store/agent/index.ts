@@ -6,6 +6,7 @@ export interface AgentState {
   loadingDelegationDetails: boolean;
   delegationDetails?: AgentDelegationDetails;
   agent?: Agent;
+  agents?: Agent[];
   loadingAgent: boolean;
 }
 
