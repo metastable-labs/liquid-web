@@ -66,7 +66,6 @@ const ExploreAgents = () => {
             ))}
 
           {loadingAgents &&
-            (!agents || agents?.length == 0) &&
             Array.from({ length: 9 }).map((_, index) => (
               <LWAgentCardSkeleton key={index} variant="secondary" />
             ))}
