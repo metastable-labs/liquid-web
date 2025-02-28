@@ -7,6 +7,7 @@ import {
   LWToastNotification,
   LWToolBar,
   LWSelectNetworkModal,
+  LWIntro,
 } from "@/components";
 import UiLoading from "@/components/ui/loading";
 
@@ -44,6 +45,8 @@ const App = ({ children }: { children: React.ReactNode }) => {
       <LWToastNotification />
 
       <LWSelectNetworkModal />
+
+      <LWIntro />
     </>
   );
 };

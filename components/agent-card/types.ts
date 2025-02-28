@@ -12,9 +12,13 @@ interface AgentCardProps {
   actions?: TableAction;
   actionIdentifier?: TableActionIdentifier;
   variant?: "primary" | "secondary";
+  isIntro?: boolean;
+  backgroundColor?: string;
 }
 
 interface AgentStat {
   title: string;
   value: string | number | React.ReactElement;
+  variant?: "primary" | "secondary";
+  isIntro?: boolean;
 }

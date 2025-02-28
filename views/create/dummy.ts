@@ -1,7 +1,7 @@
 const dummyAgents: Array<Agent> = [
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -9,12 +9,12 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 86.7,
-    name: "Favour",
+    name: "Yardsticker",
     token: {
       agentId: "1",
-      name: "Meister",
+      name: "Liquiditer",
       symbol: "A1",
       locked: "100",
       marketCap: "100",
@@ -28,7 +28,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -36,9 +36,9 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -20.43,
-    name: "Justice",
+    name: "Greenmonger",
     token: {
       agentId: "2",
       name: "Agent 2",
@@ -55,7 +55,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -63,9 +63,9 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 90.5,
-    name: "Meister",
+    name: "Liquiditer",
     token: {
       agentId: "3",
       name: "Agent 3",
@@ -82,7 +82,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -90,12 +90,12 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
     name: "Njoku",
     token: {
       agentId: "4",
-      name: "Agent 4",
+      name: "Benjamin Bills",
       symbol: "A4",
       locked: "100",
       marketCap: "100",
@@ -109,7 +109,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -117,12 +117,12 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 86.7,
-    name: "Favour",
+    name: "Yardsticker",
     token: {
       agentId: "1",
-      name: "Meister",
+      name: "Liquiditer",
       symbol: "A1",
       locked: "100",
       marketCap: "100",
@@ -136,7 +136,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -144,9 +144,9 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -20.43,
-    name: "Justice",
+    name: "Greenmonger",
     token: {
       agentId: "2",
       name: "Agent 2",
@@ -163,7 +163,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -171,9 +171,9 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 90.5,
-    name: "Meister",
+    name: "Liquiditer",
     token: {
       agentId: "3",
       name: "Agent 3",
@@ -190,7 +190,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -198,12 +198,12 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
     name: "Njoku",
     token: {
       agentId: "4",
-      name: "Agent 4",
+      name: "Benjamin Bills",
       symbol: "A4",
       locked: "100",
       marketCap: "100",
@@ -217,7 +217,7 @@ const dummyAgents: Array<Agent> = [
   },
   {
     creator: {
-      username: "ifunanya",
+      username: "Beethoven",
       fid: 1,
       followers: 1_000_000,
       following: 20,
@@ -225,12 +225,12 @@ const dummyAgents: Array<Agent> = [
       profile: { bio: [] },
     },
     goal: "To make money",
-    id: "acd7d9b3-c34a-42b8-ac34-ec9959eb8699",
+    id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
     name: "Njoku",
     token: {
       agentId: "4",
-      name: "Agent 4",
+      name: "Benjamin Bills",
       symbol: "A4",
       locked: "100",
       marketCap: "100",

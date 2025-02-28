@@ -17,6 +17,7 @@ const ArrowLeftIcon = ({
       strokeMiterlimit="10"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className="transition-colors duration-500"
     />
   </svg>
 );
