@@ -13,14 +13,17 @@ import LWBackdrop from "../backdrop";
 import Dropdown from "./dropdown";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import useWalletActions from "@/store/wallet/actions";
+import { setAppIsReady } from "@/store/app";
 
 const LWToolBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { ready, authenticated, login, user, getAccessToken } = usePrivy();
   const { connectUser, fetchDelegationDetails } = useAgentActions();
+  const { fetchWallet } = useWalletActions();
   const { truncate } = useTruncateText();
   const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
-  const { agentState } = useSystemFunctions();
+  const { agentState, dispatch } = useSystemFunctions();
 
   const address = user?.wallet?.address || "";
   const username =
@@ -31,6 +34,8 @@ const LWToolBar = () => {
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
   const connect = async () => {
+    if (ready && !user) return dispatch(setAppIsReady(true));
+
     if (!user) return;
 
     const accessToken = await getAccessToken();
@@ -39,12 +44,14 @@ const LWToolBar = () => {
 
     await setTokenHeader(accessToken);
 
-    setTimeout(() => {
-      connectUser();
+    setTimeout(async () => {
+      await connectUser();
+      await fetchWallet();
 
-      if (!agentState.agent?.id) return;
+      if (!agentState.agent?.id) return dispatch(setAppIsReady(true));
 
-      fetchDelegationDetails(agentState.agent?.id);
+      await fetchDelegationDetails(agentState.agent?.id);
+      dispatch(setAppIsReady(true));
     }, 1500);
   };
 
@@ -53,7 +60,7 @@ const LWToolBar = () => {
   useEffect(() => {
     connect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id, agentState.agent]);
+  }, [user, agentState.agent, ready]);
 
   return (
     <div

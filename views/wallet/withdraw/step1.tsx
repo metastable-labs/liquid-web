@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { WalletIconInactive } from "@/public/icons";
 import { LWButton } from "@/components";
-import { step } from "viem/chains";
 
 const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
   const handleNext = () => {
@@ -32,8 +30,9 @@ const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
       <div className="flex flex-col items-center">
         <p className="px-3.5 pt-3.5 pb-4 rounded-xl bg-primary-1400 self-stretch text-[16px] leading-[19.84px] text-primary-2150">
           For now you can only withdraw native assets{" "}
-          <span className="font-bold">ETH</span> and{" "}
-          <span className="font-bold">SOL</span>
+          <span className="font-bold">ETH</span>
+          {/* and{" "}
+          <span className="font-bold">SOL</span> */}
         </p>
 
         <motion.div

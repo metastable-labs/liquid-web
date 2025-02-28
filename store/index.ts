@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import appReducer from "./app";
 import agentReducer from "./agent";
+import walletReducer from "./wallet";
 
 export interface CallbackProps {
   onSuccess?: Function;
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     app: appReducer,
     agent: agentReducer,
+    wallet: walletReducer,
   },
 });
 
