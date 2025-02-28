@@ -177,11 +177,14 @@ const LWAgentCard = ({
       </div>
 
       <div
-        className={classNames("flex items-center justify-between", {
-          "lg:gap-10 lg:w-auto w-full": variant === "primary" && !isIntro,
-          "gap-7": variant === "secondary" && !isIntro,
-          "gap-4 w-full lg:w-auto": isIntro,
-        })}
+        className={classNames(
+          "flex items-center justify-between w-full lg:w-auto",
+          {
+            "lg:gap-10": variant === "primary" && !isIntro,
+            "gap-7": variant === "secondary" && !isIntro,
+            "gap-4": isIntro,
+          }
+        )}
       >
         <AgentStat isIntro={isIntro} {...stats[0]} variant={variant} />
 
