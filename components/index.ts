@@ -9,6 +9,7 @@ import LWButton from "./button";
 import LWUserPaper from "./user-paper";
 import LWTradeInterface from "./trade-interface";
 import LWAgentCard from "./agent-card";
+import LWAgentCardSkeleton from "./agent-card/skeleton";
 import LWBackdrop from "./backdrop";
 import LWSelectNetworkModal from "./modal/select-network-modal";
 import LWIntro from "./intro";
@@ -28,4 +29,5 @@ export {
   LWBackdrop,
   LWSelectNetworkModal,
   LWIntro,
+  LWAgentCardSkeleton,
 };

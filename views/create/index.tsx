@@ -1,8 +1,34 @@
+import { useEffect } from "react";
 import Image from "next/image";
 
+import useInfiniteScroll from "@/hooks/useInfiniteScroll";
+import useAgentActions from "@/store/agent/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import ExploreAgents from "./explore-agents";
 
 const Create = () => {
+  const {
+    agentState: { agentsMeta, agents, loadingAgents },
+  } = useSystemFunctions();
+  const { fetchAgents } = useAgentActions();
+
+  const hasMoreData =
+    agentsMeta && agents && agents.length < agentsMeta.totalItems;
+
+  const shouldFetchMore = useInfiniteScroll(hasMoreData || false);
+
+  useEffect(() => {
+    fetchAgents(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (shouldFetchMore && agentsMeta) {
+      fetchAgents(agentsMeta.nextPage);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldFetchMore]);
+
   return (
     <div className="flex flex-col gap-16">
       <div className="flex flex-col items-center -space-y-3">
@@ -30,7 +56,7 @@ const Create = () => {
         </p>
       </div>
 
-      <ExploreAgents />
+      <ExploreAgents loading={shouldFetchMore || loadingAgents} />
     </div>
   );
 };
