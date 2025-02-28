@@ -30,6 +30,18 @@ const childVariants = {
   }),
 };
 
+const spiralVariants = {
+  initial: { rotate: 0 },
+  spiral: {
+    rotate: [0, -10, 0],
+    transition: {
+      duration: 4,
+      ease: "easeInOut",
+      repeat: Infinity,
+    },
+  },
+};
+
 const colors = [
   "#EEEBFF",
   "#FEF7EC",
@@ -60,12 +72,18 @@ const Step3 = () => {
             zIndex: dummyAgents.length - index,
           }}
         >
-          <LWAgentCard
-            agent={agent}
-            variant="secondary"
-            isIntro
-            backgroundColor={colors[index]}
-          />
+          <motion.div
+            variants={spiralVariants}
+            initial="initial"
+            animate="spiral"
+          >
+            <LWAgentCard
+              agent={agent}
+              variant="secondary"
+              isIntro
+              backgroundColor={colors[index]}
+            />
+          </motion.div>
         </motion.div>
       ))}
     </motion.div>

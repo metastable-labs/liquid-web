@@ -73,14 +73,14 @@ const LWIntro = () => {
     }
   }, [cookies.HasShowIntroModal]);
 
-  useEffect(() => {
-    if (step < stepTexts.length - 1) {
-      const timer = setTimeout(() => {
-        setStep(step + 1);
-      }, 8000);
-      return () => clearTimeout(timer);
-    }
-  }, [step]);
+  // useEffect(() => {
+  //   if (step < stepTexts.length - 1) {
+  //     const timer = setTimeout(() => {
+  //       setStep(step + 1);
+  //     }, 8000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [step]);
 
   return (
     <AnimatePresence>

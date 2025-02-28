@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import classNames from "classnames";
-import { motion, Variants } from "framer-motion";
 
 import {
   AttachmentIcon,
@@ -16,7 +17,6 @@ const AgentStat = ({ title, value }: AgentStat) => (
     <span className="text-[12px] leading-[15.84px] lg:text-[15px] lg:leading-[19.8px] text-primary-100 whitespace-nowrap">
       {title}
     </span>
-
     {typeof value === "string" ? (
       <span className="text-[16px] leading-[19.2px] text-primary-2600 font-medium">
         {value}
@@ -50,14 +50,10 @@ const agents = [
   { icon: <BookSavedIcon />, title: "Research Agent" },
 ];
 
-const textAnimation: Variants = {
-  hidden: { y: 0 },
+const staggerAnimation = {
   visible: {
-    y: [0, -5, 0],
     transition: {
-      duration: 2,
-      repeat: Infinity,
-      repeatType: "mirror",
+      staggerChildren: 0.1,
     },
   },
 };
@@ -86,27 +82,25 @@ const agentChildVariants: Variants = {
   },
 };
 
-// const rockAnimation: Variants = {
-//   animate: {
-//     rotate: [-1, 1, -1],
-//     transition: {
-//       duration: 3,
-//       ease: "easeInOut",
-//       repeat: Infinity,
-//       repeatType: "mirror",
-//     },
-//   },
-// };
+const text =
+  "Create an agent to buy tokens launched in the past 3 hours with a market cap of $150k market cap.";
+const staggerDelay = 0.1;
+const animationDuration = 0.6;
+const totalCycleTime = (text.length - 1) * staggerDelay + animationDuration;
 
 const Step1 = () => {
+  const [cycle, setCycle] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCycle((prev) => prev + 1);
+    }, totalCycleTime * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col gap-8 pointer-events-none">
-      <motion.div
-        // variants={rockAnimation}
-        // initial="animate"
-        // animate="animate"
-        className="self-stretch p-[21.36px] flex flex-col items-center gap-8 rounded-2xl border border-primary-150 bg-white shadow-secondaryShadow"
-      >
+      <motion.div className="self-stretch p-[21.36px] flex flex-col items-center gap-8 rounded-2xl border border-primary-150 bg-white shadow-secondaryShadow">
         <div className="w-full flex items-center gap-2">
           <Image
             src="/images/avatar1.png"
@@ -124,9 +118,7 @@ const Step1 = () => {
 
             <div className="flex items-center gap-1 text-[11px] leading-[13.64px] lg:text-[12px] lg:leading-[15.84px]">
               <span className="text-primary-100">Creator:</span>
-
               <span className="text-primary-350">@njokuscript</span>
-
               <Image
                 src="/images/farcaster.png"
                 alt="farcaster logo"
@@ -141,13 +133,9 @@ const Step1 = () => {
 
         <div className="flex items-center justify-between w-full gap-7">
           <AgentStat {...stats[0]} />
-
           <div className="w-[1px] h-4 bg-primary-2450" />
-
           <AgentStat {...stats[1]} />
-
           <div className="w-[1px] h-4 bg-primary-2450" />
-
           <AgentStat {...stats[2]} />
         </div>
       </motion.div>
@@ -155,13 +143,30 @@ const Step1 = () => {
       <div className="self-stretch flex flex-col gap-3.5">
         <div className="px-[14.23px] py-[10.67px] flex flex-col gap-3.5 rounded-[18.673px] border border-primary-550 shadow-inputShadow bg-white">
           <motion.p
-            variants={textAnimation}
+            key={cycle}
+            className="text-[12.449px] leading-[16.432px] text-primary-2400 max-w-[298px] whitespace-pre-wrap"
+            variants={staggerAnimation}
             initial="hidden"
             animate="visible"
-            className="text-[12.449px] leading-[16.432px] text-primary-2400 max-w-[298px]"
           >
-            Create an agent to buy tokens launched in the past 3 hours with a
-            market cap of $150k market cap.
+            {text.split("").map((char, index) => (
+              <motion.span
+                key={index}
+                style={{ display: "inline-block" }}
+                variants={{
+                  hidden: { y: 0 },
+                  visible: {
+                    y: [0, -1, 0],
+                    transition: {
+                      duration: animationDuration,
+                      delay: index * staggerDelay,
+                    },
+                  },
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </motion.p>
 
           <div className="flex items-center justify-between">
@@ -170,7 +175,6 @@ const Step1 = () => {
           </div>
         </div>
 
-        {/* Agents buttons with staggered slide-in from right */}
         <motion.div
           className="flex items-center justify-between gap-[9.465px]"
           variants={agentContainerVariants}
@@ -195,7 +199,6 @@ const Step1 = () => {
               )}
             >
               {icon}
-
               <span
                 className={classNames(
                   "text-[7.572px] leading-[9.389px] font-medium whitespace-nowrap",
