@@ -10,7 +10,7 @@ const useWalletActions = () => {
     try {
       dispatch(setLoadingAssets(true));
       const response = await api.fetchAssets();
-
+      console.log(response);
       dispatch(setAssets(response));
     } catch (error: any) {
       //

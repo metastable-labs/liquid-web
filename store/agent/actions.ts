@@ -99,7 +99,6 @@ const useAgentActions = () => {
       callback?.onSuccess?.(formattedRecords);
     } catch (error: any) {
       callback?.onError?.(error);
-      dispatch(setAgents(undefined));
     } finally {
       dispatch(setLoadingAgents(false));
     }

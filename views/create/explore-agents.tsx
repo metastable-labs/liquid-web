@@ -4,9 +4,9 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { LWAgentCard, LWAgentCardSkeleton } from "@/components";
 import classNames from "classnames";
 
-const ExploreAgents = ({ loading }: { loading: boolean }) => {
+const ExploreAgents = () => {
   const {
-    agentState: { agents },
+    agentState: { agents, loadingAgents },
   } = useSystemFunctions();
 
   const agents_: Array<Agent> =
@@ -31,10 +31,8 @@ const ExploreAgents = ({ loading }: { loading: boolean }) => {
       active: true,
     })) || [];
 
-  console.log(agents_);
-
-  const showAgents = Boolean(agents_.length) && !loading;
-  const showEmptyState = !loading && agents_.length === 0;
+  const showAgents = Boolean(agents_.length) && !loadingAgents;
+  const showEmptyState = !loadingAgents && agents_.length === 0;
 
   return (
     <div className="flex flex-col items-stretch gap-6 lg:self-center self-stretch pb-10">
@@ -67,7 +65,8 @@ const ExploreAgents = ({ loading }: { loading: boolean }) => {
               </Link>
             ))}
 
-          {loading &&
+          {loadingAgents &&
+            (!agents || agents?.length == 0) &&
             Array.from({ length: 9 }).map((_, index) => (
               <LWAgentCardSkeleton key={index} variant="secondary" />
             ))}

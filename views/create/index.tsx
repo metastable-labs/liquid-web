@@ -8,7 +8,7 @@ import ExploreAgents from "./explore-agents";
 
 const Create = () => {
   const {
-    agentState: { agentsMeta, agents, loadingAgents },
+    agentState: { agentsMeta, agents },
   } = useSystemFunctions();
   const { fetchAgents } = useAgentActions();
 
@@ -56,7 +56,7 @@ const Create = () => {
         </p>
       </div>
 
-      <ExploreAgents loading={shouldFetchMore || loadingAgents} />
+      <ExploreAgents />
     </div>
   );
 };
