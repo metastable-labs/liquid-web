@@ -18,6 +18,7 @@ const useSystemFunctions = () => {
   // states
   const appState = useAppSelector((state) => state.app);
   const agentState = useAppSelector((state) => state.agent);
+  const walletState = useAppSelector((state) => state.wallet);
 
   return {
     // functions
@@ -30,6 +31,7 @@ const useSystemFunctions = () => {
     // states
     appState,
     agentState,
+    walletState,
   };
 };
 

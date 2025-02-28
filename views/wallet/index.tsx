@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,6 +9,7 @@ import { CoinIcon, ArrowUpAltIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
 import { appearAnimation } from "@/utils/helpers";
 import useAppActions from "@/store/app/actions";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 import Add from "./add";
 import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
@@ -17,10 +18,15 @@ import ETHSOL from "./eth-sol";
 const Wallet = () => {
   const { user } = usePrivy();
   const { showSelectNetworkModal } = useAppActions();
+  const { walletState } = useSystemFunctions();
+
   const [walletInteraction, setWalletInteraction] =
     useState<WalletInteration>("main");
 
+  const [assets, setAssets] = useState<Wallet[]>([]);
+
   const balance = "0.00";
+  const showSeeAll = assets?.length && assets?.length <= 4;
 
   const actions = [
     {
@@ -35,32 +41,29 @@ const Wallet = () => {
     },
   ];
 
-  const assets: Array<Asset> = [
-    {
-      title: "USD Coin",
-      icon: "/images/usdc.png",
-      network: "base",
-      symbol: "USDC",
-      balance: 4506,
-      balanceUSDValue: 4508,
-    },
-    {
-      title: "cbBTC",
-      icon: "/images/btc.png",
-      network: "base",
-      symbol: "cbBTC",
-      balance: 700,
-      balanceUSDValue: 12_000_000,
-    },
-    {
-      title: "Ethereum",
-      icon: "/images/eth.png",
-      network: "base",
-      symbol: "ETH",
-      balance: 300,
-      balanceUSDValue: 40_540.89,
-    },
-  ];
+  const handleSeeAll = () => {
+    const assets = walletState?.assets || [];
+    if (showSeeAll) {
+      setAssets([...assets]);
+    } else {
+      const firstFourAssets = assets.slice(0, 4);
+      setAssets([...firstFourAssets]);
+    }
+  };
+
+  useEffect(() => {
+    const assets = walletState.assets;
+
+    if (!assets) return;
+
+    if (assets.length > 4) {
+      const firstFourAssets = assets.slice(0, 4);
+      setAssets([...firstFourAssets]);
+    } else {
+      setAssets([...assets]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletState.assets]);
 
   const walletInteractions = {
     main: (
@@ -115,15 +118,17 @@ const Wallet = () => {
                 <AssetPaper key={index} asset={asset} />
               ))}
 
-              <LWClickAnimation
-                onClick={() => console.log("Clicked")}
-                className="flex items-center gap-1 w-fit"
-              >
-                <span className="text-[13px] leading-[16.12px] text-primary-400">
-                  See all
-                </span>
-                <ArrowRightIcon fill="#0C0507" width={14} height={14} />
-              </LWClickAnimation>
+              {walletState.assets && walletState.assets.length > 4 && (
+                <LWClickAnimation
+                  onClick={handleSeeAll}
+                  className="flex items-center gap-1 w-fit"
+                >
+                  <span className="text-[13px] leading-[16.12px] text-primary-400">
+                    {showSeeAll ? "See all" : "See less"}
+                  </span>
+                  <ArrowRightIcon fill="#0C0507" width={14} height={14} />
+                </LWClickAnimation>
+              )}
             </div>
           </div>
         </div>

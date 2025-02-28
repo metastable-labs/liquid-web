@@ -8,6 +8,7 @@ export interface AppState {
   openGrantPermission: boolean;
   openSelectNetworkModal: boolean;
   isSolanaSupported: boolean;
+  appIsReady: boolean;
 }
 
 const initialState: AppState = {
@@ -21,12 +22,17 @@ const initialState: AppState = {
   openGrantPermission: false,
   openSelectNetworkModal: false,
   isSolanaSupported: false,
+  appIsReady: false,
 };
 
 export const appReducer = createSlice({
   name: "app",
   initialState,
   reducers: {
+    setAppIsReady(state, action: PayloadAction<boolean>) {
+      state.appIsReady = action.payload;
+    },
+
     setInfo(state, action: PayloadAction<Info | null>) {
       state.info = action.payload;
     },
@@ -55,6 +61,7 @@ export const {
   setToast,
   setOpenGrantPermission,
   setOpenSelectNetworkModal,
+  setAppIsReady,
 } = appReducer.actions;
 
 export default appReducer.reducer;
