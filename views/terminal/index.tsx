@@ -13,6 +13,7 @@ import WhyGrantPermission from "./why-grant-permission";
 import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
 import { useEffect, useState } from "react";
+import Spinner from "@/components/ui/spinner";
 
 const Terminal = () => {
   const { appState, agentState } = useSystemFunctions();
@@ -54,8 +55,8 @@ const Terminal = () => {
         })}
       >
         {loading && (
-          <div className="flex flex-col xl:flex-row items-stretch justify-center">
-            <div className="w-10 h-10 border-2 border-primary-100 rounded-full animate-spin" />
+          <div className="flex items-center justify-center h-[70vh]">
+            <Spinner />
           </div>
         )}
 

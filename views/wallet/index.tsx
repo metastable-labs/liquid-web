@@ -14,6 +14,7 @@ import Add from "./add";
 import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
 import ETHSOL from "./eth-sol";
+import Spinner from "@/components/ui/spinner";
 
 const Wallet = () => {
   const { user } = usePrivy();
@@ -73,9 +74,17 @@ const Wallet = () => {
             Total Holdings
           </h5>
 
-          <span className="text-[36px] leading-[40.32px] text-primary-950 font-QuantaGroteskPro font-bold">
-            ${balance}
-          </span>
+          <div className="flex gap-3 items-center flex-wrap">
+            <span className="text-[36px] leading-[40.32px] text-primary-950 font-QuantaGroteskPro font-bold">
+              ${balance}
+            </span>
+
+            {walletState.loadingAssets && (
+              <div className="mb-2">
+                <Spinner size={5} />
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="self-stretch flex flex-col gap-8">
