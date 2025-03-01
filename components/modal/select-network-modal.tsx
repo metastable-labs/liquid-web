@@ -34,7 +34,9 @@ const LWSelectNetworkModal = () => {
 
     if (solanaWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
       const agentId = agentState.agent?.id || "";
-      return delegateOrUndelegate(agentId, true, "SOLANA");
+      delegateOrUndelegate(agentId, true, "SOLANA");
+      showSelectNetworkModal(false);
+      return;
     }
 
     const agentId = agentState.agent?.id || "";
@@ -53,7 +55,9 @@ const LWSelectNetworkModal = () => {
 
     if (evmWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
       const agentId = agentState.agent?.id || "";
-      return delegateOrUndelegate(agentId, true, "BASE");
+      delegateOrUndelegate(agentId, true, "BASE");
+      showSelectNetworkModal(false);
+      return;
     }
 
     const agentId = agentState.agent?.id || "";

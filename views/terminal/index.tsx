@@ -20,13 +20,13 @@ const Terminal = () => {
   const { showGrantPermission } = useAppActions();
   const { user, ready } = usePrivy();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
-  const { delegationDetails, agent } = agentState;
+  const { delegationDetails, agent, loadingDelegationDetails, loadingAgent } =
+    agentState;
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
   const loading =
-    agentState.loadingAgent ||
-    (!agentState.delegationDetails && agentState.loadingDelegationDetails);
+    loadingAgent || (!delegationDetails && loadingDelegationDetails);
 
   useEffect(() => {
     const permissionGranted =
