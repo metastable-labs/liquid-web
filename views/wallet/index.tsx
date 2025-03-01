@@ -15,6 +15,7 @@ import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
 import ETHSOL from "./eth-sol";
 import Spinner from "@/components/ui/spinner";
+import WalletSkeleton from "./skeleton";
 
 const Wallet = () => {
   const { user } = usePrivy();
@@ -63,7 +64,6 @@ const Wallet = () => {
     } else {
       setAssets([...assets]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletState.assets]);
 
   const walletInteractions = {
@@ -123,20 +123,33 @@ const Wallet = () => {
             </h1>
 
             <div className="flex flex-col self-stretch items-stretch gap-6">
-              {assets.map((asset, index) => (
-                <AssetPaper key={index} asset={asset} />
-              ))}
+              {assets && assets.length > 0 ? (
+                <>
+                  {assets.map((asset, index) => (
+                    <AssetPaper key={index} asset={asset} />
+                  ))}
 
-              {walletState.assets && walletState.assets.length > 4 && (
-                <LWClickAnimation
-                  onClick={handleSeeAll}
-                  className="flex items-center gap-1 w-fit"
-                >
-                  <span className="text-[13px] leading-[16.12px] text-primary-400">
-                    {showSeeAll ? "See all" : "See less"}
-                  </span>
-                  <ArrowRightIcon fill="#0C0507" width={14} height={14} />
-                </LWClickAnimation>
+                  {walletState.assets && walletState.assets.length > 4 && (
+                    <LWClickAnimation
+                      onClick={handleSeeAll}
+                      className="flex items-center gap-1 w-fit"
+                    >
+                      <span className="text-[13px] leading-[16.12px] text-primary-400">
+                        {showSeeAll ? "See all" : "See less"}
+                      </span>
+                      <ArrowRightIcon fill="#0C0507" width={14} height={14} />
+                    </LWClickAnimation>
+                  )}
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center w-full py-10">
+                  <p className="text-[16px] leading-[19.2px] text-gray-500">
+                    You don’t have any assets yet.
+                  </p>
+                  <p className="mt-2 text-[14px] leading-[16.8px] text-gray-400">
+                    Add funds to your wallet to get started.
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -157,64 +170,71 @@ const Wallet = () => {
         }
       )}
     >
-      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">
-        <div className="flex items-center gap-6 justify-between self-stretch px-4 py-3 border border-primary-550 bg-primary-600 rounded-[26px]">
-          <div className="flex items-center gap-6">
-            <Image
-              src="/images/person.png"
-              alt="Activity"
-              width={40}
-              height={40}
-              quality={100}
-              className="w-10 h-10 object-cover rounded-full"
-            />
+      {walletState.loadingAssets ? (
+        <WalletSkeleton />
+      ) : (
+        <>
+          <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">
+            <div className="flex items-center gap-6 justify-between self-stretch px-4 py-3 border border-primary-550 bg-primary-600 rounded-[26px]">
+              <div className="flex items-center gap-6">
+                <Image
+                  src="/images/person.png"
+                  alt="Activity"
+                  width={40}
+                  height={40}
+                  quality={100}
+                  className="w-10 h-10 object-cover rounded-full"
+                />
 
-            <div className="flex flex-col gap-[5px]">
-              <h3 className="text-[20px] leading-[23.2px] text-primary-50 font-medium">
-                Wallet
-              </h3>
+                <div className="flex flex-col gap-[5px]">
+                  <h3 className="text-[20px] leading-[23.2px] text-primary-50 font-medium">
+                    Wallet
+                  </h3>
 
-              <p className="text-[12px] leading-[15.84px] text-primary-100 max-w-[278px]">
-                Liquid uses <span className="font-bold">privy delegated</span>{" "}
-                wallets to allow agents take actions on your behalf
-              </p>
+                  <p className="text-[12px] leading-[15.84px] text-primary-100 max-w-[278px]">
+                    Liquid uses{" "}
+                    <span className="font-bold">privy delegated</span> wallets
+                    to allow agents take actions on your behalf
+                  </p>
+                </div>
+              </div>
+
+              <ETHSOL />
             </div>
+
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={walletInteraction}
+                {...appearAnimation}
+                transition={{ duration: 0.2 }}
+                className="flex-1"
+              >
+                {walletInteractions[walletInteraction]}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          <ETHSOL />
-        </div>
+          <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white hidden xl:flex flex-col gap-[70px]">
+            <h1 className="text-[19.7px] leading-[26px] text-primary-400 font-medium">
+              Activity
+            </h1>
 
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={walletInteraction}
-            {...appearAnimation}
-            transition={{ duration: 0.2 }}
-            className="flex-1"
-          >
-            {walletInteractions[walletInteraction]}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+            <Image
+              src="/images/activity.png"
+              alt="Activity"
+              width={500}
+              height={500}
+              quality={100}
+              className="w-full h-[388px]"
+            />
 
-      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white hidden xl:flex flex-col gap-[70px]">
-        <h1 className="text-[19.7px] leading-[26px] text-primary-400 font-medium">
-          Activity
-        </h1>
-
-        <Image
-          src="/images/activity.png"
-          alt="Activity"
-          width={500}
-          height={500}
-          quality={100}
-          className="w-full h-[388px]"
-        />
-
-        <p className="text-[15px] leading-[19.8px text-primary-1700 font-medium max-w-[272px] text-center self-center">
-          Activity feature is coming soon and will be available in the next
-          release
-        </p>
-      </div>
+            <p className="text-[15px] leading-[19.8px text-primary-1700 font-medium max-w-[272px] text-center self-center">
+              Activity feature is coming soon and will be available in the next
+              release
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };

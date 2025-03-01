@@ -8,7 +8,7 @@ import ExploreAgents from "./explore-agents";
 
 const Create = () => {
   const {
-    agentState: { agentsMeta, agents },
+    agentState: { agentsMeta, agents, loadingAgents },
   } = useSystemFunctions();
   const { fetchAgents } = useAgentActions();
 
@@ -31,13 +31,23 @@ const Create = () => {
 
   return (
     <div className="flex flex-col gap-16">
-      <div className="flex flex-col items-center -space-y-3">
+      <div className="flex flex-col items-center space-y-10 lg:-space-y-3">
         <Image
           src="/images/coming-soon.png"
           alt="Coming soon"
           width={500}
           height={500}
-          className="w-full h-[297px]"
+          quality={100}
+          className="w-full h-[297px] hidden lg:block"
+        />
+
+        <Image
+          src="/images/mobile-coming-soon.png"
+          alt="Coming soon"
+          width={500}
+          height={500}
+          quality={100}
+          className="w-full h-fit lg:hidden"
         />
 
         <p className="text-[18px] leading-[22.32px] text-primary-1700 text-center max-w-xl">
@@ -56,7 +66,7 @@ const Create = () => {
         </p>
       </div>
 
-      <ExploreAgents />
+      <ExploreAgents loading={shouldFetchMore || loadingAgents} />
     </div>
   );
 };

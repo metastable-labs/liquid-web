@@ -14,6 +14,7 @@ import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/ui/spinner";
+import TerminalSkeleton from "./skeleton";
 
 const Terminal = () => {
   const { appState, agentState } = useSystemFunctions();
@@ -54,11 +55,7 @@ const Terminal = () => {
           "px-5": !user,
         })}
       >
-        {loading && (
-          <div className="flex items-center justify-center h-[70vh]">
-            <Spinner />
-          </div>
-        )}
+        {loading && <TerminalSkeleton />}
 
         {!loading && (
           <>

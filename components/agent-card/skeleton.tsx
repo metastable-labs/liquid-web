@@ -15,7 +15,7 @@ const LWAgentCardSkeleton = ({
   const containerClasses = classNames({
     "self-stretch flex flex-col lg:flex-row items-center gap-[18px] border border-primary-150 bg-white p-6 lg:gap-20 lg:justify-between rounded-2xl":
       variant === "primary",
-    "self-stretch flex flex-col items-center border border-primary-150 bg-white p-6 gap-9 rounded-2xl":
+    "self-stretch flex flex-col items-center border border-primary-150 bg-white p-6 gap-9 rounded-2xl min-w-[309px] justify-between":
       variant === "secondary",
   });
 
@@ -71,13 +71,10 @@ const LWAgentCardSkeleton = ({
       </div>
 
       <div
-        className={classNames(
-          "flex items-center justify-between w-full lg:w-auto",
-          {
-            "lg:gap-10": variant === "primary",
-            "gap-7": variant === "secondary",
-          }
-        )}
+        className={classNames("flex items-center justify-between w-full", {
+          "lg:gap-10 lg:w-auto": variant === "primary",
+          "gap-7": variant === "secondary",
+        })}
       >
         {[0, 1, 2].map((index) => (
           <div key={index} className="flex flex-col items-center">

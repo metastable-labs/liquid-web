@@ -1,7 +1,6 @@
 type SelectOption = {
   title: string;
   value: string;
-  icon?: string;
 };
 
 interface ILWSelect {
@@ -10,7 +9,6 @@ interface ILWSelect {
   options?: Array<SelectOption>;
   disabled?: boolean;
   defaultValue?: string;
-  variant?: "primary" | "secondary" | "tertiary";
   label?: string;
   fullWidth?: boolean;
 }
