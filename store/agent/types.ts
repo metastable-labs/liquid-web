@@ -8,6 +8,7 @@ type AgentDelegationDetails = {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  chain: "BASE" | "SOLANA";
 };
 
 type AgentsMeta = {

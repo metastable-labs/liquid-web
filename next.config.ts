@@ -36,7 +36,8 @@ const ContentSecurityPolicy = `
     https://www.googletagmanager.com/gtag/js
     https://apple.com/apple-pay
     https://google.com/pay
-    https://auth.privy.io/api/v1/analytics_events;
+    https://auth.privy.io/api/v1/analytics_events
+    wss://dev.useliquid.xyz/aqua;
   
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
   

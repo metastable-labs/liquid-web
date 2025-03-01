@@ -4,7 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface AgentState {
   delegating: boolean;
   loadingDelegationDetails: boolean;
-  delegationDetails?: AgentDelegationDetails;
+  delegationDetails?: AgentDelegationDetails[];
   agent?: Agent;
   agents?: Array<Agent>;
   myAgents?: Array<Agent>;
@@ -47,10 +47,10 @@ export const agentReducer = createSlice({
 
     setDelegationDetails(
       state,
-      action: PayloadAction<AgentDelegationDetails | undefined>
+      action: PayloadAction<AgentDelegationDetails[] | undefined>
     ) {
       if (action.payload) {
-        state.delegationDetails = { ...action.payload };
+        state.delegationDetails = [...action.payload];
       } else {
         state.delegationDetails = undefined;
       }

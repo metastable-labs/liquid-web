@@ -55,7 +55,7 @@ const AgentOverview = () => {
       user && ready
         ? evmWallet?.delegated &&
           (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
-          (delegationDetails ? delegationDetails?.isActive : false)
+          (delegationDetails ? delegationDetails[0]?.isActive : false)
         : false;
 
     setIsPermissionGranted(permissionGranted);

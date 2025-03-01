@@ -20,7 +20,7 @@ const Terminal = () => {
   const { showGrantPermission } = useAppActions();
   const { user, ready } = usePrivy();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
-  const { delegationDetails } = agentState;
+  const { delegationDetails, agent } = agentState;
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
@@ -33,7 +33,7 @@ const Terminal = () => {
       user && ready
         ? evmWallet?.delegated &&
           (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
-          (delegationDetails ? delegationDetails?.isActive : false)
+          (delegationDetails ? delegationDetails[0]?.isActive : false)
         : false;
 
     setIsPermissionGranted(permissionGranted);
@@ -82,7 +82,7 @@ const Terminal = () => {
         <GrantPermission />
       </ModalWrapper>
 
-      <AgentLog />
+      {agent?.id && <AgentLog agentId={agent.id} />}
     </>
   );
 };

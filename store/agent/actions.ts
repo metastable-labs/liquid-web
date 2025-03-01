@@ -61,10 +61,14 @@ const useAgentActions = () => {
     }
   };
 
-  const delegateOrUndelegate = async (agentId: string, isActive: boolean) => {
+  const delegateOrUndelegate = async (
+    agentId: string,
+    isActive: boolean,
+    chain: "BASE" | "SOLANA"
+  ) => {
     try {
       dispatch(setDelegating(true));
-      await api.delegateOrUndelegate(agentId, isActive);
+      await api.delegateOrUndelegate(agentId, isActive, chain);
 
       fetchDelegationDetails(agentId);
     } catch (error: any) {

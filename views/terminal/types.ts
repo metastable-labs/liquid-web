@@ -59,9 +59,8 @@ type AgentLog = {
 };
 
 type Log = {
-  date: string;
+  timestamp: string;
   message: string;
-  type: "info" | "warning" | "error" | "success";
-  initiator?: "user" | "aqua" | "error";
-  loading?: boolean;
+  type: "INFO" | "ERROR" | "WARNING";
+  terminate: boolean;
 };

@@ -2,8 +2,12 @@ import { axiosInstance } from "@/utils/axios";
 
 type API = {
   fetchAgent: (agentId: string) => Promise<Agent>;
-  fetchDelegationStatus: (agentId: string) => Promise<AgentDelegationDetails>;
-  delegateOrUndelegate: (agentId: string, isActive: boolean) => Promise<void>;
+  fetchDelegationStatus: (agentId: string) => Promise<AgentDelegationDetails[]>;
+  delegateOrUndelegate: (
+    agentId: string,
+    isActive: boolean,
+    chain: string
+  ) => Promise<void>;
   connectUser: () => Promise<void>;
   fetchAgents: (page: number) => Promise<AgentsResponse>;
   fetchMyAgents: (page: number) => Promise<AgentsResponse>;
@@ -12,7 +16,7 @@ type API = {
 const api: API = {
   fetchDelegationStatus: async (
     agentId: string
-  ): Promise<AgentDelegationDetails> => {
+  ): Promise<AgentDelegationDetails[]> => {
     const response = await axiosInstance.get(
       `agents/delegate/status/${agentId}`
     );
@@ -26,8 +30,12 @@ const api: API = {
     return response.data?.data;
   },
 
-  delegateOrUndelegate: async (agentId: string, isActive: boolean) => {
-    await axiosInstance.post(`agents/delegate`, { agentId, isActive });
+  delegateOrUndelegate: async (
+    agentId: string,
+    isActive: boolean,
+    chain: string
+  ) => {
+    await axiosInstance.post(`agents/delegate`, { agentId, isActive, chain });
   },
 
   connectUser: async () => {

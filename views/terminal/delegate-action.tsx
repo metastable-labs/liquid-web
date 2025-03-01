@@ -13,14 +13,16 @@ function DelegateActionButton() {
   const { agentState, appState } = useSystemFunctions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
 
-  const isAlreadyDelegatedToThisAgent = agentState.delegationDetails?.isActive;
+  const isAlreadyDelegatedToThisAgent =
+    agentState.delegationDetails?.[0]?.isActive;
 
   const onRevoke = () => {
     const agentId = agentState.agent?.id || "";
 
     showGrantPermission(false);
     revokeWallets().then(() => {
-      delegateOrUndelegate(agentId, false);
+      delegateOrUndelegate(agentId, false, "BASE");
+      delegateOrUndelegate(agentId, false, "SOLANA");
     });
   };
 

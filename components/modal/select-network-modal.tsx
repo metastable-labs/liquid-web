@@ -21,7 +21,8 @@ const LWSelectNetworkModal = () => {
 
   const { isSolanaSupported } = appState;
 
-  const isAlreadyDelegatedToThisAgent = agentState.delegationDetails?.isActive;
+  const isAlreadyDelegatedToThisAgent =
+    agentState.delegationDetails?.[0]?.isActive;
 
   const pathSegments = pathname.split("/").filter(Boolean);
 
@@ -33,7 +34,7 @@ const LWSelectNetworkModal = () => {
 
     if (solanaWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
       const agentId = agentState.agent?.id || "";
-      return delegateOrUndelegate(agentId, true);
+      return delegateOrUndelegate(agentId, true, "SOLANA");
     }
 
     const agentId = agentState.agent?.id || "";
@@ -42,7 +43,7 @@ const LWSelectNetworkModal = () => {
       address: solanaWallet?.address,
       chainType: "solana",
     }).then(() => {
-      delegateOrUndelegate(agentId, true);
+      delegateOrUndelegate(agentId, true, "SOLANA");
       showSelectNetworkModal(false);
     });
   };
@@ -52,7 +53,7 @@ const LWSelectNetworkModal = () => {
 
     if (evmWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
       const agentId = agentState.agent?.id || "";
-      return delegateOrUndelegate(agentId, true);
+      return delegateOrUndelegate(agentId, true, "BASE");
     }
 
     const agentId = agentState.agent?.id || "";
@@ -61,7 +62,7 @@ const LWSelectNetworkModal = () => {
       address: evmWallet?.address,
       chainType: "ethereum",
     }).then(() => {
-      delegateOrUndelegate(agentId, true);
+      delegateOrUndelegate(agentId, true, "BASE");
       showSelectNetworkModal(false);
     });
   };
