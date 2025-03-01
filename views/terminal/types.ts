@@ -53,11 +53,6 @@ type Transaction = {
   token: string;
 };
 
-type AgentLog = {
-  date: string;
-  transactions: Array<Transaction>;
-};
-
 type Log = {
   timestamp: string;
   message: string;
