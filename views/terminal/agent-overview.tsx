@@ -18,7 +18,7 @@ const AgentOverview = () => {
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
-  const { delegationDetails } = agentState;
+  const { delegationDetails, loadingDelegationDetails } = agentState;
   const agent = agentState.agent;
   const name = agent?.name || "";
 
@@ -187,6 +187,7 @@ const AgentOverview = () => {
                 onClick={action.onClick}
                 variant={action.variant}
                 className="w-full"
+                loading={index === 0 && loadingDelegationDetails}
               />
 
               {action.variant === "secondary" && (

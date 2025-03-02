@@ -2,7 +2,6 @@
 import { usePrivy } from "@privy-io/react-auth";
 import classNames from "classnames";
 
-import Loading from "@/components/ui/loading";
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
@@ -13,7 +12,6 @@ import WhyGrantPermission from "./why-grant-permission";
 import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
 import { useEffect, useState } from "react";
-import Spinner from "@/components/ui/spinner";
 import TerminalSkeleton from "./skeleton";
 
 const Terminal = () => {
@@ -21,13 +19,9 @@ const Terminal = () => {
   const { showGrantPermission } = useAppActions();
   const { user, ready } = usePrivy();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
-  const { delegationDetails, agent, loadingDelegationDetails, loadingAgent } =
-    agentState;
+  const { delegationDetails, agent, loadingAgent } = agentState;
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
-
-  const loading =
-    loadingAgent || (!delegationDetails && loadingDelegationDetails);
 
   useEffect(() => {
     const permissionGranted =
@@ -55,9 +49,9 @@ const Terminal = () => {
           "px-5": !user,
         })}
       >
-        {loading && <TerminalSkeleton />}
+        {loadingAgent && <TerminalSkeleton />}
 
-        {!loading && (
+        {!loadingAgent && (
           <>
             <div className="flex flex-col xl:flex-row items-stretch gap-[30px]">
               <AgentOverview />
