@@ -13,15 +13,31 @@ import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
 import { useEffect, useState } from "react";
 import TerminalSkeleton from "./skeleton";
+import AccessDenied from "./access-denied";
 
 const Terminal = () => {
   const { appState, agentState } = useSystemFunctions();
-  const { showGrantPermission } = useAppActions();
+  const { showGrantPermission, showAccessDeniedModal } = useAppActions();
   const { user, ready } = usePrivy();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
   const { delegationDetails, agent, loadingAgent } = agentState;
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+
+  const modals = [
+    {
+      title: isPermissionGranted ? "Revoke Permission" : "Grant Permission",
+      isOpen: appState.openGrantPermission,
+      onClose: () => showGrantPermission(false),
+      children: <GrantPermission />,
+    },
+    {
+      title: "You’re not whitelisted",
+      isOpen: appState.openAccessDenied,
+      onClose: () => showAccessDeniedModal(false),
+      children: <AccessDenied />,
+    },
+  ];
 
   useEffect(() => {
     const permissionGranted =
@@ -63,6 +79,10 @@ const Terminal = () => {
           </>
         )}
       </div>
+
+      {modals.map((modal, index) => (
+        <ModalWrapper key={index} {...modal} enlargeTitle />
+      ))}
 
       <ModalWrapper
         title={isPermissionGranted ? "Revoke Permission" : "Grant Permission"}

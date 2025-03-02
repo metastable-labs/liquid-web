@@ -35,13 +35,13 @@ const LWButton = ({
       onClick={onClick}
     >
       <span
-        className={classNames("lg:whitespace-nowrap", {
+        className={classNames("lg:whitespace-nowrap font-QuantaGroteskPro", {
           "text-[16px] leading-[16px] font-semibold": variant === "primary",
           "text-white":
             variant === "primary" ||
             variant === "primaryAlt" ||
             variant === "danger",
-          "text-[18px] leading-[18px] font-semibold font-QuantaGroteskPro":
+          "text-[18px] leading-[18px] font-semibold":
             variant === "secondary" ||
             variant === "primaryAlt" ||
             variant === "danger",

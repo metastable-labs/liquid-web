@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { usePrivy } from "@privy-io/react-auth";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
-import { MenuIcon, RotatedAddIcon } from "@/public/icons";
+import { LogoutIcon, MenuIcon, RotatedAddIcon } from "@/public/icons";
 import { navigationItems } from "@/constants/navigation";
 import useTruncateText from "@/hooks/useTruncateText";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
@@ -25,13 +25,12 @@ const modalVariants = {
 };
 
 const Menu = () => {
-  const { pathname } = useSystemFunctions();
-  const { user } = usePrivy();
+  const { pathname, navigate } = useSystemFunctions();
+  const { user, logout } = usePrivy();
   const { truncate } = useTruncateText();
   const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
 
   const address = user?.wallet?.address || "";
   const userName =
@@ -42,7 +41,11 @@ const Menu = () => {
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
   const onClose = () => setIsOpen(false);
-  const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
+
+  const onLogout = () =>
+    logout().then(() => {
+      navigate.replace("/");
+    });
 
   useEffect(() => onClose(), [pathname]);
 
@@ -85,7 +88,7 @@ const Menu = () => {
               animate="visible"
               exit="hidden"
               transition={{ type: "tween" }}
-              className="bg-white px-2 py-11 z-10 flex flex-col gap-7 items-stretch"
+              className="bg-white px-2 py-11 z-10 flex flex-col gap-7 items-stretch relative"
             >
               <div className="flex items-center justify-end">
                 <LWClickAnimation className="w-fit h-fit" onClick={onClose}>
@@ -94,43 +97,29 @@ const Menu = () => {
               </div>
 
               <div className="flex flex-col items-stretch gap-5">
-                <div className="relative">
-                  <LWClickAnimation
-                    onClick={toggleShowDropDown}
-                    className="pb-[19px] px-5 flex items-center gap-2.5 border-b-[0.5px] border-b-primary-550"
-                  >
+                <div className="pb-[19px] px-5 flex items-center gap-2.5 border-b-[0.5px] border-b-primary-550">
+                  <Image
+                    src={avatar}
+                    alt={`${userName} avatar`}
+                    width={44}
+                    height={44}
+                    quality={100}
+                    className="w-11 h-11 object-cover rounded-full"
+                  />
+
+                  <div className="flex items-center justify-center gap-1">
+                    <span className="text-[13px] leading-[16.2px] text-primary-350">
+                      @{userName}
+                    </span>
                     <Image
-                      src={avatar}
-                      alt={`${userName} avatar`}
-                      width={44}
-                      height={44}
+                      src="/images/farcaster.png"
+                      alt="farcaster logo"
+                      width={16}
+                      height={16}
                       quality={100}
-                      className="w-11 h-11 object-cover rounded-full"
+                      className="w-4 h-4 object-cover rounded-full"
                     />
-
-                    <div className="flex items-center justify-center gap-1">
-                      <span className="text-[13px] leading-[16.2px] text-primary-350">
-                        @{userName}
-                      </span>
-                      <Image
-                        src="/images/farcaster.png"
-                        alt="farcaster logo"
-                        width={16}
-                        height={16}
-                        quality={100}
-                        className="w-4 h-4 object-cover rounded-full"
-                      />
-                    </div>
-                  </LWClickAnimation>
-
-                  <AnimatePresence>
-                    {showDropdown && (
-                      <>
-                        <LWBackdrop onClick={toggleShowDropDown} />
-                        <Dropdown />
-                      </>
-                    )}
-                  </AnimatePresence>
+                  </div>
                 </div>
 
                 <div className="flex flex-col px-5 gap-6">
@@ -161,6 +150,17 @@ const Menu = () => {
                   })}
                 </div>
               </div>
+
+              <LWClickAnimation
+                className="flex items-center gap-1 cursor-pointer w-fit absolute bottom-9 left-7"
+                onClick={onLogout}
+              >
+                <LogoutIcon width={24} height={24} />
+
+                <span className="text-[11px] leading-[13.64px] text-primary-50">
+                  Logout
+                </span>
+              </LWClickAnimation>
             </motion.div>
           </div>
         )}

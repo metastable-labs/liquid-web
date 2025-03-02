@@ -23,7 +23,7 @@ const Agents = () => {
   const shouldFetchMore = useInfiniteScroll(hasMoreData || false);
 
   useEffect(() => {
-    fetchMyAgents(1);
+    if (!myAgents) fetchMyAgents(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
