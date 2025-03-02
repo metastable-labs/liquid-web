@@ -17,7 +17,7 @@ export interface AgentState {
 
 const initialState: AgentState = {
   delegating: false,
-  loadingDelegationDetails: true,
+  loadingDelegationDetails: false,
   delegationDetails: undefined,
   agent: undefined,
   agents: undefined,
