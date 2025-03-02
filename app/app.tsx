@@ -46,7 +46,13 @@ const App = ({ children }: { children: React.ReactNode }) => {
           >
             {showNavigation && <LWNavigation />}
 
-            <div className="flex-1">{children}</div>
+            <div
+              className={classNames("flex-1 lg:min-h-[345px]", {
+                "px-0 lg:px-5": !authenticated || !address,
+              })}
+            >
+              {children}
+            </div>
           </div>
         )}
       </div>

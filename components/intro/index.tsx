@@ -9,6 +9,7 @@ import StepTexts from "./step-texts";
 import Step1 from "./step1";
 import Step2 from "./step2";
 import Step3 from "./step3";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -34,6 +35,10 @@ const stepTexts: Array<IStepTexts> = [
 ];
 
 const LWIntro = () => {
+  const {
+    appState: { appIsReady },
+  } = useSystemFunctions();
+
   const [step, setStep] = useState(0);
   const [cookies, setCookie] = useCookies(["HasShowIntroModal"]);
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -73,14 +78,16 @@ const LWIntro = () => {
     }
   }, [cookies.HasShowIntroModal]);
 
-  // useEffect(() => {
-  //   if (step < stepTexts.length - 1) {
-  //     const timer = setTimeout(() => {
-  //       setStep(step + 1);
-  //     }, 8000);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [step]);
+  useEffect(() => {
+    if (step < stepTexts.length - 1) {
+      const timer = setTimeout(() => {
+        setStep(step + 1);
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
+
+  if (!appIsReady) return null;
 
   return (
     <AnimatePresence>

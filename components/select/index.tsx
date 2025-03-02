@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
 
-import { ArrowCircleDownIcon } from "@/public/icons";
+import { SortIcon } from "@/public/icons";
 import LWClickAnimation from "../click-animation";
-import ModalWrapper from "../modal/modal-wrapper";
+import LWBackdrop from "../backdrop";
 
 const LWSelect = ({
   defaultValue,
@@ -14,24 +14,18 @@ const LWSelect = ({
   onClick,
   options,
   title,
-  variant = "primary",
   fullWidth = false,
 }: ILWSelect) => {
+  // Manage the selected value locally
+  const [selectedValue, setSelectedValue] = useState<string>(
+    defaultValue || ""
+  );
+  const [displayText, setDisplayText] = useState<string>(title || "");
   const [isOpen, setIsOpen] = useState(false);
-  const [displayText, setDisplayText] = useState<string>(title!);
-  const [icon, setIcon] = useState<string | undefined>(undefined);
 
   const showOptions = isOpen && options;
 
-  const handleValue = (option: SelectOption) => {
-    setIsOpen(false);
-    setDisplayText(option.title);
-    setIcon(option.icon);
-    onClick?.(option.value);
-  };
-
-  const closeModal = () => setIsOpen(false);
-
+  // Update display text when defaultValue or options change
   useEffect(() => {
     if (defaultValue) {
       const defaultOption = options?.find(
@@ -39,108 +33,71 @@ const LWSelect = ({
       );
       if (defaultOption) {
         setDisplayText(defaultOption.title);
-        setIcon(defaultOption.icon);
+        setSelectedValue(defaultOption.value);
       } else {
-        setDisplayText(title!);
-        setIcon(undefined);
+        setDisplayText(title || "");
       }
     }
   }, [defaultValue, options, title]);
 
+  const handleValue = (option: SelectOption) => {
+    setIsOpen(false);
+    setDisplayText(option.title);
+    setSelectedValue(option.value);
+    onClick?.(option.value);
+  };
+
+  const close = () => setIsOpen(false);
+
   return (
     <div
-      className={classNames({
-        "flex flex-col gap-1.5 relative": variant === "primary",
+      className={classNames("relative", {
         "w-full items-stretch": fullWidth,
       })}
     >
-      {label && (
-        <label
-          className={classNames({
-            "text-[13px] leading-[16.12px] font-medium text-primary-400":
-              variant === "primary",
-          })}
-        >
-          {label}
-        </label>
-      )}
-
       <LWClickAnimation
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
-        className={classNames({
-          "p-3.5 w-full flex items-center justify-between gap-2 border border-primary-150 bg-white rounded-2xl":
-            variant === "primary",
-        })}
+        className="px-3 py-2 flex items-center justify-between gap-2 border border-primary-150 bg-primary-600 rounded-xl"
       >
-        <div
-          className={classNames({
-            "flex items-center gap-2": icon,
-          })}
-        >
-          {icon && (
-            <Image
-              src={icon}
-              alt={`${displayText}-icon`}
-              width={24}
-              height={24}
-              className="rounded-full object-cover"
-              quality={100}
-            />
-          )}
-
-          <span
-            className={classNames({
-              "text-[14px] leading-[18.48px] text-primary-50":
-                variant === "primary",
-            })}
-          >
-            {displayText}
-          </span>
-        </div>
-
-        <div className="min-w-fit">
-          <ArrowCircleDownIcon />
-        </div>
+        <SortIcon />
+        <span className="text-[15px] leading-[19.8px] text-primary-1700 font-medium">
+          {displayText}
+        </span>
       </LWClickAnimation>
 
-      <ModalWrapper isOpen={isOpen} onClose={closeModal} title={label}>
-        <div className="p-6">
-          <div className="space-y-6">
-            {options?.map(({ title, value, icon }) => (
-              <div
-                onClick={handleValue.bind(this, { title, value, icon })}
-                key={value}
-                className="flex items-center justify-between p-4 rounded-xl border-[1px] border-[#EAEEF4] cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <Image
-                    src={icon!}
-                    alt={`${title}-icon`}
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                  />
-
-                  <span className="text-[14px] font-light text-primary-50">
+      <AnimatePresence>
+        {showOptions && (
+          <>
+            <LWBackdrop onClick={close} />
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full right-0 mt-1 z-20 border border-primary-150 bg-white shadow-profileDropdown rounded-2xl p-2 flex flex-col gap-5 w-fit"
+            >
+              {options?.map(({ title, value }) => (
+                <div
+                  onClick={() => handleValue({ title, value })}
+                  key={value}
+                  className={classNames(
+                    "flex items-center p-2.5 rounded-lg cursor-pointer",
+                    {
+                      "bg-primary-600 pointer-events-none":
+                        value === selectedValue,
+                    }
+                  )}
+                >
+                  <span className="text-[15px] leading-[19.8px] text-primary-1800 font-medium whitespace-nowrap">
                     {title}
                   </span>
                 </div>
-
-                <div
-                  className={classNames(
-                    "w-2 h-2 rounded-full transition-all duration-500",
-                    {
-                      "bg-primary-1000": value === defaultValue,
-                      "bg-transparent": value !== defaultValue,
-                    }
-                  )}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </ModalWrapper>
+              ))}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

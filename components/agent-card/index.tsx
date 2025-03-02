@@ -90,14 +90,14 @@ const LWAgentCard = ({
 
   return (
     <div
-      className={classNames({
+      className={classNames("transition-all duration-500", {
         "self-stretch flex flex-col lg:flex-row items-center gap-[18px] border border-primary-150 bg-white":
           variant === "primary",
         "p-6 lg:gap-20 lg:justify-between rounded-2xl":
           variant === "primary" && !isIntro,
         "p-[11px] justify-between rounded-[7px]":
           variant === "primary" && isIntro,
-        "self-stretch flex flex-col items-center border border-primary-150 bg-white":
+        "self-stretch flex flex-col items-center border border-primary-150 bg-white hover:shadow-agentLog":
           variant === "secondary",
         "p-6 gap-9 rounded-2xl": variant === "secondary" && !isIntro,
         "p-3 gap-4 rounded-xl h-[136px] justify-between w-[246px]":
@@ -177,14 +177,11 @@ const LWAgentCard = ({
       </div>
 
       <div
-        className={classNames(
-          "flex items-center justify-between w-full lg:w-auto",
-          {
-            "lg:gap-10": variant === "primary" && !isIntro,
-            "gap-7": variant === "secondary" && !isIntro,
-            "gap-4": isIntro,
-          }
-        )}
+        className={classNames("flex items-center justify-between w-full ", {
+          "lg:gap-10 lg:w-auto": variant === "primary" && !isIntro,
+          "gap-7": variant === "secondary" && !isIntro,
+          "gap-4": isIntro,
+        })}
       >
         <AgentStat isIntro={isIntro} {...stats[0]} variant={variant} />
 
