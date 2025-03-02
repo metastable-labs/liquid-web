@@ -1,4 +1,4 @@
-import { usePrivy, useDelegatedActions } from "@privy-io/react-auth";
+import { usePrivy, useDelegatedActions, useLogin } from "@privy-io/react-auth";
 import { LWButton } from "@/components";
 import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
@@ -6,10 +6,15 @@ import useAgentActions from "@/store/agent/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 
 function DelegateActionButton() {
-  const { user, login } = usePrivy();
+  const { showGrantPermission, showSelectNetworkModal } = useAppActions();
+  const { user } = usePrivy();
+  const { login } = useLogin({
+    onComplete: () => {
+      showGrantPermission(false);
+    },
+  });
   const { delegateOrUndelegate } = useAgentActions();
   const { revokeWallets } = useDelegatedActions();
-  const { showGrantPermission, showSelectNetworkModal } = useAppActions();
   const { agentState, appState } = useSystemFunctions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
 
