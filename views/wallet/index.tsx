@@ -179,7 +179,7 @@ const Wallet = () => {
         }
       )}
     >
-      {walletState.loadingAssets ? (
+      {!walletState.assets && walletState.loadingAssets ? (
         <WalletSkeleton />
       ) : (
         <>

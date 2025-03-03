@@ -19,7 +19,7 @@ const Permissions = () => {
 
   const showEmptyState =
     !loadingDelegatedAgents && delegatedAgents?.length === 0;
-  const showSkeleton = loadingDelegatedAgents;
+  const showSkeleton = !delegatedAgents && loadingDelegatedAgents;
 
   useEffect(() => {
     fetchDelegatedAgents();
