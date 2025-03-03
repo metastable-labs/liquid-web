@@ -84,15 +84,6 @@ const Terminal = () => {
         <ModalWrapper key={index} {...modal} enlargeTitle />
       ))}
 
-      <ModalWrapper
-        title={isPermissionGranted ? "Revoke Permission" : "Grant Permission"}
-        isOpen={appState.openGrantPermission}
-        onClose={() => showGrantPermission(false)}
-        enlargeTitle
-      >
-        <GrantPermission />
-      </ModalWrapper>
-
       {agent?.id && <AgentLog agentId={agent.id} />}
     </>
   );
