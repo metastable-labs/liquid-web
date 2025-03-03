@@ -29,15 +29,27 @@ const AccessDenied = () => {
     <div className="px-6 pt-1 pb-6 flex flex-col gap-6">
       <p className="self-stretch text-[16px] leading-[19.84px] text-primary-50">
         We&apos;ll be rolling out to more users soon. Follow us on{" "}
-        <a href="#" target="_blank" className="underline underline-offset-2">
+        <a
+          href="https://x.com/getliquidapp"
+          target="_blank"
+          className="underline underline-offset-2"
+        >
           X
         </a>{" "}
         and Join our{" "}
-        <a href="#" target="_blank" className="underline underline-offset-2">
+        <a
+          href="https://discord.gg/fDwU7XUx"
+          target="_blank"
+          className="underline underline-offset-2"
+        >
           Discord
         </a>
         /
-        <a href="#" target="_blank" className="underline underline-offset-2">
+        <a
+          href="https://warpcast.com/~/channel/liquidapp"
+          target="_blank"
+          className="underline underline-offset-2"
+        >
           Warpcast
         </a>{" "}
         channel to stay updated.
