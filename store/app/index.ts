@@ -6,6 +6,7 @@ export interface AppState {
   farcasterContext: UserContext | undefined;
   toast: ToastState;
   openGrantPermission: boolean;
+  openAccessDenied: boolean;
   openSelectNetworkModal: boolean;
   isSolanaSupported: boolean;
   appIsReady: boolean;
@@ -20,6 +21,7 @@ const initialState: AppState = {
     show: false,
   },
   openGrantPermission: false,
+  openAccessDenied: false,
   openSelectNetworkModal: false,
   isSolanaSupported: false,
   appIsReady: false,
@@ -49,6 +51,10 @@ export const appReducer = createSlice({
       state.openGrantPermission = action.payload;
     },
 
+    setOpenAccessDenied: (state, action: PayloadAction<boolean>) => {
+      state.openAccessDenied = action.payload;
+    },
+
     setOpenSelectNetworkModal: (state, action: PayloadAction<boolean>) => {
       state.openSelectNetworkModal = action.payload;
     },
@@ -62,6 +68,7 @@ export const {
   setOpenGrantPermission,
   setOpenSelectNetworkModal,
   setAppIsReady,
+  setOpenAccessDenied,
 } = appReducer.actions;
 
 export default appReducer.reducer;

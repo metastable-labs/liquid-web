@@ -13,6 +13,9 @@ export interface AgentState {
   loadingAgent: boolean;
   loadingAgents: boolean;
   loadingMyAgents: boolean;
+  delegatedAgents?: Array<Agent>;
+  delegatedAgentsMeta?: AgentsMeta;
+  loadingDelegatedAgents: boolean;
 }
 
 const initialState: AgentState = {
@@ -27,6 +30,9 @@ const initialState: AgentState = {
   loadingAgent: true,
   loadingAgents: true,
   loadingMyAgents: true,
+  delegatedAgents: undefined,
+  delegatedAgentsMeta: undefined,
+  loadingDelegatedAgents: true,
 };
 
 export const agentReducer = createSlice({
@@ -125,6 +131,40 @@ export const agentReducer = createSlice({
         state.myAgentsMeta = undefined;
       }
     },
+
+    setLoadingDelegatedAgents(state, action: PayloadAction<boolean>) {
+      state.loadingDelegatedAgents = action.payload;
+    },
+
+    setDelegatedAgents(state, action: PayloadAction<Array<Agent> | undefined>) {
+      if (action.payload) {
+        state.delegatedAgents = [...action.payload];
+      } else {
+        state.delegatedAgents = undefined;
+      }
+    },
+
+    setExtraDelegatedAgents: (
+      state,
+      action: PayloadAction<Array<Agent> | undefined>
+    ) => {
+      if (action.payload) {
+        state.delegatedAgents = [...state.delegatedAgents!, ...action.payload];
+      } else {
+        state.delegatedAgents = undefined;
+      }
+    },
+
+    setDelegatedAgentsMeta(
+      state,
+      action: PayloadAction<AgentsMeta | undefined>
+    ) {
+      if (action.payload) {
+        state.delegatedAgentsMeta = { ...action.payload };
+      } else {
+        state.delegatedAgentsMeta = undefined;
+      }
+    },
   },
 });
 
@@ -142,6 +182,10 @@ export const {
   setMyAgents,
   setMyAgentsMeta,
   setLoadingMyAgents,
+  setDelegatedAgents,
+  setDelegatedAgentsMeta,
+  setExtraDelegatedAgents,
+  setLoadingDelegatedAgents,
 } = agentReducer.actions;
 
 export default agentReducer.reducer;

@@ -36,7 +36,7 @@ const ExploreAgents = ({ loading, seeAll }: ExploreAgentsProps) => {
       active: true,
     })) || [];
 
-  const showSkeleton = seeAll ? loadingAgents && !agents : loading;
+  const showSkeleton = seeAll ? loading : loadingAgents && !agents;
   const showAgents = Boolean(agents_.length) && !loadingAgents;
   const showEmptyState = !loadingAgents && agents_.length === 0;
   const showSeeAll = Number(agentsMeta?.totalItems) > 12;

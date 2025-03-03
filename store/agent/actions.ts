@@ -15,6 +15,10 @@ import {
   setMyAgents,
   setMyAgentsMeta,
   setLoadingMyAgents,
+  setDelegatedAgents,
+  setDelegatedAgentsMeta,
+  setExtraDelegatedAgents,
+  setLoadingDelegatedAgents,
 } from ".";
 
 const formatAgent = (agent: any): Agent => {
@@ -135,6 +139,37 @@ const useAgentActions = () => {
     }
   };
 
+  const fetchDelegatedAgents = async (
+    page: number,
+    callback?: CallbackProps
+  ) => {
+    try {
+      dispatch(setLoadingDelegatedAgents(true));
+      const { nextPage, previousPage, records, size, totalItems } =
+        await api.fetchDelegatedAgents(page);
+
+      const formattedRecords = records.map((record: any) =>
+        formatAgent(record)
+      );
+
+      dispatch(
+        setDelegatedAgentsMeta({ nextPage, previousPage, size, totalItems })
+      );
+
+      if (page === 1) {
+        dispatch(setDelegatedAgents(formattedRecords));
+      } else {
+        dispatch(setExtraDelegatedAgents(formattedRecords));
+      }
+
+      callback?.onSuccess?.(formattedRecords);
+    } catch (error: any) {
+      callback?.onError?.(error);
+    } finally {
+      dispatch(setLoadingDelegatedAgents(false));
+    }
+  };
+
   return {
     fetchDelegationDetails,
     delegateOrUndelegate,
@@ -142,6 +177,7 @@ const useAgentActions = () => {
     fetchAgent,
     fetchAgents,
     fetchMyAgents,
+    fetchDelegatedAgents,
   };
 };
 

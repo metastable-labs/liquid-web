@@ -4,6 +4,7 @@ import {
   setOpenGrantPermission,
   setToast,
   setOpenSelectNetworkModal,
+  setOpenAccessDenied,
 } from ".";
 import api from "./api";
 
@@ -39,6 +40,10 @@ const useAppActions = () => {
     dispatch(setOpenGrantPermission(show));
   };
 
+  const showAccessDeniedModal = (show: boolean) => {
+    dispatch(setOpenAccessDenied(show));
+  };
+
   const showSelectNetworkModal = (show: boolean) =>
     dispatch(setOpenSelectNetworkModal(show));
 
@@ -49,6 +54,7 @@ const useAppActions = () => {
     registerUser,
     showGrantPermission,
     showSelectNetworkModal,
+    showAccessDeniedModal,
   };
 };
 

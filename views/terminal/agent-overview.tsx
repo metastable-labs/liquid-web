@@ -9,12 +9,14 @@ import { formatNumberWithSuffix } from "@/utils/helpers";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
+import whitelist from "@/constants/whitelist";
 
 const AgentOverview = () => {
   const { navigate, agentState, appState } = useSystemFunctions();
   const { ready, user } = usePrivy();
-  const { showGrantPermission } = useAppActions();
-  const { solanaWallet, evmWallet } = useLinkedAccounts();
+  const { showGrantPermission, showAccessDeniedModal } = useAppActions();
+  const { solanaWallet, evmWallet, linkedFarcaster, linkedTwitter } =
+    useLinkedAccounts();
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
@@ -22,10 +24,19 @@ const AgentOverview = () => {
   const agent = agentState.agent;
   const name = agent?.name || "";
 
+  const username = linkedFarcaster?.username || linkedTwitter?.username;
+
+  const onGrantPermission = () => {
+    if (!user || (user && whitelist.includes(username! || "")))
+      return showGrantPermission(true);
+
+    return showAccessDeniedModal(true);
+  };
+
   const actions: Array<ILWButton> = [
     {
       title: `${isPermissionGranted ? "Revoke" : "Grant Permission"}`,
-      onClick: () => showGrantPermission(true),
+      onClick: onGrantPermission,
       variant: isPermissionGranted ? "danger" : "primaryAlt",
     },
     {
