@@ -27,7 +27,7 @@ const AccessDenied = () => {
 
   return (
     <div className="px-6 pt-1 pb-6 flex flex-col gap-6">
-      <p className="self-stretch text-[16px] leading-[19.84px] text-primary-50">
+      {/* <p className="self-stretch text-[16px] leading-[19.84px] text-primary-50">
         We&apos;ll be rolling out to more users soon. Follow us on{" "}
         <a
           href="https://x.com/getliquidapp"
@@ -53,6 +53,9 @@ const AccessDenied = () => {
           Warpcast
         </a>{" "}
         channel to stay updated.
+      </p> */}
+      <p className="self-stretch text-[16px] leading-[19.84px] text-primary-50">
+        Follow our Warpcast channel and check back
       </p>
       <LWButton
         title="Got it"
