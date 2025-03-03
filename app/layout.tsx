@@ -24,12 +24,12 @@ export const metadata: Metadata = {
   applicationName: "Liquid",
   openGraph: {
     title: "Launch an onchain AI agent in seconds",
-    description: "Liquid makes crypto simple. an AI agent that takes onchain actions for you.",
+    description: "Liquid makes crypto simple. Create AI agents that takes onchain actions for you.",
     url: "https://app.useliquid.xyz",
     type: "website",
     images: [
       {
-        url: "https://res.cloudinary.com/njokuscript/image/upload/v1740572700/Section_preview_2_u2yliq.png",
+        url: "https://app.useliquid.xyz/liquid_preview.jpg",
         width: 1200,
         height: 630,
       },
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "https://app.useliquid.xyz",
     title: "Launch an onchain AI agent in seconds",
-    description: "Liquid makes crypto simple. an AI agent that takes onchain actions for you.",
+    description: "Liquid makes crypto simple. Create AI agents that takes onchain actions for you.",
     images: [
       {
-        url: "https://res.cloudinary.com/njokuscript/image/upload/v1740572700/Section_preview_2_u2yliq.png",
+        url: "https://app.useliquid.xyz/liquid_preview.jpg",
         width: 1200,
         height: 630,
       },
