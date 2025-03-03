@@ -1,16 +1,33 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { setupCache } from "axios-cache-interceptor";
+import { getAccessToken } from "@privy-io/react-auth";
 
-const axiosInstance = axios.create({
+const Axios = axios.create({
   baseURL: "https://dev.useliquid.xyz/aqua/api/v1/",
 });
+
+const axiosInstance = setupCache(Axios);
 
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
-    // if (error?.response?.status === 401 || error?.response?.status === 403) {
-    // }
+  async (error: AxiosError) => {
+    if (error?.response?.status === 401 || error?.response?.status === 403) {
+      const accessToken = await getAccessToken();
+
+      if (!accessToken) return;
+
+      await setTokenHeader(accessToken);
+
+      if (error.config?.headers) {
+        // Update the original request's headers with the new token.
+        error.config.headers.Authorization = `Bearer ${accessToken}`;
+
+        // Retry the request using the original config.
+        return axiosInstance(error.config);
+      }
+    }
     return Promise.reject(error);
   }
 );
