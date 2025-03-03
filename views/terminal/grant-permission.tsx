@@ -33,7 +33,7 @@ const GrantPermission = () => {
       </ul>
 
       <p className="self-stretch px-3.5 pt-3.5 pb-4 bg-primary-1400 rounded-xl text-[16px] leading-[19.84px] text-primary-2150">
-        Note that Liquid will not have access to your{" "}
+        Note that Liquid or the AI Agents will not have access to your{" "}
         <span className="font-bold">private keys</span> and you can always
         revoke access anytime on the app.
       </p>

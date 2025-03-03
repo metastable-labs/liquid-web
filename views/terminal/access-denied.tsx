@@ -5,7 +5,7 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 
 const permissionInfo = [
-  "It's advisable to fund your wallet with ETH or SOL to set the max spend for unrestricted agent trades.",
+  "Make sure your wallet has enought ETH for unrestricted agent trades.",
   "Agents can use a % of the delegated balance per trade, based on their goals.",
 ];
 
