@@ -67,14 +67,27 @@ const Dropdown = () => {
             {`${isAddress(username) ? "" : "@"}${username}`}
           </span>
 
-          <Image
-            src="/images/farcaster.png"
-            alt="farcaster logo"
-            width={13}
-            height={13}
-            quality={100}
-            className="w-[13px] h-[13px] object-cover rounded-full"
-          />
+          {linkedFarcaster && (
+            <Image
+              src="/images/farcaster.png"
+              alt="farcaster logo"
+              width={13}
+              height={13}
+              quality={100}
+              className="w-[13px] h-[13px] object-cover rounded-full"
+            />
+          )}
+
+          {linkedTwitter && (
+            <Image
+              src="/images/twitter.webp"
+              alt="farcaster logo"
+              width={13}
+              height={13}
+              quality={100}
+              className="w-[13px] h-[13px] object-cover rounded-full"
+            />
+          )}
         </div>
       </div>
 
