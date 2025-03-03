@@ -12,8 +12,8 @@ const AssetPaper = ({ asset }: { asset: Wallet }) => {
     Number(balance) < 1 ? balance : Number(balance).toLocaleString();
 
   const usdBalance = formatBalance("3", 2);
-  const formatedUsdBalance =
-    Number(usdBalance) < 1 ? usdBalance : Number(usdBalance).toLocaleString();
+  const formatedUsdBalance = "-";
+  // Number(usdBalance) < 1 ? usdBalance : Number(usdBalance).toLocaleString();
 
   return (
     <div className="py-0.5 self-stretch flex items-center justify-between">
