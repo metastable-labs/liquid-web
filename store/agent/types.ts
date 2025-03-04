@@ -11,25 +11,50 @@ type AgentDelegationDetails = {
   chain: "BASE" | "SOLANA";
 };
 
-type AgentsMeta = {
-  size: number;
-  totalItems: number;
-  nextPage: number;
-  previousPage: string;
+type Creator = {
+  username: string;
+  fid: number;
+  followers: number;
+  following: number;
+  pfp: string;
+  profile: {
+    bio: {
+      text: string;
+    };
+  };
 };
 
-type AgentsResponse = AgentsMeta & {
-  records: Array<Agent>;
-};
-
-type DelegatedAgents = {
+type Agent = {
+  id: string;
   name: string;
-  creator: string;
+  goal: string;
+  type: string;
+  token: {
+    agentId: string;
+    name: string;
+    locked: string;
+    marketCap: string;
+    status: string;
+    symbol: string;
+  };
+  creator: Creator;
   winRate: number;
   users: number;
   last7dPnl: number;
   totalPnl: number;
-  agentId: string;
-  agentType: string;
-  pfp: string;
+  active?: boolean;
+};
+
+type AgentsMeta = {
+  perPage: string;
+  totalItems: number;
+  nextPage: number | null;
+  previousPage: number | null;
+};
+
+type AgentsResponse = {
+  data: Agent[];
+  meta: AgentsMeta;
+  success: boolean;
+  message: string;
 };

@@ -27,7 +27,7 @@ const LWToastNotification = () => {
             scale: 0.5,
             transition: { duration: 0.5 },
           }}
-          className="w-screen flex justify-center items-center fixed z-[99999] top-[8%] left-0 px-4"
+          className="w-screen flex justify-center items-center fixed z-[999999999] top-[8%] left-0 px-4"
         >
           <motion.div
             className={classNames(

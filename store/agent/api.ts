@@ -10,7 +10,7 @@ type API = {
   ) => Promise<void>;
   connectUser: () => Promise<void>;
   fetchAgents: (page: number) => Promise<AgentsResponse>;
-  fetchDelegatedAgents: () => Promise<DelegatedAgents[]>;
+  fetchDelegatedAgents: () => Promise<AgentsResponse>;
   fetchMyAgents: (page: number) => Promise<AgentsResponse>;
 };
 
@@ -52,7 +52,7 @@ const api: API = {
   },
 
   fetchDelegatedAgents: async () => {
-    const response = await axiosInstance.get(`/agents/delegate`);
+    const response = await axiosInstance.get(`/agents/delegate?size=50`);
 
     return response.data;
   },

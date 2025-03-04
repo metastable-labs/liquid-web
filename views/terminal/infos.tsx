@@ -22,23 +22,9 @@ const AgentInfos = () => {
 
   const creator = agentState.agent?.creator;
   const goal = agentState.agent?.goal || "";
-  const username = creator?.username || "";
-
-  const mockCreator = {
-    avatar: creator?.pfp || "",
-    createdAt: "2024-07-01T00:00:00.000Z",
-    followers: creator?.followers || 0,
-    following: creator?.following || 0,
-    id: creator?.fid?.toString() || "",
-    name: username,
-    twitterURL: `https://twitter.com/${username}`,
-    updatedAt: "2024-07-01T00:00:00.000Z",
-    username: username,
-    warpcastURL: `https://warpcast.com/${username}`,
-  };
 
   const infoCards: Array<InfoCardProps> = [
-    { children: <LWUserPaper user={mockCreator} />, title: "Creator" },
+    { children: <LWUserPaper user={creator!} />, title: "Creator" },
     {
       children: (
         <p
@@ -56,11 +42,12 @@ const AgentInfos = () => {
 
   return (
     <div className="self-stretch p-6 border border-primary-150 bg-white rounded-3xl flex flex-col items-stretch justify-between gap-6">
-      {infoCards.map((infoCard, index) => (
-        <InfoCard key={index} title={infoCard.title}>
-          {infoCard.children}
-        </InfoCard>
-      ))}
+      {creator &&
+        infoCards.map((infoCard, index) => (
+          <InfoCard key={index} title={infoCard.title}>
+            {infoCard.children}
+          </InfoCard>
+        ))}
     </div>
   );
 };

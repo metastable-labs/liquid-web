@@ -1,3 +1,1 @@
-interface ILWUserPaper {
-  user: User;
-}
+

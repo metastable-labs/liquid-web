@@ -28,7 +28,7 @@ const Agents = () => {
   }, []);
 
   useEffect(() => {
-    if (shouldFetchMore && myAgentsMeta) {
+    if (shouldFetchMore && myAgentsMeta && myAgentsMeta.nextPage) {
       fetchMyAgents(myAgentsMeta.nextPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -6,29 +6,7 @@ const AgentsMap = ({ loading }: { loading: boolean }) => {
     agentState: { myAgents },
   } = useSystemFunctions();
 
-  const agents_: Array<Agent> =
-    myAgents?.map((agent) => ({
-      name: agent?.name,
-      creator: agent.creator,
-      goal: agent?.goal,
-      id: agent?.id,
-      last7dPnl: agent.last7dPnl,
-      totalPnl: agent.totalPnl,
-      token: {
-        agentId: agent?.token.agentId,
-        name: agent?.token.name,
-        symbol: "MHN",
-        locked: "100",
-        marketCap: "100",
-        status: "active",
-      },
-      type: agent.type,
-      users: agent.users,
-      winRate: agent.winRate,
-      active: true,
-    })) || [];
-
-  const showEmptyState = !loading && agents_.length === 0;
+  const showEmptyState = !loading && myAgents && myAgents.length === 0;
 
   return (
     <div className="flex flex-col gap-6 items-stretch pb-10">
@@ -46,7 +24,7 @@ const AgentsMap = ({ loading }: { loading: boolean }) => {
           </p>
         </div>
       ) : (
-        agents_.map((agent) => (
+        myAgents?.map((agent) => (
           <LWAgentCard
             key={agent.id}
             agent={agent}

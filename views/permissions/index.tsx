@@ -1,4 +1,4 @@
-import { LWAgentCard, LWAgentCardSkeleton } from "@/components";
+import { LWAgentCardSkeleton } from "@/components";
 import { PermissionsIconActive } from "@/public/icons";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAgentActions from "@/store/agent/actions";
@@ -14,8 +14,6 @@ const Permissions = () => {
   const { ready, authenticated, user } = usePrivy();
 
   const address = user?.wallet?.address;
-
-  console.log(delegatedAgents);
 
   const showEmptyState =
     !loadingDelegatedAgents && delegatedAgents?.length === 0;
@@ -72,7 +70,7 @@ const Permissions = () => {
           </div>
         ) : (
           delegatedAgents?.map((agent) => (
-            <AgentItem key={agent.agentId} {...agent} />
+            <AgentItem key={agent.id} {...agent} />
           ))
         )}
       </div>

@@ -95,7 +95,7 @@ const LWToolBar = () => {
           </LWClickAnimation>
         )}
 
-        {ready && authenticated && address && (
+        {avatar && (
           <>
             <div className="relative hidden lg:block">
               <LWClickAnimation

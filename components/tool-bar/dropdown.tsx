@@ -4,19 +4,23 @@ import { usePrivy } from "@privy-io/react-auth";
 
 import useTruncateText from "@/hooks/useTruncateText";
 import useCopy from "@/hooks/useCopy";
-import { EmptyWalletIcon, LogoutIcon } from "@/public/icons";
+import {
+  CheckIcon,
+  CopyIcon,
+  EmptyWalletIcon,
+  LogoutIcon,
+} from "@/public/icons";
 import LWClickAnimation from "../click-animation";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
-
-const isAddress = (value: string): boolean => /^0x[a-fA-F0-9]{40}$/.test(value);
+import { truncateWalletAddress } from "@/utils/helpers";
 
 const Dropdown = () => {
   const { user, logout } = usePrivy();
   const { truncate } = useTruncateText();
-  const { handleCopy } = useCopy();
   const { navigate } = useSystemFunctions();
   const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
+  const { handleCopy, hasCopied } = useCopy("Copied");
 
   const address = user?.wallet?.address || "";
 
@@ -28,11 +32,6 @@ const Dropdown = () => {
   const avatar = linkedTwitter?.profilePictureUrl || linkedFarcaster?.pfp || "";
 
   const actions = [
-    {
-      icon: <EmptyWalletIcon />,
-      title: "Wallet",
-      action: () => handleCopy(address),
-    },
     {
       icon: <LogoutIcon />,
       title: "Log out",
@@ -62,31 +61,47 @@ const Dropdown = () => {
           className="w-10 h-10 object-cover rounded-full"
         />
 
-        <div className="flex items-center justify-center gap-1">
-          <span className="text-[12px] leading-[16px] text-primary-350">
-            {`${isAddress(username) ? "" : "@"}${username}`}
-          </span>
+        <div>
+          <div className="flex items-center justify-center gap-1">
+            <span className="text-[12px] leading-[16px] text-primary-350">
+              @{`${username}`}
+            </span>
 
-          {linkedFarcaster && (
-            <Image
-              src="/images/farcaster.png"
-              alt="farcaster logo"
-              width={13}
-              height={13}
-              quality={100}
-              className="w-[13px] h-[13px] object-cover rounded-full"
-            />
-          )}
+            {linkedFarcaster && (
+              <Image
+                src="/images/farcaster.png"
+                alt="farcaster logo"
+                width={13}
+                height={13}
+                quality={100}
+                className="w-[13px] h-[13px] object-cover rounded-full"
+              />
+            )}
 
-          {linkedTwitter && (
-            <Image
-              src="/images/twitter.webp"
-              alt="farcaster logo"
-              width={13}
-              height={13}
-              quality={100}
-              className="w-[13px] h-[13px] object-cover rounded-full"
-            />
+            {linkedTwitter && (
+              <Image
+                src="/images/twitter.webp"
+                alt="farcaster logo"
+                width={13}
+                height={13}
+                quality={100}
+                className="w-[13px] h-[13px] object-cover rounded-full"
+              />
+            )}
+          </div>
+
+          {address && (
+            <div className="flex items-center gap-1 text-[11px] mt-1 text-primary-1500">
+              <span>{truncateWalletAddress(address)}</span>
+
+              <LWClickAnimation onClick={() => handleCopy(address)}>
+                {hasCopied ? (
+                  <CheckIcon height={18} width={18} fill="green" />
+                ) : (
+                  <CopyIcon height={18} width={18} />
+                )}
+              </LWClickAnimation>
+            </div>
           )}
         </div>
       </div>

@@ -24,22 +24,14 @@ const AgentStat = ({ title, value }: AgentStat) => (
   </div>
 );
 
-const AgentItem = ({
-  creator,
-  agentId,
-  last7dPnl,
-  name,
-  users,
-  winRate,
-  pfp,
-}: DelegatedAgents) => {
+const AgentItem = ({ creator, id, last7dPnl, name, users, winRate }: Agent) => {
   const { delegateOrUndelegate } = useAgentActions();
   const { revokeWallets } = useDelegatedActions();
 
   const handleAction = () => {
     revokeWallets().then(() => {
-      delegateOrUndelegate(agentId, false, "BASE");
-      delegateOrUndelegate(agentId, false, "SOLANA");
+      delegateOrUndelegate(id, false, "BASE");
+      delegateOrUndelegate(id, false, "SOLANA");
     });
   };
 
@@ -64,12 +56,12 @@ const AgentItem = ({
   return (
     <div className="transition-all duration-500 self-stretch flex flex-col lg:flex-row lg:justify-between items-center gap-[18px] border border-primary-150 bg-white p-6 rounded-2xl">
       <Link
-        href={`/${agentId}`}
+        href={`/${id}`}
         className="w-full lg:w-auto flex lg:block items-center justify-between"
       >
         <div className="flex items-center gap-2">
           <Image
-            src={pfp}
+            src={creator.pfp}
             alt="User Avatar"
             width={56}
             height={56}
@@ -85,7 +77,7 @@ const AgentItem = ({
             <div className="flex items-center gap-1 lg:text-[12px] lg:leading-[15.84px]">
               <span className="text-primary-100">Creator:</span>
 
-              <span className="text-primary-350">@{creator}</span>
+              <span className="text-primary-350">@{creator.username}</span>
 
               <Image
                 src="/images/farcaster.png"
@@ -126,7 +118,7 @@ const AgentItem = ({
           </span>
         </LWClickAnimation>
 
-        <Link href={`/${agentId}`} className="hidden lg:block">
+        <Link href={`/${id}`} className="hidden lg:block">
           <ExternalLinkIcon />
         </Link>
       </div>

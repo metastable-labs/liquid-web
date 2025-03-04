@@ -14,31 +14,9 @@ const ExploreAgents = ({ loading, seeAll }: ExploreAgentsProps) => {
     agentState: { agents, agentsMeta, loadingAgents },
   } = useSystemFunctions();
 
-  const agents_: Array<Agent> =
-    agents?.map((agent) => ({
-      name: agent?.name,
-      creator: agent.creator,
-      goal: agent?.goal,
-      id: agent?.id,
-      last7dPnl: agent.last7dPnl,
-      totalPnl: agent.totalPnl,
-      token: {
-        agentId: agent?.token.agentId,
-        name: agent?.token.name,
-        symbol: "MHN",
-        locked: "100",
-        marketCap: "100",
-        status: "active",
-      },
-      type: agent.type,
-      users: agent.users,
-      winRate: agent.winRate,
-      active: true,
-    })) || [];
-
   const showSkeleton = seeAll ? loading : loadingAgents && !agents;
-  const showAgents = Boolean(agents_.length) && !loadingAgents;
-  const showEmptyState = !loadingAgents && agents_.length === 0;
+  const showAgents = Boolean(agents) && !loadingAgents;
+  const showEmptyState = !loadingAgents && agents && agents.length === 0;
   const showSeeAll = Number(agentsMeta?.totalItems) > 12;
 
   return (
@@ -92,7 +70,7 @@ const ExploreAgents = ({ loading, seeAll }: ExploreAgentsProps) => {
       ) : (
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2 lg:grid-cols-3 w-full">
           {showAgents &&
-            agents_.map((agent, index) => (
+            agents?.map((agent, index) => (
               <Link href={`/${agent?.id}`} key={index}>
                 <LWAgentCard agent={agent} variant="secondary" />
               </Link>

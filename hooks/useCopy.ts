@@ -15,7 +15,7 @@ const useCopy = (toastText = "Copied url") => {
 
     setTimeout(() => {
       setHasCopied(false);
-    }, 5000);
+    }, 3000);
   };
 
   return { handleCopy, hasCopied };

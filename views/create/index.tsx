@@ -23,7 +23,7 @@ const Create = () => {
   }, []);
 
   useEffect(() => {
-    if (shouldFetchMore && agentsMeta) {
+    if (shouldFetchMore && agentsMeta && agentsMeta.nextPage) {
       fetchAgents(agentsMeta.nextPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

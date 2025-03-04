@@ -13,13 +13,13 @@ const useFunding = () => {
   const { fetchWallet } = useWalletActions();
   const { walletState } = useSystemFunctions();
   const { fundWallet: fundEVMWallet } = useEVMFundWallet({
-    onUserExited({ balance }) {
+    onUserExited({ balance, address }) {
       const privyBalance = formatEther(balance!);
       const serverBalance = walletState.assets?.find(
         (asset) => asset.symbol === "ETH"
       )?.uiAmount;
 
-      if (serverBalance === undefined) return;
+      if (serverBalance === undefined) return fetchWallet();
 
       if (Number(privyBalance) > serverBalance) {
         showToast(

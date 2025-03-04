@@ -6,14 +6,14 @@ export interface AgentState {
   loadingDelegationDetails: boolean;
   delegationDetails?: AgentDelegationDetails[];
   agent?: Agent;
-  agents?: Array<Agent>;
-  myAgents?: Array<Agent>;
+  agents?: Agent[];
+  myAgents?: Agent[];
   agentsMeta?: AgentsMeta;
   myAgentsMeta?: AgentsMeta;
   loadingAgent: boolean;
   loadingAgents: boolean;
   loadingMyAgents: boolean;
-  delegatedAgents?: Array<DelegatedAgents>;
+  delegatedAgents?: Agent[];
   loadingDelegatedAgents: boolean;
 }
 
@@ -72,7 +72,7 @@ export const agentReducer = createSlice({
       state.loadingAgents = action.payload;
     },
 
-    setAgents(state, action: PayloadAction<Array<Agent> | undefined>) {
+    setAgents(state, action: PayloadAction<Agent[] | undefined>) {
       if (action.payload) {
         state.agents = [...action.payload];
       } else {
@@ -80,10 +80,7 @@ export const agentReducer = createSlice({
       }
     },
 
-    setExtraAgents: (
-      state,
-      action: PayloadAction<Array<Agent> | undefined>
-    ) => {
+    setExtraAgents: (state, action: PayloadAction<Agent[] | undefined>) => {
       if (action.payload) {
         state.agents = [...state.agents!, ...action.payload];
       } else {
@@ -103,7 +100,7 @@ export const agentReducer = createSlice({
       state.loadingMyAgents = action.payload;
     },
 
-    setMyAgents(state, action: PayloadAction<Array<Agent> | undefined>) {
+    setMyAgents(state, action: PayloadAction<Agent[] | undefined>) {
       if (action.payload) {
         state.myAgents = [...action.payload];
       } else {
@@ -111,10 +108,7 @@ export const agentReducer = createSlice({
       }
     },
 
-    setExtraMyAgents: (
-      state,
-      action: PayloadAction<Array<Agent> | undefined>
-    ) => {
+    setExtraMyAgents: (state, action: PayloadAction<Agent[] | undefined>) => {
       if (action.payload) {
         state.myAgents = [...state.myAgents!, ...action.payload];
       } else {
@@ -134,10 +128,7 @@ export const agentReducer = createSlice({
       state.loadingDelegatedAgents = action.payload;
     },
 
-    setDelegatedAgents(
-      state,
-      action: PayloadAction<Array<DelegatedAgents> | undefined>
-    ) {
+    setDelegatedAgents(state, action: PayloadAction<Agent[] | undefined>) {
       if (action.payload) {
         state.delegatedAgents = [...action.payload];
       } else {

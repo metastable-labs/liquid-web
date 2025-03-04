@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-const LWUserPaper = ({ user }: ILWUserPaper) => (
+const LWUserPaper = ({ user }: { user: Creator }) => (
   <div className="flex items-center gap-2">
     <Image
-      src={user.avatar}
-      alt={`${user.name} avatar`}
+      src={user.pfp}
+      alt={`${user.username} avatar`}
       width={100}
       height={100}
       quality={100}
@@ -14,7 +14,7 @@ const LWUserPaper = ({ user }: ILWUserPaper) => (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
         <h1 className="text-[clamp(22px,5vw,28px)] leading-[clamp(27px,5vw,31.36px)] text-primary-2350 font-bold font-QuantaGroteskPro">
-          {user.name}
+          {user.username}
         </h1>
 
         <span className="text-[clamp(14px,5vw,16px)] leading-[clamp(17px,5vw,19.84px)] text-primary-100">
@@ -36,7 +36,11 @@ const LWUserPaper = ({ user }: ILWUserPaper) => (
         </div>
 
         <div className="flex items-center gap-2">
-          <a href={user.warpcastURL} target="_blank" rel="noreferrer">
+          <a
+            href={`https://warpcast.com/${user.username}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <span className="text-[16px] leading-[19.84px] text-primary-450 underline underline-offset-2">
               Warpcast
             </span>
@@ -44,7 +48,11 @@ const LWUserPaper = ({ user }: ILWUserPaper) => (
 
           <div className="w-[1px] h-4 bg-primary-2450" />
 
-          <a href={user.twitterURL} target="_blank" rel="noreferrer">
+          <a
+            href={`https://twitter.com/${user.username}`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <span className="text-[16px] leading-[19.84px] text-primary-450 underline underline-offset-2">
               X
             </span>

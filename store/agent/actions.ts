@@ -34,14 +34,6 @@ const formatAgent = (agent: any): Agent => {
   };
 };
 
-const formatDelegatedAgent = (agent: DelegatedAgents): DelegatedAgents => {
-  return {
-    ...agent,
-    last7dPnl: parseValue(agent.last7dPnl),
-    totalPnl: parseValue(agent.totalPnl),
-  };
-};
-
 const useAgentActions = () => {
   const { dispatch } = useSystemFunctions();
 
@@ -96,14 +88,11 @@ const useAgentActions = () => {
   const fetchAgents = async (page: number, callback?: CallbackProps) => {
     try {
       dispatch(setLoadingAgents(true));
-      const { nextPage, previousPage, records, size, totalItems } =
-        await api.fetchAgents(page);
+      const { data, meta } = await api.fetchAgents(page);
 
-      const formattedRecords = records.map((record: any) =>
-        formatAgent(record)
-      );
+      const formattedRecords = data.map((record: any) => formatAgent(record));
 
-      dispatch(setAgentsMeta({ nextPage, previousPage, size, totalItems }));
+      dispatch(setAgentsMeta({ ...meta }));
 
       if (page === 1) {
         dispatch(setAgents(formattedRecords));
@@ -122,14 +111,11 @@ const useAgentActions = () => {
   const fetchMyAgents = async (page: number, callback?: CallbackProps) => {
     try {
       dispatch(setLoadingMyAgents(true));
-      const { nextPage, previousPage, records, size, totalItems } =
-        await api.fetchMyAgents(page);
+      const { data, meta } = await api.fetchMyAgents(page);
 
-      const formattedRecords = records.map((record: any) =>
-        formatAgent(record)
-      );
+      const formattedRecords = data.map((record: any) => formatAgent(record));
 
-      dispatch(setMyAgentsMeta({ nextPage, previousPage, size, totalItems }));
+      dispatch(setMyAgentsMeta({ ...meta }));
 
       if (page === 1) {
         dispatch(setMyAgents(formattedRecords));
@@ -149,11 +135,9 @@ const useAgentActions = () => {
   const fetchDelegatedAgents = async (callback?: CallbackProps) => {
     try {
       dispatch(setLoadingDelegatedAgents(true));
-      const response = await api.fetchDelegatedAgents();
+      const { data } = await api.fetchDelegatedAgents();
 
-      const formattedAgents = response.map((agent) =>
-        formatDelegatedAgent(agent)
-      );
+      const formattedAgents = data.map((agent) => formatAgent(agent));
 
       dispatch(setDelegatedAgents(formattedAgents));
 
