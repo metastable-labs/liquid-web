@@ -31,7 +31,7 @@ export function Keypad({ onKeyPress, onBackspace, className }: KeypadProps) {
   };
 
   return (
-    <div className={cn("grid grid-cols-3 gap-2", className)}>
+    <div className={classNames("grid grid-cols-3 gap-2", className)}>
       {keys.map((key) => (
         <Button
           key={key}
