@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { cn } from '../../utils/class-name';
-import { Button } from './button';
-import { PercentageButtonProps } from './types';
+import classNames from "classnames";
+import { Button } from "./button";
+import { PercentageButtonProps } from "./types";
 
 export function PercentageButton({
   value,
@@ -14,14 +14,14 @@ export function PercentageButton({
     <Button
       variant="outline"
       size="sm"
-      className={cn(
-        'flex-1 transition-colors font-medium rounded-lg text-[13px]',
-        isSelected && 'border-blue-500 text-blue-500',
-        className,
+      className={classNames(
+        "flex-1 transition-colors font-medium rounded-lg text-[13px]",
+        isSelected && "border-blue-500 text-blue-500",
+        className
       )}
       onClick={onClick}
     >
-      {value === 100 ? 'MAX' : `${value}%`}
+      {value === 100 ? "MAX" : `${value}%`}
     </Button>
   );
 }

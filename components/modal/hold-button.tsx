@@ -3,8 +3,8 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
-import { cn } from "../../utils/class-name";
 import { HoldButtonProps } from "./types";
+import classNames from "classnames";
 
 export function HoldButton({
   children,
@@ -69,7 +69,7 @@ export function HoldButton({
         onPointerDown={startHolding}
         onPointerUp={stopHolding}
         onPointerLeave={stopHolding}
-        className={cn(
+        className={classNames(
           "font-QuantaGroteskPro relative overflow-hidden rounded-full",
           className
         )}
