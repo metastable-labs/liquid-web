@@ -16,19 +16,25 @@ import {
   setMyAgentsMeta,
   setLoadingMyAgents,
   setDelegatedAgents,
-  setDelegatedAgentsMeta,
-  setExtraDelegatedAgents,
   setLoadingDelegatedAgents,
 } from ".";
 
-const formatAgent = (agent: any): Agent => {
-  const parseValue = (value: string | number): number => {
-    if (typeof value === "string") {
-      return parseFloat(value.replace("%", ""));
-    }
-    return value;
-  };
+const parseValue = (value: string | number): number => {
+  if (typeof value === "string") {
+    return parseFloat(value.replace("%", ""));
+  }
+  return value;
+};
 
+const formatAgent = (agent: any): Agent => {
+  return {
+    ...agent,
+    last7dPnl: parseValue(agent.last7dPnl),
+    totalPnl: parseValue(agent.totalPnl),
+  };
+};
+
+const formatDelegatedAgent = (agent: DelegatedAgents): DelegatedAgents => {
   return {
     ...agent,
     last7dPnl: parseValue(agent.last7dPnl),
@@ -75,6 +81,7 @@ const useAgentActions = () => {
       await api.delegateOrUndelegate(agentId, isActive, chain);
 
       fetchDelegationDetails(agentId);
+      fetchDelegatedAgents();
     } catch (error: any) {
       //
     } finally {
@@ -139,31 +146,20 @@ const useAgentActions = () => {
     }
   };
 
-  const fetchDelegatedAgents = async (
-    page: number,
-    callback?: CallbackProps
-  ) => {
+  const fetchDelegatedAgents = async (callback?: CallbackProps) => {
     try {
       dispatch(setLoadingDelegatedAgents(true));
-      const { nextPage, previousPage, records, size, totalItems } =
-        await api.fetchDelegatedAgents(page);
+      const response = await api.fetchDelegatedAgents();
 
-      const formattedRecords = records.map((record: any) =>
-        formatAgent(record)
+      const formattedAgents = response.map((agent) =>
+        formatDelegatedAgent(agent)
       );
 
-      dispatch(
-        setDelegatedAgentsMeta({ nextPage, previousPage, size, totalItems })
-      );
+      dispatch(setDelegatedAgents(formattedAgents));
 
-      if (page === 1) {
-        dispatch(setDelegatedAgents(formattedRecords));
-      } else {
-        dispatch(setExtraDelegatedAgents(formattedRecords));
-      }
-
-      callback?.onSuccess?.(formattedRecords);
+      callback?.onSuccess?.(formattedAgents);
     } catch (error: any) {
+      dispatch(setDelegatedAgents(undefined));
       callback?.onError?.(error);
     } finally {
       dispatch(setLoadingDelegatedAgents(false));

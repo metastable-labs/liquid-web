@@ -3,64 +3,28 @@ import { PermissionsIconActive } from "@/public/icons";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAgentActions from "@/store/agent/actions";
 import { usePrivy } from "@privy-io/react-auth";
-import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 import { useEffect } from "react";
+import AgentItem from "./item";
 
 const Permissions = () => {
   const {
-    agentState: {
-      delegatedAgentsMeta,
-      delegatedAgents,
-      loadingDelegatedAgents,
-    },
+    agentState: { delegatedAgents, loadingDelegatedAgents },
   } = useSystemFunctions();
   const { fetchDelegatedAgents } = useAgentActions();
   const { ready, authenticated, user } = usePrivy();
 
   const address = user?.wallet?.address;
 
-  const hasMoreData =
-    delegatedAgentsMeta &&
-    delegatedAgents &&
-    delegatedAgents.length < delegatedAgentsMeta.totalItems;
+  console.log(delegatedAgents);
 
-  const agents_: Array<Agent> =
-    delegatedAgents?.map((agent) => ({
-      name: agent?.name,
-      creator: agent.creator,
-      goal: agent?.goal,
-      id: agent?.id,
-      last7dPnl: agent.last7dPnl,
-      totalPnl: agent.totalPnl,
-      token: {
-        agentId: agent?.token.agentId,
-        name: agent?.token.name,
-        symbol: "MHN",
-        locked: "100",
-        marketCap: "100",
-        status: "active",
-      },
-      type: agent.type,
-      users: agent.users,
-      winRate: agent.winRate,
-      active: true,
-    })) || [];
-
-  const shouldFetchMore = useInfiniteScroll(hasMoreData || false);
-  const showEmptyState = !loadingDelegatedAgents && agents_.length === 0;
-  const showSkeleton = loadingDelegatedAgents || shouldFetchMore;
+  const showEmptyState =
+    !loadingDelegatedAgents && delegatedAgents?.length === 0;
+  const showSkeleton = !delegatedAgents && loadingDelegatedAgents;
 
   useEffect(() => {
-    if (!delegatedAgents) fetchDelegatedAgents(1);
+    fetchDelegatedAgents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (shouldFetchMore && delegatedAgentsMeta) {
-      fetchDelegatedAgents(delegatedAgentsMeta.nextPage);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shouldFetchMore]);
 
   if (!ready) return null;
 
@@ -107,13 +71,8 @@ const Permissions = () => {
             </p>
           </div>
         ) : (
-          agents_.map((agent) => (
-            <LWAgentCard
-              key={agent.id}
-              agent={agent}
-              actionIdentifier="revoke"
-              actions={{ revoke: (id: string) => console.log(id) }}
-            />
+          delegatedAgents?.map((agent) => (
+            <AgentItem key={agent.agentId} {...agent} />
           ))
         )}
       </div>

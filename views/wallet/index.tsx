@@ -10,17 +10,19 @@ import { LWClickAnimation } from "@/components";
 import { appearAnimation } from "@/utils/helpers";
 import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import Spinner from "@/components/ui/spinner";
+import WalletSkeleton from "./skeleton";
+import useWalletActions from "@/store/wallet/actions";
 import Add from "./add";
 import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
 import ETHSOL from "./eth-sol";
-import Spinner from "@/components/ui/spinner";
-import WalletSkeleton from "./skeleton";
 
 const Wallet = () => {
   const { user } = usePrivy();
   const { showSelectNetworkModal } = useAppActions();
   const { walletState } = useSystemFunctions();
+  const { fetchWallet } = useWalletActions();
 
   const [walletInteraction, setWalletInteraction] =
     useState<WalletInteration>("main");
@@ -65,6 +67,13 @@ const Wallet = () => {
       setAssets([...assets]);
     }
   }, [walletState.assets]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    fetchWallet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const walletInteractions = {
     main: (
@@ -170,7 +179,7 @@ const Wallet = () => {
         }
       )}
     >
-      {walletState.loadingAssets ? (
+      {!walletState.assets && walletState.loadingAssets ? (
         <WalletSkeleton />
       ) : (
         <>

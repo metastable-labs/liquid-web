@@ -15,10 +15,12 @@ import { useEffect, useState } from "react";
 import TerminalSkeleton from "./skeleton";
 import AccessDenied from "./access-denied";
 import { BlueInfoIcon } from "@/public/icons";
+import useAgentActions from "@/store/agent/actions";
 
 const Terminal = () => {
   const { appState, agentState } = useSystemFunctions();
   const { showGrantPermission, showAccessDeniedModal } = useAppActions();
+  const { fetchDelegationDetails } = useAgentActions();
   const { user, ready } = usePrivy();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
   const { delegationDetails, agent, loadingAgent } = agentState;
@@ -57,6 +59,13 @@ const Terminal = () => {
     solanaWallet,
     appState.isSolanaSupported,
   ]);
+
+  useEffect(() => {
+    if (!agent || !user) return;
+
+    fetchDelegationDetails(agent.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [agent, user]);
 
   return (
     <>

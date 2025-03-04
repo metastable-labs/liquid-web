@@ -11,8 +11,6 @@ import { navigationItems } from "@/constants/navigation";
 import useTruncateText from "@/hooks/useTruncateText";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import LWClickAnimation from "../click-animation";
-import LWBackdrop from "../backdrop";
-import Dropdown from "./dropdown";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -111,14 +109,27 @@ const Menu = () => {
                     <span className="text-[13px] leading-[16.2px] text-primary-350">
                       @{userName}
                     </span>
-                    <Image
-                      src="/images/farcaster.png"
-                      alt="farcaster logo"
-                      width={16}
-                      height={16}
-                      quality={100}
-                      className="w-4 h-4 object-cover rounded-full"
-                    />
+                    {linkedFarcaster && (
+                      <Image
+                        src="/images/farcaster.png"
+                        alt="farcaster logo"
+                        width={16}
+                        height={16}
+                        quality={100}
+                        className="w-4 h-4 object-cover rounded-full"
+                      />
+                    )}
+
+                    {linkedTwitter && (
+                      <Image
+                        src="/images/twitter.webp"
+                        alt="farcaster logo"
+                        width={16}
+                        height={16}
+                        quality={100}
+                        className="w-4 h-4 object-cover rounded-full"
+                      />
+                    )}
                   </div>
                 </div>
 

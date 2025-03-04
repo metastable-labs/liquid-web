@@ -30,7 +30,7 @@ const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
       <div className="flex flex-col items-center">
         <p className="px-3.5 pt-3.5 pb-4 rounded-xl bg-primary-1400 self-stretch text-[16px] leading-[19.84px] text-primary-2150">
           For now you can only withdraw native assets{" "}
-          <span className="font-bold">ETH</span>
+          <span className="font-bold">(ETH)</span>
           {/* and{" "}
           <span className="font-bold">SOL</span> */}
         </p>

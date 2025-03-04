@@ -21,3 +21,15 @@ type AgentsMeta = {
 type AgentsResponse = AgentsMeta & {
   records: Array<Agent>;
 };
+
+type DelegatedAgents = {
+  name: string;
+  creator: string;
+  winRate: number;
+  users: number;
+  last7dPnl: number;
+  totalPnl: number;
+  agentId: string;
+  agentType: string;
+  pfp: string;
+};
