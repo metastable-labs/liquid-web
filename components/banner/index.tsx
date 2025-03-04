@@ -71,7 +71,7 @@ const LWBanner = () => {
           <p className="text-[14px] leading-[24px] text-white">
             Follow our{" "}
             <a
-              href="https://discord.gg/fDwU7XUx"
+              href="https://warpcast.com/~/channel/liquidapp"
               className="underline underline-offset-2"
               target="_blank"
               rel="noopener noreferrer"
