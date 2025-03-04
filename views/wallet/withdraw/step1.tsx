@@ -15,7 +15,7 @@ const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
             name="recipient"
             type="text"
             placeholder="Recipient address"
-            className="w-full text-[16px] leading-[19.84px] text-primary-2400 bg-transparent outline-none"
+            className="w-full text-[16px] leading-[19.84px] text-primary-50 placeholder:text-primary-2400 bg-transparent outline-none focus:outline-primary-350 transition-all duration-500"
             onChange={(e) => setAddress?.(e.target.value)}
             value={address}
             disabled={step! > 0}

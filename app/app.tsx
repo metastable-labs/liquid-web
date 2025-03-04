@@ -8,6 +8,7 @@ import {
   LWToolBar,
   LWSelectNetworkModal,
   LWIntro,
+  LWBanner,
 } from "@/components";
 import UiLoading from "@/components/ui/loading";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
@@ -62,6 +63,8 @@ const App = ({ children }: { children: React.ReactNode }) => {
       <LWSelectNetworkModal />
 
       <LWIntro />
+
+      <LWBanner />
     </>
   );
 };
