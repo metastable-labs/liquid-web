@@ -16,7 +16,7 @@ const Withdraw = ({ onClose }: InteractionProps) => {
   const { isEthValid, isSolValid } = useAddressValidator(address);
 
   const steps = [
-    <Step1 key={1} setAddress={setAddress} />,
+    <Step1 address={address} key={1} setAddress={setAddress} />,
     <Step2
       key={2}
       address={address}
