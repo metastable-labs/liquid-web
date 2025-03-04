@@ -90,6 +90,14 @@ const useAgentActions = () => {
       dispatch(setLoadingAgents(true));
       const { data, meta } = await api.fetchAgents(page);
 
+      if (!meta.previousPage && !data) {
+        return dispatch(setMyAgents(undefined));
+      }
+
+      if (!data) {
+        return;
+      }
+
       const formattedRecords = data.map((record: any) => formatAgent(record));
 
       dispatch(setAgentsMeta({ ...meta }));
@@ -113,6 +121,14 @@ const useAgentActions = () => {
       dispatch(setLoadingMyAgents(true));
       const { data, meta } = await api.fetchMyAgents(page);
 
+      if (!meta.previousPage && !data) {
+        return dispatch(setMyAgents(undefined));
+      }
+
+      if (!data) {
+        return;
+      }
+
       const formattedRecords = data.map((record: any) => formatAgent(record));
 
       dispatch(setMyAgentsMeta({ ...meta }));
@@ -135,7 +151,15 @@ const useAgentActions = () => {
   const fetchDelegatedAgents = async (callback?: CallbackProps) => {
     try {
       dispatch(setLoadingDelegatedAgents(true));
-      const { data } = await api.fetchDelegatedAgents();
+      const { data, meta } = await api.fetchDelegatedAgents();
+
+      if (!meta.previousPage && !data) {
+        return dispatch(setDelegatedAgents(undefined));
+      }
+
+      if (!data) {
+        return;
+      }
 
       const formattedAgents = data.map((agent) => formatAgent(agent));
 

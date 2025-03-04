@@ -2,11 +2,11 @@ import axios, { AxiosError } from "axios";
 import { setupCache } from "axios-cache-interceptor";
 import { getAccessToken } from "@privy-io/react-auth";
 
-const Axios = axios.create({
+const axiosInstance = axios.create({
   baseURL: "https://dev.useliquid.xyz/aqua/api/v1/",
 });
 
-const axiosInstance = setupCache(Axios);
+// const axiosInstance = setupCache(Axios);
 
 axiosInstance.interceptors.response.use(
   (response) => {

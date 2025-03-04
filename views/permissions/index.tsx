@@ -16,7 +16,9 @@ const Permissions = () => {
   const address = user?.wallet?.address;
 
   const showEmptyState =
-    !loadingDelegatedAgents && delegatedAgents?.length === 0;
+    !loadingDelegatedAgents &&
+    (!delegatedAgents || delegatedAgents?.length === 0);
+
   const showSkeleton = !delegatedAgents && loadingDelegatedAgents;
 
   useEffect(() => {
