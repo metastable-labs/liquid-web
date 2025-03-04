@@ -1,10 +1,10 @@
 "use client";
 
-import { cn } from "@/utils/class-name";
 import { ChevronLeft } from "lucide-react";
 
 import { Button } from "./button";
 import { KeypadProps } from "../modal/types";
+import classNames from "classnames";
 
 export function Keypad({ onKeyPress, onBackspace, className }: KeypadProps) {
   const keys = [
@@ -38,7 +38,7 @@ export function Keypad({ onKeyPress, onBackspace, className }: KeypadProps) {
           variant="ghost"
           size="lg"
           onClick={() => handleKeyPress(key)}
-          className={cn(
+          className={classNames(
             "h-14 text-xl font-medium rounded-xl hover:bg-gray-100",
             key === "backspace" && "text-base"
           )}
