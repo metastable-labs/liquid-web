@@ -15,9 +15,11 @@ const useFunding = () => {
   const { fundWallet: fundEVMWallet } = useEVMFundWallet({
     onUserExited({ balance }) {
       const privyBalance = formatEther(balance!);
-      const serverBalance =
-        walletState.assets?.find((asset) => asset.symbol === "ETH")?.uiAmount ||
-        0;
+      const serverBalance = walletState.assets?.find(
+        (asset) => asset.symbol === "ETH"
+      )?.uiAmount;
+
+      if (serverBalance === undefined) return;
 
       if (Number(privyBalance) > serverBalance) {
         showToast(
@@ -31,9 +33,11 @@ const useFunding = () => {
   const { fundWallet: fundSolanaWallet } = useSolanaFundWallet({
     onUserExited({ balance }) {
       const privyBalance = balance;
-      const serverBalance =
-        walletState.assets?.find((asset) => asset.symbol === "SOL")?.uiAmount ||
-        0;
+      const serverBalance = walletState.assets?.find(
+        (asset) => asset.symbol === "SOL"
+      )?.uiAmount;
+
+      if (serverBalance === undefined) return;
 
       if (Number(privyBalance) > serverBalance) {
         showToast(
