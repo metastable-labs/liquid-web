@@ -17,9 +17,27 @@ function DelegateActionButton() {
   const { revokeWallets } = useDelegatedActions();
   const { agentState, appState } = useSystemFunctions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
+  const { delegateWallet } = useDelegatedActions();
 
   const isAlreadyDelegatedToThisAgent =
     agentState.delegationDetails?.[0]?.isActive;
+
+  const onDelegateEvmWallet = () => {
+    if (evmWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
+      const agentId = agentState.agent?.id || "";
+      return delegateOrUndelegate(agentId, true, "BASE");
+    }
+
+    const agentId = agentState.agent?.id || "";
+
+    delegateWallet({
+      address: evmWallet?.address,
+      chainType: "ethereum",
+    }).then(() => {
+      delegateOrUndelegate(agentId, true, "BASE");
+      showSelectNetworkModal(false);
+    });
+  };
 
   const onRevoke = () => {
     const agentId = agentState.agent?.id || "";
@@ -45,7 +63,8 @@ function DelegateActionButton() {
     }
 
     showGrantPermission(false);
-    return showSelectNetworkModal(true);
+    // return showSelectNetworkModal(true);
+    return onDelegateEvmWallet();
   };
 
   const btnText = user == null ? "Connect Wallet" : "Continue";

@@ -17,12 +17,16 @@ import Add from "./add";
 import Withdraw from "./withdraw";
 import AssetPaper from "./asset-paper";
 import ETHSOL from "./eth-sol";
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
+import useFunding from "@/hooks/useFunding";
 
 const Wallet = () => {
   const { user } = usePrivy();
   const { showSelectNetworkModal } = useAppActions();
   const { walletState } = useSystemFunctions();
   const { fetchWallet } = useWalletActions();
+  const { evmWallet } = useLinkedAccounts();
+  const { fundWallet } = useFunding();
 
   const [walletInteraction, setWalletInteraction] =
     useState<WalletInteration>("main");
@@ -32,11 +36,18 @@ const Wallet = () => {
   const balance = "0.00";
   const showSeeAll = assets?.length && assets?.length <= 4;
 
+  const onFundEvmWallet = () => {
+    if (!evmWallet) return;
+
+    fundWallet(evmWallet.address, "evm");
+  };
+
   const actions = [
     {
       title: "Add money",
       icon: <CoinIcon />,
-      action: () => showSelectNetworkModal(true),
+      // action: () => showSelectNetworkModal(true),
+      action: onFundEvmWallet,
     },
     {
       title: "Withdraw",

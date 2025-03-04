@@ -10,6 +10,7 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import whitelist from "@/constants/whitelist";
+import useAgentActions from "@/store/agent/actions";
 
 const AgentOverview = () => {
   const { navigate, agentState, appState } = useSystemFunctions();
@@ -25,10 +26,12 @@ const AgentOverview = () => {
   const name = agent?.name || "";
 
   const username = linkedFarcaster?.username || linkedTwitter?.username;
+  const isAlreadyDelegatedToThisAgent = delegationDetails?.[0]?.isActive;
 
   const onGrantPermission = () => {
-    if (!user || (user && whitelist.includes(username! || "")))
+    if (!user || (user && whitelist.includes(username! || ""))) {
       return showGrantPermission(true);
+    }
 
     return showAccessDeniedModal(true);
   };
@@ -66,7 +69,7 @@ const AgentOverview = () => {
       user && ready
         ? evmWallet?.delegated &&
           (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
-          (delegationDetails ? delegationDetails[0]?.isActive : false)
+          (delegationDetails ? isAlreadyDelegatedToThisAgent : false)
         : false;
 
     setIsPermissionGranted(permissionGranted);
@@ -77,6 +80,7 @@ const AgentOverview = () => {
     evmWallet,
     solanaWallet,
     appState.isSolanaSupported,
+    isAlreadyDelegatedToThisAgent,
   ]);
 
   const extras = [
