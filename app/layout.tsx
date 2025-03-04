@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Liquid web",
   keywords: [
     "ai",
-    "ai agents",    
+    "ai agents",
     "liquid",
     "pools",
     "crypto agent",
@@ -77,7 +77,7 @@ export default function RootLayout({
           }'
         />
       </head>
-      <body className="font-Aeonik lg:rounded-[32px] lg:m-4 lg:border lg:border-primary-150 no-scrollbar">
+      <body className="font-Aeonik lg:rounded-[32px] lg:m-4 lg:border lg:border-primary-150 no-scrollbar transition-all duration-500">
         {/** Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1SHGD261ZW"

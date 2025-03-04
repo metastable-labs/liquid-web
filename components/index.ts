@@ -13,6 +13,7 @@ import LWAgentCardSkeleton from "./agent-card/skeleton";
 import LWBackdrop from "./backdrop";
 import LWSelectNetworkModal from "./modal/select-network-modal";
 import LWIntro from "./intro";
+import LWBanner from "./banner";
 
 export {
   LWNavigation,
@@ -30,4 +31,5 @@ export {
   LWSelectNetworkModal,
   LWIntro,
   LWAgentCardSkeleton,
+  LWBanner,
 };

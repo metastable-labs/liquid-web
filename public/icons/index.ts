@@ -58,6 +58,7 @@ import MemecoinIcon from "./memecoin-icon";
 import DollarSquareIcon from "./dollar-square-icon";
 import BookSavedIcon from "./book-saved-icon";
 import SortIcon from "./sort-icon";
+import BlueInfoIcon from "./blue-info-icon";
 
 export {
   CubeIcons,
@@ -120,4 +121,5 @@ export {
   DollarSquareIcon,
   MemecoinIcon,
   SortIcon,
+  BlueInfoIcon,
 };
