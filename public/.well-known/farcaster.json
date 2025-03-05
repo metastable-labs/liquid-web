@@ -10,7 +10,7 @@
     "iconUrl": "https://app.useliquid.xyz/icon.png",
     "homeUrl": "https://app.useliquid.xyz",
     "imageUrl": "https://app.useliquid.xyz/image.png",
-    "buttonTitle": "Check this out",
+    "buttonTitle": "Get Started",
     "splashImageUrl": "https://app.useliquid.xyz/splash.png",
     "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://app.useliquid.xyz/api/webhook"
