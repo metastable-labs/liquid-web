@@ -1,20 +1,20 @@
 "use client";
+import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import classNames from "classnames";
 
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
-import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import { BlueInfoIcon } from "@/public/icons";
 import useAgentActions from "@/store/agent/actions";
 import { setDelegationDetails } from "@/store/agent";
+import { usePermissionStatus } from "@/hooks/usePermissionStatus";
 import AgentLog from "./agent-log";
-import GrantPermission from "./grant-permission";
+import Permission from "./grant-permission";
 import WhyGrantPermission from "./why-grant-permission";
 import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
-import { useEffect, useState } from "react";
 import TerminalSkeleton from "./skeleton";
 import AccessDenied from "./access-denied";
 
@@ -22,18 +22,16 @@ const Terminal = () => {
   const { appState, agentState, dispatch } = useSystemFunctions();
   const { showGrantPermission, showAccessDeniedModal } = useAppActions();
   const { fetchDelegationDetails } = useAgentActions();
-  const { user, ready } = usePrivy();
-  const { solanaWallet, evmWallet } = useLinkedAccounts();
+  const { user } = usePrivy();
   const { delegationDetails, agent, loadingAgent } = agentState;
-
-  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+  const isPermissionGranted = usePermissionStatus(delegationDetails);
 
   const modals = [
     {
       title: isPermissionGranted ? "Revoke Permission" : "Grant Permission",
       isOpen: appState.openGrantPermission,
       onClose: () => showGrantPermission(false),
-      children: <GrantPermission />,
+      children: <Permission />,
     },
     {
       title: "You’re not whitelisted",
@@ -42,24 +40,6 @@ const Terminal = () => {
       children: <AccessDenied />,
     },
   ];
-
-  useEffect(() => {
-    const permissionGranted =
-      user && ready
-        ? evmWallet?.delegated &&
-          (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
-          (delegationDetails ? delegationDetails[0]?.isActive : false)
-        : false;
-
-    setIsPermissionGranted(permissionGranted);
-  }, [
-    user,
-    ready,
-    delegationDetails,
-    evmWallet,
-    solanaWallet,
-    appState.isSolanaSupported,
-  ]);
 
   useEffect(() => {
     dispatch(setDelegationDetails(undefined));

@@ -12,7 +12,7 @@ const revokeInfo = [
   "This will prevent the agent from making any more trades on your behalf.",
 ];
 
-const GrantPermission = () => {
+const Permission = () => {
   const { appState } = useSystemFunctions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
 
@@ -43,4 +43,4 @@ const GrantPermission = () => {
   );
 };
 
-export default GrantPermission;
+export default Permission;
