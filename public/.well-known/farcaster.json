@@ -1,18 +1,18 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjE5NjMzOSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDgzQjk3QzRBM0QyREFEMkY1MTZmNjE1OUZDRkRhYjViNzNlMjI0YzcifQ",
+    "header": "eyJmaWQiOjkyMTczMiwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDNmRTQ5RUNBNTU3Y2YwZThkNWU5ZUE2ZDlEYzA3N2FhZjA0QjA2RTcifQ",
     "payload": "eyJkb21haW4iOiJhcHAudXNlbGlxdWlkLnh5eiJ9",
-    "signature": "MHhiMGI0ZmExZjAyNmUwNzI4NTU5YWMyYjY3MmExZmVlY2YxZDkxOTNiZDE4ZjRiMTIzYzAzNGJlNjM4ZDE3N2Y1NGM3YjVhY2RmMmYxMmJkNjBhMjFlNjYwYWZmNmZhNmQ4NGRjYjdkMWUyNmFmY2IwNTg1OWJhMTljNjRjNmRmNjFi"
+    "signature": "MHg5NGYzMzBmZGRkOGRkMDViODEzYTU4ZWY5YTNlNmU2YzA2NGM5ZDAzNDU4NGE1NGZmYjgyMDM5YzhjMzJmNTk3NDYzZjMzOTUzODhmYWRiN2I0ZTU0YzU4NTg1Mjc1ZjIxZGY3NjQ2MGU3M2NmMzYxMjFmNjQzM2Q2MThiMzgzZjFi"
   },
   "frame": {
     "version": "1",
     "name": "Liquid",
-    "iconUrl": "https://app.useliquid.xyz/liquid-logo.png",
-    "homeUrl": "https://app.useliquid.xyz/",
-    "imageUrl": "https://app.useliquid.xyz/liquid_preview.jpg",
-    "buttonTitle": "See agents",
-    "splashImageUrl": "https://app.useliquid.xyz/liquid-logo.png",
-    "splashBackgroundColor": "#f7f7f7",
+    "iconUrl": "https://app.useliquid.xyz/icon.png",
+    "homeUrl": "https://app.useliquid.xyz",
+    "imageUrl": "https://app.useliquid.xyz/image.png",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://app.useliquid.xyz/splash.png",
+    "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://app.useliquid.xyz/api/webhook"
   }
 }
