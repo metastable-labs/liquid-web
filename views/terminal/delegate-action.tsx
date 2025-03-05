@@ -43,10 +43,12 @@ function DelegateActionButton() {
     const agentId = agentState.agent?.id || "";
 
     showGrantPermission(false);
-    revokeWallets().then(() => {
-      delegateOrUndelegate(agentId, false, "BASE");
-      delegateOrUndelegate(agentId, false, "SOLANA");
-    });
+    // revokeWallets().then(() => {
+    //   delegateOrUndelegate(agentId, false, "BASE");
+    //   delegateOrUndelegate(agentId, false, "SOLANA");
+    // });
+    delegateOrUndelegate(agentId, false, "BASE");
+    delegateOrUndelegate(agentId, false, "SOLANA");
   };
 
   const onClick = () => {

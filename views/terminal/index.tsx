@@ -6,6 +6,9 @@ import ModalWrapper from "@/components/modal/modal-wrapper";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
+import { BlueInfoIcon } from "@/public/icons";
+import useAgentActions from "@/store/agent/actions";
+import { setDelegationDetails } from "@/store/agent";
 import AgentLog from "./agent-log";
 import GrantPermission from "./grant-permission";
 import WhyGrantPermission from "./why-grant-permission";
@@ -14,11 +17,9 @@ import AgentOverview from "./agent-overview";
 import { useEffect, useState } from "react";
 import TerminalSkeleton from "./skeleton";
 import AccessDenied from "./access-denied";
-import { BlueInfoIcon } from "@/public/icons";
-import useAgentActions from "@/store/agent/actions";
 
 const Terminal = () => {
-  const { appState, agentState } = useSystemFunctions();
+  const { appState, agentState, dispatch } = useSystemFunctions();
   const { showGrantPermission, showAccessDeniedModal } = useAppActions();
   const { fetchDelegationDetails } = useAgentActions();
   const { user, ready } = usePrivy();
@@ -59,6 +60,11 @@ const Terminal = () => {
     solanaWallet,
     appState.isSolanaSupported,
   ]);
+
+  useEffect(() => {
+    dispatch(setDelegationDetails(undefined));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!agent || !user) return;

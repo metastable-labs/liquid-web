@@ -41,11 +41,13 @@ const AgentOverview = () => {
       title: `${isPermissionGranted ? "Revoke" : "Grant Permission"}`,
       onClick: onGrantPermission,
       variant: isPermissionGranted ? "danger" : "primaryAlt",
+      loading: loadingDelegationDetails,
     },
     {
       title: `Trade (coming soon)`, // `Trade $${agent?.token.symbol}`
       onClick: () => navigate.push(`/${agent?.id}/trade`),
       variant: "secondary",
+      loading: false,
     },
   ];
 
@@ -197,13 +199,7 @@ const AgentOverview = () => {
                 relative: action.variant === "secondary",
               })}
             >
-              <LWButton
-                title={action.title}
-                onClick={action.onClick}
-                variant={action.variant}
-                className="w-full"
-                loading={index === 0 && loadingDelegationDetails}
-              />
+              <LWButton className="w-full" {...action} />
 
               {action.variant === "secondary" && (
                 <div className="rounded-[21.6px] bg-[rgba(217, 217, 217, 0.01)] backdrop-blur-[1px] absolute w-full h-full top-0 left-0" />

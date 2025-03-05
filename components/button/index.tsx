@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
+import Spinner from "../ui/spinner";
 
 const LWButton = ({
   title,
@@ -34,22 +35,26 @@ const LWButton = ({
       type={type}
       onClick={onClick}
     >
-      <span
-        className={classNames("lg:whitespace-nowrap font-QuantaGroteskPro", {
-          "text-[16px] leading-[16px] font-semibold": variant === "primary",
-          "text-white":
-            variant === "primary" ||
-            variant === "primaryAlt" ||
-            variant === "danger",
-          "text-[18px] leading-[18px] font-semibold":
-            variant === "secondary" ||
-            variant === "primaryAlt" ||
-            variant === "danger",
-          "text-primary-1800": variant === "secondary",
-        })}
-      >
-        {title}
-      </span>
+      {loading && <Spinner size={6} />}
+
+      {!loading && (
+        <span
+          className={classNames("lg:whitespace-nowrap font-QuantaGroteskPro", {
+            "text-[16px] leading-[16px] font-semibold": variant === "primary",
+            "text-white":
+              variant === "primary" ||
+              variant === "primaryAlt" ||
+              variant === "danger",
+            "text-[18px] leading-[18px] font-semibold":
+              variant === "secondary" ||
+              variant === "primaryAlt" ||
+              variant === "danger",
+            "text-primary-1800": variant === "secondary",
+          })}
+        >
+          {title}
+        </span>
+      )}
     </motion.button>
   );
 };
