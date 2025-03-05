@@ -15,7 +15,7 @@ const ExploreAgents = ({ loading, seeAll }: ExploreAgentsProps) => {
   } = useSystemFunctions();
 
   const showSkeleton = seeAll ? loading : loadingAgents && !agents;
-  const showAgents = Boolean(agents) && !loadingAgents;
+  const showAgents = agents && agents.length > 0;
   const showEmptyState = !loadingAgents && agents && agents.length === 0;
   const showSeeAll = Number(agentsMeta?.totalItems) > 12;
 
