@@ -88,7 +88,7 @@ const Step2 = ({
 
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center">
-          <div className="flex items-center justify-center gap-2 font-QuantaGroteskPro">
+          <div className="flex items-center justify-center gap-1 font-QuantaGroteskPro">
             <div className="relative">
               <span
                 ref={spanRef}
