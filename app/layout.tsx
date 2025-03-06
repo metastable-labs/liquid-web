@@ -65,7 +65,7 @@ export default function RootLayout({
             "version": "next",
             "imageUrl": "https://app.useliquid.xyz/liquid_preview.jpg",
             "button":{
-              "title": "Check this out",
+              "title": "Get Started",
               "action": {
                 "type": "launch_frame",
                 "name": "Liquid",
