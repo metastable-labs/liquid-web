@@ -8,7 +8,6 @@ import { usePrivy } from "@privy-io/react-auth";
 import { CoinIcon, ArrowUpAltIcon, ArrowRightIcon } from "@/public/icons";
 import { LWClickAnimation } from "@/components";
 import { appearAnimation } from "@/utils/helpers";
-import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import Spinner from "@/components/ui/spinner";
 import WalletSkeleton from "./skeleton";
@@ -22,7 +21,6 @@ import useFunding from "@/hooks/useFunding";
 
 const Wallet = () => {
   const { user } = usePrivy();
-  const { showSelectNetworkModal } = useAppActions();
   const { walletState } = useSystemFunctions();
   const { fetchWallet } = useWalletActions();
   const { evmWallet } = useLinkedAccounts();

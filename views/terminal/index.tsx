@@ -17,12 +17,14 @@ import AgentInfos from "./infos";
 import AgentOverview from "./agent-overview";
 import TerminalSkeleton from "./skeleton";
 import AccessDenied from "./access-denied";
+import useWalletActions from "@/store/wallet/actions";
 
 const Terminal = () => {
   const { appState, agentState, dispatch } = useSystemFunctions();
   const { showGrantPermission, showAccessDeniedModal } = useAppActions();
   const { fetchDelegationDetails } = useAgentActions();
   const { user } = usePrivy();
+  const { fetchWallet } = useWalletActions();
   const { delegationDetails, agent, loadingAgent } = agentState;
   const isPermissionGranted = usePermissionStatus(delegationDetails);
 
@@ -47,7 +49,10 @@ const Terminal = () => {
   }, []);
 
   useEffect(() => {
-    if (!agent || !user) return;
+    if (!user) return;
+    fetchWallet();
+
+    if (!agent) return;
 
     fetchDelegationDetails(agent.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
