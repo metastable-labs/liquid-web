@@ -49,13 +49,18 @@ const useFunding = () => {
     },
   });
 
-  const fundWallet = (address: string, network: "evm" | "solana") => {
+  const fundWallet = (
+    address: string,
+    network: "evm" | "solana",
+    amount?: string
+  ) => {
     if (network === "solana") {
       return fundSolanaWallet(address);
     }
 
     return fundEVMWallet(address, {
       chain: base,
+      amount,
     });
   };
 
