@@ -8,7 +8,7 @@ const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
   };
 
   return (
-    <div className="flex flex-col items-stretch justify-between h-80 lg:h-full gap-">
+    <div className="flex flex-col items-stretch justify-between h-80 lg:h-full gap-3">
       <div className="self-stretch flex flex-col items-stretch gap-2">
         <div className="self-stretch px-4 py-2.5 flex items-center justify-center gap-2 rounded-[26px] border border-primary-550 shadow-withdrawAddressInput h-[60px] focus-within:border-primary-350 transition-all duration-500">
           <input
@@ -35,15 +35,17 @@ const Step1 = ({ step, setStep, setAddress, address }: WithdrawStepProps) => {
           <span className="font-bold">SOL</span> */}
         </p>
 
-        <motion.div
-          animate={{
-            height: address ? "auto" : "0px",
-            marginTop: address ? "32px" : "0px",
-            opacity: address ? 1 : 0,
-          }}
-        >
-          <LWButton onClick={handleNext} title="Next" />
-        </motion.div>
+        {step && step > 1 && (
+          <motion.div
+            animate={{
+              height: address ? "auto" : "0px",
+              marginTop: address ? "32px" : "0px",
+              opacity: address ? 1 : 0,
+            }}
+          >
+            <LWButton onClick={handleNext} title="Next" />
+          </motion.div>
+        )}
       </div>
     </div>
   );

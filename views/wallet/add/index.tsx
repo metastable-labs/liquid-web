@@ -6,8 +6,10 @@ import useFormattedAmount from "@/hooks/useFormattedAmount";
 import useFunding from "@/hooks/useFunding";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import { ArrowLeftIcon } from "@/public/icons";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const Add = ({ onClose }: InteractionProps) => {
+  const { walletState } = useSystemFunctions();
   const { updateAmount, amountWithThousandSeparator } = useFormattedAmount();
   const [inputWidth, setInputWidth] = useState(50);
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -15,6 +17,8 @@ const Add = ({ onClose }: InteractionProps) => {
   const { fundWallet } = useFunding();
 
   const amountValue = amountWithThousandSeparator?.replace(/,/g, "");
+  const ethBalance =
+    walletState.assets?.find((asset) => asset.symbol === "ETH")?.uiAmount || 0;
 
   const onFundEvmWallet = () => {
     if (!evmWallet) return;
@@ -78,7 +82,7 @@ const Add = ({ onClose }: InteractionProps) => {
           </div>
 
           <span className="text-[11px] leading-[13.64px] text-primary-2400 font-medium">
-            Available balance: 1 ETH
+            Available balance: {ethBalance} ETH
           </span>
         </div>
 

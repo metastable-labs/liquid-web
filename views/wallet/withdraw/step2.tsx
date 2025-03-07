@@ -7,6 +7,7 @@ import { LWClickAnimation } from "@/components";
 import useTruncateText from "@/hooks/useTruncateText";
 import useAddressValidator from "@/hooks/useAddressValidator";
 import useTransaction from "@/hooks/useTransaction";
+import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const Step2 = ({
   address,
@@ -15,6 +16,7 @@ const Step2 = ({
   setAmount,
   onClose,
 }: WithdrawStepProps) => {
+  const { walletState } = useSystemFunctions();
   const { truncatedText } = useTruncateText(address, 8, 8);
   const [inputWidth, setInputWidth] = useState(50);
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -22,9 +24,11 @@ const Step2 = ({
   const { isEthValid, isSolValid } = useAddressValidator(address || "", 1);
   const { sendTransaction } = useTransaction(onClose);
 
-  const balance = 2000;
+  const balance =
+    walletState.assets?.find((asset) => asset.symbol === "ETH")?.uiAmount || 0;
   const amountValue = amount?.replace(/,/g, "");
-  const disableNext = !amount || Number(amountValue) > balance;
+  const disableNext =
+    !amount || Number(amountValue) === 0 || Number(amountValue) > balance;
 
   const handleNext = () => {
     if ((!isEthValid && !isSolValid) || !address) return;
@@ -122,7 +126,7 @@ const Step2 = ({
             }}
             className="text-[14px] leading-[18.48px] text-primary-950 font-bold mt-1"
           >
-            ~${(1298.68).toLocaleString()}
+            {/* ~${(1298.68).toLocaleString()} */}
           </motion.span>
         </div>
 

@@ -10,8 +10,23 @@ const useWalletActions = () => {
     try {
       dispatch(setLoadingAssets(true));
       const response = await api.fetchAssets();
-      console.log(response);
-      dispatch(setAssets(response));
+
+      const processedResponse = response
+        .sort((a, b) => b.name.localeCompare(a.name))
+        .map((asset) => ({
+          ...asset,
+          chainId: asset.chainId.toLowerCase() as "base" | "solana",
+        }));
+
+      const ethIndex = processedResponse.findIndex(
+        (asset) => asset.symbol === "ETH"
+      );
+      if (ethIndex !== -1) {
+        const [ethAsset] = processedResponse.splice(ethIndex, 1);
+        processedResponse.unshift(ethAsset);
+      }
+
+      dispatch(setAssets(processedResponse));
     } catch (error: any) {
       //
     } finally {
