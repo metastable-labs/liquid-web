@@ -18,6 +18,7 @@ import AgentOverview from "./agent-overview";
 import TerminalSkeleton from "./skeleton";
 import AccessDenied from "./access-denied";
 import useWalletActions from "@/store/wallet/actions";
+import Activity from "./activity";
 
 const Terminal = () => {
   const { appState, agentState, dispatch } = useSystemFunctions();
@@ -86,6 +87,8 @@ const Terminal = () => {
 
               <AgentInfos />
             </div>
+
+            <Activity />
 
             <WhyGrantPermission />
           </div>

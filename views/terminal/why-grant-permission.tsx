@@ -15,17 +15,16 @@ const permissionsInfo = [
     <span className="font-bold">
       your wallet sees the profits from those trades.
     </span>{" "}
-    You can{" "}
-    <span className="font-bold">revoke this permission</span> anytime.
+    You can <span className="font-bold">revoke this permission</span> anytime.
   </p>,
 ];
 
 const WhyGrantPermission = () => {
   return (
     <div className="flex flex-col gap-4 items-stretch">
-      <h1 className="text-[clamp(24px,5vw,28px)] leading-[clamp(27px,5vw,31.36px)] text-primary-2350 font-bold font-QuantaGroteskPro">
+      <h2 className="text-[clamp(24px,5vw,28px)] leading-[clamp(27px,5vw,31.36px)] text-primary-2350 font-bold font-QuantaGroteskPro">
         Why should you grant permission?
-      </h1>
+      </h2>
 
       <ul className="flex flex-col gap-10 px-3.5 pt-3.5 pb-4 rounded-3xl bg-primary-1750 text-[18px] leading-[22.32px] text-primary-2350 list-disc">
         {permissionsInfo.map((info, index) => (
