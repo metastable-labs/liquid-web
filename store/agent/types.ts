@@ -43,8 +43,8 @@ type Agent = {
   last7dPnl: number;
   totalPnl: number;
   active?: boolean;
-  totalPositions: number;
-  activePositions: number;
+  totalPositions?: number;
+  activePositions?: number;
 };
 
 type AgentsMeta = {
