@@ -26,15 +26,10 @@ const AgentStat = ({ title, value }: AgentStat) => (
 
 const AgentItem = ({ creator, id, last7dPnl, name, users, winRate }: Agent) => {
   const { delegateOrUndelegate } = useAgentActions();
-  const { revokeWallets } = useDelegatedActions();
 
   const handleAction = () => {
-    // revokeWallets().then(() => {
-    //   delegateOrUndelegate(id, false, "BASE");
-    //   delegateOrUndelegate(id, false, "SOLANA");
-    // });
     delegateOrUndelegate(id, false, "BASE");
-    delegateOrUndelegate(id, false, "SOLANA");
+    // delegateOrUndelegate(id, false, "SOLANA");
   };
 
   const stats: Array<AgentStat> = [
