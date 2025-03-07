@@ -1,4 +1,4 @@
-import { formatBalance } from "@/utils/helpers";
+import { formatBalance, formatCurrency } from "@/utils/helpers";
 import Image from "next/image";
 
 const networkIcons = {
@@ -6,17 +6,22 @@ const networkIcons = {
   base: "/images/base.png",
 };
 
-const AssetPaper = ({ asset }: { asset: Wallet }) => {
-  const balance = formatBalance(asset.uiAmount.toString(), 5);
+const AssetItem = ({ asset }: { asset: Wallet }) => {
+  const { whole, decimal } = formatCurrency(asset.uiAmount);
+  const balance = `${whole}.${decimal}`;
   const formatedBalance =
     Number(balance) < 1 ? balance : Number(balance).toLocaleString();
 
-  const usdBalance = formatBalance("3", 2);
-  const formatedUsdBalance = "-";
-  // Number(usdBalance) < 1 ? usdBalance : Number(usdBalance).toLocaleString();
+  const usdBalance = formatBalance(asset.balanceUSD || 0, 2);
+  const formatedUsdBalance =
+    Number(usdBalance) < 1 ? usdBalance : Number(usdBalance).toLocaleString();
 
   return (
-    <div className="py-0.5 self-stretch flex items-center justify-between">
+    <a
+      href={`https://dexscreener.com/base/${asset.address}`}
+      target="_blank"
+      className="self-stretch flex items-center justify-between hover:bg-primary-150 transition-all duration-500 px-2 py-3 -ml-2 rounded"
+    >
       <div className="flex items-center gap-2.5">
         <div className="relative">
           <Image
@@ -49,10 +54,10 @@ const AssetPaper = ({ asset }: { asset: Wallet }) => {
         </div>
       </div>
       <span className="text-[13px] leading-[16.12px] text-primary-1800 font-medium">
-        ${formatedUsdBalance}
+        {asset.balanceUSD ? `$${formatedUsdBalance}` : "-"}
       </span>
-    </div>
+    </a>
   );
 };
 
-export default AssetPaper;
+export default AssetItem;

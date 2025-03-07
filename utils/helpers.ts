@@ -97,9 +97,10 @@ const truncateWalletAddress = (
   )}`;
 };
 
-const formatBalance = (balance: string, decimals = 2): string => {
-  const valuesBeforeDecimal = balance.split(".")[0];
-  const valuesAfterDecimal = balance.split(".")[1];
+const formatBalance = (balance: string | number, decimals = 2): string => {
+  const balanceString = balance.toString();
+  const valuesBeforeDecimal = balanceString.split(".")[0];
+  const valuesAfterDecimal = balanceString.split(".")[1];
   const truncatedDecimals = valuesAfterDecimal
     ? valuesAfterDecimal?.slice(0, decimals)
     : "";

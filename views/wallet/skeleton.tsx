@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
 import classNames from "classnames";
 
-// Base skeleton class – adjust colors as needed.
 const skeletonBase = "bg-gray-300 animate-pulse rounded";
 
 interface WalletSkeletonProps {
   walletInteraction?: string | number;
-  // Optionally, you can pass a desired number of assets to simulate
   assetsCount?: number;
 }
 
@@ -14,34 +12,27 @@ const WalletSkeleton = ({
   walletInteraction = "skeleton-key",
   assetsCount = 3,
 }: WalletSkeletonProps) => {
-  // Stub for appearAnimation.
   const appearAnimation = {
     initial: { opacity: 0, y: -10 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -10 },
   };
 
-  // For the actions, we assume there are 2 buttons.
   const actionsCount = 2;
 
   return (
     <>
       <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white flex flex-col gap-[70px]">
-        {/* Header Section */}
         <div className="flex items-center gap-6 justify-between self-stretch px-4 py-3 border border-primary-550 bg-primary-600 rounded-[26px]">
           <div className="flex items-center gap-6">
-            {/* Image Skeleton: simulate a rounded avatar */}
             <div
               className={classNames(skeletonBase, "w-10 h-10 rounded-full")}
             />
             <div className="flex flex-col gap-[5px]">
-              {/* Title Skeleton for "Wallet" */}
               <div className={classNames(skeletonBase, "w-24 h-[23px]")} />
-              {/* Paragraph Skeleton: simulating two lines of text */}
               <div className={classNames(skeletonBase, "w-[278px] h-[30px]")} />
             </div>
           </div>
-          {/* ETHSOL component placeholder */}
           <div className="flex items-center -space-x-2">
             {[1, 2].map((image, index) => (
               <div
@@ -112,44 +103,35 @@ const WalletSkeleton = ({
         </motion.div>
       </div>
 
-      <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white hidden xl:flex flex-col gap-[70px] justify-between h-full">
-        {/* Title Skeleton */}
+      {/* <div className="w-full lg:p-6 lg:rounded-[32px] lg:border lg:border-primary-150 bg-white hidden xl:flex flex-col gap-[70px] justify-between h-full">
         <div className="bg-gray-300 animate-pulse rounded w-40 h-[26px]" />
 
-        {/* Activity Skeleton */}
         <div className="flex flex-col gap-6">
-          {/* Date Header Skeleton */}
+        
           <div className={classNames(skeletonBase, "w-28 h-4")} />
 
-          {/* Activity Items */}
           <div className="flex flex-col gap-11">
-            {/* We'll show 4 skeleton items for demonstration. Adjust as needed. */}
             {Array.from({ length: 5 }).map((_, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  {/* Icon Skeleton */}
                   <div
                     className={classNames(skeletonBase, "w-8 h-8 rounded-full")}
                   />
 
                   <div className="flex flex-col gap-1">
-                    {/* Activity Name Skeleton */}
                     <div className={classNames(skeletonBase, "w-32 h-4")} />
-                    {/* Time Skeleton */}
                     <div className={classNames(skeletonBase, "w-16 h-3")} />
                   </div>
                 </div>
 
-                {/* Amount Skeleton */}
                 <div className={classNames(skeletonBase, "w-16 h-4")} />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Paragraph Skeleton */}
         <div className="bg-gray-300 animate-pulse rounded max-w-[272px] self-center w-full h-[20px]" />
-      </div>
+      </div> */}
     </>
   );
 };
