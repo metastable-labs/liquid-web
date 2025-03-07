@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import classNames from "classnames";
 import { usePrivy } from "@privy-io/react-auth";
 
@@ -12,14 +13,21 @@ import {
 } from "@/components";
 import UiLoading from "@/components/ui/loading";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
+import useAgentActions from "@/store/agent/actions";
 
 const App = ({ children }: { children: React.ReactNode }) => {
   const { ready, authenticated, user } = usePrivy();
+  const { fetchChannelFollowers } = useAgentActions();
   const { appState } = useSystemFunctions();
 
   const address = user?.wallet?.address || "";
 
   const showNavigation = ready && authenticated && address;
+
+  useEffect(() => {
+    fetchChannelFollowers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

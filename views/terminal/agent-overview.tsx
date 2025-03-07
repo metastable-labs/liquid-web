@@ -9,8 +9,6 @@ import { formatNumberWithSuffix } from "@/utils/helpers";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAppActions from "@/store/app/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
-import whitelist from "@/constants/whitelist";
-import useAgentActions from "@/store/agent/actions";
 
 const AgentOverview = () => {
   const { navigate, agentState, appState } = useSystemFunctions();
@@ -21,15 +19,19 @@ const AgentOverview = () => {
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
-  const { delegationDetails, loadingDelegationDetails } = agentState;
+  const { delegationDetails, loadingDelegationDetails, channelFollowers } =
+    agentState;
   const agent = agentState.agent;
   const name = agent?.name || "";
 
   const username = linkedFarcaster?.username || linkedTwitter?.username;
   const isAlreadyDelegatedToThisAgent = delegationDetails?.[0]?.isActive;
+  const whitelisted = channelFollowers?.find(
+    (follower) => follower.username === username
+  );
 
   const onGrantPermission = () => {
-    if (!user || (user && whitelist.includes(username! || ""))) {
+    if (!user || (user && whitelisted)) {
       return showGrantPermission(true);
     }
 
