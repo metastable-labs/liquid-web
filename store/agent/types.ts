@@ -58,3 +58,8 @@ type AgentsResponse = {
   success: boolean;
   message: string;
 };
+
+type ChannelFollower = {
+  username: string;
+  fid: number;
+};

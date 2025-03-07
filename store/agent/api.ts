@@ -12,6 +12,7 @@ type API = {
   fetchAgents: (page: number) => Promise<AgentsResponse>;
   fetchDelegatedAgents: () => Promise<AgentsResponse>;
   fetchMyAgents: (page: number) => Promise<AgentsResponse>;
+  fetchChannelFollowers: () => Promise<ChannelFollower[]>;
 };
 
 const api: API = {
@@ -61,6 +62,12 @@ const api: API = {
     const response = await axiosInstance.get(`agents?size=12&page=${page}`);
 
     return response.data;
+  },
+
+  fetchChannelFollowers: async () => {
+    const response = await axiosInstance.get(`social/channel/followers`);
+
+    return response.data?.data;
   },
 };
 

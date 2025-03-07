@@ -17,6 +17,7 @@ import {
   setLoadingMyAgents,
   setDelegatedAgents,
   setLoadingDelegatedAgents,
+  setChannelFollowers,
 } from ".";
 
 const parseValue = (value: string | number): number => {
@@ -174,6 +175,16 @@ const useAgentActions = () => {
     }
   };
 
+  const fetchChannelFollowers = async (callback?: CallbackProps) => {
+    try {
+      const response = await api.fetchChannelFollowers();
+
+      dispatch(setChannelFollowers(response));
+    } catch (error: any) {
+      callback?.onError?.(error);
+    }
+  };
+
   return {
     fetchDelegationDetails,
     delegateOrUndelegate,
@@ -182,6 +193,7 @@ const useAgentActions = () => {
     fetchAgents,
     fetchMyAgents,
     fetchDelegatedAgents,
+    fetchChannelFollowers,
   };
 };
 
