@@ -22,14 +22,15 @@ const FundWalletPrompt = () => {
 
   const balance =
     walletState.assets?.find((asset) => asset.symbol.toLowerCase() === "eth")
-      ?.balance || 0;
+      ?.balanceUSD || 0;
+  const shouldFundWallet = Number(balance) <= 5;
 
   return (
     <div
       className={classNames(
         "p-[14px] rounded-xl flex items-center xl:items-start gap-2 bg-primary-3150",
         {
-          hidden: Number(balance) > 0,
+          hidden: !shouldFundWallet,
         }
       )}
     >

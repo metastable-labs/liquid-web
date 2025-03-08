@@ -18,9 +18,15 @@ function DelegateActionButton() {
   const { agentState, appState } = useSystemFunctions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
   const { delegateWallet } = useDelegatedActions();
+  const { walletState, navigate } = useSystemFunctions();
 
   const isAlreadyDelegatedToThisAgent =
     agentState.delegationDetails?.[0]?.isActive;
+
+  const balance =
+    walletState.assets?.find((asset) => asset.symbol.toLowerCase() === "eth")
+      ?.balanceUSD || 0;
+  const shouldFundWallet = Number(balance) <= 5;
 
   const onDelegateEvmWallet = () => {
     if (evmWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
@@ -52,6 +58,10 @@ function DelegateActionButton() {
       return login();
     }
 
+    if (shouldFundWallet) {
+      return navigate.push("/wallet");
+    }
+
     if (
       (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
       evmWallet?.delegated &&
@@ -65,7 +75,12 @@ function DelegateActionButton() {
     return onDelegateEvmWallet();
   };
 
-  const btnText = user == null ? "Connect Wallet" : "Continue";
+  const btnText =
+    user == null
+      ? "Connect Wallet"
+      : shouldFundWallet
+      ? "Fund Wallet"
+      : "Continue";
 
   return <LWButton title={btnText} onClick={onClick} />;
 }
