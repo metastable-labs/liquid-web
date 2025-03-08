@@ -137,12 +137,9 @@ const DesktopView = ({ data, period, periods, setPeriod }: IView) => {
         <iframe
           height="100%"
           width="100%"
-          id="geckoterminal-embed"
-          title="GeckoTerminal Embed"
-          src="https://www.geckoterminal.com/solana/pools/22WrmyTj8x2TRVQen3fxxi2r4Rn6JDHWoMTpsSmn8RUd?embed=1&info=0&swaps=0&grayscale=0&light_chart=1"
-          frameBorder="0"
           allow="clipboard-write"
           allowFullScreen
+          src="https://dexscreener.com/base/0xa46d5090499efb9c5dd7d95f7ca69f996b9fb761?embed=1&loadChartSettings=0&trades=0&info=0&chartLeftToolbar=0&chartTheme=light&theme=light&chartStyle=1&chartType=usd&interval=15"
         ></iframe>
         <div></div>
       </div>

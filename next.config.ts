@@ -16,9 +16,9 @@ const ContentSecurityPolicy = `
   
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com;
   
-  child-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.geckoterminal.com;
+  child-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://www.geckoterminal.com https://dexscreener.com;
   
-  frame-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.geckoterminal.com;
+  frame-src https://auth.privy.io https://verify.walletconnect.com https://verify.walletconnect.org https://challenges.cloudflare.com https://www.geckoterminal.com https://dexscreener.com;
   
   connect-src 'self' 
     https://auth.privy.io 
@@ -37,7 +37,8 @@ const ContentSecurityPolicy = `
     https://apple.com/apple-pay
     https://google.com/pay
     https://auth.privy.io/api/v1/analytics_events
-    wss://dev.useliquid.xyz/aqua;
+    wss://dev.useliquid.xyz/aqua
+    https://dexscreener.com;
   
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
   
