@@ -26,7 +26,13 @@ function DelegateActionButton() {
   const balance =
     walletState.assets?.find((asset) => asset.symbol.toLowerCase() === "eth")
       ?.balanceUSD || 0;
+
   const shouldFundWallet = Number(balance) <= 5;
+
+  const shouldRevokeAccess =
+    (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
+    evmWallet?.delegated &&
+    isAlreadyDelegatedToThisAgent;
 
   const onDelegateEvmWallet = () => {
     if (evmWallet?.delegated && !isAlreadyDelegatedToThisAgent) {
@@ -58,16 +64,12 @@ function DelegateActionButton() {
       return login();
     }
 
-    if (shouldFundWallet) {
-      return navigate.push("/wallet");
+    if (shouldRevokeAccess) {
+      return onRevoke();
     }
 
-    if (
-      (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
-      evmWallet?.delegated &&
-      isAlreadyDelegatedToThisAgent
-    ) {
-      return onRevoke();
+    if (shouldFundWallet) {
+      return navigate.push("/wallet");
     }
 
     showGrantPermission(false);
@@ -78,7 +80,7 @@ function DelegateActionButton() {
   const btnText =
     user == null
       ? "Connect Wallet"
-      : shouldFundWallet
+      : shouldFundWallet && !shouldRevokeAccess
       ? "Fund Wallet"
       : "Continue";
 
