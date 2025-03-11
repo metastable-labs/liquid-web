@@ -1,12 +1,18 @@
 import { formatBalance, formatCurrency } from "@/utils/helpers";
 import Image from "next/image";
+import { useState } from "react";
 
 const networkIcons = {
   solana: "/images/sol.png",
   base: "/images/base.png",
 };
 
+const defaultIconUrl =
+  "https://res.cloudinary.com/djzeufu4j/image/upload/v1732105634/tokenAIcon_jgy241.png";
+
 const AssetItem = ({ asset }: { asset: Wallet }) => {
+  const [logo, setLogo] = useState(asset.logo);
+
   const { whole, decimal } = formatCurrency(asset.uiAmount);
   const balance = `${whole}.${decimal}`;
   const formatedBalance =
@@ -25,12 +31,15 @@ const AssetItem = ({ asset }: { asset: Wallet }) => {
       <div className="flex items-center gap-2.5">
         <div className="relative">
           <Image
-            src="/images/eth.png"
+            src={logo}
             alt={`${asset.symbol} icon`}
             width={24}
             height={24}
             quality={100}
             className="w-6 h-6 rounded-full border border-primary-150"
+            onError={() => {
+              setLogo(defaultIconUrl);
+            }}
           />
 
           <Image

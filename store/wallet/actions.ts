@@ -12,6 +12,7 @@ const useWalletActions = () => {
       const response = await api.fetchAssets();
 
       const processedResponse = response
+        .filter((asset) => asset.uiAmount > 0)
         .sort((a, b) => b.name.localeCompare(a.name))
         .map((asset) => ({
           ...asset,
