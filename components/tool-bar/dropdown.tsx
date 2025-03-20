@@ -80,7 +80,7 @@ const Dropdown = () => {
 
             {linkedTwitter && (
               <Image
-                src="/images/twitter.webp"
+                src="/images/twitter.png"
                 alt="farcaster logo"
                 width={13}
                 height={13}

@@ -4259,6 +4259,11 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   dependencies:
     react-is "^16.7.0"
 
+html-to-image@^1.11.13:
+  version "1.11.13"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.11.13.tgz#adbc989c993b7aaf90b629c0cacf833db84d5f43"
+  integrity sha512-cuOPoI7WApyhBElTTb9oqsawRvZ0rHhaHwghRLlTuffoD1B2aDemlCruLeZrUIIdvG7gs9xeELEPm6PhuASqrg==
+
 humanize-ms@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/humanize-ms/-/humanize-ms-1.2.1.tgz#c46e3159a293f6b896da29316d8b6fe8bb79bbed"

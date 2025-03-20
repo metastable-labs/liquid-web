@@ -122,7 +122,7 @@ const Menu = () => {
 
                     {linkedTwitter && (
                       <Image
-                        src="/images/twitter.webp"
+                        src="/images/twitter.png"
                         alt="farcaster logo"
                         width={16}
                         height={16}

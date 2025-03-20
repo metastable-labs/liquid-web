@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import classNames from "classnames";
+
+import { CloseIcon } from "@/public/icons";
 import { ModalWrapperProps } from "./types";
 import { useIsMobile } from "../../hooks/useIsMobile";
-import classNames from "classnames";
 import LWClickAnimation from "../click-animation";
-import { CloseIcon } from "@/public/icons";
 
 function ModalWrapper({
   title = "",
@@ -13,6 +14,7 @@ function ModalWrapper({
   children,
   variant = "default",
   enlargeTitle = false,
+  fluid = false,
 }: ModalWrapperProps) {
   const isMobile = useIsMobile();
 
@@ -64,32 +66,36 @@ function ModalWrapper({
 
           {variant === "default" && (
             <motion.div
-              className={`bg-white rounded-3xl overflow-hidden z-50 ${
-                isMobile
-                  ? "fixed bottom-0 left-0 right-0 rounded-b-none"
-                  : "w-[400px] fixed"
-              }`}
+              className={classNames(
+                "bg-white rounded-3xl overflow-hidden z-50",
+                {
+                  "fixed bottom-0 left-0 right-0 rounded-b-none": isMobile,
+                  "w-[400px] fixed": !isMobile && !fluid,
+                }
+              )}
               variants={isMobile ? modalVariants.mobile : modalVariants.desktop}
               initial="hidden"
               animate="visible"
               exit="hidden"
               transition={{ type: "tween" }}
             >
-              <div className="flex flex-col justify-center items-center mt-4 pb-5">
-                {isMobile && (
-                  <div className="h-[4px] w-[40px] bg-[#E2E8F0] rounded-full" />
-                )}
-                <h2
-                  className={classNames({
-                    "text-[16px] leading-[19.84px] text-primary-950 font-medium text-center mt-2":
-                      !enlargeTitle,
-                    "text-[24px] leading-[26.88px] font-medium text-center mt-3":
-                      enlargeTitle,
-                  })}
-                >
-                  {title}
-                </h2>
-              </div>
+              {title && (
+                <div className="flex flex-col justify-center items-center mt-4 pb-5">
+                  {isMobile && (
+                    <div className="h-[4px] w-[40px] bg-[#E2E8F0] rounded-full" />
+                  )}
+                  <h2
+                    className={classNames({
+                      "text-[16px] leading-[19.84px] text-primary-950 font-medium text-center mt-2":
+                        !enlargeTitle,
+                      "text-[24px] leading-[26.88px] font-medium text-center mt-3":
+                        enlargeTitle,
+                    })}
+                  >
+                    {title}
+                  </h2>
+                </div>
+              )}
 
               {children}
             </motion.div>

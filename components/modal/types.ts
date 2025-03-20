@@ -46,6 +46,7 @@ export interface ModalWrapperProps {
   children: React.ReactNode;
   variant?: "default" | "flush-right";
   enlargeTitle?: boolean;
+  fluid?: boolean;
 }
 
 export interface ExitPostionModalProps extends ModalProps {

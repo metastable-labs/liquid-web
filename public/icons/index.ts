@@ -60,6 +60,7 @@ import BookSavedIcon from "./book-saved-icon";
 import SortIcon from "./sort-icon";
 import BlueInfoIcon from "./blue-info-icon";
 import LinearInfoIcon from "./linear-info-icon";
+import XIcon from "./x-icon";
 
 export {
   CubeIcons,
@@ -124,4 +125,5 @@ export {
   SortIcon,
   BlueInfoIcon,
   LinearInfoIcon,
+  XIcon,
 };
