@@ -14,6 +14,7 @@ import LWBackdrop from "./backdrop";
 import LWSelectNetworkModal from "./modal/select-network-modal";
 import LWIntro from "./intro";
 import LWBanner from "./banner";
+import LWShareModal from "./modal/share-modal";
 
 export {
   LWNavigation,
@@ -32,4 +33,5 @@ export {
   LWIntro,
   LWAgentCardSkeleton,
   LWBanner,
+  LWShareModal,
 };

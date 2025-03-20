@@ -13,7 +13,8 @@ import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 const AgentOverview = () => {
   const { navigate, agentState, appState } = useSystemFunctions();
   const { ready, user } = usePrivy();
-  const { showGrantPermission, showAccessDeniedModal } = useAppActions();
+  const { showGrantPermission, showAccessDeniedModal, showShareModal } =
+    useAppActions();
   const { solanaWallet, evmWallet, linkedFarcaster, linkedTwitter } =
     useLinkedAccounts();
 
@@ -111,7 +112,7 @@ const AgentOverview = () => {
   ];
 
   const handleShare = () => {
-    console.log("Share");
+    showShareModal(true);
   };
 
   return (

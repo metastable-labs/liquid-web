@@ -10,6 +10,7 @@ export interface AppState {
   openSelectNetworkModal: boolean;
   isSolanaSupported: boolean;
   appIsReady: boolean;
+  openShareModal: boolean;
 }
 
 const initialState: AppState = {
@@ -25,6 +26,7 @@ const initialState: AppState = {
   openSelectNetworkModal: false,
   isSolanaSupported: false,
   appIsReady: false,
+  openShareModal: false,
 };
 
 export const appReducer = createSlice({
@@ -58,6 +60,10 @@ export const appReducer = createSlice({
     setOpenSelectNetworkModal: (state, action: PayloadAction<boolean>) => {
       state.openSelectNetworkModal = action.payload;
     },
+
+    setOpenShareModal: (state, action: PayloadAction<boolean>) => {
+      state.openShareModal = action.payload;
+    },
   },
 });
 
@@ -69,6 +75,7 @@ export const {
   setOpenSelectNetworkModal,
   setAppIsReady,
   setOpenAccessDenied,
+  setOpenShareModal,
 } = appReducer.actions;
 
 export default appReducer.reducer;
