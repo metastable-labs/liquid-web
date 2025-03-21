@@ -55,7 +55,7 @@ const LWBanner = () => {
       closeTimer = setTimeout(() => {
         setIsOpen(false);
         const marginTop = window.innerWidth < 1024 ? 0 : 16;
-        animateBodyMargin(16);
+        animateBodyMargin(marginTop);
         setCookie(BANNER_COOKIE, "true", {
           path: "/",
           maxAge: 3 * 24 * 60 * 60,
