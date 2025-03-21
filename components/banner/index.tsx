@@ -6,10 +6,11 @@ import { useCookies } from "react-cookie";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 
 const BANNER_COOKIE = "lwBannerClosed";
+const INTRO_MODAL_COOKIE = "HasShowIntroModal";
 
 const LWBanner = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookie] = useCookies([BANNER_COOKIE]);
+  const [cookies, setCookie] = useCookies([BANNER_COOKIE, INTRO_MODAL_COOKIE]);
   const {
     appState: { appIsReady },
   } = useSystemFunctions();
@@ -27,6 +28,10 @@ const LWBanner = () => {
 
   useEffect(() => {
     if (!appIsReady) return;
+
+    const hasShownIntro = cookies[INTRO_MODAL_COOKIE];
+    if (!hasShownIntro) return;
+
     if (cookies[BANNER_COOKIE]) return;
 
     const timer = setTimeout(() => {
@@ -39,7 +44,10 @@ const LWBanner = () => {
 
   useEffect(() => {
     if (!appIsReady) return;
+    if (!cookies[INTRO_MODAL_COOKIE]) return;
+
     let closeTimer: NodeJS.Timeout;
+
     if (isOpen) {
       closeTimer = setTimeout(() => {
         setIsOpen(false);
@@ -50,12 +58,13 @@ const LWBanner = () => {
         });
       }, 3 * 60 * 1000);
     }
+
     return () => {
       if (closeTimer) clearTimeout(closeTimer);
     };
-  }, [isOpen, setCookie, appIsReady]);
+  }, [isOpen, setCookie, appIsReady, cookies]);
 
-  if (!appIsReady) return null;
+  if (!appIsReady || !cookies[INTRO_MODAL_COOKIE]) return null;
 
   return (
     <AnimatePresence>
