@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCookies } from "react-cookie";
+import classNames from "classnames";
 
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 
@@ -12,7 +13,7 @@ const LWBanner = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cookies, setCookie] = useCookies([BANNER_COOKIE, INTRO_MODAL_COOKIE]);
   const {
-    appState: { appIsReady },
+    appState: { appIsReady, isAgentLogOpen },
   } = useSystemFunctions();
 
   const bannerVariants = {
@@ -75,7 +76,13 @@ const LWBanner = () => {
           animate="visible"
           exit="exit"
           transition={{ duration: 0.5 }}
-          className="px-6 py-3 bg-primary-3100 flex items-center justify-center w-screen fixed top-0 left-0 z-50"
+          className={classNames(
+            "px-6 py-3 bg-primary-3100 flex items-center justify-center w-screen fixed top-0 left-0",
+            {
+              "z-50": !isAgentLogOpen,
+              "-z-10": isAgentLogOpen,
+            }
+          )}
         >
           <p className="text-[14px] leading-[24px] text-white">
             Follow our{" "}
