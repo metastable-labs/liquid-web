@@ -106,7 +106,7 @@ const LWIntro = () => {
             {...appearAnimation}
             exit={{ opacity: 0, scale: 0.9 }}
           >
-            <div className="lg:py-8 p-7 lg:px-10 bg-primary-1750 h-full w-full max-w-[400px] lg:max-w-none lg:w-[400px]">
+            <div className="lg:py-8 p-7 lg:px-10 bg-primary-1750 lg:h-full w-full max-w-[400px] lg:max-w-none lg:w-[400px]">
               <AnimatePresence mode="popLayout">
                 <motion.div
                   {...appearAnimation}
