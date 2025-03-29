@@ -92,7 +92,7 @@ const AgentOverview = () => {
       key="symbol"
       className="text-[14px] leading-[18.48px] text-primary-2350 font-medium"
     >
-      ${agent?.token.symbol}
+      ${agent?.token?.symbol || ""}
     </span>,
     <div key="base" className="flex items-center gap-0.5">
       <Image
