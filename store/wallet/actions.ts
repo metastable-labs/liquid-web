@@ -13,7 +13,7 @@ const useWalletActions = () => {
 
       const processedResponse = response
         .filter((asset) => asset.uiAmount > 0)
-        .sort((a, b) => b.name.localeCompare(a.name))
+        .sort((a, b) => b.balanceUSD - a.balanceUSD)
         .map((asset) => ({
           ...asset,
           chainId: asset.chainId.toLowerCase() as "base" | "solana",
