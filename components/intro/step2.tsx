@@ -126,7 +126,7 @@ const shimmerVariants: Variants = {
 const Step2 = () => {
   return (
     <motion.div
-      className="flex flex-col gap-[11px] lg:items-stretch justify-center lg:pb-10 h-full"
+      className="flex flex-col gap-[11px] lg:items-stretch justify-center lg:pb-10 h-[300px] lg:h-full"
       variants={containerVariants}
       initial="hidden"
       animate="show"
