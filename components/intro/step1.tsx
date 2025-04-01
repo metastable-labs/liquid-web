@@ -99,7 +99,7 @@ const Step1 = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-8 pointer-events-none">
+    <div className="flex flex-col gap-8 pointer-events-none h-[300px] lg:h-full">
       <motion.div className="self-stretch p-[21.36px] flex flex-col items-center gap-8 rounded-2xl border border-primary-150 bg-white shadow-secondaryShadow">
         <div className="w-full flex items-center gap-2">
           <Image

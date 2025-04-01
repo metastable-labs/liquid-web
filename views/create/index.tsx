@@ -8,7 +8,7 @@ import ExploreAgents from "./explore-agents";
 
 const Create = () => {
   const {
-    agentState: { agentsMeta, agents, loadingAgents },
+    agentState: { agentsMeta, agents },
   } = useSystemFunctions();
   const { fetchAgents } = useAgentActions();
 
@@ -31,7 +31,7 @@ const Create = () => {
 
   return (
     <div className="flex flex-col gap-16">
-      <div className="flex flex-col items-center space-y-10 lg:-space-y-3">
+      <div className="flex flex-col items-center gap-10 lg:gap-0 lg:-space-y-3">
         <Image
           src="/images/coming-soon.png"
           alt="Coming soon"
@@ -44,13 +44,13 @@ const Create = () => {
         <Image
           src="/images/mobile-coming-soon.png"
           alt="Coming soon"
-          width={500}
-          height={500}
+          width={300}
+          height={300}
           quality={100}
-          className="w-full h-fit lg:hidden"
+          className="lg:hidden"
         />
 
-        <p className="text-[18px] leading-[22.32px] text-primary-1700 text-center max-w-xl">
+        <p className="lg:text-[18px] leading-[22.32px] text-primary-1700 text-center max-w-xl">
           Creation of Agent coming soon. For now, go to farcaster and tag{" "}
           <span>
             <a
