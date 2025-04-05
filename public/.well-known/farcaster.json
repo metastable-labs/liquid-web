@@ -13,6 +13,6 @@
     "buttonTitle": "Get Started",
     "splashImageUrl": "https://app.useliquid.xyz/liquid-logo.png",
     "splashBackgroundColor": "#f7f7f7",
-    "webhookUrl": "https://app.useliquid.xyz/api/webhook"
+    "webhookUrl": "https://api.neynar.com/f/app/e44264f1-77fb-40dc-9e13-4f102d8bc9ae/event"
   }
 }
