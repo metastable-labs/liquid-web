@@ -19,6 +19,7 @@ const CreatePage = () => {
           dispatch(setFarcasterContext(user.user));
         }
         FrameSDK.actions.ready();
+        await FrameSDK.actions.addFrame();
       };
 
       if (FrameSDK && !isSDKLoaded) {
