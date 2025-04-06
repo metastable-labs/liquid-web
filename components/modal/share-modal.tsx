@@ -70,24 +70,24 @@ const LWShareModal = () => {
     },
   ];
 
-  const last7dpnlIsPositive = agent?.last7dPnl && agent?.last7dPnl > 0;
-  const totalPnlIsPositive = agent?.totalPnl && agent?.totalPnl > 0;
+  const currentPnlIsPositive = agent?.currentPnl && agent?.currentPnl >= 0;
+  const totalPnlIsPositive = agent?.totalPnl && agent?.totalPnl >= 0;
 
   const rates = [
     { title: "Win rate", value: agent?.winRate || "0%" },
     { title: "Users", value: formatNumberWithSuffix(agent?.users || 0) },
     {
-      title: "Last 7D PnL",
-      value: agent?.last7dPnl
-        ? `${last7dpnlIsPositive ? "+" : ""}${agent?.last7dPnl}`
-        : "0",
-      variant: last7dpnlIsPositive ? "positive" : "negative",
+      title: "Current PnL",
+      value: agent?.currentPnl
+        ? `${currentPnlIsPositive ? "+" : ""}${agent?.currentPnl}%`
+        : "0%",
+      variant: currentPnlIsPositive ? "positive" : "negative",
     },
     {
       title: "Total PnL",
       value: agent?.totalPnl
-        ? `${totalPnlIsPositive ? "+" : ""}${agent?.totalPnl}`
-        : "0",
+        ? `${totalPnlIsPositive ? "+" : ""}${agent?.totalPnl}%`
+        : "0%",
       variant: totalPnlIsPositive ? "positive" : "negative",
     },
   ];

@@ -42,6 +42,7 @@ type Agent = {
   users: number;
   last7dPnl: number;
   totalPnl: number;
+  currentPnl: number;
   active?: boolean;
   totalPositions?: number;
   activePositions?: number;

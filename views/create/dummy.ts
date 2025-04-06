@@ -11,6 +11,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 86.7,
+    currentPnl: 86.7,
     name: "Yardsticker",
     token: {
       agentId: "1",
@@ -38,6 +39,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -20.43,
+    currentPnl: -20.43,
     name: "Greenmonger",
     token: {
       agentId: "2",
@@ -65,6 +67,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 90.5,
+    currentPnl: 90.5,
     name: "Liquiditer",
     token: {
       agentId: "3",
@@ -92,6 +95,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
+    currentPnl: -12.6,
     name: "Njoku",
     token: {
       agentId: "4",
@@ -119,6 +123,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 86.7,
+    currentPnl: 86.7,
     name: "Yardsticker",
     token: {
       agentId: "1",
@@ -146,6 +151,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -20.43,
+    currentPnl: -20.43,
     name: "Greenmonger",
     token: {
       agentId: "2",
@@ -173,6 +179,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: 90.5,
+    currentPnl: 90.5,
     name: "Liquiditer",
     token: {
       agentId: "3",
@@ -200,6 +207,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
+    currentPnl: -12.6,
     name: "Njoku",
     token: {
       agentId: "4",
@@ -227,6 +235,7 @@ const dummyAgents: Array<Agent> = [
     goal: "To make money",
     id: "fd4b2962-d3eb-48cb-af6b-bd825c016264",
     last7dPnl: -12.6,
+    currentPnl: -12.6,
     name: "Njoku",
     token: {
       agentId: "4",

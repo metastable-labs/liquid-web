@@ -23,7 +23,14 @@ const AgentStat = ({ title, value }: AgentStat) => (
   </div>
 );
 
-const AgentItem = ({ creator, id, last7dPnl, name, users, winRate }: Agent) => {
+const AgentItem = ({
+  creator,
+  id,
+  name,
+  users,
+  winRate,
+  currentPnl,
+}: Agent) => {
   const { delegateOrUndelegate } = useAgentActions();
 
   const handleAction = () => {
@@ -31,21 +38,21 @@ const AgentItem = ({ creator, id, last7dPnl, name, users, winRate }: Agent) => {
     // delegateOrUndelegate(id, false, "SOLANA");
   };
 
-  const last7dpnlIsPositive = last7dPnl && last7dPnl > 0;
+  const currentPnlIsPositive = currentPnl && currentPnl >= 0;
 
   const stats: Array<AgentStat> = [
     { title: "Win rate", value: `${winRate}%` || "0%" },
     { title: "Users", value: formatNumberWithSuffix(users || 0) },
     {
-      title: "Last 7D PnL",
+      title: "Current PnL",
       value: (
         <span
           className={classNames("font-medium text-[16px] leading-[19.2px]", {
-            "text-primary-2700": last7dpnlIsPositive,
-            "text-[#AF1D38]": !last7dpnlIsPositive,
+            "text-primary-2700": currentPnlIsPositive,
+            "text-[#AF1D38]": !currentPnlIsPositive,
           })}
         >
-          {`${last7dpnlIsPositive ? "+" : ""}${last7dPnl}%`}
+          {`${currentPnlIsPositive ? "+" : ""}${currentPnl}%`}
         </span>
       ),
     },
