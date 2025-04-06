@@ -3,6 +3,8 @@ import moment from "moment";
 import classNames from "classnames";
 import { motion } from "framer-motion";
 
+import useSystemFunctions from "@/hooks/useSystemFunctions";
+import useAppActions from "@/store/app/actions";
 import ModalWrapper from "@/components/modal/modal-wrapper";
 import { ChevronDownIcon } from "@/public/icons";
 
@@ -57,8 +59,12 @@ const Log = ({ timestamp, message, type }: Log) => {
 
 const AgentLog = ({ agentId }: { agentId: string }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState(false);
+
   const [logs, setLogs] = useState<Log[]>([]);
+  const { showAgentLog } = useAppActions();
+  const {
+    appState: { isAgentLogOpen },
+  } = useSystemFunctions();
 
   const ws = new WebSocket("wss://dev.useliquid.xyz/aqua");
 
@@ -90,7 +96,7 @@ const AgentLog = ({ agentId }: { agentId: string }) => {
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => showAgentLog(true)}
         className="fixed right-8 bottom-8 flex items-center justify-center gap-4 p-6 border border-primary-150 bg-white rounded-3xl shadow-agentLog"
       >
         <span className="text-[16px] leading-[19.2px] font-medium text-primary-2600">
@@ -102,8 +108,8 @@ const AgentLog = ({ agentId }: { agentId: string }) => {
       </button>
 
       <ModalWrapper
-        isOpen={open}
-        onClose={() => setOpen(false)}
+        isOpen={isAgentLogOpen}
+        onClose={() => showAgentLog(false)}
         variant="flush-right"
       >
         <div className="flex flex-col items-stretch gap-6 pb-10">

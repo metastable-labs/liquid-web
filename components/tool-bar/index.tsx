@@ -57,13 +57,7 @@ const LWToolBar = () => {
   }, [user, ready]);
 
   return (
-    <div
-      className="w-full sticky top-0 flex items-center justify-between gap-5 px-5 py-5 xl:bg-transparent z-10 rounded-full min-h-[85.5px]"
-      style={{
-        background:
-          "linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.5) 70%, transparent 100%)",
-      }}
-    >
+    <div className="w-full sticky top-0 flex items-center justify-between gap-5 px-5 py-5 xl:bg-transparent z-10 min-h-[70px] lg:min-h-[85.5px] bg-white">
       <Image
         src="/images/logo.png"
         alt="Liquid Logo"

@@ -15,6 +15,7 @@ const AssetItem = ({ asset }: { asset: Wallet }) => {
 
   const { whole, decimal } = formatCurrency(asset.uiAmount);
   const balance = `${whole}.${decimal}`;
+
   const formatedBalance =
     Number(balance) < 1 ? balance : Number(balance).toLocaleString();
 

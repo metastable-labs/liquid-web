@@ -54,7 +54,7 @@ const colors = [
 const Step3 = () => {
   return (
     <motion.div
-      className="relative w-full h-[386.5px] lg:h-full"
+      className="relative w-full h-[300px] lg:h-full"
       variants={containerVariants}
       initial="hidden"
       animate="show"

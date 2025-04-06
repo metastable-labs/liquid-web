@@ -102,11 +102,11 @@ const LWIntro = () => {
           />
 
           <motion.div
-            className="rounded-3xl bg-white flex flex-col lg:flex-row items-center relative min-w-fit lg:h-[400px] overflow-hidden"
+            className="rounded-3xl bg-white flex flex-col lg:flex-row items-center relative min-w-fit max-h-[95vh] lg:max-h-none lg:h-[400px] overflow-hidden"
             {...appearAnimation}
             exit={{ opacity: 0, scale: 0.9 }}
           >
-            <div className="py-8 px-10 lg:px-7 bg-primary-1750 h-full w-full max-w-[400px] lg:max-w-none lg:w-[400px]">
+            <div className="lg:py-8 p-7 lg:px-10 bg-primary-1750 lg:max-h-none lg:h-full w-full max-w-[400px] lg:max-w-none lg:w-[400px]">
               <AnimatePresence mode="popLayout">
                 <motion.div
                   {...appearAnimation}
@@ -118,7 +118,7 @@ const LWIntro = () => {
               </AnimatePresence>
             </div>
 
-            <div className="p-7 flex flex-col justify-between gap-32 lg:gap-0 items-center h-full max-w-[400px]">
+            <div className="p-7 flex flex-col justify-between gap-10 md:gap-32 lg:gap-0 items-center h-[300px] lg:h-full max-w-[400px]">
               <AnimatePresence mode="popLayout">
                 <motion.div {...appearAnimation} key={step}>
                   <StepTexts {...stepTexts[step]} />
