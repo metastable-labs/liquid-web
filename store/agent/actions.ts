@@ -43,7 +43,9 @@ const useAgentActions = () => {
       dispatch(setLoadingAgent(true));
       const response = await api.fetchAgent(agentId);
 
-      dispatch(setAgent(response));
+      const formatedAgent = formatAgent(response);
+
+      dispatch(setAgent(formatedAgent));
     } catch (error: any) {
       dispatch(setAgent(undefined));
     } finally {

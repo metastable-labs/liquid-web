@@ -54,18 +54,25 @@ const AgentOverview = () => {
     },
   ];
 
+  const last7dpnlIsPositive = agent?.last7dPnl && agent?.last7dPnl > 0;
+  const totalPnlIsPositive = agent?.totalPnl && agent?.totalPnl > 0;
+
   const rates = [
     { title: "Win rate", value: agent?.winRate || "0%" },
     { title: "Users", value: formatNumberWithSuffix(agent?.users || 0) },
     {
       title: "Last 7D PnL",
-      value: `+${agent?.last7dPnl || ""}`,
-      variant: "positive",
+      value: `${last7dpnlIsPositive ? "+" : ""}${
+        agent?.last7dPnl?.toLocaleString() || ""
+      }`,
+      variant: last7dpnlIsPositive ? "positive" : "negative",
     },
     {
       title: "Total PnL",
-      value: `+$${agent?.totalPnl?.toLocaleString() || "0"}`,
-      variant: "positive",
+      value: `${totalPnlIsPositive ? "+" : ""}${
+        agent?.totalPnl?.toLocaleString() || "0"
+      }`,
+      variant: totalPnlIsPositive ? "positive" : "negative",
     },
   ];
 
@@ -88,12 +95,14 @@ const AgentOverview = () => {
     isAlreadyDelegatedToThisAgent,
   ]);
 
+  const symbol = agent?.token?.symbol || "";
+
   const extras = [
     <span
       key="symbol"
       className="text-[14px] leading-[18.48px] text-primary-2350 font-medium"
     >
-      ${agent?.token.symbol}
+      ${symbol}
     </span>,
     <div key="base" className="flex items-center gap-0.5">
       <Image

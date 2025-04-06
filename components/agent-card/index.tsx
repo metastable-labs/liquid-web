@@ -51,6 +51,8 @@ const LWAgentCard = ({
   // Properly define the case where the current user is the creator of the agent
   const isCreator = creator.username === "creator";
 
+  const last7dpnlIsPositive = last7dPnl && last7dPnl > 0;
+
   const stats: Array<AgentStat> = [
     { title: "Win rate", value: `${winRate}%` || "0%" },
     { title: "Users", value: formatNumberWithSuffix(users || 0) },
@@ -59,13 +61,13 @@ const LWAgentCard = ({
       value: (
         <span
           className={classNames("font-medium", {
-            "text-primary-2700": last7dPnl > 0,
-            "text-[#AF1D38]": last7dPnl < 0,
+            "text-primary-2700": last7dpnlIsPositive,
+            "text-[#AF1D38]": !last7dpnlIsPositive,
             "text-[16px] leading-[19.2px]": !isIntro,
             "text-[7.392px] leading-[8.87px]": isIntro,
           })}
         >
-          {`${last7dPnl > 0 ? "+" : ""}${last7dPnl}%`}
+          {`${last7dpnlIsPositive ? "+" : ""}${last7dPnl}%`}
         </span>
       ),
     },

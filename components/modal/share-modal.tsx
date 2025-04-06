@@ -36,7 +36,7 @@ const LWShareModal = () => {
 
   const handleShare = async (platform: "farcaster" | "twitter") => {
     const message = encodeURIComponent(
-      `Check out Agent ${agent?.name} here: ${currentURL}`
+      `Check out this AI Agent ${agent?.name} here: ${currentURL}`
     );
 
     if (platform === "farcaster") {
@@ -70,18 +70,25 @@ const LWShareModal = () => {
     },
   ];
 
+  const last7dpnlIsPositive = agent?.last7dPnl && agent?.last7dPnl > 0;
+  const totalPnlIsPositive = agent?.totalPnl && agent?.totalPnl > 0;
+
   const rates = [
     { title: "Win rate", value: agent?.winRate || "0%" },
     { title: "Users", value: formatNumberWithSuffix(agent?.users || 0) },
     {
       title: "Last 7D PnL",
-      value: `+${agent?.last7dPnl || ""}`,
-      variant: "positive",
+      value: agent?.last7dPnl
+        ? `${last7dpnlIsPositive ? "+" : ""}${agent?.last7dPnl}`
+        : "0",
+      variant: last7dpnlIsPositive ? "positive" : "negative",
     },
     {
       title: "Total PnL",
-      value: `+$${agent?.totalPnl?.toLocaleString() || "0"}`,
-      variant: "positive",
+      value: agent?.totalPnl
+        ? `${totalPnlIsPositive ? "+" : ""}${agent?.totalPnl}`
+        : "0",
+      variant: totalPnlIsPositive ? "positive" : "negative",
     },
   ];
 
