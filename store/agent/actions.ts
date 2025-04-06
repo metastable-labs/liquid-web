@@ -30,8 +30,9 @@ const parseValue = (value: string | number): number => {
 const formatAgent = (agent: any): Agent => {
   return {
     ...agent,
-    last7dPnl: parseValue(agent.last7dPnl),
-    totalPnl: parseValue(agent.totalPnl),
+    last7dPnl: parseValue(agent.last7dPnl || 0),
+    totalPnl: parseValue(agent.totalPnl || 0),
+    currentPnl: parseValue(agent.currentPnl || 0),
   };
 };
 

@@ -31,7 +31,7 @@ const stats: Array<AgentStat> = [
   { title: "Win rate", value: "95%" },
   { title: "Users", value: "5.2k" },
   {
-    title: "Last 7D PnL",
+    title: "Current PnL",
     value: (
       <span className="text-[16px] leading-[19.2px] font-medium text-primary-2700">
         +85.7%
