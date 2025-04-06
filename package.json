@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "framer-motion": "^11.15.0",
+    "html-to-image": "^1.11.13",
     "lucide-react": "^0.469.0",
     "moment": "^2.30.1",
     "motion": "^11.15.0",

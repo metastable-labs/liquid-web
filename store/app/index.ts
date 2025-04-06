@@ -10,6 +10,7 @@ export interface AppState {
   openSelectNetworkModal: boolean;
   isSolanaSupported: boolean;
   appIsReady: boolean;
+  openShareModal: boolean;
   isAgentLogOpen: boolean;
 }
 
@@ -26,6 +27,7 @@ const initialState: AppState = {
   openSelectNetworkModal: false,
   isSolanaSupported: false,
   appIsReady: false,
+  openShareModal: false,
   isAgentLogOpen: false,
 };
 
@@ -61,6 +63,10 @@ export const appReducer = createSlice({
       state.openSelectNetworkModal = action.payload;
     },
 
+    setOpenShareModal: (state, action: PayloadAction<boolean>) => {
+      state.openShareModal = action.payload;
+    },
+
     setIsAgentLogOpen: (state, action: PayloadAction<boolean>) => {
       state.isAgentLogOpen = action.payload;
     },
@@ -75,6 +81,7 @@ export const {
   setOpenSelectNetworkModal,
   setAppIsReady,
   setOpenAccessDenied,
+  setOpenShareModal,
   setIsAgentLogOpen,
 } = appReducer.actions;
 

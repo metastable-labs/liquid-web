@@ -5,6 +5,7 @@ import {
   setToast,
   setOpenSelectNetworkModal,
   setOpenAccessDenied,
+  setOpenShareModal,
   setIsAgentLogOpen,
 } from ".";
 import api from "./api";
@@ -48,6 +49,7 @@ const useAppActions = () => {
   const showSelectNetworkModal = (show: boolean) =>
     dispatch(setOpenSelectNetworkModal(show));
 
+  const showShareModal = (show: boolean) => dispatch(setOpenShareModal(show));
   const showAgentLog = (show: boolean) => dispatch(setIsAgentLogOpen(show));
 
   return {
@@ -58,6 +60,7 @@ const useAppActions = () => {
     showGrantPermission,
     showSelectNetworkModal,
     showAccessDeniedModal,
+    showShareModal,
     showAgentLog,
   };
 };
