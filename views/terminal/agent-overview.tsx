@@ -64,14 +64,14 @@ const AgentOverview = () => {
       title: "Current PnL",
       value: `${currentPnlIsPositive ? "+" : ""}${
         agent?.currentPnl?.toLocaleString() || ""
-      }`,
+      }%`,
       variant: currentPnlIsPositive ? "positive" : "negative",
     },
     {
       title: "Total PnL",
       value: `${totalPnlIsPositive ? "+" : ""}${
         agent?.totalPnl?.toLocaleString() || "0"
-      }`,
+      }%`,
       variant: totalPnlIsPositive ? "positive" : "negative",
     },
   ];

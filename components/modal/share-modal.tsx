@@ -79,15 +79,15 @@ const LWShareModal = () => {
     {
       title: "Current PnL",
       value: agent?.currentPnl
-        ? `${currentPnlIsPositive ? "+" : ""}${agent?.currentPnl}`
-        : "0",
+        ? `${currentPnlIsPositive ? "+" : ""}${agent?.currentPnl}%`
+        : "0%",
       variant: currentPnlIsPositive ? "positive" : "negative",
     },
     {
       title: "Total PnL",
       value: agent?.totalPnl
-        ? `${totalPnlIsPositive ? "+" : ""}${agent?.totalPnl}`
-        : "0",
+        ? `${totalPnlIsPositive ? "+" : ""}${agent?.totalPnl}%`
+        : "0%",
       variant: totalPnlIsPositive ? "positive" : "negative",
     },
   ];
