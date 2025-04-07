@@ -14,6 +14,7 @@ import Dropdown from "./dropdown";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import { setAppIsReady } from "@/store/app";
+import useConnectToFarcaster from "@/hooks/useConnectToFarcaster";
 
 const LWToolBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -22,6 +23,7 @@ const LWToolBar = () => {
   const { truncate } = useTruncateText();
   const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
   const { dispatch } = useSystemFunctions();
+  const { loginToFarcasterFrame, isSDKLoaded } = useConnectToFarcaster();
 
   const address = user?.wallet?.address || "";
   const username =
@@ -50,6 +52,15 @@ const LWToolBar = () => {
   };
 
   const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
+
+  const handleLogin = () => {
+    if (isSDKLoaded) {
+      console.log("loginToFarcasterFrame");
+      return loginToFarcasterFrame();
+    }
+
+    return login();
+  };
 
   useEffect(() => {
     connect();
@@ -80,7 +91,7 @@ const LWToolBar = () => {
 
         {ready && (!authenticated || !address) && (
           <LWClickAnimation
-            onClick={login}
+            onClick={handleLogin}
             className="px-4 py-2 w-[100px] flex items-center justify-center rounded-lg border border-primary-550 bg-white"
           >
             <span className="text-[14px] leading-[18.48px] font-medium text-primary-950">

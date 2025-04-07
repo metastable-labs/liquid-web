@@ -4,7 +4,7 @@ import useAppActions from "@/store/app/actions";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAgentActions from "@/store/agent/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
-
+import useConnectToFarcaster from "@/hooks/useConnectToFarcaster";
 function DelegateActionButton() {
   const { showGrantPermission, showSelectNetworkModal } = useAppActions();
   const { user } = usePrivy();
@@ -13,6 +13,7 @@ function DelegateActionButton() {
       showGrantPermission(false);
     },
   });
+  const { loginToFarcasterFrame, isSDKLoaded } = useConnectToFarcaster();
   const { delegateOrUndelegate } = useAgentActions();
   const { revokeWallets } = useDelegatedActions();
   const { agentState, appState } = useSystemFunctions();
@@ -59,9 +60,14 @@ function DelegateActionButton() {
     // delegateOrUndelegate(agentId, false, "SOLANA");
   };
 
-  const onClick = () => {
+  const onClick = async () => {
     if (user == null) {
-      return login();
+      if (isSDKLoaded) {
+        await loginToFarcasterFrame();
+        return showGrantPermission(false);
+      } else {
+        return login();
+      }
     }
 
     if (shouldRevokeAccess) {
