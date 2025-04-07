@@ -12,6 +12,7 @@ const useConnectToFarcaster = () => {
   const { dispatch } = useSystemFunctions();
 
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [isFrameLoaded, setIsFrameLoaded] = useState(false);
 
   const loginToFarcasterFrame = async () => {
     try {
@@ -29,6 +30,35 @@ const useConnectToFarcaster = () => {
       console.error(error);
     }
   };
+
+  // Detect if app is loaded in a Farcaster frame
+  useEffect(() => {
+    const detectFrameEnvironment = () => {
+      if (typeof window !== "undefined") {
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        const searchParams = new URLSearchParams(window.location.search);
+
+        const isInFrame =
+          searchParams.has("fc") ||
+          searchParams.has("fc-frame") ||
+          window.location.href.includes("fc-frame") ||
+          document.referrer.includes("farcaster") ||
+          document.referrer.includes("warpcast") ||
+          window !== window.parent ||
+          userAgent.includes("farcaster") ||
+          userAgent.includes("warpcast");
+
+        setIsFrameLoaded(isInFrame);
+
+        // We can also log this for debugging
+        if (isInFrame) {
+          console.log("App loaded within Farcaster frame");
+        }
+      }
+    };
+
+    detectFrameEnvironment();
+  }, []);
 
   useEffect(
     function initFrameSDK() {
@@ -54,7 +84,7 @@ const useConnectToFarcaster = () => {
     [isSDKLoaded]
   );
 
-  return { loginToFarcasterFrame, isSDKLoaded };
+  return { loginToFarcasterFrame, isSDKLoaded, isFrameLoaded };
 };
 
 export default useConnectToFarcaster;

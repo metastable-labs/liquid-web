@@ -13,7 +13,7 @@ function DelegateActionButton() {
       showGrantPermission(false);
     },
   });
-  const { loginToFarcasterFrame, isSDKLoaded } = useConnectToFarcaster();
+  const { loginToFarcasterFrame, isFrameLoaded } = useConnectToFarcaster();
   const { delegateOrUndelegate } = useAgentActions();
   const { revokeWallets } = useDelegatedActions();
   const { agentState, appState } = useSystemFunctions();
@@ -62,7 +62,7 @@ function DelegateActionButton() {
 
   const onClick = async () => {
     if (user == null) {
-      if (isSDKLoaded) {
+      if (isFrameLoaded) {
         await loginToFarcasterFrame();
         return showGrantPermission(false);
       } else {

@@ -23,7 +23,7 @@ const LWToolBar = () => {
   const { truncate } = useTruncateText();
   const { linkedFarcaster, linkedTwitter } = useLinkedAccounts();
   const { dispatch } = useSystemFunctions();
-  const { loginToFarcasterFrame, isSDKLoaded } = useConnectToFarcaster();
+  const { loginToFarcasterFrame, isFrameLoaded } = useConnectToFarcaster();
 
   const address = user?.wallet?.address || "";
   const username =
@@ -54,8 +54,7 @@ const LWToolBar = () => {
   const toggleShowDropDown = () => setShowDropdown((prev) => !prev);
 
   const handleLogin = () => {
-    if (isSDKLoaded) {
-      console.log("loginToFarcasterFrame");
+    if (isFrameLoaded) {
       return loginToFarcasterFrame();
     }
 
