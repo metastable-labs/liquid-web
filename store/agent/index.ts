@@ -16,6 +16,7 @@ export interface AgentState {
   delegatedAgents?: Agent[];
   loadingDelegatedAgents: boolean;
   channelFollowers?: ChannelFollower[];
+  followingStatus?: FollowingStatus;
 }
 
 const initialState: AgentState = {
@@ -33,6 +34,7 @@ const initialState: AgentState = {
   delegatedAgents: undefined,
   loadingDelegatedAgents: true,
   channelFollowers: undefined,
+  followingStatus: undefined,
 };
 
 export const agentReducer = createSlice({
@@ -148,6 +150,13 @@ export const agentReducer = createSlice({
         state.channelFollowers = undefined;
       }
     },
+
+    setFollowingStatus(
+      state,
+      action: PayloadAction<FollowingStatus | undefined>
+    ) {
+      state.followingStatus = action.payload;
+    },
   },
 });
 
@@ -168,6 +177,7 @@ export const {
   setDelegatedAgents,
   setLoadingDelegatedAgents,
   setChannelFollowers,
+  setFollowingStatus,
 } = agentReducer.actions;
 
 export default agentReducer.reducer;

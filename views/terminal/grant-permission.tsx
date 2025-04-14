@@ -52,7 +52,7 @@ const FundWalletPrompt = () => {
 };
 
 const Permission = () => {
-  const { appState } = useSystemFunctions();
+  const { appState, agentState } = useSystemFunctions();
   const { solanaWallet, evmWallet } = useLinkedAccounts();
 
   const permissionGranted =
@@ -61,9 +61,17 @@ const Permission = () => {
 
   const info = permissionGranted ? revokeInfo : permissionInfo;
 
+  const isAlreadyDelegatedToThisAgent =
+    agentState.delegationDetails?.[0]?.isActive;
+
+  const isRevokeAccess =
+    (appState.isSolanaSupported ? solanaWallet?.delegated : true) &&
+    evmWallet?.delegated &&
+    isAlreadyDelegatedToThisAgent;
+
   return (
     <div className="px-6 pt-1 pb-6 flex flex-col gap-6">
-      <FundWalletPrompt />
+      {!isRevokeAccess && <FundWalletPrompt />}
 
       <ul className="flex flex-col gap-5 text-[16px] leading-[19.84px] text-primary-50 list-disc">
         {info.map((info, index) => (

@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import classNames from "classnames";
 import { usePrivy } from "@privy-io/react-auth";
-
 import {
   LWNavigation,
   LWToastNotification,
@@ -15,20 +14,23 @@ import {
 import UiLoading from "@/components/ui/loading";
 import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAgentActions from "@/store/agent/actions";
-
+import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 const App = ({ children }: { children: React.ReactNode }) => {
   const { ready, authenticated, user } = usePrivy();
-  const { fetchChannelFollowers } = useAgentActions();
   const { appState } = useSystemFunctions();
+  const { checkFollowingStatus } = useAgentActions();
+  const { linkedFarcaster } = useLinkedAccounts();
 
   const address = user?.wallet?.address || "";
 
   const showNavigation = ready && authenticated && address;
 
   useEffect(() => {
-    fetchChannelFollowers();
+    if (!linkedFarcaster?.fid) return;
+
+    checkFollowingStatus(linkedFarcaster.fid);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [linkedFarcaster]);
 
   return (
     <>

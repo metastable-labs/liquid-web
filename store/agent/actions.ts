@@ -18,7 +18,9 @@ import {
   setDelegatedAgents,
   setLoadingDelegatedAgents,
   setChannelFollowers,
+  setFollowingStatus,
 } from ".";
+import useAppActions from "../app/actions";
 
 const parseValue = (value: string | number): number => {
   if (typeof value === "string") {
@@ -38,6 +40,7 @@ const formatAgent = (agent: any): Agent => {
 
 const useAgentActions = () => {
   const { dispatch } = useSystemFunctions();
+  const { showToast } = useAppActions();
 
   const fetchAgent = async (agentId: string) => {
     try {
@@ -79,7 +82,14 @@ const useAgentActions = () => {
       fetchDelegationDetails(agentId);
       fetchDelegatedAgents();
     } catch (error: any) {
-      //
+      const systemErr = error?.response?.data?.errors?.[0]?.message;
+      const descriptiveErr = error?.response?.data?.message;
+
+      const errMsg =
+        descriptiveErr ||
+        systemErr ||
+        "Something went wrong! Please try again.";
+      showToast(errMsg, "error");
     } finally {
       dispatch(setDelegating(false));
     }
@@ -188,6 +198,16 @@ const useAgentActions = () => {
     }
   };
 
+  const checkFollowingStatus = async (farcasterId: number) => {
+    try {
+      const response = await api.checkFollowingStatus(farcasterId);
+
+      dispatch(setFollowingStatus(response));
+    } catch (error: any) {
+      console.log("error", error);
+    }
+  };
+
   return {
     fetchDelegationDetails,
     delegateOrUndelegate,
@@ -197,6 +217,7 @@ const useAgentActions = () => {
     fetchMyAgents,
     fetchDelegatedAgents,
     fetchChannelFollowers,
+    checkFollowingStatus,
   };
 };
 

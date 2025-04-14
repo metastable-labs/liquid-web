@@ -66,3 +66,8 @@ type ChannelFollower = {
   username: string;
   fid: number;
 };
+
+type FollowingStatus = {
+  isFollowing: boolean;
+  hasFarcaster: boolean;
+};

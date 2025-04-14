@@ -5,6 +5,7 @@ import useSystemFunctions from "@/hooks/useSystemFunctions";
 import useAgentActions from "@/store/agent/actions";
 import useLinkedAccounts from "@/hooks/useLinkedAccounts";
 import useConnectToFarcaster from "@/hooks/useConnectToFarcaster";
+
 function DelegateActionButton() {
   const { showGrantPermission, showSelectNetworkModal } = useAppActions();
   const { user } = usePrivy();

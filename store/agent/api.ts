@@ -13,6 +13,7 @@ type API = {
   fetchDelegatedAgents: () => Promise<AgentsResponse>;
   fetchMyAgents: (page: number) => Promise<AgentsResponse>;
   fetchChannelFollowers: () => Promise<ChannelFollower[]>;
+  checkFollowingStatus: (farcasterId: number) => Promise<FollowingStatus>;
 };
 
 const api: API = {
@@ -66,6 +67,14 @@ const api: API = {
 
   fetchChannelFollowers: async () => {
     const response = await axiosInstance.get(`social/channel/followers`);
+
+    return response.data?.data;
+  },
+
+  checkFollowingStatus: async (farcasterId: number) => {
+    const response = await axiosInstance.get(
+      `social/following-status/${farcasterId}`
+    );
 
     return response.data?.data;
   },

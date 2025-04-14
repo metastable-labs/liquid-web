@@ -20,16 +20,14 @@ const AgentOverview = () => {
 
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
 
-  const { delegationDetails, loadingDelegationDetails, channelFollowers } =
+  const { delegationDetails, loadingDelegationDetails, followingStatus } =
     agentState;
   const agent = agentState.agent;
   const name = agent?.name || "";
 
   const username = linkedFarcaster?.username || linkedTwitter?.username;
   const isAlreadyDelegatedToThisAgent = delegationDetails?.[0]?.isActive;
-  const whitelisted = channelFollowers?.find(
-    (follower) => follower.username === username
-  );
+  const whitelisted = followingStatus?.isFollowing;
 
   const onGrantPermission = () => {
     if (!user || (user && whitelisted)) {
