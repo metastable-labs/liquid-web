@@ -29,7 +29,7 @@ const AgentItem = ({
   name,
   users,
   winRate,
-  currentPnl,
+  currentPnl = 0,
 }: Agent) => {
   const { delegateOrUndelegate } = useAgentActions();
 
@@ -38,7 +38,7 @@ const AgentItem = ({
     // delegateOrUndelegate(id, false, "SOLANA");
   };
 
-  const currentPnlIsPositive = currentPnl && currentPnl >= 0;
+  const currentPnlIsPositive = currentPnl >= 0;
 
   const stats: Array<AgentStat> = [
     { title: "Win rate", value: `${winRate}%` || "0%" },

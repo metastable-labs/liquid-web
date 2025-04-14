@@ -41,7 +41,7 @@ const AgentStat = ({ title, value, isIntro, variant }: AgentStat) => (
 );
 
 const LWAgentCard = ({
-  agent: { creator, id, name, users, winRate, currentPnl },
+  agent: { creator, id, name, users, winRate, currentPnl = 0 },
   actions,
   actionIdentifier,
   variant = "primary",
@@ -51,7 +51,9 @@ const LWAgentCard = ({
   // Properly define the case where the current user is the creator of the agent
   const isCreator = creator.username === "creator";
 
-  const currentPnlIsPositive = currentPnl && currentPnl >= 0;
+  console.log("currentPnl", currentPnl);
+
+  const currentPnlIsPositive = currentPnl >= 0;
 
   const stats: Array<AgentStat> = [
     { title: "Win rate", value: `${winRate}%` || "0%" },

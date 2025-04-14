@@ -52,8 +52,10 @@ const AgentOverview = () => {
     },
   ];
 
-  const currentPnlIsPositive = agent?.currentPnl && agent?.currentPnl >= 0;
-  const totalPnlIsPositive = agent?.totalPnl && agent?.totalPnl >= 0;
+  const currentPnlIsPositive =
+    agent?.currentPnl != undefined && agent?.currentPnl >= 0;
+  const totalPnlIsPositive =
+    agent?.totalPnl != undefined && agent?.totalPnl >= 0;
 
   const rates = [
     { title: "Win rate", value: agent?.winRate || "0%" },
