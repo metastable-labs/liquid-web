@@ -76,6 +76,13 @@ const useAgentActions = () => {
     chain: "BASE" | "SOLANA"
   ) => {
     try {
+      if (isActive) {
+        return showToast(
+          "Delegation to this agent is paused! Check back later",
+          "info"
+        );
+      }
+
       dispatch(setDelegating(true));
       await api.delegateOrUndelegate(agentId, isActive, chain);
 
